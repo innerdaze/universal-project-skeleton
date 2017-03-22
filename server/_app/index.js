@@ -1,4 +1,5 @@
 import {createLogger, stdSerializers} from 'bunyan'
+import {default as startServer} from '_app/lib/server'
 
 const log = createLogger({
   name: 'Le App',
@@ -7,4 +8,6 @@ const log = createLogger({
   }
 })
 
-log.info(`WE ARE RUN`)
+startServer(() => {
+  log.info(`WE ARE RUN`)
+})

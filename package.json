@@ -2,7 +2,7 @@
   "name": "skeleton",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/_app/index.js",
   "scripts": {
     "build:dev": "cross-env NODE_ENV=development webpack --config webpack.web.js",
     "build": "cross-env NODE_ENV=production webpack -p --config webpack.web.js",
@@ -23,6 +23,7 @@
   "dependencies": {
     "bunyan": "^1.8.8",
     "cross-env": "^3.2.3",
+    "eslint-plugin-import": "^2.2.0",
     "lodash": "^4.17.4"
   },
   "devDependencies": {
@@ -50,8 +51,22 @@
     "semicolon": false,
     "overrides": [
       {
+        "files": "server/**/*.js",
+        "settings": {
+          "import/resolver": {
+            "node": {
+              "paths": [
+                "server"
+              ]
+            }
+          }
+        }
+      },
+      {
         "files": "client/**/*.js",
-        "envs": ["browser"]
+        "envs": [
+          "browser"
+        ]
       }
     ]
   }

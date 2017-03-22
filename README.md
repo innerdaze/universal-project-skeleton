@@ -22,6 +22,11 @@
 -> npm i
 ```
 
+6. Rename the project (one-liner!)
+```sh
+
+```
+
 __Bonus Points__
 
 6. Set the upstream to the original repo
