@@ -1,0 +1,10 @@
+{
+  "env": {},
+  "globals": {},
+  "rules": {
+    "semi": [
+      2,
+      "always"
+    ]
+  }
+}
