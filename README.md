@@ -22,10 +22,9 @@
 -> npm i
 ```
 
-6. Rename the project (one-liner!)
-```sh
+6. Rename the project
 
-```
+No one-liner for this yet (feel free to add). For now, edit the package.json using the [world's greatest text editor](https://www.diffur.com/what-is-the-best-text-editor-for-programming) and change the package name to whatever you want (guess what we called ours).
 
 __Bonus Points__
 
@@ -33,7 +32,6 @@ __Bonus Points__
 ```sh
 -> git remote add upstream http://git.orbistech.co.uk/lee.driscoll/universal-project-skeleton.git
 ```
-
 
 ## Tricks
 
