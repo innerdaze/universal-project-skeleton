@@ -5,7 +5,7 @@ function component() {
   var element = document.createElement('div')
 
   /* lodash is required for the next line to work */
-  element.innerHTML = _.join(['Hello', 'Webpack'], ' ')
+  element.innerHTML = _.join(['Hello', 'Webpack!!!!!!!!!!!'], ' ')
 
   return element
 }
@@ -20,3 +20,9 @@ if (window.cordova) {
   startApp()
 }
 
+if (module.hot) {
+  module.hot.dispose(() => {
+    document.body.removeChild(document.body.children[1])
+  });
+  module.hot.accept();
+}

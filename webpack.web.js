@@ -2,15 +2,18 @@ var path = require('path')
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
-var outputDir = 'web'
-
 module.exports = {
-  entry: path.resolve(__dirname, path.join('client', 'index.js')),
+  entry: [
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+    path.join(__dirname, 'client', 'index.js')
+  ],
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, path.join('dist', outputDir))
+    path: path.join(__dirname, 'dist', 'web'),
+    publicPath: '/'
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html'
     }),
