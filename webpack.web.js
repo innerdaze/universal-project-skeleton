@@ -20,5 +20,20 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       compress: process.env.NODE_ENV === 'production'
     })
-  ]
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        include: /client/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          query: {
+            presets: ['env']
+          }
+        }
+      }
+    ]
+  }
 }
