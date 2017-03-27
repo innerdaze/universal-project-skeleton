@@ -3,7 +3,7 @@ var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: path.join(__dirname, 'client', 'index.js'),
+  entry: path.join(__dirname, 'client', 'index.jsx'),
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, 'dist', 'cordova')
@@ -20,17 +20,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        include: /client/,
-        use: {
-          loader: 'babel-loader',
-          query: {
-            presets: ['es2015', 'react']
-          }
-        }
-      },
-      {
-        test: /\.jsx$/,
+        test: /\.(js|jsx)$/,
         include: /client/,
         use: {
           loader: 'babel-loader',

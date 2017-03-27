@@ -7,7 +7,7 @@ export default class MyRootAppComponent extends Component {
     return (
       <div>
         <h1>{"It's a React page!"}</h1>
-        <p>nom</p>
+        <p>nomnomnom</p>
       </div>
     )
   }
