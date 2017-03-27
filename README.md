@@ -6,7 +6,7 @@
 
 2. Clone this repo (replace "jeff" with your answer from Step 1)
 ```sh
--> git clone http://git.orbistech.co.uk/lee.driscoll/universal-project-skeleton.git jeff
+-> git clone http://git.orbistech.co.uk:1955/lee.driscoll/universal-project-skeleton.git jeff
 -> cd jeff
 ```
 
@@ -14,7 +14,7 @@
 
 4. Setup your project to point at the new repo
 ```sh
--> git remote set-url origin http://git.orbistech.co.uk/lee.driscoll/jeff.git
+-> git remote set-url origin http://git.orbistech.co.uk:1955/lee.driscoll/jeff.git
 ```
 
 5. Install all the things
@@ -31,7 +31,15 @@ __Bonus Points__
 6. Set the upstream to the original repo
 
 ```sh
--> git remote add upstream http://git.orbistech.co.uk/lee.driscoll/universal-project-skeleton.git
+-> git remote add upstream http://git.orbistech.co.uk:1955/lee.driscoll/universal-project-skeleton.git
+```
+
+## Applying changes to skeleton
+
+Use git rebase to load in changes to the core skeleton, but review changes you want to pull because there's no guarantee nothing will break.
+
+```sh
+-> git pull --rebase upstream master
 ```
 
 ## Tricks
