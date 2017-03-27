@@ -29,6 +29,7 @@ No one-liner for this yet (feel free to add). For now, edit the package.json usi
 __Bonus Points__
 
 6. Set the upstream to the original repo
+
 ```sh
 -> git remote add upstream http://git.orbistech.co.uk/lee.driscoll/universal-project-skeleton.git
 ```
