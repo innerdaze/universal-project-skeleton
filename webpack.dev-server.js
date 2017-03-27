@@ -37,11 +37,11 @@ server.use(webpackHotMiddleware(compiler, {
 
 server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({extended: true}))
-
+/*
 server.use('/', (req, res) => (
   res.sendFile(path.join(__dirname, 'app', 'markup', 'dev.html'))
 ))
-
+*/
 server.listen(PORT, IP, err => {
   if (err) {
     console.log(`=> OMG!!! 🙀 ${err}`)

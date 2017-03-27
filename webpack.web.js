@@ -5,7 +5,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   entry: [
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-    path.join(__dirname, 'client', 'index.js')
+    path.join(__dirname, 'client', 'index.jsx')
   ],
   output: {
     filename: 'bundle.js',
@@ -15,6 +15,7 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'client', 'templates', 'index.ejs'),
       filename: 'index.html'
     }),
     new webpack.optimize.UglifyJsPlugin({
@@ -24,17 +25,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        include: /client/,
-        use: {
-          loader: 'babel-loader',
-          query: {
-            presets: ['es2015', 'react']
-          }
-        }
-      },
-      {
-        test: /\.jsx$/,
+        test: /\.(js|jsx)$/,
         include: /client/,
         use: {
           loader: 'babel-loader',
