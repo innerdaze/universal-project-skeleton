@@ -7,6 +7,14 @@ if (module.hot) {
   module.hot.accept();
 }
 
-ReactDOM.render(
-  <MyRootAppComponent />
-  , document.getElementById('root'))
+function startApp() {
+  ReactDOM.render(
+    <MyRootAppComponent />
+    , document.getElementById('root'))
+}
+
+if (window.cordova) {
+  document.addEventListener('deviceready', startApp, false)
+} else {
+  startApp()
+}

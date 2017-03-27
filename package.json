@@ -4,8 +4,8 @@
   "description": "",
   "main": "server/_app/index.js",
   "scripts": {
-    "prebuild": "npm clean",
-    "prebuild:cordova": "npm clean",
+    "prebuild": "npm run clean",
+    "prebuild:cordova": "npm run clean",
     "build:dev": "cross-env NODE_ENV=development webpack --config webpack.web.js",
     "build": "cross-env NODE_ENV=production webpack -p --config webpack.web.js",
     "build:cordova:dev": "cross-env NODE_ENV=development webpack --config webpack.cordova.js",
