@@ -26,11 +26,20 @@ module.exports = {
       {
         test: /\.js$/,
         include: /client/,
-        exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
           query: {
-            presets: ['env']
+            presets: ['es2015', 'react']
+          }
+        }
+      },
+      {
+        test: /\.jsx$/,
+        include: /client/,
+        use: {
+          loader: 'babel-loader',
+          query: {
+            presets: ['es2015', 'react']
           }
         }
       }
