@@ -1,4 +1,3 @@
-const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 const webpack = require('webpack')
@@ -37,15 +36,10 @@ server.use(webpackHotMiddleware(compiler, {
 
 server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({extended: true}))
-/*
-server.use('/', (req, res) => (
-  res.sendFile(path.join(__dirname, 'app', 'markup', 'dev.html'))
-))
-*/
+
 server.listen(PORT, IP, err => {
   if (err) {
     console.log(`=> OMG!!! 🙀 ${err}`)
   }
   console.log(`=> 🔥  Webpack dev server is running on port ${PORT}`)
 })
-

@@ -1,16 +1,23 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-
-import MyRootAppComponent from './components/MyRootAppComponent.jsx'
+import {render} from 'react-dom'
+import {Provider} from 'react-redux'
+import {createStore} from 'redux'
+import orderApp from './reducers/AppReducer'
+import Root from './containers/Root.jsx'
 
 if (module.hot) {
-  module.hot.accept();
+  module.hot.accept()
 }
 
 function startApp() {
-  ReactDOM.render(
-    <MyRootAppComponent />
-    , document.getElementById('root'))
+  let store = createStore(orderApp)
+
+  render(
+    <Provider store={store}>
+      <Root/>
+    </Provider>,
+    document.getElementById('root')
+  )
 }
 
 if (window.cordova) {
