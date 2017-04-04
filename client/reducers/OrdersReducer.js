@@ -1,3 +1,5 @@
+import { map } from 'lodash'
+
 export function orders(state = {
   isFetching: false,
   didInvalidate: false,
@@ -35,7 +37,7 @@ export function orders(state = {
         ...state,
         isFetching: false,
         didInvalidate: false,
-        items: action.orders,
+        items: map(action.orders, 'id'),
         lastUpdated: action.receivedAt
       }
     default:
@@ -60,12 +62,14 @@ export function orderEntities(state = {}, action) {
     case 'CHANGE_ORDER_QUANTITY':
       return state.map((item, index) => {
         if (index === action.id) {
-          return Object.assign({}, ...item, {
+          return Object.assign({}, item, {
             quantity: action.quantity
           })
         }
         return item
       })
+    case 'RECEIVE_ORDERS':
+      return action.orders
     default:
       return state
   }

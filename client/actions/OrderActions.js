@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch'
+import { apiURL } from '../config'
 import * as types from '../constants/ActionTypes'
 
 export function addOrder(id, order) {
@@ -13,14 +14,14 @@ export function changeOrderQuantity(id, quantity) {
   return { type: types.CHANGE_ORDER_QUANTITY, id, quantity }
 }
 
-function requestOrders(device) {
+export function requestOrders(device) {
   return {
     type: types.REQUEST_ORDERS,
     device
   }
 }
 
-function receiveOrders(device, json) {
+export function receiveOrders(device, json) {
   return {
     type: types.RECEIVE_ORDERS,
     device,
@@ -33,7 +34,7 @@ export function fetchOrders(device) {
   return function (dispatch) {
     dispatch(requestOrders(device))
 
-    return fetch('http://localhost:3333/orders')
+    return fetch(`${apiURL}/orders`)
       .then(response => response.json())
       .then(json =>
         dispatch(receiveOrders(device, json))
