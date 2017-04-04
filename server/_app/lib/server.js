@@ -1,5 +1,5 @@
 import http from 'http'
-import {createLogger, stdSerializers} from 'bunyan'
+import { createLogger, stdSerializers } from 'bunyan'
 
 const log = createLogger({
   name: 'Le Server',

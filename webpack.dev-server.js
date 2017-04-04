@@ -35,7 +35,7 @@ server.use(webpackHotMiddleware(compiler, {
 }))
 
 server.use(bodyParser.json())
-server.use(bodyParser.urlencoded({extended: true}))
+server.use(bodyParser.urlencoded({ extended: true }))
 
 server.listen(PORT, IP, err => {
   if (err) {

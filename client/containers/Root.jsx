@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {Router, Route, browserHistory} from 'react-router'
+import React, { Component } from 'react'
+import { Router, Route, browserHistory } from 'react-router'
 import Login from '../components/Login.jsx'
 import ScannedItemListContainer from '../containers/ScannedItemListContainer.jsx'
 import Scanner from '../components/Scanner.jsx'

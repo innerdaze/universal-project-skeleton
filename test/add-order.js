@@ -1,7 +1,7 @@
 import test from 'ava'
-import {createStore} from 'redux'
-import {addOrder} from '../client/actions/OrderActions'
-import orderApp from '../client/reducers/AppReducer'
+import { createStore } from 'redux'
+import { addOrder } from '../client/actions/OrderActions'
+import orderApp from '../client/reducers/RootReducer'
 
 test('add order', t => {
   let store = createStore(orderApp)
@@ -14,8 +14,14 @@ test('add order', t => {
   }
 
   let unsubscribe = store.subscribe(() => {
-    if (store.getState().orders[0] === order) {
-      t.pass()
+    const orders = store.getState().orderEntities
+    const ids = Object.keys(orders)
+
+    for (let i = 0, ln = ids.length, current; i < ln; i++) {
+      current = ids[i]
+      if (current === order.id && orders[current] === order) {
+        t.pass()
+      }
     }
   })
 

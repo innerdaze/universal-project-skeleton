@@ -1,5 +1,5 @@
-import {createLogger, stdSerializers} from 'bunyan'
-import {default as startServer} from '_app/lib/server'
+import { createLogger, stdSerializers } from 'bunyan'
+import { default as startServer } from '_app/lib/server'
 
 const log = createLogger({
   name: 'Le App',

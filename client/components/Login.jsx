@@ -18,11 +18,11 @@ export default class Login extends React.Component {
   }
 
   handleUsernameChange(e) {
-    this.setState({user: e.target.value})
+    this.setState({ user: e.target.value })
   }
 
   handlePasswordChange(e) {
-    this.setState({password: e.target.value})
+    this.setState({ password: e.target.value })
   }
 
   handleLogin(e) {

@@ -1,38 +1,72 @@
-function orders(state = {orders: []}, action) {
+export function orders(state = {
+  isFetching: false,
+  didInvalidate: false,
+  items: []
+}, action) {
   switch (action.type) {
     case 'ADD_ORDER':
       return {
         ...state,
-        orders: [
-          ...state.orders,
-          ...action.order
+        items: [
+          ...state.items,
+          ...action.id
         ]
       }
     case 'DELETE_ORDER':
       return {
         ...state,
-        orders: state.orders.map((order, index) => {
-          if (index !== action.id) {
-            return order
-          }
-          return null
+        items: state.items.filter(value => {
+          return value !== action.id
         })
       }
-    case 'CHANGE_ORDER_QUANTITY':
+    case 'INVALIDATE_ORDERS':
       return {
         ...state,
-        orders: state.orders.map((order, index) => {
-          if (index === action.id) {
-            return Object.assign({}, ...order, {
-              quantity: action.quantity
-            })
-          }
-          return order
-        })
+        didInvalidate: true
+      }
+    case 'REQUEST_ORDERS':
+      return {
+        ...state,
+        isFetching: true,
+        didInvalidate: false
+      }
+    case 'RECEIVE_ORDERS':
+      return {
+        ...state,
+        isFetching: false,
+        didInvalidate: false,
+        items: action.orders,
+        lastUpdated: action.receivedAt
       }
     default:
       return state
   }
 }
 
-export default orders
+export function orderEntities(state = {}, action) {
+  switch (action.type) {
+    case 'ADD_ORDER':
+      return {
+        ...state,
+        [action.id]: action.order
+      }
+    case 'DELETE_ORDER':
+      return state.map((item, index) => {
+        if (index !== action.id) {
+          return item
+        }
+        return null
+      })
+    case 'CHANGE_ORDER_QUANTITY':
+      return state.map((item, index) => {
+        if (index === action.id) {
+          return Object.assign({}, ...item, {
+            quantity: action.quantity
+          })
+        }
+        return item
+      })
+    default:
+      return state
+  }
+}

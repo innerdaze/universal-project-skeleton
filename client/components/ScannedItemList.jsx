@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import ScannedItem from './ScannedItem.jsx'
 
 class ScannedItemList extends Component {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ScannedItem = ({onClick, productId, title, quantity}) => (
+const ScannedItem = ({ onClick, productId, title, quantity }) => (
   <li onClick={onClick}>
     <span>{productId}</span>
     <span>{title}</span>
