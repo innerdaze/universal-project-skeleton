@@ -1,51 +1,57 @@
-import { map } from 'lodash'
+import { map, keyBy } from 'lodash'
+import sampleOrders from '../test/fixtures/orders-sample.json'
 
 export function orders(state = {
-  isFetching: false,
-  didInvalidate: false,
-  items: []
+  isProcessing: false,
+  lastUpdated: null,
+  unprocessedItems: map(sampleOrders, 'Barcode'),
+  processedItems: [],
+  error: null
 }, action) {
   switch (action.type) {
     case 'ADD_ORDER':
       return {
         ...state,
-        items: [
-          ...state.items,
-          ...action.id
+        unprocessedItems: [
+          ...state.unprocessedItems,
+          action.id
         ]
       }
     case 'DELETE_ORDER':
       return {
         ...state,
-        items: state.items.filter(value => {
+        items: state.unprocessedItems.filter(value => {
           return value !== action.id
         })
       }
-    case 'INVALIDATE_ORDERS':
+    case 'REQUEST_PROCESS_ORDERS':
       return {
         ...state,
-        didInvalidate: true
+        isProcessing: true
       }
-    case 'REQUEST_ORDERS':
+    case 'RECEIVE_PROCESS_ORDERS':
       return {
         ...state,
-        isFetching: true,
-        didInvalidate: false
-      }
-    case 'RECEIVE_ORDERS':
-      return {
-        ...state,
-        isFetching: false,
-        didInvalidate: false,
-        items: map(action.orders, 'id'),
+        isProcessing: false,
         lastUpdated: action.receivedAt
+      }
+    case 'SUCCEED_PROCESS_ORDERS':
+      return {
+        ...state,
+        processedItems: state.unprocessedItems,
+        unprocessedItems: []
+      }
+    case 'FAIL_PROCESS_ORDERS':
+      return {
+        ...state,
+        error: action.error
       }
     default:
       return state
   }
 }
 
-export function orderEntities(state = {}, action) {
+export function orderEntities(state = keyBy(sampleOrders, 'Barcode'), action) {
   switch (action.type) {
     case 'ADD_ORDER':
       return {
@@ -53,23 +59,21 @@ export function orderEntities(state = {}, action) {
         [action.id]: action.order
       }
     case 'DELETE_ORDER':
-      return state.map((item, index) => {
-        if (index !== action.id) {
-          return item
-        }
-        return null
-      })
+      let newState = {...state}
+
+      delete newState[action.id]
+
+      return newState
     case 'CHANGE_ORDER_QUANTITY':
-      return state.map((item, index) => {
-        if (index === action.id) {
-          return Object.assign({}, item, {
-            quantity: action.quantity
-          })
+      return {
+        ...state,
+        [action.id]: {
+          ...state[action.id],
+          Qty: action.quantity
         }
-        return item
-      })
+      }
     case 'RECEIVE_ORDERS':
-      return action.orders
+      return keyBy(action.orders, 'Barcode')
     default:
       return state
   }

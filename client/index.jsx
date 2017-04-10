@@ -1,28 +1,14 @@
 import 'babel-polyfill' // eslint-disable-line import/no-unassigned-import
+import 'grommet/scss/hpe/index.scss' // eslint-disable-line import/no-unassigned-import
 import React from 'react'
-import thunkMiddleware from 'redux-thunk'
-import { createLogger } from 'redux-logger'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
-import appReducer from './reducers/RootReducer'
+import configureStore from './store'
 import Root from './containers/Root.jsx'
-import { fetchOrders } from './actions/OrderActions'
 
-if (module.hot) {
-  module.hot.accept()
-}
-
-const loggerMiddleware = createLogger()
+const store = configureStore()
 
 function startApp() {
-  let store = createStore(
-    appReducer,
-    applyMiddleware(
-      thunkMiddleware,
-      loggerMiddleware
-    )
-  )
 
   render(
     <Provider store={store}>
@@ -31,7 +17,10 @@ function startApp() {
     document.getElementById('root')
   )
 
-  store.dispatch(fetchOrders({ id: 'whateva' }))
+  if (module.hot) {
+    module.hot.accept()
+  }
+  // store.dispatch(push('/'))
 }
 
 if (window.cordova) {
@@ -39,3 +28,5 @@ if (window.cordova) {
 } else {
   startApp()
 }
+
+export { store }

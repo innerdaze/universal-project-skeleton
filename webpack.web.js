@@ -19,6 +19,11 @@ module.exports = {
     }
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
+      }
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'client', 'templates', 'index.ejs'),
@@ -50,6 +55,18 @@ module.exports = {
             options: {
               importLoaders: true,
               modules: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader', options: {
+              includePaths: ['./node_modules', './node_modules/grommet/node_modules']
             }
           }
         ]

@@ -1,49 +1,50 @@
-import React from 'react'
+import React, { Component } from 'react'
+import LoginForm from 'grommet/components/LoginForm'
+import Notification from 'grommet/components/Notification'
+import Box from 'grommet/components/Box'
 
-import css from 'css/ratchet-theme-android.css'
-
-export default class Login extends React.Component {
+export default class Login extends Component {
 
   constructor(props) {
     super(props)
 
     this.state = {
-      user: '',
+      username: '',
       password: ''
     }
 
-    this.login = this.login.bind(this)
-    this.handleUsernameChange = this.handleUsernameChange.bind(this)
-    this.handlePasswordChange = this.handlePasswordChange.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
   }
 
-  handleUsernameChange(e) {
-    this.setState({ user: e.target.value })
-  }
-
-  handlePasswordChange(e) {
-    this.setState({ password: e.target.value })
-  }
-
-  handleLogin(e) {
-    e.preventDefault()
-
-    /* Auth.login(this.state.user, this.state.password)
-      .catch(function(err) {
-        console.log("Error logging in", err)
-      }) */
-    console.log('user: %s, pass: %s', this.state.user, this.state.password)
+  handleLogin(data) {
+    this.props.login(data.username, data.password)
   }
 
   render() {
     return (
-      <form role="form">
-        <div className="form-group">
-          <input type="text" value={this.state.user} placeholder="Username" onChange={this.handleUsernameChange}/>
-          <input type="password" value={this.state.password} placeholder="Password" onChange={this.handlePasswordChange}/>
-        </div>
-        <button className={css.btn} type="submit" onClick={this.handleLogin}>Press MEEEE!</button>
-      </form>
+      <Box direction='column'>
+        {this.props.error && (
+          <Box direction='row'>
+            <Notification message={this.props.error} status='critical'/>
+          </Box>
+        )}
+        <Box direction='row'>
+          <LoginForm
+            title='Orbis mStock'
+            onSubmit={this.handleLogin}
+            usernameType='text'/>
+        </Box>
+      </Box>
     )
   }
+}
+
+Login.propTypes = {
+  login: React.PropTypes.func,
+  error: React.PropTypes.string
+}
+
+Login.defaultProps = {
+  login: Function.prototype,
+  error: null
 }

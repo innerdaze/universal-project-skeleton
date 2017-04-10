@@ -6,9 +6,16 @@ module.exports = {
   entry: path.join(__dirname, 'client', 'index.jsx'),
   output: {
     filename: 'bundle.js',
-    path: path.join(__dirname, 'dist', 'cordova')
+    path: path.join(__dirname, 'dist', 'cordova'),
+    publicPath: '/'
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+        CORDOVA: JSON.stringify(true)
+      }
+    }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.join(__dirname, 'client', 'templates', 'index.cordova.ejs')
@@ -28,6 +35,18 @@ module.exports = {
             presets: ['es2015', 'react']
           }
         }
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader', options: {
+              includePaths: ['./node_modules', './node_modules/grommet/node_modules']
+            }
+          }
+        ]
       }
     ]
   }

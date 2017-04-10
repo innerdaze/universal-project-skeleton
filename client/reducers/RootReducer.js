@@ -1,12 +1,6 @@
 import { combineReducers } from 'redux'
-import { orders, orderEntities } from './OrdersReducer'
-import { products, productEntities } from './ProductsReducer'
+import * as reducers from '../reducers'
 
-const appReducer = combineReducers({
-  orders,
-  orderEntities,
-  products,
-  productEntities
-})
+const appReducer = combineReducers(reducers)
 
 export default appReducer

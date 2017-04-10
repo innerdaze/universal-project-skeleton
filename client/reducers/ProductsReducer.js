@@ -1,9 +1,11 @@
-import { map } from 'lodash'
+import { map, keyBy } from 'lodash'
+import sampleProducts from '../test/fixtures/products-sample.json'
 
 export function products(state = {
   isFetching: false,
   didInvalidate: false,
-  items: []
+  lastUpdated: null,
+  items: map(sampleProducts, 'ProductID')
 }, action) {
   switch (action.type) {
     case 'INVALIDATE_PRODUCTS':
@@ -30,10 +32,10 @@ export function products(state = {
   }
 }
 
-export function productEntities(state = {}, action) {
+export function productEntities(state = keyBy(sampleProducts, 'ProductID'), action) {
   switch (action.type) {
     case 'RECEIVE_PRODUCTS':
-      return action.products
+      return keyBy(action.products, 'ProductID')
     default:
       return state
   }
