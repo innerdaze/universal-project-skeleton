@@ -1,12 +1,14 @@
 import { map, keyBy } from 'lodash'
 import sampleOrders from '../test/fixtures/orders-sample.json'
+import OperationModes from '../constants/OperationModes'
 
 export function orders(state = {
   isProcessing: false,
   lastUpdated: null,
   unprocessedItems: map(sampleOrders, 'Barcode'),
   processedItems: [],
-  error: null
+  error: null,
+  mode: OperationModes.STOCKTAKE
 }, action) {
   switch (action.type) {
     case 'ADD_ORDER':
@@ -46,6 +48,11 @@ export function orders(state = {
         ...state,
         error: action.error
       }
+    case 'CHANGE_OPERATION_MODE':
+      return {
+        ...state,
+        mode: action.mode
+      }
     default:
       return state
   }
@@ -73,7 +80,7 @@ export function orderEntities(state = keyBy(sampleOrders, 'Barcode'), action) {
         }
       }
     case 'RECEIVE_ORDERS':
-      return keyBy(action.orders, 'Barcode')
+      return keyBy(action.orders, 'id')
     default:
       return state
   }

@@ -37,6 +37,7 @@ export default {
     lastUpdated: Date,
     unprocessedItems: [String],
     processedItems: [String],
+    mode: String,
     error: null
   },
   products: {
@@ -46,6 +47,12 @@ export default {
     items: [String]
   },
   barcodes: {
+    isFetching: Boolean,
+    didInvalidate: Boolean,
+    lastUpdated: Date,
+    items: [String]
+  },
+  cashiers: {
     isFetching: Boolean,
     didInvalidate: Boolean,
     lastUpdated: Date,

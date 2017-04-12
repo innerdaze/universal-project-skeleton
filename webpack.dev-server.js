@@ -1,11 +1,10 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const webpack = require('webpack')
-const webpackDevMiddleware = require('webpack-dev-middleware')
-const webpackHotMiddleware = require('webpack-hot-middleware')
-const WebpackDashboardPlugin = require('webpack-dashboard/plugin')
-
-const devBuildConfig = require('./webpack.web')
+import express from 'express'
+import bodyParser from 'body-parser'
+import webpack from 'webpack'
+import webpackDevMiddleware from 'webpack-dev-middleware'
+import webpackHotMiddleware from 'webpack-hot-middleware'
+import WebpackDashboardPlugin from 'webpack-dashboard/plugin'
+import devBuildConfig from './webpack.web'
 
 const IP = process.env.IP || 'localhost'
 const PORT = process.env.PORT || 4000

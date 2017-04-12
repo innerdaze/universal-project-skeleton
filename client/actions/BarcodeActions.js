@@ -49,7 +49,7 @@ export function invalidateBarcodes() {
   }
 }
 
-export function processBarcode(barcode) {
+export function processBarcode(barcode, mode) {
   return function (dispatch) {
 
     const order = {
@@ -61,7 +61,7 @@ export function processBarcode(barcode) {
       Ref2: '',
       // TermianlID: store.getState().terminalID,
       // TransDate: now.toISOString().substr(-1),
-      TransType: 10,
+      TransType: mode,
       UnitID: '',
       // UserID: store.getState().user.id
     }

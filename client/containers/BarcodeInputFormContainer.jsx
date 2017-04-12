@@ -3,13 +3,16 @@ import BarcodeInputForm from '../components/BarcodeInputForm.jsx'
 import { processBarcode } from '../actions/BarcodeActions'
 
 const mapStateToProps = state => {
-  return {}
+  return {
+    mode: state.orders.mode,
+    barcodes: state.barcodeEntities
+  }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSubmitBarcode: barcode => {
-      dispatch(processBarcode(barcode))
+    onSubmitBarcode: (barcode, mode) => {
+      dispatch(processBarcode(barcode, mode))
     }
   }
 }

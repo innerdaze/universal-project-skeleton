@@ -3,11 +3,11 @@ var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: path.join(__dirname, 'client', 'index.jsx'),
+  entry: ['babel-polyfill', path.join(__dirname, 'client', 'index.jsx')],
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, 'dist', 'cordova'),
-    publicPath: '/'
+    publicPath: ''
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -35,6 +35,20 @@ module.exports = {
             presets: ['es2015', 'react']
           }
         }
+      },
+      {
+        test: /\.css$/,
+        include: /client\/assets\/css/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: true,
+              modules: true
+            }
+          }
+        ]
       },
       {
         test: /\.scss$/,

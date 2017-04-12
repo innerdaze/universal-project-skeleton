@@ -5,7 +5,8 @@ import { deleteOrder, changeOrderQuantity } from '../actions/OrderActions'
 const mapStateToProps = state => {
   return {
     items: state.orders.unprocessedItems.filter(id => {
-      return state.orderEntities[id]
+      return state.orderEntities[id] &&
+        state.orderEntities[id].TransType === state.orders.mode
     }).map(id => {
       const barcode = state.barcodeEntities[id]
       let order = state.orderEntities[id]

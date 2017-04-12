@@ -1,11 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import { store } from '../index.jsx'
 import Form from 'grommet/components/Form'
-import FormField from 'grommet/components/FormField'
 import TextInput from 'grommet/components/TextInput'
 import Footer from 'grommet/components/Footer'
 import Button from 'grommet/components/Button'
 import Toast from 'grommet/components/Toast'
+import Box from 'grommet/components/Box'
 
 class BarcodeInputForm extends Component {
 
@@ -31,27 +30,29 @@ class BarcodeInputForm extends Component {
   onSubmit(e) {
     e.preventDefault()
 
-    const foundBarcode = store.getState().barcodeEntities[this.state.barcode]
+    const foundBarcode = this.props.barcodes[this.state.barcode]
 
     if (foundBarcode) {
 
       const now = new Date()
 
       const order = {
+        // Now
         __type: 'HandheldTrans',
         AreaID: '',
         Barcode: this.state.barcode,
         Qty: 1,
         Ref1: '',
         Ref2: '',
-        TermianlID: store.getState().terminalID,
-        TransDate: now.toISOString().substr(-1),
-        TransType: 10,
+        TransType: this.props.mode,
         UnitID: '',
-        UserID: store.getState().user.id
+        // When processing
+        //TermianlID: store.getState().terminalID,
+        TransDate: now.toISOString().substr(-1)
+        //UserID: store.getState().user.id
       }
 
-      this.props.onSubmitBarcode(foundBarcode)
+      this.props.onSubmitBarcode(foundBarcode, this.props.mode)
     } else {
       this.setState({
         error: 'No match for barcode'
@@ -67,7 +68,7 @@ class BarcodeInputForm extends Component {
 
   render() {
     return (
-      <Form compact={true}>
+      <Form plain={true}>
         { this.state.error &&
           <Toast
             status='critical'
@@ -75,29 +76,30 @@ class BarcodeInputForm extends Component {
             {this.state.error}
           </Toast>
         }
-        <FormField>
+        <Box
+          direction='row'>
           <TextInput
             placeHolder="Enter barcode"
             onDOMChange={this.onChange}
             value={this.state.barcode}/>
-        </FormField>
-        <Footer>
           <Button label='Submit'
             type='submit'
             primary={true}
             onClick={this.onSubmit}/>
-        </Footer>
+        </Box>
       </Form>
     )
   }
 }
 
 BarcodeInputForm.propTypes = {
-  onSubmitBarcode: PropTypes.func.isRequired
+  onSubmitBarcode: PropTypes.func.isRequired,
+  barcodes: PropTypes.array.isRequired
 }
 
 BarcodeInputForm.defaultProps = {
-  onSubmitBarcode: Function.prototype
+  onSubmitBarcode: Function.prototype,
+  barcodes: []
 }
 
 export default BarcodeInputForm

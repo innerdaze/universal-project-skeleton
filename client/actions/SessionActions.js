@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import { browserHistory } from 'react-router'
+import history from '../history'
 import { apiURL } from '../config'
 import {
   REQUEST_LOGIN,
@@ -88,7 +88,7 @@ export function login(userID, password) {
       .then(json => {
         dispatch(startSession(json.result.Result.SessionID))
         dispatch(succeedLogin(json.result.Result.UserData))
-        browserHistory.push('/orders')
+        history.push('/orders')
       })
       .catch(error => {
         dispatch(failLogin(error))

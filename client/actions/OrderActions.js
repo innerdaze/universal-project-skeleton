@@ -1,42 +1,47 @@
 import fetch from 'isomorphic-fetch'
 import { apiURL } from '../config'
-import * as types from '../constants/ActionTypes'
+import {
+  ADD_ORDER, DELETE_ORDER, CHANGE_ORDER_QUANTITY,
+  REQUEST_PROCESS_ORDERS, RECEIVE_PROCESS_ORDERS,
+  SUCCEED_PROCESS_ORDERS, FAIL_PROCESS_ORDERS,
+  CHANGE_OPERATION_MODE
+} from '../constants/ActionTypes'
 import { checkStatusAndParseJSON } from '../helpers/Network'
 
 export function addOrder(id, order) {
-  return { type: types.ADD_ORDER, id, order }
+  return { type: ADD_ORDER, id, order }
 }
 
 export function deleteOrder(id) {
-  return { type: types.DELETE_ORDER, id }
+  return { type: DELETE_ORDER, id }
 }
 
 export function changeOrderQuantity(id, quantity) {
-  return { type: types.CHANGE_ORDER_QUANTITY, id, quantity }
+  return { type: CHANGE_ORDER_QUANTITY, id, quantity }
 }
 
 export function requestProcessOrders() {
   return {
-    type: types.REQUEST_PROCESS_ORDERS
+    type: REQUEST_PROCESS_ORDERS
   }
 }
 
 export function receiveProcessOrders() {
   return {
-    type: types.RECEIVE_PROCESS_ORDERS,
+    type: RECEIVE_PROCESS_ORDERS,
     receivedAt: Date.now()
   }
 }
 
 export function succeedProcessOrders() {
   return {
-    type: types.SUCCEED_PROCESS_ORDERS
+    type: SUCCEED_PROCESS_ORDERS
   }
 }
 
 export function failProcessOrders() {
   return {
-    type: types.FAIL_PROCESS_ORDERS
+    type: FAIL_PROCESS_ORDERS
   }
 }
 
@@ -62,5 +67,12 @@ export function processOrders(sessionID, orders, device) {
       .catch(error => {
         dispatch(failProcessOrders(error))
       })
+  }
+}
+
+export function changeOperationMode(mode) {
+  return {
+    type: CHANGE_OPERATION_MODE,
+    mode: mode
   }
 }

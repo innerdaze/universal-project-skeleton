@@ -6,9 +6,10 @@ import { Provider } from 'react-redux'
 import configureStore from './store'
 import Root from './containers/Root.jsx'
 
-const store = configureStore()
 
-function startApp() {
+async function startApp() {
+
+  const store = await configureStore()
 
   render(
     <Provider store={store}>
@@ -28,5 +29,3 @@ if (window.cordova) {
 } else {
   startApp()
 }
-
-export { store }
