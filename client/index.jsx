@@ -11,6 +11,7 @@ async function startApp() {
 
   const store = await configureStore()
 
+
   render(
     <Provider store={store}>
       <Root/>

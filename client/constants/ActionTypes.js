@@ -1,7 +1,9 @@
-// App
-export const CHANGE_OPERATION_MODE = 'CHANGE_OPERATION_MODE'
+// Sync
+export const START_SYNC = 'START_SYNC'
+export const END_SYNC = 'END_SYNC'
 
-// Resource
+// Orders
+export const CHANGE_OPERATION_MODE = 'CHANGE_OPERATION_MODE'
 export const DELETE_ORDER = 'DELETE_ORDER'
 export const CHANGE_ORDER_QUANTITY = 'CHANGE_ORDER_QUANTITY'
 

@@ -31,7 +31,7 @@ class ModeSwitcher extends Component {
         justify='center'>
         <Menu
           label='Change Mode'
-          inline={true}
+          inline={false}
           direction='row'
           justify='between'
           size='small'

@@ -3,6 +3,7 @@ import { products, productEntities } from './reducers/ProductsReducer'
 import { cashiers, cashierEntities } from './reducers/CashiersReducer'
 import { barcodes, barcodeEntities } from './reducers/BarcodesReducer'
 import { session, user } from './reducers/SessionReducer'
+import sync from './reducers/SyncReducer'
 import scanner from './reducers/ScannerReducer'
 
 export {
@@ -16,5 +17,6 @@ export {
   barcodeEntities,
   session,
   user,
-  scanner
+  scanner,
+  sync
 }

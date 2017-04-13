@@ -87,7 +87,7 @@ export function login(userID, password) {
       .then(checkStatusAndParseJSON)
       .then(json => {
         dispatch(startSession(json.result.Result.SessionID))
-        dispatch(succeedLogin(json.result.Result.UserData))
+        dispatch(succeedLogin(json.result.Result.UserData))       
         history.push('/orders')
       })
       .catch(error => {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import BackgroundSyncProgressContainer from '../containers/BackgroundSyncProgressContainer.jsx'
 import BarcodeInputFormContainer from '../containers/BarcodeInputFormContainer.jsx'
 import ScannedItemListContainer from '../containers/ScannedItemListContainer.jsx'
 import ModeSwitcherContainer from '../containers/ModeSwitcherContainer.jsx'
@@ -13,6 +14,7 @@ const OrdersLayout = () => (
     appCentered={true}
     direction='column'
     full={true}>
+    <BackgroundSyncProgressContainer/>
     <ModeSwitcherContainer/>
     <BarcodeInputFormContainer/>
     <ScannedItemListContainer/>

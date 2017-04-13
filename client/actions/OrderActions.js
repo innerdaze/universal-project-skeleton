@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch'
+import { v4 } from 'uuid'
 import { apiURL } from '../config'
 import {
   ADD_ORDER, DELETE_ORDER, CHANGE_ORDER_QUANTITY,
@@ -74,5 +75,26 @@ export function changeOperationMode(mode) {
   return {
     type: CHANGE_OPERATION_MODE,
     mode: mode
+  }
+}
+
+export function createTransaction(mode, barcode, quantity) {
+  return function (dispatch) {
+
+    const order = {
+      __type: 'HandheldTrans',
+      AreaID: '',
+      Barcode: barcode,
+      Qty: quantity,
+      Ref1: '',
+      Ref2: '',
+      // TermianlID: store.getState().terminalID,
+      // TransDate: now.toISOString().substr(-1),
+      TransType: mode,
+      UnitID: '',
+      // UserID: store.getState().user.id
+    }
+
+    dispatch(addOrder(uuidGen(), order))
   }
 }

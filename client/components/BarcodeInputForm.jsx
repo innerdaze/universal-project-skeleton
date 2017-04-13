@@ -32,6 +32,8 @@ class BarcodeInputForm extends Component {
 
     const foundBarcode = this.props.barcodes[this.state.barcode]
 
+    const found = this.props.matchBarcode(this.state.barcode)
+
     if (foundBarcode) {
 
       const now = new Date()
@@ -52,7 +54,7 @@ class BarcodeInputForm extends Component {
         //UserID: store.getState().user.id
       }
 
-      this.props.onSubmitBarcode(foundBarcode, this.props.mode)
+      this.props.createTransaction(this.props.mode, foundBarcode, 1)
     } else {
       this.setState({
         error: 'No match for barcode'

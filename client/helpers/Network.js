@@ -10,3 +10,7 @@ export function checkStatusAndParseJSON(response) {
       throw error
     })
 }
+
+export function isOnline() {
+  return navigator.connection.type !== navigator.connection.NONE
+}

@@ -10,5 +10,5 @@ export const api = {
 
 export const apiURL = `${api.protocol}://${api.host}:${api.port}`
 
-// TODO: Review this
+/* TODO: Review this */
 export const lowestLogLevel = isDevelopment ? 'debug' : 'error'
