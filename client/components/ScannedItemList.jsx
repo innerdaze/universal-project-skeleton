@@ -1,6 +1,8 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import List from 'grommet/components/List'
 import Box from 'grommet/components/Box'
+import ListPlaceholder from 'grommet-addons/components/ListPlaceholder'
 import ScannedItem from './ScannedItem.jsx'
 import ChangeOrderQuantityFormContainer from '../containers/ChangeOrderQuantityFormContainer.jsx'
 import DeleteEntityForm from '../components/DeleteEntityForm.jsx'
@@ -51,12 +53,11 @@ class ScannedItemList extends Component {
   }
 
   onDeleteItemConfirm() {
-
     this.setState({
       isDeletingOrder: false
     })
 
-    this.props.onDeleteItemClick(this.state.selectedOrder.Barcode)
+    this.props.onDeleteItemClick(this.state.selectedOrder._id)
 
     this.setState({
       selectedOrder: null
@@ -77,26 +78,35 @@ class ScannedItemList extends Component {
           <ChangeOrderQuantityFormContainer
             order={this.state.selectedOrder}
             onSubmit={this.onChangeOrderQuantitySubmit}
-            onCancel={this.onChangeOrderQuantityCancel}/>
+            onCancel={this.onChangeOrderQuantityCancel}
+            />
         }
         {
           this.state.isDeletingOrder &&
           <DeleteEntityForm
             message='Confirm you would like to delete this order'
             onConfirm={this.onDeleteItemConfirm}
-            onCancel={this.onDeleteItemCancel}/>
+            onCancel={this.onDeleteItemCancel}
+            />
         }
         <List>
-          {this.props.items.map(item => (
-            item && <ScannedItem
-              key={item.Barcode}
-              id={item.Barcode}
-              productID={item.productID}
-              title={item.productName}
-              quantity={item.Qty}
-              onChangeQuantityClick={this.onChangeOrderQuantityClick.bind(this, item)}
-              onDeleteClick={this.onDeleteItemClick.bind(this, item)} />
-          ))}
+          {this.props.items.length ?
+            this.props.items.map(item => (
+              item && <ScannedItem
+                key={item._id}
+                id={item._id}
+                productID={item.productID}
+                title={item.productName}
+                quantity={item.Qty}
+                onChangeQuantityClick={this.onChangeOrderQuantityClick.bind(this, item)}
+                onDeleteClick={this.onDeleteItemClick.bind(this, item)}
+                />
+            )) : <ListPlaceholder
+                emptyMessage='Nothing to process - Add some items to get started.'
+                filteredTotal={this.props.items.length}
+                unfilteredTotal={this.props.items.length}
+                />
+          }
         </List>
       </Box>
     )

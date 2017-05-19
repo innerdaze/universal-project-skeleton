@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Button from 'grommet/components/Button'
 
 class ProcessItemsButton extends Component {
-
   constructor(props) {
     super(props)
 
@@ -20,9 +20,21 @@ class ProcessItemsButton extends Component {
 
   render() {
     return (
-      <Button label='Process' primary={true}/>
+      <Button
+        disabled={this.state.canProcess}
+        label="Process"
+        onClick={this.onClick}
+        primary/>
     )
   }
+}
+
+ProcessItemsButton.propTypes = {
+  onProcessItemsClick: PropTypes.func.isRequired
+}
+
+ProcessItemsButton.defaultProps = {
+  onProcessItemsClick: Function.prototype
 }
 
 export default ProcessItemsButton

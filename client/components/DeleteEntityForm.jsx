@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import Layer from 'grommet/components/Layer'
 import Paragraph from 'grommet/components/Paragraph'
 import Footer from 'grommet/components/Footer'
@@ -9,20 +10,24 @@ import TrashIcon from 'grommet/components/icons/base/Trash'
 const DeleteEntityForm = ({ message, onConfirm, onCancel }) => (
   <Layer>
     <Paragraph
-      align='center'>
+      align="center"
+      >
       {message}
     </Paragraph>
     <Footer
-      justify='between'>
+      justify="between"
+      >
       <Anchor
-        label='Cancel'
+        label="Cancel"
         icon={<CloseIcon/>}
-        onClick={onCancel}/>
+        onClick={onCancel}
+        />
       <Anchor
-        primary={true}
-        label='Confirm'
+        primary
+        label="Confirm"
         icon={<TrashIcon/>}
-        onClick={onConfirm}/>
+        onClick={onConfirm}
+        />
     </Footer>
   </Layer>
 )

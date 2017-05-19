@@ -1,0 +1,7 @@
+.#{grommet-namespace}search__drop {
+  input {
+    @include media-query(palm) {
+      width: calc(100vw - 52px);
+    }
+  }
+}

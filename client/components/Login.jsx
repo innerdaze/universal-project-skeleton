@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { appShortTitle } from '../config'
 import LoginForm from 'grommet/components/LoginForm'
 import Notification from 'grommet/components/Notification'
 import Box from 'grommet/components/Box'
+import Header from 'grommet/components/Header'
+import Headline from 'grommet/components/Headline'
 
 export default class Login extends Component {
 
@@ -10,10 +14,23 @@ export default class Login extends Component {
 
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      error: ''
     }
 
     this.handleLogin = this.handleLogin.bind(this)
+  }
+
+  componentWillReceiveProps(newProps){
+    if (this.state.error === newProps.error) {
+      return false
+    } else {
+      this.state.error = newProps.error
+    }
+  }
+
+  handleNotificationClose() {
+    this.state.error = null
   }
 
   handleLogin(data) {
@@ -22,26 +39,26 @@ export default class Login extends Component {
 
   render() {
     return (
-      <Box direction='column'>
-        {this.props.error && (
-          <Box direction='row'>
-            <Notification message={this.props.error} status='critical'/>
-          </Box>
+      <Box justify='center'
+        align='center'
+        full={true}>
+        {this.state.error && (
+          <Notification message={this.state.error} status="critical" onClose={this.onNotificationClose} />
         )}
-        <Box direction='row'>
-          <LoginForm
-            title='Orbis mStock'
-            onSubmit={this.handleLogin}
-            usernameType='text'/>
-        </Box>
+        <LoginForm
+          title={appShortTitle}
+          secondaryText='By Orbis'
+          onSubmit={this.handleLogin}
+          usernameType='text'
+          />
       </Box>
     )
   }
 }
 
 Login.propTypes = {
-  login: React.PropTypes.func,
-  error: React.PropTypes.string
+  login: PropTypes.func,
+  error: PropTypes.string
 }
 
 Login.defaultProps = {

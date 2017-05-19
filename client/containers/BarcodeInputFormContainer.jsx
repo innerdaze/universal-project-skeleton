@@ -1,19 +1,18 @@
 import { connect } from 'react-redux'
 import BarcodeInputForm from '../components/BarcodeInputForm.jsx'
-import { processBarcode } from '../actions/BarcodeActions'
+import { createTransactionFromBarcode } from '../actions/BarcodeActions'
 
 const mapStateToProps = state => {
   return {
-    mode: state.orders.mode,
-    barcodes: state.barcodeEntities
+    error: state.barcodeLookup.lastError
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSubmitBarcode: (barcode, mode) => {
-      dispatch(processBarcode(barcode, mode))
-    }
+    onSubmitBarcode: barcode => (
+      dispatch(createTransactionFromBarcode(barcode))
+    )
   }
 }
 

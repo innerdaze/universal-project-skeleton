@@ -11,7 +11,7 @@ import appReducer from './reducers/RootReducer'
 export default async function configureStore(initialState) {
   const loggerMiddleware = createLogger()
 
-  let storeEnhancers;
+  let storeEnhancers
 
   if (process.env.NODE_ENV === 'development') {
     storeEnhancers = composeWithDevTools(

@@ -6,11 +6,8 @@ import { Provider } from 'react-redux'
 import configureStore from './store'
 import Root from './containers/Root.jsx'
 
-
 async function startApp() {
-
   const store = await configureStore()
-
 
   render(
     <Provider store={store}>

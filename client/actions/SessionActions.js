@@ -80,14 +80,14 @@ export function login(userID, password) {
         }
       })
     })
-      .then((response) => {
+      .then(response => {
         dispatch(receiveLogin())
         return response
       })
       .then(checkStatusAndParseJSON)
       .then(json => {
         dispatch(startSession(json.result.Result.SessionID))
-        dispatch(succeedLogin(json.result.Result.UserData))       
+        dispatch(succeedLogin(json.result.Result.UserData))
         history.push('/orders')
       })
       .catch(error => {

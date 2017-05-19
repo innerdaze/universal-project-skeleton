@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import Login from '../components/Login.jsx'
 import { login } from '../actions/SessionActions'
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     error: state.session.error && 'Could not login at this time. Please try again later or contact support'
   }

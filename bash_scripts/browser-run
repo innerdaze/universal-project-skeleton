@@ -1,0 +1,3 @@
+NODE_TARGET=browser npm run build:cordova:dev
+npm run cordova:link
+cd cordova && cordova run browser

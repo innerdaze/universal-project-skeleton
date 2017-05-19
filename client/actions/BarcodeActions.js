@@ -4,9 +4,13 @@ import {
   REQUEST_BARCODES,
   RECEIVE_BARCODES,
   INVALIDATE_BARCODES,
-  PROCESS_BARCODE
+  PROCESS_BARCODE,
+  LOOKUP_BARCODE,
+  SUCCEED_LOOKUP_BARCODE,
+  FAIL_LOOKUP_BARCODE
 } from '../constants/ActionTypes'
-import { addOrder } from './OrderActions'
+import { createTransaction } from './OrderActions'
+import { failIfMissing } from '../helpers/Function.js'
 
 export function requestBarcodes() {
   return {
@@ -22,7 +26,29 @@ export function receiveBarcodes(json) {
   }
 }
 
-export function fetchBarcodes(sessionID) {
+export function lookupBarcode(barcodeID) {
+  return {
+    type: LOOKUP_BARCODE,
+    barcodeID: barcodeID
+  }
+}
+
+export function failLookupBarcode(barcodeID) {
+  return {
+    type: FAIL_LOOKUP_BARCODE,
+    barcodeID: barcodeID,
+    error: `No match for barcode: ${barcodeID}`
+  }
+}
+
+export function succeedLookupBarcode(barcodeID) {
+  return {
+    type: SUCCEED_LOOKUP_BARCODE,
+    barcodeID: barcodeID
+  }
+}
+
+export function fetchBarcodes(sessionID = failIfMissing('sessionID', 'fetchBarcodes')) {
   return function (dispatch) {
     dispatch(requestBarcodes())
 
@@ -37,35 +63,38 @@ export function fetchBarcodes(sessionID) {
       })
     })
       .then(response => response.json())
-      .then(json => {
-        dispatch(receiveBarcodes(json.result.Result.ListOfBarcodes))
-      })
+      .then(json => dispatch(receiveBarcodes(json.result.Result.ListOfBarcodes)))
+  }
+}
+
+export function _findBarcodeByID(barcodeID) {
+  return function (dispatch, getState) {
+    dispatch(lookupBarcode(barcodeID))
+
+    const barcode = getState().barcodeEntities[barcodeID]
+
+    if (barcode) {
+      dispatch(succeedLookupBarcode(barcodeID))
+    } else {
+      dispatch(failLookupBarcode(barcodeID))
+    }
+
+    return barcode
+  }
+}
+
+export function createTransactionFromBarcode(barcodeID) {
+  return function (dispatch, getState) {
+    const found = dispatch(_findBarcodeByID(barcodeID))
+
+    if (found) {
+      dispatch(createTransaction(getState().orders.mode, barcodeID, 1))
+    }
   }
 }
 
 export function invalidateBarcodes() {
   return {
     type: INVALIDATE_BARCODES
-  }
-}
-
-export function processBarcode(barcode, mode) {
-  return function (dispatch) {
-
-    const order = {
-      __type: 'HandheldTrans',
-      AreaID: '',
-      Barcode: barcode.Barcode,
-      Qty: 1,
-      Ref1: '',
-      Ref2: '',
-      // TermianlID: store.getState().terminalID,
-      // TransDate: now.toISOString().substr(-1),
-      TransType: mode,
-      UnitID: '',
-      // UserID: store.getState().user.id
-    }
-
-    dispatch(addOrder(barcode.Barcode, order))
   }
 }

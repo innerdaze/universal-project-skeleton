@@ -1,5 +1,6 @@
 [
   {
+    "_id": "488412DB-99C1-4BA5-A1F0-047C2AB71B2F",
     "__type": "HandheldTrans",
     "AreaID": "",
     "Barcode": "8191",
@@ -13,6 +14,7 @@
     "UserID": "1234"
   },
   {
+    "_id": "76BA38DC-BF36-4374-ACFE-3119D6450854",
     "__type": "HandheldTrans",
     "AreaID": "",
     "Barcode": "8194",

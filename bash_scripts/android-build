@@ -1,0 +1,4 @@
+NODE_TARGET=device npm run build:cordova:dev
+npm run cordova:link
+cd cordova && cordova build android
+open platforms/android/build/outputs/apk/

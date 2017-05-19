@@ -1,6 +1,7 @@
 // Sync
 export const START_SYNC = 'START_SYNC'
 export const END_SYNC = 'END_SYNC'
+export const SYNC_PROGRESS = 'SYNC_PROGRESS'
 
 // Orders
 export const CHANGE_OPERATION_MODE = 'CHANGE_OPERATION_MODE'
@@ -19,6 +20,11 @@ export const INITIALIZE_SCANNER = 'INITIALIZE_SCANNER'
 export const START_SCANNING = 'START_SCANNING'
 export const END_SCANNING = 'END_SCANNING'
 export const FOUND_BARCODE = 'FOUND_BARCODE'
+
+// Barcode
+export const LOOKUP_BARCODE = 'LOOKUP_BARCODE'
+export const FAIL_LOOKUP_BARCODE = 'FAIL_LOOKUP_BARCODE'
+export const SUCCEED_LOOKUP_BARCODE = 'SUCCEED_LOOKUP_BARCODE'
 
 // Network
 // - Orders
@@ -46,3 +52,7 @@ export const FAIL_LOGIN = 'FAIL_LOGIN'
 export const SUCCEED_LOGIN = 'SUCCEED_LOGIN'
 export const REQUEST_LOGOUT = 'REQUEST_LOGOUT'
 export const RECEIVE_LOGOUT = 'RECEIVE_LOGOUT'
+
+// UI
+export const UI_SHOW_MENU = 'UI_SHOW_MENU'
+export const UI_HIDE_MENU = 'UI_HIDE_MENU'

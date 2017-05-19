@@ -33,17 +33,17 @@ test.failing('send orders to server for processing', async t => {
       params: {
         SessionID: sessionID,
         Data: [{
-          '__type': 'HandheldTrans',
-          'AreaID': '',
-          'Barcode': '1234',
-          'Qty': 100,
-          'Ref1': '',
-          'Ref2': '',
-          'TermianlID': '1',
-          'TransDate': '2017-03-31T19:54:40.765',
-          'TransType': 10,
-          'UnitID': '',
-          'UserID': '1234'
+          __type: 'HandheldTrans',
+          AreaID: '',
+          Barcode: '1234',
+          Qty: 100,
+          Ref1: '',
+          Ref2: '',
+          TermianlID: '1',
+          TransDate: '2017-03-31T19:54:40.765',
+          TransType: 10,
+          UnitID: '',
+          UserID: '1234'
         }]
       }
     })

@@ -1,25 +1,59 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import BackgroundSyncProgressContainer from '../containers/BackgroundSyncProgressContainer.jsx'
 import BarcodeInputFormContainer from '../containers/BarcodeInputFormContainer.jsx'
 import ScannedItemListContainer from '../containers/ScannedItemListContainer.jsx'
-import ModeSwitcherContainer from '../containers/ModeSwitcherContainer.jsx'
 import ProcessItemsButtonContainer from '../containers/ProcessItemsButtonContainer.jsx'
+import OrdersHeaderLayout from '../components/OrdersHeaderLayout.jsx'
+import MainMenu from '../components/MainMenu.jsx'
+import Split from 'grommet/components/Split'
+import Sidebar from 'grommet/components/Sidebar'
 import Box from 'grommet/components/Box'
-import Section from 'grommet/components/Section'
-import Footer from 'grommet/components/Footer'
 
-const OrdersLayout = () => (
-  <Section
-    primary={true}
-    appCentered={true}
-    direction='column'
-    full={true}>
-    <BackgroundSyncProgressContainer/>
-    <ModeSwitcherContainer/>
-    <BarcodeInputFormContainer/>
-    <ScannedItemListContainer/>
-    <ProcessItemsButtonContainer/>
-  </Section>
-)
+class OrdersLayout extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      mainMenuVisible: false
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (this.state.mainMenuVisible === newProps.mainMenuVisible) {
+      return false
+    } else {
+      this.setState({
+        mainMenuVisible: newProps.mainMenuVisible
+      })
+    }
+  }
+
+  render() {
+    return (
+      <Split
+        fixed={true}
+        priority={this.state.mainMenuVisible ? 'left' : 'right'}
+        flex='right'>
+        <MainMenu/>
+        <Box justify='center' pad='medium'>
+          <BackgroundSyncProgressContainer/>
+          <OrdersHeaderLayout/>
+          <BarcodeInputFormContainer/>
+          <ScannedItemListContainer/>
+          <ProcessItemsButtonContainer/>
+        </Box>
+      </Split>
+    )
+  }
+}
+
+OrdersLayout.propTypes = {
+	mainMenuVisible: PropTypes.bool
+}
+
+OrdersLayout.defaultProps = {
+	mainMenuVisible: false
+}
 
 export default OrdersLayout

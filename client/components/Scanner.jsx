@@ -42,13 +42,15 @@ class Scanner extends Component {
           <FormField>
             <TextInput
               placeHolder="Enter Barcode"
-              onDOMChange={this.onEnterBarcodeFieldChange}/>
+              onDOMChange={this.onEnterBarcodeFieldChange}
+              />
           </FormField>
           <Button
             type="submit"
             label="Submit"
-            primary={true}
-            onClick={this.handleEnterBarcodeManually}/>
+            primary
+            onClick={this.handleEnterBarcodeManually}
+            />
         </Form>
         { /* }
         <button onClick={this.handleStartScanClick}>Scan</button>

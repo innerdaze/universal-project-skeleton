@@ -19,10 +19,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.join(__dirname, 'client', 'templates', 'index.cordova.ejs')
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: process.env.NODE_ENV === 'production'
     })
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: process.env.NODE_ENV === 'production'
+    // })
   ],
   module: {
     rules: [
@@ -56,11 +56,20 @@ module.exports = {
           'style-loader',
           'css-loader',
           {
-            loader: 'sass-loader', options: {
-              includePaths: ['./node_modules', './node_modules/grommet/node_modules']
+            loader: 'sass-loader',
+            options: {
+              includePaths: [
+                './node_modules',
+                './node_modules/grommet/scss'
+              ]
             }
           }
         ]
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        include: /client\/assets\/fonts/,
+        loader: 'file-loader?name=client/assets/fonts/[name].[ext]'
       }
     ]
   }

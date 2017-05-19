@@ -1,29 +1,28 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Meter from 'grommet/components/Meter'
 
 class BackgroundSyncProgress extends Component {
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      progress: 0
-    }
-  }
-
   render() {
-    return this.state.isSyncing && (
-      <Meter type='bar' value={this.state.progress}/>
+    return this.props.isSyncing && (
+      <Meter
+        type='bar'
+        max={1}
+        fill={true}
+        value={this.props.progress}
+        />
     ) || null
   }
 }
 
 BackgroundSyncProgress.propTypes = {
-  isSyncing: React.PropTypes.bool
+  isSyncing: PropTypes.bool.isRequired,
+  progress: PropTypes.number.isRequired
 }
 
 BackgroundSyncProgress.defaultProps = {
-  isSyncing: false
+  isSyncing: false,
+  progress: 0
 }
 
 export default BackgroundSyncProgress

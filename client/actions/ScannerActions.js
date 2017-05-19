@@ -36,29 +36,29 @@ export function scan() {
     dispatch(initializeScanner())
 
     Quagga.init({
-      inputStream : {
-        name : 'Live',
-        type : 'LiveStream',
+      inputStream: {
+        name: 'Live',
+        type: 'LiveStream',
         target: document.querySelector('#scannerViewport')    // Or '#yourElement' (optional)
       },
-      decoder : {
-        readers : ['ean']
+      decoder: {
+        readers: ['ean']
       }
-    }, function(err) {
-        if (err) {
-            console.log(err);
-            return
-        }
+    }, function (err) {
+      if (err) {
+        console.log(err)
+        return
+      }
 
-        dispatch(startScanning())
+      dispatch(startScanning())
 
-        Quagga.onDetected(data => {
-          dispatch(foundBarcode(data))
+      Quagga.onDetected(data => {
+        dispatch(foundBarcode(data))
 
-          Quagga.stop()
-        })
+        Quagga.stop()
+      })
 
-        Quagga.start();
-    });
+      Quagga.start()
+    })
   }
 }

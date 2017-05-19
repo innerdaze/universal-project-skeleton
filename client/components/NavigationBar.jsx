@@ -8,12 +8,13 @@ export default class NavigationBar extends Component {
 
   render() {
     return (
-      <Footer primary={true} appCentered={true}>
+      <Footer primary appCentered>
         <Menu
-          inline={true}
-          direction='row'
+          inline
+          direction="row"
           responsive={false}
-          fill={true}>
+          fill
+          >
           <Link to="/orders">Orders</Link>
         </Menu>
       </Footer>

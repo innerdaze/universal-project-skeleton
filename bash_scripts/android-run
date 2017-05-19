@@ -1,0 +1,4 @@
+adb uninstall uk.co.orbistech.mobilloyalty
+NODE_TARGET=device npm run build:cordova:dev
+npm run cordova:link
+cd cordova && cordova run android --device

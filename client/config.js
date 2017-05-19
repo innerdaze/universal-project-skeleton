@@ -9,6 +9,8 @@ export const api = {
 }
 
 export const apiURL = `${api.protocol}://${api.host}:${api.port}`
+export const appTitle = 'Orbis Site Assistant'
+export const appShortTitle = 'Site Assistant'
 
 /* TODO: Review this */
 export const lowestLogLevel = isDevelopment ? 'debug' : 'error'

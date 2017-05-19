@@ -5,7 +5,7 @@ import OperationModes from '../constants/OperationModes'
 export function orders(state = {
   isProcessing: false,
   lastUpdated: null,
-  unprocessedItems: map(sampleOrders, 'Barcode'),
+  unprocessedItems: map(sampleOrders, '_id'),
   processedItems: [],
   error: null,
   mode: OperationModes.STOCKTAKE
@@ -58,7 +58,7 @@ export function orders(state = {
   }
 }
 
-export function orderEntities(state = keyBy(sampleOrders, 'Barcode'), action) {
+export function orderEntities(state = keyBy(sampleOrders, '_id'), action) {
   switch (action.type) {
     case 'ADD_ORDER':
       return {
@@ -66,7 +66,7 @@ export function orderEntities(state = keyBy(sampleOrders, 'Barcode'), action) {
         [action.id]: action.order
       }
     case 'DELETE_ORDER':
-      let newState = {...state}
+      let newState = { ...state }
 
       delete newState[action.id]
 
@@ -80,7 +80,7 @@ export function orderEntities(state = keyBy(sampleOrders, 'Barcode'), action) {
         }
       }
     case 'RECEIVE_ORDERS':
-      return keyBy(action.orders, 'id')
+      return keyBy(action.orders, '_id')
     default:
       return state
   }

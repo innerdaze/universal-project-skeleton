@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ListItem from 'grommet/components/ListItem'
 import Box from 'grommet/components/Box'
 import Menu from 'grommet/components/Menu'
@@ -12,24 +13,28 @@ class ScannedItem extends Component {
   render() {
     return (
       <ListItem
-        justify='between'
-        responsive={false}>
-        <Box direction='row' basis='1/2' justify='between'>
+        justify="between"
+        responsive={false}
+        >
+        <Box direction="row" basis="1/2" justify="between">
           <Box>{this.props.productID}</Box>
           <Box>{this.props.title}</Box>
         </Box>
-        <Box direction='row' basis='1/2' justify='end' textAlign='right'>
+        <Box direction="row" basis="1/2" justify="end" textAlign="right">
           <Box className="secondary">{this.props.quantity} x Units</Box>
           <Menu
-            icon={<ActionsIcon/>}>
+            icon={<ActionsIcon/>}
+            >
             <Anchor
               icon={<EditIcon/>}
-              label='Change Quantity'
-              onClick={this.props.onChangeQuantityClick}/>
+              label="Change Quantity"
+              onClick={this.props.onChangeQuantityClick}
+              />
             <Anchor
               icon={<TrashIcon/>}
-              label='Delete Order'
-              onClick={this.props.onDeleteClick}/>
+              label="Delete Order"
+              onClick={this.props.onDeleteClick}
+              />
           </Menu>
         </Box>
       </ListItem>
@@ -38,9 +43,9 @@ class ScannedItem extends Component {
 }
 
 ScannedItem.propTypes = {
-  id: React.PropTypes.string.isRequired,
-  title: React.PropTypes.string.isRequired,
-  onClick: React.PropTypes.func.isRequired
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired
 }
 
 ScannedItem.defaultProps = {

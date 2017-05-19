@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Layer from 'grommet/components/Layer'
 import Form from 'grommet/components/Form'
 import Header from 'grommet/components/Header'
@@ -40,7 +41,7 @@ class ChangeOrderQuantityForm extends Component {
   onSubmit(e) {
     e.preventDefault()
 
-    this.props.changeOrderQuantity(this.props.order.Barcode, this.state.quantity)
+    this.props.changeOrderQuantity(this.props.order._id, this.state.quantity)
 
     this.props.onSubmit()
   }
@@ -64,20 +65,24 @@ class ChangeOrderQuantityForm extends Component {
             <NumberInput
               min={1}
               value={this.state.quantity}
-              onChange={this.onNumberInputChange}/>
+              onChange={this.onNumberInputChange}
+              />
           </FormField>
           <Footer
-            pad={{'vertical': 'medium'}}
-            justify='between'>
+            pad={{ vertical: 'medium' }}
+            justify="between"
+            >
             <Anchor
-              label='Cancel'
+              label="Cancel"
               icon={<CloseIcon/>}
-              onClick={this.onCancel}/>
+              onClick={this.onCancel}
+              />
             <Anchor
-              primary={true}
-              label='Submit'
+              primary
+              label="Submit"
               icon={<NextLinkIcon/>}
-              onClick={this.onSubmit}/>
+              onClick={this.onSubmit}
+              />
           </Footer>
         </Form>
       </Layer>
@@ -86,15 +91,15 @@ class ChangeOrderQuantityForm extends Component {
 }
 
 ChangeOrderQuantityForm.propTypes = {
-  order: React.PropTypes.object.isRequired,
-  onSubmit: React.PropTypes.func.isRequired,
-  onCancel: React.PropTypes.func.isRequired
+  order: PropTypes.object.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired
 }
 
 ChangeOrderQuantityForm.propDefaults = {
   order: null,
   onChangeOrderQuantitySubmit: Function.prototype,
-  onChangeOrderQuantityChange: Function.prototype,
+  onChangeOrderQuantityChange: Function.prototype
 }
 
 export default ChangeOrderQuantityForm

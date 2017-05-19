@@ -1,6 +1,24 @@
+export default async function apiCall({
+  service = failIfMissing('service'),
+  params = {},
+  success = json => json,
+  failure = error => error
+}) {
+  return fetch(`${config.apiRoot}/json`, {
+    method: 'post',
+    body: JSON.stringify({
+      method: service,
+      params
+    })
+  })
+  .then(res => res.json())
+  .then(success)
+  .catch(failure)
+}
+
 export function checkStatusAndParseJSON(response) {
   return response.json()
-    .then((data) => {
+    .then(data => {
       if (data.result.Result.ResMessage.ResCode === 0) {
         return data
       }

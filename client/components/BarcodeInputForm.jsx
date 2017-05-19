@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Form from 'grommet/components/Form'
 import TextInput from 'grommet/components/TextInput'
 import Footer from 'grommet/components/Footer'
@@ -27,39 +28,19 @@ class BarcodeInputForm extends Component {
     })
   }
 
-  onSubmit(e) {
-    e.preventDefault()
-
-    const foundBarcode = this.props.barcodes[this.state.barcode]
-
-    const found = this.props.matchBarcode(this.state.barcode)
-
-    if (foundBarcode) {
-
-      const now = new Date()
-
-      const order = {
-        // Now
-        __type: 'HandheldTrans',
-        AreaID: '',
-        Barcode: this.state.barcode,
-        Qty: 1,
-        Ref1: '',
-        Ref2: '',
-        TransType: this.props.mode,
-        UnitID: '',
-        // When processing
-        //TermianlID: store.getState().terminalID,
-        TransDate: now.toISOString().substr(-1)
-        //UserID: store.getState().user.id
-      }
-
-      this.props.createTransaction(this.props.mode, foundBarcode, 1)
+  componentWillReceiveProps(newProps){
+    if (this.state.error === newProps.error) {
+      return false
     } else {
       this.setState({
-        error: 'No match for barcode'
+        error: newProps.error
       })
     }
+  }
+
+  onSubmit(e) {
+    e.preventDefault()
+    this.props.onSubmitBarcode(this.state.barcode)
   }
 
   onCloseError() {
@@ -70,24 +51,31 @@ class BarcodeInputForm extends Component {
 
   render() {
     return (
-      <Form plain={true}>
+      <Form plain>
         { this.state.error &&
-          <Toast
+          <Notification
             status='critical'
-            onClose={this.onCloseError}>
+            onClose={this.onCloseError}
+            >
             {this.state.error}
-          </Toast>
+          </Notification>
         }
         <Box
-          direction='row'>
+          direction='row'
+          alignContent='stretch'
+          >
           <TextInput
             placeHolder="Enter barcode"
             onDOMChange={this.onChange}
-            value={this.state.barcode}/>
-          <Button label='Submit'
-            type='submit'
-            primary={true}
-            onClick={this.onSubmit}/>
+            value={this.state.barcode}
+            />
+          <Button
+            label="Submit"
+            type="submit"
+            secondary
+            fill
+            onClick={this.onSubmit}
+            />
         </Box>
       </Form>
     )

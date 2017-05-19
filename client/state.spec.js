@@ -52,6 +52,10 @@ export default {
     lastUpdated: Date,
     items: [String]
   },
+  barcodeLookup: {
+    lastQuery: String,
+    lastError: Error
+  },
   cashiers: {
     isFetching: Boolean,
     didInvalidate: Boolean,

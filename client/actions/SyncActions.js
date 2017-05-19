@@ -1,7 +1,12 @@
+import ProgressPromise from 'progress-promise'
 import {
   START_SYNC,
-  END_SYNC
+  END_SYNC,
+  SYNC_PROGRESS
 } from '../constants/ActionTypes'
+import { fetchBarcodes } from './BarcodeActions'
+import { fetchProducts } from './ProductActions'
+import { fetchCashiers } from './CashierActions'
 
 export function startSync() {
   return {
@@ -12,5 +17,28 @@ export function startSync() {
 export function endSync() {
   return {
     type: END_SYNC
+  }
+}
+
+export function syncProgress(progress) {
+  return {
+    type: SYNC_PROGRESS,
+    progress
+  }
+}
+
+export function sync() {
+  return async (dispatch, getState) => {
+    dispatch(startSync())
+
+    const sessionID = getState().session.id
+
+    await ProgressPromise.all([
+      dispatch(fetchBarcodes(sessionID)),
+      dispatch(fetchProducts(sessionID)),
+      dispatch(fetchCashiers(sessionID))
+    ]).progress(results => dispatch(syncProgress(results.proportion)))
+
+    dispatch(endSync())
   }
 }
