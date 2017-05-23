@@ -1,16 +1,20 @@
+@import '_orbis.colors';
+
 // Colors
-$brand-color: #e86320;
-$brand-color-lighter: desaturate(lighten($brand-color, 55%), 40%);
-// $brand-neutral-colors: (4) !default;
-$brand-accent-colors: (#E89820, #D51D48, #159A6F) !default;
+$brand-color: $orbis-brand-color;
+
+//$brand-color-lighter: desaturate(lighten($brand-color, 55%), 40%);
+
+$brand-neutral-colors: ($orbis-neutral-1, $orbis-neutral-2, $orbis-neutral-3, $orbis-neutral-4) !default;
+$brand-accent-colors: ($orbis-accent-1, $orbis-accent-2, $orbis-accent-3) !default;
 // $brand-status-colors: (
 //   ok: $brand-color
 // )
-$brand-grey-colors: (#000001, #333333, #3B3B3B, #434343, #666666);
+// $brand-grey-colors: (#000001, #333333, #3B3B3B, #434343, #666666);
 $brand-link-color: inherit;
-$link-hover-color: #000;
+//$link-hover-color: #000;
 $brand-link-text-decoration: underline;
-$button-accent-color: #F3A780;
+//$button-accent-color: #F3A780;
 $control-brand-color: $brand-color;
 
 // Borders
