@@ -32,7 +32,8 @@
     "precordova:emulate:android": "npm run cordova:link",
     "cordova:emulate:android": "cd cordova && cordova emulate android",
     "tunnel": "lt --port 4000 --subdomain obms",
-    "api-mock": "api-mock --port 3333 api-blueprint/spec.md"
+    "api-mock": "api-mock --port 3333 api-blueprint/spec.md",
+    "watch:cordova:browser:dev": "nodemon -w client -w webpack.cordova.js -w webpack.dev-server.js -x 'cross-env NODE_TARGET=browser npm run build:cordova:dev && npm run cordova:link && cd cordova && cordova run browser'"
   },
   "keywords": [],
   "author": "Lee Driscoll <lee.driscoll@orbistech.co.uk>",
