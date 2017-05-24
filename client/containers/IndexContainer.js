@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import Index from '../components/Index.jsx'
 
 const mapStateToProps = state => ({
@@ -6,6 +7,6 @@ const mapStateToProps = state => ({
   isLoggedIn: state.session.alive
 })
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps
-)(Index)
+)(Index))

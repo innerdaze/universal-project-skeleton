@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Box from 'grommet/components/Box'
 import Notification from 'grommet/components/Notification'
@@ -34,6 +35,19 @@ class Initialize extends Component {
   }
 
   render() {
+    // const {isInitialized, isLoggedIn} = this.props
+    // if (isInitialized && isLoggedIn) {
+    //   return (
+    //     <Redirect to='/orders'/>
+    //   )
+    // }
+    //
+    // if (isInitialized && !isLoggedIn) {
+    //   return (
+    //     <Redirect to='/login'/>
+    //   )
+    // }
+
     return (
       <Box justify='center'
         align='center'

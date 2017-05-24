@@ -13,8 +13,8 @@ import styles from '../assets/scss/orbis/index.scss'
 export default () => (
   <ConnectedRouter history={history}>
     <AppLayout>
+      <Route component={IndexContainer}/>
       <Switch>
-        <Route exact path='/' component={IndexContainer}/>
         <Route path='/login' component={LoginContainer}/>
         <Route path='/initialize' component={InitializeContainer}/>
         <Route path='/orders' component={OrdersLayoutContainer}/>

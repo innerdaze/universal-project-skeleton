@@ -3,12 +3,26 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 class Index extends Component {
+  // shouldComponentUpdate(newProps) {
+  //   debugger
+  //   if (newProps.location.pathname !== this.props.location.pathname) {
+  //     return true
+  //   }
+  //   return false
+  // }
+
   render() {
-    const {isInitialized, isLoggedIn, location} = this.props
+    const {isInitialized, isLoggedIn, location } = this.props
     const route = !isInitialized ? '/initialize' : !isLoggedIn ? '/login' : '/orders'
 
+    console.log(`Redirecting to ${route}`)
+    //<p>Redirect to={route}</p>
+    //<Redirect to={route}/>
+
     return (
-      <p>Redirect to={route}</p>
+      <div id={location}>
+        <Redirect to={route}/>
+      </div>
     )
   }
 }
