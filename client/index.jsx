@@ -5,14 +5,14 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { connect, push } from 'connected-react-router'
 import configureStore from './store'
-import createRoutes from './containers/Root.jsx'
+import Root from './containers/Root.jsx'
 
 async function startApp() {
   const store = await configureStore()
 
   render(
     <Provider store={store}>
-      {createRoutes(store)}
+      <Root />
     </Provider>,
     document.getElementById('root')
   )
@@ -21,7 +21,7 @@ async function startApp() {
     module.hot.accept()
   }
 
-  // store.dispatch(push
+  // store.dispatch(push('/'))
 }
 
 if (window.cordova) {

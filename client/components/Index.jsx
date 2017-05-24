@@ -4,21 +4,23 @@ import PropTypes from 'prop-types'
 
 class Index extends Component {
   render() {
-    const {isInitialized, isLoggedIn} = this.props
+    const {isInitialized, isLoggedIn, location} = this.props
     const route = !isInitialized ? '/initialize' : !isLoggedIn ? '/login' : '/orders'
 
     return (
-      <Redirect to={route}/>
+      <p>Redirect to={route}</p>
     )
   }
 }
 
 Index.propTypes = {
+  location: PropTypes.object,
   isInitialized: PropTypes.bool.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }
 
 Index.defaultProps = {
+  location: null,
   isInitialized: false,
   isLoggedIn: false
 }
