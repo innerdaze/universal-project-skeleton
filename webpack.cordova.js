@@ -9,6 +9,9 @@ module.exports = {
     path: path.join(__dirname, 'dist', 'cordova'),
     publicPath: ''
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.scss', '.css', '.json']
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {

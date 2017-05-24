@@ -1,7 +1,6 @@
 import fetch from 'isomorphic-fetch'
 import { v4 as uuidGen } from 'uuid'
 import { find, filter, includes } from 'lodash'
-import { apiURL } from '../config'
 import {
   ADD_ORDER, DELETE_ORDER, CHANGE_ORDER_QUANTITY,
   REQUEST_PROCESS_ORDERS, RECEIVE_PROCESS_ORDERS,
@@ -53,17 +52,17 @@ export function processOrders() {
   return function (dispatch, getState) {
     dispatch(requestProcessOrders())
 
-    const orders = getState().orderEntities
+    const { orders, orderItems, app, session } = getState()
 
-    return fetch(apiURL, {
+    return fetch(app.apiRoot, {
       method: 'post',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: JSON.stringify({
         method: 'HandheldService.ProcessTransactions',
         params: {
-          SessionID: getState().session.id,
-          Data: getState().orders.unprocessedItems.map(id => {
-            return orders.hasOwnProperty(id) && orders[id]
+          SessionID: session.id,
+          Data: orders.unprocessedItems.map(id => {
+            return orderItems.hasOwnProperty(id) && orderItems[id]
           })
         }
       })

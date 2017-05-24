@@ -4,18 +4,20 @@ import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import WebpackDashboardPlugin from 'webpack-dashboard/plugin'
-import devBuildConfig from './webpack.web'
+import webBuildConfig from './webpack.web'
+import cordovaBuildConfig from './webpack.cordova'
 
 const IP = process.env.IP || 'localhost'
 const PORT = process.env.PORT || 4000
 
 const server = express()
-const compiler = webpack(devBuildConfig)
+const config = process.env.NODE_TARGET === 'device' ? cordovaBuildConfig : webBuildConfig
+const compiler = webpack(config)
 
 compiler.apply(new WebpackDashboardPlugin())
 
 server.use(webpackDevMiddleware(compiler, {
-  publicPath: devBuildConfig.output.publicPath,
+  publicPath: config.output.publicPath,
   hot: true,
   historyApiFallback: true,
   stats: {

@@ -5,8 +5,11 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { persistStore, autoRehydrate } from 'redux-persist'
 import createFilter from 'redux-persist-transform-filter'
 import localForage from 'localforage'
+import { connectRouter, routerMiddleware } from 'connected-react-router'
 import cordovaSQLiteDriver from 'localforage-cordovasqlitedriver'
-import appReducer from './reducers/RootReducer'
+import rootReducer from './reducers/RootReducer'
+import history from './history'
+
 
 export default async function configureStore(initialState) {
   const loggerMiddleware = createLogger()
@@ -16,6 +19,7 @@ export default async function configureStore(initialState) {
   if (process.env.NODE_ENV === 'development') {
     storeEnhancers = composeWithDevTools(
       applyMiddleware(
+        routerMiddleware(history),
         thunkMiddleware,
         loggerMiddleware
       ),
@@ -23,20 +27,22 @@ export default async function configureStore(initialState) {
     )
   } else {
     storeEnhancers = compose(
-      applyMiddleware(thunkMiddleware),
+      applyMiddleware(
+        routerMiddleware(history),
+        thunkMiddleware
+      ),
       autoRehydrate()
     )
   }
 
   const store = createStore(
-    appReducer,
+    connectRouter(history)(rootReducer),
     storeEnhancers
   )
 
   if (module.hot) {
     module.hot.accept('./reducers', () => {
-      const nextRootReducer = require('./reducers.js')
-      store.replaceReducer(nextRootReducer)
+      store.replaceReducer(connectRouter(history)(rootReducer))
     })
   }
 
@@ -57,13 +63,16 @@ export default async function configureStore(initialState) {
       'cashierEntities',
       'cashiers',
       'barcodeEntities',
-      'barcodes'
+      'barcodes',
+      'app',
+      'session'
     ],
     transforms: [
       createFilter('orders', ['unprocessedItems', 'processedItems']),
       createFilter('products', ['items']),
       createFilter('cashiers', ['items']),
       createFilter('barcodes', ['items'])
+      // createFilter('app', ['initialized', 'apiRoot'])
     ]
   })
 

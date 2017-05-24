@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch'
+import { push } from 'connected-react-router'
 import history from '../history'
-import { apiURL } from '../config'
 import {
   REQUEST_LOGIN,
   RECEIVE_LOGIN,
@@ -67,10 +67,10 @@ export function receiveLogout() {
 }
 
 export function login(userID, password) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     dispatch(requestLogin())
 
-    return fetch(apiURL, {
+    return fetch(getState().app.apiRoot, {
       method: 'post',
       body: JSON.stringify({
         method: 'SystemLoginService.Login',
@@ -88,7 +88,7 @@ export function login(userID, password) {
       .then(json => {
         dispatch(startSession(json.result.Result.SessionID))
         dispatch(succeedLogin(json.result.Result.UserData))
-        history.push('/orders')
+        // dispatch(push('/orders'))
       })
       .catch(error => {
         dispatch(failLogin(error))
@@ -97,10 +97,10 @@ export function login(userID, password) {
 }
 
 export function logout(sessionID) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     dispatch(requestLogout())
 
-    return fetch(apiURL, {
+    return fetch(getState().app.apiRoot, {
       method: 'post',
       body: JSON.stringify({
         method: 'SystemLoginService.Logout',

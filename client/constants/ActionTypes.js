@@ -56,3 +56,7 @@ export const RECEIVE_LOGOUT = 'RECEIVE_LOGOUT'
 // UI
 export const UI_SHOW_MENU = 'UI_SHOW_MENU'
 export const UI_HIDE_MENU = 'UI_HIDE_MENU'
+
+// App
+export const APP_INITIALIZE = 'APP_INITIALIZE'
+export const APP_SET_API_ROOT = 'APP_SET_API_ROOT'

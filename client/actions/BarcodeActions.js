@@ -1,5 +1,4 @@
 import fetch from 'isomorphic-fetch'
-import { apiURL } from '../config'
 import {
   REQUEST_BARCODES,
   RECEIVE_BARCODES,
@@ -49,10 +48,10 @@ export function succeedLookupBarcode(barcodeID) {
 }
 
 export function fetchBarcodes(sessionID = failIfMissing('sessionID', 'fetchBarcodes')) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     dispatch(requestBarcodes())
 
-    return fetch(apiURL, {
+    return fetch(getState().app.apiRoot, {
       method: 'post',
       body: JSON.stringify({
         method: 'HandheldService.GetBarcodes',

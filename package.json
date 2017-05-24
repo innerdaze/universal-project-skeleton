@@ -48,6 +48,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "bunyan": "^1.8.8",
+    "connected-react-router": "^4.2.1",
     "core-decorators": "^0.18.0",
     "cross-env": "^3.2.3",
     "debug": "^2.6.6",
@@ -81,6 +82,7 @@
     "redux-persist-transform-filter": "0.0.9",
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.5",
+    "valid-url": "^1.0.9",
     "webpack": "^2.5.1",
     "webpack-dev-middleware": "^1.10.2"
   },
@@ -88,6 +90,7 @@
     "ava": "^0.18.2",
     "babel-cli": "^6.24.0",
     "babel-eslint": "^7.2.1",
+    "babel-loader": "^7.0.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",

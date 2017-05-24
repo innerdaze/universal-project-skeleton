@@ -1,6 +1,8 @@
 export default {
   deviceID: String,
-  isBootstrapped: Boolean,
+  app: {
+    isInitialized: Boolean
+  },
   user: {
     id: String,
     name: String

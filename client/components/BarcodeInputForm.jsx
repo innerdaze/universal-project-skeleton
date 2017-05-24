@@ -70,7 +70,7 @@ class BarcodeInputForm extends Component {
             value={this.state.barcode}
             />
           <Button
-            label="Submit"
+            label='Submit'
             type="submit"
             secondary
             fill

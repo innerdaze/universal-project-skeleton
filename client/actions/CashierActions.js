@@ -1,5 +1,4 @@
 import fetch from 'isomorphic-fetch'
-import { apiURL } from '../config'
 import {
   REQUEST_CASHIERS,
   RECEIVE_CASHIERS,
@@ -24,7 +23,7 @@ export function fetchCashiers(sessionID) {
   return function (dispatch) {
     dispatch(requestCashiers())
 
-    return fetch(apiURL, {
+    return fetch(getState().app.apiRoot, {
       method: 'post',
       body: JSON.stringify({
         method: 'CashierService.GetCashiers',

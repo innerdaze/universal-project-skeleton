@@ -3,15 +3,16 @@ import 'grommet/scss/hpe/index.scss' // eslint-disable-line import/no-unassigned
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
+import { connect, push } from 'connected-react-router'
 import configureStore from './store'
-import Root from './containers/Root.jsx'
+import createRoutes from './containers/Root.jsx'
 
 async function startApp() {
   const store = await configureStore()
 
   render(
     <Provider store={store}>
-      <Root/>
+      {createRoutes(store)}
     </Provider>,
     document.getElementById('root')
   )
@@ -19,7 +20,8 @@ async function startApp() {
   if (module.hot) {
     module.hot.accept()
   }
-  // store.dispatch(push('/'))
+
+  // store.dispatch(push
 }
 
 if (window.cordova) {

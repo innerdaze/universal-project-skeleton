@@ -15,17 +15,27 @@ export default class Login extends Component {
     this.state = {
       username: '',
       password: '',
-      error: ''
+      error: '',
+      initialized: false
     }
 
     this.handleLogin = this.handleLogin.bind(this)
   }
 
+  componentDidMount() {
+    // this.props.redirectToInitialize()
+  }
+
   componentWillReceiveProps(newProps){
-    if (this.state.error === newProps.error) {
+    const { error, initialized } = newProps
+
+    if ({ error, initialized } === {
+      error: this.state.error,
+      initialized: this.state.initialized
+    }) {
       return false
     } else {
-      this.state.error = newProps.error
+      this.setState({ error, initialized })
     }
   }
 

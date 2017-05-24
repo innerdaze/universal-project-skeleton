@@ -1,5 +1,5 @@
-import { browserHistory, hashHistory } from 'react-router'
+import { createBrowserHistory, createMemoryHistory } from 'history'
 
-const history = process.env.CORDOVA ? hashHistory : browserHistory
+const history = process.env.CORDOVA ? createMemoryHistory() : createBrowserHistory()
 
 export default history

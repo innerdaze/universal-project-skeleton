@@ -1,5 +1,4 @@
 import fetch from 'isomorphic-fetch'
-import { apiURL } from '../config'
 import {
   REQUEST_PRODUCTS,
   RECEIVE_PRODUCTS,
@@ -21,10 +20,10 @@ export function receiveProducts(json) {
 }
 
 export function fetchProducts(sessionID) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     dispatch(requestProducts())
 
-    return fetch(apiURL, {
+    return fetch(getState().app.apiRoot, {
       method: 'post',
       body: JSON.stringify({
         method: 'HandheldService.GetProducts',
