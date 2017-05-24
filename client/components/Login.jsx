@@ -22,10 +22,6 @@ export default class Login extends Component {
     this.handleLogin = this.handleLogin.bind(this)
   }
 
-  componentDidMount() {
-    // this.props.redirectToInitialize()
-  }
-
   componentWillReceiveProps(newProps){
     const { error, initialized } = newProps
 
@@ -53,7 +49,7 @@ export default class Login extends Component {
         align='center'
         full={true}>
         {this.state.error && (
-          <Notification message={this.state.error} status="critical" onClose={this.onNotificationClose} />
+          <Notification message={this.state.error} status="critical" onClose={this.handleNotificationClose} />
         )}
         <LoginForm
           title={appShortTitle}
