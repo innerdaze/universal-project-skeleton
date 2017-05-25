@@ -17,19 +17,11 @@ class Initialize extends Component {
     super(props)
 
     this.state = {
-      apiRoot: '',
-      error: null
+      apiRoot: ''
     }
 
     this._onApiRootFieldChange = this._onApiRootFieldChange.bind(this)
     this._onFormSubmit = this._onFormSubmit.bind(this)
-  }
-
-  componentWillReceiveProps(newProps) {
-    if (newProps.error === this.state.error) {
-      return false
-    }
-    this.setState({ error: newProps.error })
   }
 
   _onApiRootFieldChange(e) {
@@ -41,20 +33,11 @@ class Initialize extends Component {
     this.props.onApiRootFormSubmit(this.state.apiRoot)
   }
 
-  _onNotificationClose() {
-    this.setState({
-      error: null
-    })
-  }
-
   render() {
     return (
       <Box justify='center'
         align='center'
         full={true}>
-        { this.state.error && (
-          <Notification message={this.state.error} status="critical" onClose={this._onNotificationClose} />
-        ) }
         <Form onSubmit={this._onFormSubmit}>
           <Header>
             <Heading>

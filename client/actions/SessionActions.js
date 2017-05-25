@@ -91,8 +91,9 @@ export function login(userID, password) {
         dispatch(succeedLogin(json.result.Result.UserData))
       })
       .catch(error => {
-        dispatch(failLogin(error))
-        dispatch(displayError(error.message || 'Could not login at this time. Please try again later or contact support'))
+        const message = error && error.message || 'Could not login at this time. Please try again later or contact support'
+        dispatch(failLogin(message))
+        dispatch(displayError(message))
       })
   }
 }

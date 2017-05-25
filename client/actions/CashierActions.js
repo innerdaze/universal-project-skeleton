@@ -20,7 +20,7 @@ export function receiveCashiers(json) {
 }
 
 export function fetchCashiers(sessionID) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     dispatch(requestCashiers())
 
     return fetch(getState().app.apiRoot, {

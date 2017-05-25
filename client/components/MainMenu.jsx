@@ -9,7 +9,7 @@ import ModeSwitcherContainer from '../containers/ModeSwitcherContainer'
 import Modes from '../constants/OperationModes'
 
 const MainMenu = () => (
-  <Sidebar colorIndex='neutral-1' full={true}>
+  <Sidebar colorIndex='brand' full={true}>
     <Header pad='medium'
       justify='between'>
       <Title>
