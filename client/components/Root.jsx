@@ -8,11 +8,20 @@ import LoginContainer from '../containers/LoginContainer'
 import AppLayout from '../components/AppLayout'
 import OrdersLayoutContainer from '../containers/OrdersLayoutContainer'
 import InitializeContainer from '../containers/InitializeContainer'
+import Notification from 'grommet/components/Notification'
 import styles from '../assets/scss/orbis/index.scss'
 
-export default ({ initialized, authed }) => (
+export default ({ initialized, authed, error, handleNotificationClose }) => (
   <ConnectedRouter history={history}>
     <AppLayout>
+      {error && (
+        <Notification
+          message={error}
+          status="critical"
+          onClose={handleNotificationClose}
+          closer={true}
+          />
+      )}
       <Switch>
         <Route path='/login' render={props => initialized === true
           ? authed === false

@@ -8,6 +8,7 @@ import { session, user } from './reducers/SessionReducer'
 import sync from './reducers/SyncReducer'
 import scanner from './reducers/ScannerReducer'
 import ui from './reducers/UIReducer'
+import error from './reducers/ErrorReducer'
 
 export {
   orders,
@@ -24,5 +25,6 @@ export {
   scanner,
   sync,
   ui,
-  app
+  app,
+  error
 }

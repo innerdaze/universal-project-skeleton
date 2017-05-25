@@ -25,6 +25,13 @@ class Initialize extends Component {
     this._onFormSubmit = this._onFormSubmit.bind(this)
   }
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.error === this.state.error) {
+      return false
+    }
+    this.setState({ error: newProps.error })
+  }
+
   _onApiRootFieldChange(e) {
     this.setState({ apiRoot: e.target.value })
   }
@@ -34,27 +41,20 @@ class Initialize extends Component {
     this.props.onApiRootFormSubmit(this.state.apiRoot)
   }
 
-  render() {
-    // const {isInitialized, isLoggedIn} = this.props
-    // if (isInitialized && isLoggedIn) {
-    //   return (
-    //     <Redirect to='/orders'/>
-    //   )
-    // }
-    //
-    // if (isInitialized && !isLoggedIn) {
-    //   return (
-    //     <Redirect to='/login'/>
-    //   )
-    // }
+  _onNotificationClose() {
+    this.setState({
+      error: null
+    })
+  }
 
+  render() {
     return (
       <Box justify='center'
         align='center'
         full={true}>
-        {/*this.state.error && (
-          <Notification message={this.state.error} status="critical" onClose={this.onNotificationClose} />
-        )*/}
+        { this.state.error && (
+          <Notification message={this.state.error} status="critical" onClose={this._onNotificationClose} />
+        ) }
         <Form onSubmit={this._onFormSubmit}>
           <Header>
             <Heading>

@@ -2,41 +2,20 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { appShortTitle } from '../config'
 import LoginForm from 'grommet/components/LoginForm'
-import Notification from 'grommet/components/Notification'
 import Box from 'grommet/components/Box'
 import Header from 'grommet/components/Header'
 import Headline from 'grommet/components/Headline'
 
 export default class Login extends Component {
-
   constructor(props) {
     super(props)
 
     this.state = {
       username: '',
-      password: '',
-      error: '',
-      initialized: false
+      password: ''
     }
 
     this.handleLogin = this.handleLogin.bind(this)
-  }
-
-  componentWillReceiveProps(newProps){
-    const { error, initialized } = newProps
-
-    if ({ error, initialized } === {
-      error: this.state.error,
-      initialized: this.state.initialized
-    }) {
-      return false
-    } else {
-      this.setState({ error, initialized })
-    }
-  }
-
-  handleNotificationClose() {
-    this.state.error = null
   }
 
   handleLogin(data) {
@@ -48,9 +27,6 @@ export default class Login extends Component {
       <Box justify='center'
         align='center'
         full={true}>
-        {this.state.error && (
-          <Notification message={this.state.error} status="critical" onClose={this.handleNotificationClose} />
-        )}
         <LoginForm
           title={appShortTitle}
           secondaryText='By Orbis'
@@ -63,11 +39,9 @@ export default class Login extends Component {
 }
 
 Login.propTypes = {
-  login: PropTypes.func,
-  error: PropTypes.string
+  login: PropTypes.func.isRequired
 }
 
 Login.defaultProps = {
-  login: Function.prototype,
-  error: null
+  login: Function.prototype
 }

@@ -60,3 +60,7 @@ export const UI_HIDE_MENU = 'UI_HIDE_MENU'
 // App
 export const APP_INITIALIZE = 'APP_INITIALIZE'
 export const APP_SET_API_ROOT = 'APP_SET_API_ROOT'
+
+// Error Handling
+export const ERROR_DISPLAY = 'ERROR_DISPLAY'
+export const ERROR_DISMISS = 'ERROR_DISMISS'

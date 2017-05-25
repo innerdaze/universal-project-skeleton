@@ -11,6 +11,7 @@ import {
   SUCCEED_LOGIN,
   FAIL_LOGIN
 } from '../constants/ActionTypes'
+import { displayError } from '../actions/ErrorActions'
 import { checkStatusAndParseJSON } from '../helpers/Network'
 
 export function startSession(id) {
@@ -49,7 +50,7 @@ export function succeedLogin(user) {
 export function failLogin(error) {
   return {
     type: FAIL_LOGIN,
-    error: error
+    error
   }
 }
 
@@ -88,10 +89,10 @@ export function login(userID, password) {
       .then(json => {
         dispatch(startSession(json.result.Result.SessionID))
         dispatch(succeedLogin(json.result.Result.UserData))
-        // dispatch(push('/orders'))
       })
       .catch(error => {
         dispatch(failLogin(error))
+        dispatch(displayError(error.message || 'Could not login at this time. Please try again later or contact support'))
       })
   }
 }

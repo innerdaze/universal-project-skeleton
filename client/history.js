@@ -1,6 +1,5 @@
-import { createBrowserHistory, createMemoryHistory, createHashHistory } from 'history'
+import { createBrowserHistory, createMemoryHistory } from 'history'
 
 const history = process.env.CORDOVA ? createMemoryHistory() : createBrowserHistory()
 
-// export default history
-export default createHashHistory()
+export default history
