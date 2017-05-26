@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 export default ({ component: RenderComponent, authed, ...rest }) => (
   <Route
     {...rest}
-    render={(props) => authed === true
+    render={props => authed === true
       ? <RenderComponent {...props} />
       : <Redirect to={{
         pathname: '/login',

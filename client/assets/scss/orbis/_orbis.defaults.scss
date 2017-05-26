@@ -19,3 +19,15 @@ $control-brand-color: $brand-color;
 
 // Borders
 $border-radius: 0px;
+
+*:not(input):not(textarea) {
+  -webkit-touch-callout: none;    /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
+  -webkit-user-select: none;      /* prevent copy paste, to allow, change 'none' to 'text' */
+  -ms-touch-callout: none;
+  -ms-user-select: none;
+  -ms-text-size-adjust: none;
+  -moz-touch-callout: none;
+  -moz-user-select: none;
+  -moz-text-size-adjust: none;
+}

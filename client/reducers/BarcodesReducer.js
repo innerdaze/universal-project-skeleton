@@ -32,7 +32,7 @@ export function barcodes(state = {
   }
 }
 
-export function barcodeEntities(state = keyBy(sampleBarcodes, 'Barcode'), action) {
+export function barcodeEntities(state = {}, action) {
   switch (action.type) {
     case 'RECEIVE_BARCODES':
       return keyBy(action.barcodes, 'Barcode')

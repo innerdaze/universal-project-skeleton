@@ -45,3 +45,10 @@ export function invalidateProducts() {
     type: INVALIDATE_PRODUCTS
   }
 }
+
+export function findProductByProductName(productName) {
+  return function (dispatch, getState) {
+    const productID = getState().productIDsByProductName[productName]
+    return productID && getState().productEntities[productID]
+  }
+}
