@@ -1,36 +1,35 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Box from 'grommet/components/Box'
+import Heading from 'grommet/components/Heading'
 import Meter from 'grommet/components/Meter'
 import Value from 'grommet/components/Value'
 
 class BackgroundSyncProgress extends Component {
   render() {
-    return this.props.isSyncing && (
-      <Box>
+    return (
+      <Box align='stretch'>
+        <Heading>Synchronising Data...</Heading>
         <Meter
           type='bar'
           max={1}
-          fill={true}
+          size='small'
           value={this.props.progress}
           label={<Value
             units='%'
-            responsive={true}
             value={Math.floor(this.props.progress * 100, 2)}
             />}
           />
       </Box>
-    ) || null
+    )
   }
 }
 
 BackgroundSyncProgress.propTypes = {
-  isSyncing: PropTypes.bool.isRequired,
   progress: PropTypes.number.isRequired
 }
 
 BackgroundSyncProgress.defaultProps = {
-  isSyncing: false,
   progress: 0
 }
 

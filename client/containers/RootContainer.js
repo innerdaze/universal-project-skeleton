@@ -4,9 +4,10 @@ import { dismissError } from '../actions/ErrorActions'
 
 export default connect(
   state => ({
-    authed: state.session.alive,
+    authed: Boolean(state.cashiers.activeCashier),
     initialized: state.app.isInitialized,
-    error: state.error.activeError
+    error: state.error.activeError,
+    isSyncing: state.sync.isSyncing
   }),
   dispatch => ({
     handleNotificationClose: () => {

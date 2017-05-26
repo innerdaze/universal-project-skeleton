@@ -3,7 +3,6 @@ import BackgroundSyncProgress from '../components/BackgroundSyncProgress.jsx'
 
 const mapStateToProps = state => {
   return {
-    isSyncing: state.sync.isSyncing,
     progress: state.sync.progress
   }
 }

@@ -6,9 +6,9 @@ import createFilter from 'redux-persist-transform-filter'
 import localForage from 'localforage'
 import PropTypes from 'prop-types'
 import reducer from '../reducers'
+import Splash from '../components/Splash'
 
 class AppProvider extends Component {
-
   constructor(props) {
     super(props)
 
@@ -35,9 +35,8 @@ class AppProvider extends Component {
       transforms: [
         createFilter('orders', ['unprocessedItems', 'processedItems']),
         createFilter('products', ['items']),
-        createFilter('cashiers', ['items']),
+        createFilter('cashiers', ['items', 'itemsByUsername', 'activeCashier']),
         createFilter('barcodes', ['items'])
-        // createFilter('app', ['initialized', 'apiRoot'])
       ]
     }, () => {
       this.setState({
@@ -48,7 +47,7 @@ class AppProvider extends Component {
 
   render() {
     if(!this.state.rehydrated){
-      return <div>Loading...</div>
+      return <Splash/>
     }
     return (
       <Provider store={this.props.store}>

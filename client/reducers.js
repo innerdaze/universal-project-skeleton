@@ -9,6 +9,7 @@ import sync from './reducers/SyncReducer'
 import scanner from './reducers/ScannerReducer'
 import ui from './reducers/UIReducer'
 import error from './reducers/ErrorReducer'
+import validation from './reducers/ValidationReducer'
 
 export {
   orders,
@@ -26,5 +27,6 @@ export {
   sync,
   ui,
   app,
-  error
+  error,
+  validation
 }

@@ -26,6 +26,12 @@ export const LOOKUP_BARCODE = 'LOOKUP_BARCODE'
 export const FAIL_LOOKUP_BARCODE = 'FAIL_LOOKUP_BARCODE'
 export const SUCCEED_LOOKUP_BARCODE = 'SUCCEED_LOOKUP_BARCODE'
 
+// Cashier
+export const LOGIN_CASHIER = 'LOGIN_CASHIER'
+export const LOGOUT_CASHIER = 'LOGOUT_CASHIER'
+export const SUCCEED_LOGIN_CASHIER = 'SUCCEED_LOGIN_CASHIER'
+export const FAIL_LOGIN_CASHIER = 'FAIL_LOGIN_CASHIER'
+
 // Network
 // - Orders
 export const REQUEST_PROCESS_ORDERS = 'REQUEST_PROCESS_ORDERS'
@@ -64,3 +70,7 @@ export const APP_SET_API_ROOT = 'APP_SET_API_ROOT'
 // Error Handling
 export const ERROR_DISPLAY = 'ERROR_DISPLAY'
 export const ERROR_DISMISS = 'ERROR_DISMISS'
+
+// Validation
+export const VALIDATE = 'VALIDATE'
+export const INVALIDATE = 'INVALIDATE'

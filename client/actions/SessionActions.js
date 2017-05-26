@@ -68,7 +68,7 @@ export function receiveLogout() {
 }
 
 export function login(userID, password) {
-  return function (dispatch, getState) {
+  return (dispatch, getState) => {
     dispatch(requestLogin())
 
     return fetch(getState().app.apiRoot, {
@@ -99,7 +99,7 @@ export function login(userID, password) {
 }
 
 export function logout(sessionID) {
-  return function (dispatch, getState) {
+  return (dispatch, getState) => {
     dispatch(requestLogout())
 
     return fetch(getState().app.apiRoot, {

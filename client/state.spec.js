@@ -66,5 +66,8 @@ export default {
   },
   scanner: {
     isScanning: Boolean
+  },
+  validation: {
+    [fieldID]: String
   }
 }

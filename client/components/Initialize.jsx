@@ -37,7 +37,8 @@ class Initialize extends Component {
     return (
       <Box justify='center'
         align='center'
-        full={true}>
+        full={true}
+        pad={{horizontal: 'medium'}}>
         <Form onSubmit={this._onFormSubmit}>
           <Header>
             <Heading>
@@ -50,7 +51,7 @@ class Initialize extends Component {
           <Paragraph>
             Enter the API root URL a provided by Orbis to get started.
           </Paragraph>
-          <FormField>
+          <FormField error={this.props.apiRootValidationError}>
             <TextInput name='apiRoot' value={this.state.apiRoot} onDOMChange={this._onApiRootFieldChange} />
           </FormField>
           <Footer pad={{vertical: 'medium'}}>

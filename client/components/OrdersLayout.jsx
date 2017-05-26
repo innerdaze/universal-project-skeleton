@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import BackgroundSyncProgressContainer from '../containers/BackgroundSyncProgressContainer.jsx'
 import BarcodeInputFormContainer from '../containers/BarcodeInputFormContainer.jsx'
 import ScannedItemListContainer from '../containers/ScannedItemListContainer.jsx'
 import ProcessItemsButtonContainer from '../containers/ProcessItemsButtonContainer.jsx'
@@ -37,7 +36,6 @@ class OrdersLayout extends Component {
         flex='right'>
         <MainMenu/>
         <Box justify='center' pad='medium'>
-          <BackgroundSyncProgressContainer/>
           <OrdersHeaderLayout/>
           <BarcodeInputFormContainer/>
           <ScannedItemListContainer/>
