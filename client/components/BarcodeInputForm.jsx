@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Form from 'grommet/components/Form'
-import TextInput from 'grommet/components/TextInput'
+import NumberInput from 'grommet/components/NumberInput'
 import Footer from 'grommet/components/Footer'
 import Button from 'grommet/components/Button'
 import Toast from 'grommet/components/Toast'
 import Box from 'grommet/components/Box'
 
 class BarcodeInputForm extends Component {
-
   constructor(props) {
     super(props)
 
@@ -18,57 +17,52 @@ class BarcodeInputForm extends Component {
 
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
-    this.onCloseError = this.onCloseError.bind(this)
   }
 
   onChange(e) {
     this.setState({
-      barcode: e.target.value,
-      error: null
+      barcode: e.target.value
     })
-  }
-
-  componentWillReceiveProps(newProps){
-    if (this.state.error === newProps.error) {
-      return false
-    } else {
-      this.setState({
-        error: newProps.error
-      })
-    }
   }
 
   onSubmit(e) {
     e.preventDefault()
-    this.props.onSubmitBarcode(this.state.barcode)
-  }
 
-  onCloseError() {
+    this.props.onSubmitBarcode(this.state.barcode)
+
     this.setState({
-      error: null
+      barcode: ''
     })
   }
 
   render() {
+    const css = `
+      #barcodeInputContainer .grommetux-button__icon {
+        display: none;
+      }
+
+      #barcodeInputContainer .grommetux-number-input {
+        display: block;
+      }
+
+      #barcodeInputContainer input {
+        width: 100%;
+      }
+    `
     return (
       <Form plain>
-        { this.state.error &&
-          <Notification
-            status='critical'
-            onClose={this.onCloseError}
-            >
-            {this.state.error}
-          </Notification>
-        }
+        <style>{css}</style>
         <Box
           direction='row'
           alignContent='stretch'
           >
-          <TextInput
-            placeHolder="Enter barcode"
-            onDOMChange={this.onChange}
-            value={this.state.barcode}
-            />
+          <div id='barcodeInputContainer'>
+            <NumberInput
+              placeholder="Enter barcode"
+              onChange={this.onChange}
+              value={this.state.barcode}
+              />
+          </div>
           <Button
             label='Submit'
             type="submit"

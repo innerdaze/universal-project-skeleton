@@ -5,7 +5,8 @@ import {
   ADD_ORDER, DELETE_ORDER, CHANGE_ORDER_QUANTITY,
   REQUEST_PROCESS_ORDERS, RECEIVE_PROCESS_ORDERS,
   SUCCEED_PROCESS_ORDERS, FAIL_PROCESS_ORDERS,
-  CHANGE_OPERATION_MODE
+  CHANGE_OPERATION_MODE, CREATE_PENDING_TRANSACTION,
+  DISCARD_PENDING_TRANSACTION, START_CHANGING_ORDER_QUANTITY
 } from '../constants/ActionTypes'
 import { checkStatusAndParseJSON } from '../helpers/Network'
 import { failIfMissing } from '../helpers/Function'
@@ -16,6 +17,12 @@ export function addOrder(id, order) {
 
 export function deleteOrder(id) {
   return { type: DELETE_ORDER, id }
+}
+
+export function startChangingOrderQuantity() {
+  return {
+    type: START_CHANGING_ORDER_QUANTITY
+  }
 }
 
 export function changeOrderQuantity(id, quantity) {
@@ -52,7 +59,7 @@ export function processOrders() {
   return function (dispatch, getState) {
     dispatch(requestProcessOrders())
 
-    const { orders, orderItems, app, session } = getState()
+    const { orders, orderEntities, app, session } = getState()
 
     return fetch(app.apiRoot, {
       method: 'post',
@@ -62,7 +69,7 @@ export function processOrders() {
         params: {
           SessionID: session.id,
           Data: orders.unprocessedItems.map(id => {
-            return orderItems.hasOwnProperty(id) && orderItems[id]
+            return orderEntities.hasOwnProperty(id) && orderEntities[id]
           })
         }
       })
@@ -83,6 +90,59 @@ export function changeOperationMode(mode) {
   }
 }
 
+export function createPendingTransaction(transaction) {
+  return {
+    type: CREATE_PENDING_TRANSACTION,
+    transaction
+  }
+}
+
+export function discardPendingTransaction() {
+  return {
+    type: DISCARD_PENDING_TRANSACTION
+  }
+}
+
+export function completPendingTransaction(quantity) {
+  return (dispatch, getState) => {
+    const transaction = getState().orders.pendingTransaction
+
+    if (quantity) {
+      transaction.Qty = quantity
+    }
+
+    dispatch(addOrder(transaction._id, transaction))
+    dispatch(discardPendingTransaction())
+  }
+}
+
+export function createPendingTransactionByProduct(product) {
+  return function (dispatch, getState) {
+    dispatch(createPendingTransaction(_createTransaction({
+      getState,
+      barcode: getState().barcodeIDsByProductID[product.ProductID],
+      mode: getState().orders.mode
+    })))
+  }
+}
+
+function _createTransaction({ getState, barcode, quantity = 1, mode }) {
+  return {
+    _id: uuidGen(),
+    __type: 'HandheldTrans',
+    AreaID: '',
+    Barcode: barcode,
+    Qty: quantity,
+    Ref1: '',
+    Ref2: '',
+    TermianlID: getState().terminalID,
+    TransDate: new Date().toISOString().slice(0, -1),
+    TransType: mode,
+    UnitID: '',
+    UserID: getState().user.id
+  }
+}
+
 export function createTransaction(mode, barcode, quantity) {
   return function (dispatch, getState) {
     const transaction = findTransactionByBarcode(getState, barcode, mode)
@@ -90,24 +150,8 @@ export function createTransaction(mode, barcode, quantity) {
     if (transaction) {
       dispatch(changeOrderQuantity(transaction._id, transaction.Qty + quantity))
     } else {
-      const uuid = uuidGen()
-
-      const order = {
-        _id: uuid,
-        __type: 'HandheldTrans',
-        AreaID: '',
-        Barcode: barcode,
-        Qty: quantity,
-        Ref1: '',
-        Ref2: '',
-        TermianlID: getState().terminalID,
-        TransDate: new Date().toISOString().slice(0, -1),
-        TransType: mode,
-        UnitID: '',
-        UserID: getState().user.id
-      }
-
-      dispatch(addOrder(uuid, order))
+      const transaction = _createTransaction({ getState, barcode, quantity, mode })
+      dispatch(addOrder(transaction._id, transaction))
     }
   }
 }

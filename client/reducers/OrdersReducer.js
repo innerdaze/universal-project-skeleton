@@ -1,14 +1,14 @@
 import { map, keyBy } from 'lodash'
-import sampleOrders from '../test/fixtures/orders-sample.json'
 import OperationModes from '../constants/OperationModes'
 
 export function orders(state = {
   isProcessing: false,
   lastUpdated: null,
-  unprocessedItems: map(sampleOrders, '_id'),
+  unprocessedItems: [],
   processedItems: [],
   error: null,
-  mode: OperationModes.STOCKTAKE
+  mode: OperationModes.STOCKTAKE,
+  pendingTransaction: null
 }, action) {
   switch (action.type) {
     case 'ADD_ORDER':
@@ -22,7 +22,7 @@ export function orders(state = {
     case 'DELETE_ORDER':
       return {
         ...state,
-        items: state.unprocessedItems.filter(value => {
+        unprocessedItems: state.unprocessedItems.filter(value => {
           return value !== action.id
         })
       }
@@ -53,12 +53,32 @@ export function orders(state = {
         ...state,
         mode: action.mode
       }
+    case 'CREATE_PENDING_TRANSACTION':
+      return {
+        ...state,
+        pendingTransaction: action.transaction
+      }
+    case 'DISCARD_PENDING_TRANSACTION':
+      return {
+        ...state,
+        pendingTransaction: null
+      }
+    case 'START_CHANGING_ORDER_QUANTITY':
+      return {
+        ...state,
+        isChangingOrderQuantity: true
+      }
+    case 'CHANGE_ORDER_QUANTITY':
+      return {
+        ...state,
+        isChangingOrderQuantity: false
+      }
     default:
       return state
   }
 }
 
-export function orderEntities(state = keyBy(sampleOrders, '_id'), action) {
+export function orderEntities(state = {}, action) {
   switch (action.type) {
     case 'ADD_ORDER':
       return {

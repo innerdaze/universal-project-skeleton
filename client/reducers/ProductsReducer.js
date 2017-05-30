@@ -1,11 +1,10 @@
 import { map, keyBy, fromPairs } from 'lodash'
-import sampleProducts from '../test/fixtures/products-sample.json'
 
 export function products(state = {
   isFetching: false,
   didInvalidate: false,
   lastUpdated: null,
-  items: map(sampleProducts, 'ProductID')
+  items: []
 }, action) {
   switch (action.type) {
     case 'INVALIDATE_PRODUCTS':
@@ -26,6 +25,34 @@ export function products(state = {
         didInvalidate: false,
         items: map(action.products, 'ProductID'),
         lastUpdated: action.receivedAt
+      }
+    default:
+      return state
+  }
+}
+
+export function productSearch(state = {
+  isSearching: false,
+  lastError: null,
+  lastMatches: []
+}, action) {
+  switch (action.type) {
+    case 'SEARCH_PRODUCTS':
+      return {
+        ...state,
+        isSearching: true
+      }
+    case 'SUCCEED_SEARCH_PRODUCTS':
+      return {
+        ...state,
+        isSearching: false,
+        lastMatches: action.matches
+      }
+    case 'FAIL_SEARCH_PRODUCTS':
+      return {
+        ...state,
+        isSearching: false,
+        lastError: action.error
       }
     default:
       return state

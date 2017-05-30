@@ -1,7 +1,16 @@
 import { orders, orderEntities } from './reducers/OrdersReducer'
-import { products, productEntities, productIDsByProductName } from './reducers/ProductsReducer'
+import {
+  products,
+  productEntities,
+  productIDsByProductName,
+  productSearch
+ } from './reducers/ProductsReducer'
 import { cashiers, cashierEntities } from './reducers/CashiersReducer'
-import { barcodes, barcodeEntities } from './reducers/BarcodesReducer'
+import {
+  barcodes,
+  barcodeEntities,
+  barcodeIDsByProductID
+} from './reducers/BarcodesReducer'
 import app from './reducers/AppReducer'
 import barcodeLookup from './reducers/BarcodeLookupReducer'
 import { session, user } from './reducers/SessionReducer'
@@ -17,11 +26,13 @@ export {
   products,
   productEntities,
   productIDsByProductName,
+  productSearch,
   cashiers,
   cashierEntities,
   barcodes,
   barcodeEntities,
   barcodeLookup,
+  barcodeIDsByProductID,
   session,
   user,
   scanner,

@@ -6,6 +6,7 @@ import Title from 'grommet/components/Title'
 import MainMenuControlContainer from '../containers/MainMenuControlContainer'
 import SyncButtonContainer from '../containers/SyncButtonContainer'
 import ModeDisplayContainer from '../containers/ModeDisplayContainer'
+import ProductSearchContainer from '../containers/ProductSearchContainer'
 
 const OrdersHeaderLayout = () => (
   <Header>
@@ -18,9 +19,7 @@ const OrdersHeaderLayout = () => (
       justify='end'
       responsive={false}>
       <SyncButtonContainer/>
-      <Search responsive={true}
-        placeHolder='Product Search'
-        dropAlign={{'left':'left'}} />
+      <ProductSearchContainer/>
     </Box>
   </Header>
 )

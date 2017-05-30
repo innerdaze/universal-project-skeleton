@@ -13,6 +13,11 @@ export default function barcodeLookup(state = {
         ...state,
         lastError: action.error
       }
+    case 'SUCCEED_LOOKUP_BARCODE':
+      return {
+        ...state,
+        lastError: null
+      }
     default:
       return state
   }

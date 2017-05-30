@@ -49,7 +49,7 @@ class Initialize extends Component {
             I see it's your first time here.
           </Paragraph>
           <Paragraph>
-            Enter the API root URL a provided by Orbis to get started.
+            Enter the API root URL provided by Orbis to get started.
           </Paragraph>
           <FormField error={this.props.apiRootValidationError}>
             <TextInput name='apiRoot' value={this.state.apiRoot} onDOMChange={this._onApiRootFieldChange} />

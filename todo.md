@@ -1,7 +1,4 @@
-4. Fix product search
-5. Make sure all errors work
-6. Instant submit of scanned barcode
-7. Clear down input after submit
-8. Selecting Type closes MainMenu
-9. Fix Process Button
-10. Correct keyboard types per field
+11. Kick back to login if session dies
+12. Handle network crap
+13. Put actual device ID in before anyone notices
+14. 

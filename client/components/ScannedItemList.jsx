@@ -29,6 +29,8 @@ class ScannedItemList extends Component {
       selectedOrder: order,
       isChangingOrderQuantity: true
     })
+
+    this.props.onChangeOrderQuantityClick()
   }
 
   onChangeOrderQuantitySubmit() {
@@ -74,7 +76,7 @@ class ScannedItemList extends Component {
   render() {
     return (
       <Box>
-        { this.state.isChangingOrderQuantity &&
+        { this.props.isChangingOrderQuantity &&
           <ChangeOrderQuantityFormContainer
             order={this.state.selectedOrder}
             onSubmit={this.onChangeOrderQuantitySubmit}
@@ -114,11 +116,15 @@ class ScannedItemList extends Component {
 }
 
 ScannedItemList.propTypes = {
-  onDeleteItemClick: PropTypes.func.isRequired
+  onDeleteItemClick: PropTypes.func.isRequired,
+  onChangeOrderQuantityClick: PropTypes.func.isRequired,
+  isChangingOrderQuantity: PropTypes.bool.isRequired
 }
 
 ScannedItemList.defaultProps = {
-  onDeleteItemClick: Function.prototype
+  onDeleteItemClick: Function.prototype,
+  onChangeOrderQuantityClick: Function.prototype,
+  isChangingOrderQuantity: false
 }
 
 export default ScannedItemList

@@ -1,10 +1,14 @@
 import { connect } from 'react-redux'
 import OrdersLayout from '../components/OrdersLayout.jsx'
+import { completPendingTransaction, discardPendingTransaction } from '../actions/OrderActions'
 
-const mapStateToProps = state => {
-  return {
-    mainMenuVisible: state.ui.mainMenuVisible
-  }
-}
-
-export default connect(mapStateToProps)(OrdersLayout)
+export default connect(
+  state => ({
+    mainMenuVisible: state.ui.mainMenuVisible,
+    pendingTransaction: state.orders.pendingTransaction
+  }),
+  dispatch => ({
+    onChangeOrderQuantitySubmit: (quantity) => dispatch(completPendingTransaction(quantity)),
+    onChangeOrderQuantityCancel: () => dispatch(discardPendingTransaction())
+  })
+)(OrdersLayout)

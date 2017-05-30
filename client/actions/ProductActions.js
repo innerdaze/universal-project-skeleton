@@ -1,8 +1,12 @@
+import { filter, toLower, map } from 'lodash'
 import fetch from 'isomorphic-fetch'
 import {
   REQUEST_PRODUCTS,
   RECEIVE_PRODUCTS,
-  INVALIDATE_PRODUCTS
+  INVALIDATE_PRODUCTS,
+  SEARCH_PRODUCTS,
+  FAIL_SEARCH_PRODUCTS,
+  SUCCEED_SEARCH_PRODUCTS
 } from '../constants/ActionTypes'
 
 export function requestProducts() {
@@ -47,8 +51,58 @@ export function invalidateProducts() {
 }
 
 export function findProductByProductName(productName) {
-  return function (dispatch, getState) {
+  return (dispatch, getState) => {
     const productID = getState().productIDsByProductName[productName]
     return productID && getState().productEntities[productID]
+  }
+}
+
+/**
+ * Experimental Spec:
+ *  search functions return "starts with" results (Array)
+ *  find functions return "exact match" result (Object)
+ */
+export function searchProductByProductName(productNameStub) {
+  return (dispatch, getState) => {
+    const productEntities = getState().productEntities
+
+    return map(filter(getState().productIDsByProductName, (id, name) => (
+      toLower(name).includes(toLower(productNameStub))
+    )), id => productEntities[id])
+  }
+}
+
+export function searchProducts(query, lookupFunction) {
+  return dispatch => {
+    dispatch(startProductSearch())
+
+    const matches = dispatch(lookupFunction(query))
+
+    if (!matches || !matches.length) {
+      dispatch(failProductSearch(query))
+      return
+    }
+
+    dispatch(succeedProductSearch(matches))
+  }
+}
+
+export function startProductSearch() {
+  return {
+    type: SEARCH_PRODUCTS
+  }
+}
+
+export function succeedProductSearch(matches) {
+  return {
+    type: SUCCEED_SEARCH_PRODUCTS,
+    matches
+  }
+}
+
+export function failProductSearch(query) {
+  return {
+    type: FAIL_SEARCH_PRODUCTS,
+    error: `No match for: ${query}`
   }
 }

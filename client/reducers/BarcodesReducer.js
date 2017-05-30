@@ -1,11 +1,10 @@
-import { map, keyBy } from 'lodash'
-import sampleBarcodes from '../test/fixtures/barcodes-sample.json'
+import { map, keyBy, fromPairs } from 'lodash'
 
 export function barcodes(state = {
   isFetching: false,
   didInvalidate: false,
   lastUpdated: null,
-  items: map(sampleBarcodes, 'Barcode')
+  items: []
 }, action) {
   switch (action.type) {
     case 'INVALIDATE_BARCODES':
@@ -36,6 +35,15 @@ export function barcodeEntities(state = {}, action) {
   switch (action.type) {
     case 'RECEIVE_BARCODES':
       return keyBy(action.barcodes, 'Barcode')
+    default:
+      return state
+  }
+}
+
+export function barcodeIDsByProductID(state = {}, action) {
+  switch (action.type) {
+    case 'RECEIVE_BARCODES':
+      return fromPairs(map(action.barcodes, barcode => [barcode.ProductID, barcode.Barcode]))
     default:
       return state
   }

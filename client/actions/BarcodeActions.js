@@ -9,6 +9,7 @@ import {
   FAIL_LOOKUP_BARCODE
 } from '../constants/ActionTypes'
 import { createTransaction } from './OrderActions'
+import { displayError, dismissError } from '../actions/ErrorActions'
 import { failIfMissing } from '../helpers/Function.js'
 
 export function requestBarcodes() {
@@ -74,8 +75,10 @@ export function _findBarcodeByID(barcodeID) {
 
     if (barcode) {
       dispatch(succeedLookupBarcode(barcodeID))
+      dispatch(dismissError())
     } else {
       dispatch(failLookupBarcode(barcodeID))
+      dispatch(displayError('No match for barcode'))
     }
 
     return barcode

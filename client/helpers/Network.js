@@ -19,7 +19,11 @@ export default async function apiCall({
 export function checkStatusAndParseJSON(response) {
   return response.json()
     .then(data => {
-      if (data.result.Result.ResMessage.ResCode === 0) {
+      if (
+        data.result.Result.ResMessage.ResCode === 0
+      ||
+        data.result.Result.ResCode === 0
+      ) {
         return data
       }
 

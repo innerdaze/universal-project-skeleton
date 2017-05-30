@@ -8,7 +8,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    changeOrderQuantity: (id, quantity) => {
+    onSubmit: (id, quantity) => {
       dispatch(changeOrderQuantity(id, quantity))
     }
   }

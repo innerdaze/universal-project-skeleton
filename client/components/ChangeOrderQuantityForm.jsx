@@ -18,7 +18,7 @@ class ChangeOrderQuantityForm extends Component {
     super(props)
 
     this.state = {
-      quantity: null
+      quantity: 1
     }
 
     this.onNumberInputChange = this.onNumberInputChange.bind(this)
@@ -41,9 +41,7 @@ class ChangeOrderQuantityForm extends Component {
   onSubmit(e) {
     e.preventDefault()
 
-    this.props.changeOrderQuantity(this.props.order._id, this.state.quantity)
-
-    this.props.onSubmit()
+    this.props.onSubmit(this.props.order._id, this.state.quantity)
   }
 
   onCancel(e) {
@@ -58,7 +56,7 @@ class ChangeOrderQuantityForm extends Component {
         <Form>
           <Header>
             <Heading>
-              Change Order Quantity
+              Set Quantity
             </Heading>
           </Header>
           <FormField>
@@ -98,8 +96,8 @@ ChangeOrderQuantityForm.propTypes = {
 
 ChangeOrderQuantityForm.propDefaults = {
   order: null,
-  onChangeOrderQuantitySubmit: Function.prototype,
-  onChangeOrderQuantityChange: Function.prototype
+  onSubmit: Function.prototype,
+  onCancel: Function.prototype
 }
 
 export default ChangeOrderQuantityForm

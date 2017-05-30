@@ -25,10 +25,12 @@ class AppProvider extends Component {
         'orders',
         'productEntities',
         'products',
+        'productIDsByProductName',
         'cashierEntities',
         'cashiers',
         'barcodeEntities',
         'barcodes',
+        'barcodeIDsByProductID',
         'app',
         'session'
       ],

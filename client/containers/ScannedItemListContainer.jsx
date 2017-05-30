@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
 import ScannedItemList from '../components/ScannedItemList.jsx'
-import { deleteOrder, changeOrderQuantity } from '../actions/OrderActions'
+import { deleteOrder, changeOrderQuantity, startChangingOrderQuantity } from '../actions/OrderActions'
 
 const mapStateToProps = state => {
   return {
+    isChangingOrderQuantity: state.orders.isChangingOrderQuantity,
     items: state.orders.unprocessedItems.filter(id => {
       return state.orderEntities[id] &&
         state.orderEntities[id].TransType === state.orders.mode
@@ -36,6 +37,9 @@ const mapDispatchToProps = dispatch => {
   return {
     onDeleteItemClick: id => {
       dispatch(deleteOrder(id))
+    },
+    onChangeOrderQuantityClick: () => {
+      dispatch(startChangingOrderQuantity())
     }
   }
 }
