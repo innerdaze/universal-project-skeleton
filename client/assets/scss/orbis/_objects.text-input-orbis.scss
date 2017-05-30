@@ -1,5 +1,5 @@
 .#{$grommet-namespace}text-input {
   @include input();
 
-  flex-grow: 1;
+  flex: 1;
 }

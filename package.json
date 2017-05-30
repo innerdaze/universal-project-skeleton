@@ -17,7 +17,6 @@
     "pretest": "npm run lint",
     "test": "cross-env NODE_PATH=server ava --verbose",
     "prestart:server:dev": "npm t",
-    "prestart:client:dev": "npm t",
     "start:server:dev": "npm start",
     "start:client:dev": "babel-node webpack.dev-server.js",
     "watch:server": "cross-env NODE_ENV=development nodemon -w server -w package.json -x npm run start:server:dev",
