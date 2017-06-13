@@ -3,6 +3,7 @@
     <name>Orbis Site Assistant</name>
     <preference name="android-minSdkVersion" value="16" />
     <preference name="android-targetSdkVersion" value="22" />
+    <preference name="windows-target-version" value="10.0" />
     <preference name="orientation" value="portrait" />
     <description>
         A simple app for taking stock

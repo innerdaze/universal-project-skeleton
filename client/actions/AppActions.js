@@ -4,6 +4,7 @@ import { APP_INITIALIZE, APP_SET_API_ROOT } from '../constants/ActionTypes'
 import { sync } from '../actions/SyncActions'
 import { login } from '../actions/SessionActions'
 import { validate, invalidate } from '../actions/ValidationActions'
+import { callApi } from '../actions/NetworkActions'
 
 const requiredConfigs = [
   'apiRoot'
@@ -28,6 +29,17 @@ function checkInitialised(state) {
   ))
 }
 
+export function testAPIRoot(url) {
+  return (dispatch, getState) => {
+    return dispatch(callApi({
+      service: '',
+      method: 'head',
+      success: () => true,
+      error: error => false
+    }))
+  }
+}
+
 /**
  * Validation is the responsibilty of the input mechanism
  */
@@ -36,7 +48,12 @@ export function setApiRoot(apiRoot) {
     const fieldID = 'apiRoot'
     const error = 'Invalid URI'
 
-    if (dispatch(validate({fieldID, value: apiRoot, validation: isWebUri, error}))) {
+    if (dispatch(validate({
+      fieldID,
+      value: apiRoot,
+      validation: url => isWebUri(url) && testAPIRoot(url),
+      error
+    }))) {
       dispatch(_setApiRoot(apiRoot))
 
       if (checkInitialised(getState())) {
