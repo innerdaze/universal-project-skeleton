@@ -51,7 +51,7 @@ export function setApiRoot(apiRoot) {
     if (dispatch(validate({
       fieldID,
       value: apiRoot,
-      validation: url => isWebUri(url) && testAPIRoot(url),
+      validation: url => isWebUri(url),
       error
     }))) {
       dispatch(_setApiRoot(apiRoot))
