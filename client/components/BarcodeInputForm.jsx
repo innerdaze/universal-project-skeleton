@@ -17,12 +17,27 @@ class BarcodeInputForm extends Component {
 
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
+    this.receiveFocus = this.receiveFocus.bind(this)
+  }
+
+  componentDidMount() {
+    this.receiveFocus()
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (this.props.shouldFocusField !== newProps.shouldFocusField && newProps.shouldFocusField) {
+      this.receiveFocus()
+    }
   }
 
   onChange(e) {
     this.setState({
       barcode: e.target.value
     })
+  }
+
+  receiveFocus() {
+    this.inputRef.focus()
   }
 
   onSubmit(e) {
@@ -48,6 +63,15 @@ class BarcodeInputForm extends Component {
       #barcodeInputContainer input {
         width: 100%;
       }
+
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+      input[type="number"] {
+          -moz-appearance: textfield;
+      }
     `
     return (
       <Form plain>
@@ -57,10 +81,14 @@ class BarcodeInputForm extends Component {
           alignContent='stretch'
           >
           <div id='barcodeInputContainer'>
-            <NumberInput
-              placeholder="Enter barcode"
+            <input
+              type='number'
+              autoFocus
+              min='1'
+              placeholder='Enter barcode'
               onChange={this.onChange}
               value={this.state.barcode}
+              ref={ref => this.inputRef = ref}
               />
           </div>
           <Button
@@ -78,12 +106,14 @@ class BarcodeInputForm extends Component {
 
 BarcodeInputForm.propTypes = {
   onSubmitBarcode: PropTypes.func.isRequired,
-  barcodes: PropTypes.array.isRequired
+  barcodes: PropTypes.array.isRequired,
+  shouldFocusField: PropTypes.bool.isRequired
 }
 
 BarcodeInputForm.defaultProps = {
   onSubmitBarcode: Function.prototype,
-  barcodes: []
+  barcodes: [],
+  shouldFocusField: PropTypes.bool.isRequired
 }
 
 export default BarcodeInputForm

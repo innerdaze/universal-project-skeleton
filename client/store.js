@@ -9,8 +9,7 @@ import cordovaSQLiteDriver from 'localforage-cordovasqlitedriver'
 import rootReducer from './reducers/RootReducer'
 import history from './history'
 
-
-export default async function configureStore(initialState) {
+export default async function configureStore() {
   const loggerMiddleware = createLogger()
 
   let storeEnhancers

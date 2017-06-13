@@ -13,6 +13,7 @@ import {
 } from '../constants/ActionTypes'
 import { displayError } from '../actions/ErrorActions'
 import { checkStatusAndParseJSON } from '../helpers/Network'
+import { callApi } from './NetworkActions'
 
 export function startSession(id) {
   return {
@@ -71,50 +72,40 @@ export function login(userID, password) {
   return (dispatch, getState) => {
     dispatch(requestLogin())
 
-    return fetch(getState().app.apiRoot, {
-      method: 'post',
-      body: JSON.stringify({
-        method: 'SystemLoginService.Login',
-        params: {
-          UserID: userID,
-          Password: password
-        }
-      })
-    })
-      .then(response => {
+    return dispatch(callApi({
+      service: 'SystemLoginService.Login',
+      skipSessionCheck: true,
+      params: {
+        UserID: userID,
+        Password: password
+      },
+      success: json => {
         dispatch(receiveLogin())
-        return response
-      })
-      .then(checkStatusAndParseJSON)
-      .then(json => {
         dispatch(startSession(json.result.Result.SessionID))
         dispatch(succeedLogin(json.result.Result.UserData))
-      })
-      .catch(error => {
+      },
+      error: error => {
         const message = error && error.message || 'Could not login at this time. Please try again later or contact support'
         dispatch(failLogin(message))
         dispatch(displayError(message))
-      })
+      }
+    }))
   }
 }
 
-export function logout(sessionID) {
+export function logout() {
   return (dispatch, getState) => {
     dispatch(requestLogout())
 
-    return fetch(getState().app.apiRoot, {
-      method: 'post',
-      body: JSON.stringify({
-        method: 'SystemLoginService.Logout',
-        params: {
-          SessionID: sessionID
-        }
-      })
-    })
-      .then(checkStatusAndParseJSON)
-      .then(() => {
+    return dispatch(callApi({
+      service: 'SystemLoginService.Logout',
+      params: {
+        SessionID: getState().session.id
+      },
+      success: json => {
         dispatch(receiveLogout())
         dispatch(endSession())
-      })
+      }
+    }))
   }
 }

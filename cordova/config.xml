@@ -3,6 +3,7 @@
     <name>Orbis Site Assistant</name>
     <preference name="android-minSdkVersion" value="16" />
     <preference name="android-targetSdkVersion" value="22" />
+    <preference name="orientation" value="portrait" />
     <description>
         A simple app for taking stock
     </description>
@@ -10,8 +11,6 @@
         Orbis Tech Ltd
     </author>
     <content src="index.html" />
-    <plugin name="cordova-plugin-whitelist" spec="1" />
-    <plugin name="cordova-plugin-console" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -21,20 +20,24 @@
     <allow-intent href="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
-        <icon src="platforms/android/res/mipmap-ldpi/ic_launcher.png" density="ldpi" />
-        <icon src="platforms/android/res/mipmap-mdpi/ic_launcher.png" density="mdpi" />
-        <icon src="platforms/android/res/mipmap-hdpi/ic_launcher.png" density="hdpi" />
-        <icon src="platforms/android/res/mipmap-xhdpi/ic_launcher.png" density="xhdpi" />
-        <icon src="platforms/android/res/mipmap-xxhdpi/ic_launcher.png" density="xxhdpi" />
-        <icon src="platforms/android/res/mipmap-xxxhdpi/ic_launcher.png" density="xxxhdpi" />
+        <icon density="ldpi" src="platforms/android/res/mipmap-ldpi/ic_launcher.png" />
+        <icon density="mdpi" src="platforms/android/res/mipmap-mdpi/ic_launcher.png" />
+        <icon density="hdpi" src="platforms/android/res/mipmap-hdpi/ic_launcher.png" />
+        <icon density="xhdpi" src="platforms/android/res/mipmap-xhdpi/ic_launcher.png" />
+        <icon density="xxhdpi" src="platforms/android/res/mipmap-xxhdpi/ic_launcher.png" />
+        <icon density="xxxhdpi" src="platforms/android/res/mipmap-xxxhdpi/ic_launcher.png" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+    <platform name="winphone" />
+    <engine name="windows" spec="~5.0.0" />
     <plugin name="cordova-fabric-plugin" spec="~1.1.7">
         <variable name="FABRIC_API_KEY" value="dd87f6353ee085f2e98da9832d5b331e4b4b78bf" />
         <variable name="FABRIC_API_SECRET" value="a2e15103d238eb04d8cbbdd9715f94a774e90bf6739ee816e988fd950bbff6a7" />
     </plugin>
+    <plugin name="cordova-plugin-console" />
     <plugin name="cordova-plugin-device" spec="~1.1.6" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
 </widget>

@@ -3,12 +3,13 @@ import PropTypes from 'prop-types'
 import List from 'grommet/components/List'
 import Box from 'grommet/components/Box'
 import ListPlaceholder from 'grommet-addons/components/ListPlaceholder'
-import ScannedItem from './ScannedItem.jsx'
-import ChangeOrderQuantityFormContainer from '../containers/ChangeOrderQuantityFormContainer.jsx'
-import DeleteEntityForm from '../components/DeleteEntityForm.jsx'
+import Splash from './Splash'
+import ScannedItem from './ScannedItem'
+import BlockingProcessDisplay from './BlockingProcessDisplay'
+import ChangeOrderQuantityFormContainer from '../containers/ChangeOrderQuantityFormContainer'
+import DeleteEntityForm from './DeleteEntityForm'
 
 class ScannedItemList extends Component {
-
   constructor(props) {
     super(props)
 
@@ -91,13 +92,16 @@ class ScannedItemList extends Component {
             onCancel={this.onDeleteItemCancel}
             />
         }
+        { this.props.isProcessing &&
+          <BlockingProcessDisplay component={<Splash loadingText='Sending...'/>}/>
+        }
         <List>
           {this.props.items.length ?
             this.props.items.map(item => (
               item && <ScannedItem
                 key={item._id}
                 id={item._id}
-                productID={item.productID}
+                productID={item.ProductID}
                 title={item.productName}
                 quantity={item.Qty}
                 onChangeQuantityClick={this.onChangeOrderQuantityClick.bind(this, item)}

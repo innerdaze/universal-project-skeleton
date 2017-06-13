@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch'
 import { v4 as uuidGen } from 'uuid'
-import { find, filter, includes } from 'lodash'
+import { find, filter, includes, map } from 'lodash'
 import {
   ADD_ORDER, DELETE_ORDER, CHANGE_ORDER_QUANTITY,
   REQUEST_PROCESS_ORDERS, RECEIVE_PROCESS_ORDERS,
@@ -8,7 +8,7 @@ import {
   CHANGE_OPERATION_MODE, CREATE_PENDING_TRANSACTION,
   DISCARD_PENDING_TRANSACTION, START_CHANGING_ORDER_QUANTITY
 } from '../constants/ActionTypes'
-import { checkStatusAndParseJSON } from '../helpers/Network'
+import { callApi } from './NetworkActions'
 import { failIfMissing } from '../helpers/Function'
 
 export function addOrder(id, order) {
@@ -42,9 +42,10 @@ export function receiveProcessOrders() {
   }
 }
 
-export function succeedProcessOrders() {
+export function succeedProcessOrders(orderIDs) {
   return {
-    type: SUCCEED_PROCESS_ORDERS
+    type: SUCCEED_PROCESS_ORDERS,
+    orderIDs
   }
 }
 
@@ -61,25 +62,27 @@ export function processOrders() {
 
     const { orders, orderEntities, app, session } = getState()
 
-    return fetch(app.apiRoot, {
-      method: 'post',
-      headers: {'Content-Type':'application/x-www-form-urlencoded'},
-      body: JSON.stringify({
-        method: 'HandheldService.ProcessTransactions',
-        params: {
-          SessionID: session.id,
-          Data: orders.unprocessedItems.map(id => {
-            return orderEntities.hasOwnProperty(id) && orderEntities[id]
-          })
-        }
-      })
+    const orderIDs = filter(orders.unprocessedItems, id => {
+      return orderEntities.hasOwnProperty(id)
+          && orderEntities[id].TransType === orders.mode
     })
-      .then(checkStatusAndParseJSON)
-      .then(() => {
-        dispatch(succeedProcessOrders())
+
+    const filteredOrders = map(orderIDs, id => {
+      return orderEntities.hasOwnProperty(id) && orderEntities[id]
+    })
+
+    return dispatch(callApi({
+      service: 'HandheldService.ProcessTransactions',
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      params: {
+        Data: filteredOrders
+      },
+      success: () => {
         dispatch(receiveProcessOrders())
-      })
-      .catch(error => dispatch(failProcessOrders(error)))
+        dispatch(succeedProcessOrders(orderIDs))
+      },
+      error: error => dispatch(failProcessOrders(error))
+    }))
   }
 }
 
@@ -117,34 +120,37 @@ export function completPendingTransaction(quantity) {
 }
 
 export function createPendingTransactionByProduct(product) {
-  return function (dispatch, getState) {
+  return (dispatch, getState) => {
+    const barcodeID = getState().barcodeIDsByProductID[product.ProductID]
+
     dispatch(createPendingTransaction(_createTransaction({
       getState,
-      barcode: getState().barcodeIDsByProductID[product.ProductID],
+      product,
+      barcode: getState().barcodeEntities[barcodeID],
       mode: getState().orders.mode
     })))
   }
 }
 
-function _createTransaction({ getState, barcode, quantity = 1, mode }) {
+function _createTransaction({ getState, barcode, product, quantity = 1, mode }) {
   return {
     _id: uuidGen(),
     __type: 'HandheldTrans',
     AreaID: '',
-    Barcode: barcode,
+    Barcode: barcode && barcode.Barcode,
     Qty: quantity,
     Ref1: '',
     Ref2: '',
-    TermianlID: getState().terminalID,
+    TermianlID: window.cordova ? device.uuid : getState().terminalID,
     TransDate: new Date().toISOString().slice(0, -1),
     TransType: mode,
-    UnitID: '',
-    UserID: getState().user.id
+    ProductID: barcode ? barcode.ProductID : product.ProductID,
+    UserID: getState().cashiers.activeCashier.CashierID
   }
 }
 
-export function createTransaction(mode, barcode, quantity) {
-  return function (dispatch, getState) {
+export function createTransactionFromBarcode({ mode, barcode, quantity }) {
+  return (dispatch, getState) => {
     const transaction = findTransactionByBarcode(getState, barcode, mode)
 
     if (transaction) {
@@ -163,7 +169,32 @@ function findTransactionByBarcode(getState, barcode, mode) {
     }),
     {
       TransType: mode,
-      Barcode: barcode
+      Barcode: barcode.Barcode
+    }
+  )
+}
+
+export function createTransactionFromProduct({ mode, product, quantity }) {
+  return (dispatch, getState) => {
+    const transaction = findTransactionByProduct({ mode, product, getState })
+
+    if (transaction) {
+      dispatch(changeOrderQuantity(transaction._id, transaction.Qty + quantity))
+    } else {
+      const transaction = _createTransaction({ getState, product, quantity, mode })
+      dispatch(addOrder(transaction._id, transaction))
+    }
+  }
+}
+
+function findTransactionByProduct({ mode, product, getState }) {
+  return find(
+    filter(getState().orderEntities, (item, key) => {
+      return includes(getState().orders.unprocessedItems, key)
+    }),
+    {
+      TransType: mode,
+      ProductID: product.ProductID
     }
   )
 }

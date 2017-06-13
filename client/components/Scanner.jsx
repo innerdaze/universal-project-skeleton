@@ -52,10 +52,6 @@ class Scanner extends Component {
             onClick={this.handleEnterBarcodeManually}
             />
         </Form>
-        { /* }
-        <button onClick={this.handleStartScanClick}>Scan</button>
-        <div id="scannerViewport"></div>
-        { */ }
       </Box>
     )
   }

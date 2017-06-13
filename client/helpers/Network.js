@@ -1,4 +1,4 @@
-export default async function apiCall({
+export default function apiCall({
   service = failIfMissing('service'),
   params = {},
   success = json => json,
@@ -16,6 +16,28 @@ export default async function apiCall({
   .catch(failure)
 }
 
+export function validateResCode(data) {
+  return (
+    data.result.Result.ResMessage.ResCode === 0
+  ||
+    data.result.Result.ResCode === 0
+  )
+}
+
+export function validateSession(data) {
+  return !Boolean(
+    data.result.Result.ResCode === 99
+  &&
+    data.result.Result.ResMessage === 'Session has expired'
+  )
+}
+
+export function throwError(data, errorMessage) {
+  const error = new Error(errorMessage)
+  error.response = data
+  throw error
+}
+
 export function checkStatusAndParseJSON(response) {
   return response.json()
     .then(data => {
@@ -27,9 +49,7 @@ export function checkStatusAndParseJSON(response) {
         return data
       }
 
-      var error = new Error(data.result.Result.ResMessage.ResMessage)
-      error.response = response
-      throw error
+      throwError(data, data.result.Result.ResMessage.ResMessage)
     })
 }
 

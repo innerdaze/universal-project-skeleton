@@ -5,6 +5,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
   devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'cheap-module-eval-source-map',
   entry: [
+    'babel-polyfill',
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     path.join(__dirname, 'client', 'index.jsx')
   ],
@@ -16,7 +17,8 @@ module.exports = {
   resolve: {
     alias: {
       css: path.resolve(__dirname, 'client', 'assets', 'css')
-    }
+    },
+    extensions: ['.js', '.jsx', '.scss', '.css', '.json']
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -65,12 +67,20 @@ module.exports = {
           'style-loader',
           'css-loader',
           {
-            loader: 'sass-loader', options: {
-              includePaths: ['./node_modules', './node_modules/grommet/node_modules']
+            loader: 'sass-loader',
+            options: {
+              includePaths: [
+                './node_modules',
+                './node_modules/grommet/scss'
+              ]
             }
           }
         ]
-      }
-    ]
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        include: /client\/assets\/fonts/,
+        loader: 'file-loader?name=client/assets/fonts/[name].[ext]'
+      }    ]
   }
 }

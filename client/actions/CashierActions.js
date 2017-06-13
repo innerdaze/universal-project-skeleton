@@ -9,6 +9,7 @@ import {
   FAIL_LOGIN_CASHIER
 } from '../constants/ActionTypes'
 import { displayError } from '../actions/ErrorActions'
+import { callApi } from './NetworkActions'
 
 export function requestCashiers() {
   return {
@@ -28,20 +29,13 @@ export function fetchCashiers(sessionID) {
   return function (dispatch, getState) {
     dispatch(requestCashiers())
 
-    return fetch(getState().app.apiRoot, {
-      method: 'post',
-      body: JSON.stringify({
-        method: 'CashierService.GetCashiers',
-        params: {
-          SessionID: sessionID,
-          StoreID: 0
-        }
-      })
-    })
-      .then(response => response.json())
-      .then(json =>
-        dispatch(receiveCashiers(json.result.Result.ListOfCashiers))
-      )
+    return dispatch(callApi({
+      service: 'CashierService.GetCashiers',
+      params: {
+        StoreID: 0
+      },
+      success: json => dispatch(receiveCashiers(json.result.Result.ListOfCashiers))
+    }))
   }
 }
 

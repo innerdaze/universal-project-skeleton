@@ -1,4 +1,4 @@
-import { map, keyBy } from 'lodash'
+import { map, keyBy, difference } from 'lodash'
 import OperationModes from '../constants/OperationModes'
 
 export function orders(state = {
@@ -40,8 +40,9 @@ export function orders(state = {
     case 'SUCCEED_PROCESS_ORDERS':
       return {
         ...state,
-        processedItems: state.unprocessedItems,
-        unprocessedItems: []
+        processedItems: [...state.unprocessedItems, ...state.processedItems],
+        // Here
+        unprocessedItems: difference(state.unprocessedItems, action.orderIDs)
       }
     case 'FAIL_PROCESS_ORDERS':
       return {

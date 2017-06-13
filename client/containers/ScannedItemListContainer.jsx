@@ -1,35 +1,40 @@
 import { connect } from 'react-redux'
+import _, { reverse } from 'lodash'
 import ScannedItemList from '../components/ScannedItemList.jsx'
 import { deleteOrder, changeOrderQuantity, startChangingOrderQuantity } from '../actions/OrderActions'
 
 const mapStateToProps = state => {
   return {
     isChangingOrderQuantity: state.orders.isChangingOrderQuantity,
-    items: state.orders.unprocessedItems.filter(id => {
-      return state.orderEntities[id] &&
-        state.orderEntities[id].TransType === state.orders.mode
-    }).map(id => {
-      const order = state.orderEntities[id]
-      const barcode = state.barcodeEntities[order.Barcode]
+    isProcessing: state.orders.isProcessing,
+    // TODO: optimization needed
+    items: _(state.orders.unprocessedItems)
+      .filter(id => {
+        return state.orderEntities[id] &&
+          state.orderEntities[id].TransType === state.orders.mode
+      })
+      .map(id => {
+        const order = state.orderEntities[id]
 
-      if (order) {
-        if (barcode) {
-          let product = state.productEntities[barcode.ProductID]
+        if (order) {
+          let product
+
+          if (order.ProductID) {
+            product = state.productEntities[order.ProductID]
+          }
 
           if (product) {
-            order.productID = barcode.ProductID
             order.productName = product.ProductName
-
             return order
           }
+
+          order.productName = 'Error mapping barcode to product'
         }
 
-        order.productName = 'Error mapping barcode to product'
-        order.productID = ''
-      }
-
-      return order || null
-    })
+        return order || null
+      })
+      .reverse()
+      .value()
   }
 }
 

@@ -6,6 +6,7 @@ import Box from 'grommet/components/Box'
 import Title from 'grommet/components/Title'
 import MainMenuHideControlContainer from '../containers/MainMenuHideControlContainer'
 import ModeSwitcherContainer from '../containers/ModeSwitcherContainer'
+import LogoutControlContainer from '../containers/LogoutControlContainer'
 import Modes from '../constants/OperationModes'
 
 const MainMenu = () => (
@@ -20,6 +21,9 @@ const MainMenu = () => (
     <Box flex='grow'
       justify='start'>
       <ModeSwitcherContainer/>
+    </Box>
+    <Box>
+      <LogoutControlContainer/>
     </Box>
   </Sidebar>
 )

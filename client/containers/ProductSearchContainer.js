@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import ProductSearch from '../components/ProductSearch'
-import { search } from '../actions/SearchActions'
 import { searchProductByProductName, searchProducts } from '../actions/ProductActions'
 import { createPendingTransactionByProduct } from '../actions/OrderActions'
 

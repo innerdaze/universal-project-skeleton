@@ -1,4 +1,4 @@
-import SVGIcon from 'grommet/components/SVGIcon';
+import SVGIcon from 'grommet/components/SVGIcon'
 
 <SVGIcon viewBox='0 0 491 49'
   version='1.1'

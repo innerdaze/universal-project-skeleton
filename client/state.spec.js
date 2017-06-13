@@ -68,6 +68,6 @@ export default {
     isScanning: Boolean
   },
   validation: {
-    [fieldID]: String
+    fieldID: String
   }
 }

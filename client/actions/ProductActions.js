@@ -8,6 +8,7 @@ import {
   FAIL_SEARCH_PRODUCTS,
   SUCCEED_SEARCH_PRODUCTS
 } from '../constants/ActionTypes'
+import { callApi } from './NetworkActions'
 
 export function requestProducts() {
   return {
@@ -27,20 +28,13 @@ export function fetchProducts(sessionID) {
   return function (dispatch, getState) {
     dispatch(requestProducts())
 
-    return fetch(getState().app.apiRoot, {
-      method: 'post',
-      body: JSON.stringify({
-        method: 'HandheldService.GetProducts',
-        params: {
-          SessionID: sessionID,
-          GetOptions: 0
-        }
-      })
-    })
-      .then(response => response.json())
-      .then(json =>
-        dispatch(receiveProducts(json.result.Result.ListOfProducts))
-      )
+    return dispatch(callApi({
+      service: 'HandheldService.GetProducts',
+      params: {
+        GetOptions: 0
+      },
+      success: json => dispatch(receiveProducts(json.result.Result.ListOfProducts))
+    }))
   }
 }
 

@@ -8,9 +8,10 @@ import {
   SUCCEED_LOOKUP_BARCODE,
   FAIL_LOOKUP_BARCODE
 } from '../constants/ActionTypes'
-import { createTransaction } from './OrderActions'
+import { createTransactionFromBarcode } from './OrderActions'
 import { displayError, dismissError } from '../actions/ErrorActions'
 import { failIfMissing } from '../helpers/Function.js'
+import { callApi } from './NetworkActions'
 
 export function requestBarcodes() {
   return {
@@ -52,18 +53,13 @@ export function fetchBarcodes(sessionID = failIfMissing('sessionID', 'fetchBarco
   return function (dispatch, getState) {
     dispatch(requestBarcodes())
 
-    return fetch(getState().app.apiRoot, {
-      method: 'post',
-      body: JSON.stringify({
-        method: 'HandheldService.GetBarcodes',
-        params: {
-          SessionID: sessionID,
-          GetOptions: 0
-        }
-      })
-    })
-      .then(response => response.json())
-      .then(json => dispatch(receiveBarcodes(json.result.Result.ListOfBarcodes)))
+    return dispatch(callApi({
+      service: 'HandheldService.GetBarcodes',
+      params: {
+        GetOptions: 0
+      },
+      success: json => dispatch(receiveBarcodes(json.result.Result.ListOfBarcodes))
+    }))
   }
 }
 
@@ -85,12 +81,16 @@ export function _findBarcodeByID(barcodeID) {
   }
 }
 
-export function createTransactionFromBarcode(barcodeID) {
+export function createTransactionFromBarcodeID(barcodeID) {
   return function (dispatch, getState) {
-    const found = dispatch(_findBarcodeByID(barcodeID))
+    const barcode = dispatch(_findBarcodeByID(barcodeID))
 
-    if (found) {
-      dispatch(createTransaction(getState().orders.mode, barcodeID, 1))
+    if (barcode) {
+      dispatch(createTransactionFromBarcode({
+        mode: getState().orders.mode,
+        barcode: barcode,
+        quantity: 1
+      }))
     }
   }
 }

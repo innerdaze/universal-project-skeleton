@@ -22,7 +22,7 @@ class ProcessItemsButton extends Component {
     return (
       <Button
         disabled={this.state.canProcess}
-        label="Process"
+        label='Process'
         onClick={this.onClick}
         primary/>
     )

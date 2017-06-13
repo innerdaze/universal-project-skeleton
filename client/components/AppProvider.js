@@ -6,7 +6,7 @@ import createFilter from 'redux-persist-transform-filter'
 import localForage from 'localforage'
 import PropTypes from 'prop-types'
 import reducer from '../reducers'
-import Splash from '../components/Splash'
+import Splash from './Splash'
 
 class AppProvider extends Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class AppProvider extends Component {
       transforms: [
         createFilter('orders', ['unprocessedItems', 'processedItems']),
         createFilter('products', ['items']),
-        createFilter('cashiers', ['items', 'itemsByUsername', 'activeCashier']),
+        createFilter('cashiers', ['items', 'idsByUsername', 'activeCashier']),
         createFilter('barcodes', ['items'])
       ]
     }, () => {
