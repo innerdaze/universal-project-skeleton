@@ -84,7 +84,7 @@ class BarcodeInputForm extends Component {
             <input
               type='number'
               autoFocus
-              min='1'
+              min={0}
               placeholder='Enter barcode'
               onChange={this.onChange}
               value={this.state.barcode}
@@ -92,7 +92,7 @@ class BarcodeInputForm extends Component {
               />
           </div>
           <Button
-            label='Submit'
+            label='Search'
             type="submit"
             secondary
             fill

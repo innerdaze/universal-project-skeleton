@@ -8,7 +8,11 @@ export function orders(state = {
   processedItems: [],
   error: null,
   mode: OperationModes.STOCKTAKE,
-  pendingTransaction: null
+  pendingTransaction: null,
+  pendingModification: null,
+  isDeletingOrder: false,
+  isChangingOrderQuantity: false,
+  changingOrderQuantityFor: null
 }, action) {
   switch (action.type) {
     case 'ADD_ORDER':
@@ -19,9 +23,15 @@ export function orders(state = {
           action.id
         ]
       }
+    case 'START_DELETING_ORDER':
+      return {
+        ...state,
+        isDeletingOrder: true
+      }
     case 'DELETE_ORDER':
       return {
         ...state,
+        isDeletingOrder: false,
         unprocessedItems: state.unprocessedItems.filter(value => {
           return value !== action.id
         })
@@ -47,7 +57,8 @@ export function orders(state = {
     case 'FAIL_PROCESS_ORDERS':
       return {
         ...state,
-        error: action.error
+        error: action.error,
+        isProcessing: false
       }
     case 'CHANGE_OPERATION_MODE':
       return {
@@ -67,12 +78,48 @@ export function orders(state = {
     case 'START_CHANGING_ORDER_QUANTITY':
       return {
         ...state,
-        isChangingOrderQuantity: true
+        isChangingOrderQuantity: true,
+        changingOrderQuantityFor: action.order
+      }
+    case 'FINISH_CHANGING_ORDER_QUANTITY':
+      return {
+        ...state,
+        isChangingOrderQuantity: false,
+        changingOrderQuantityFor: null
+      }
+    case 'CANCEL_CHANGING_ORDER_QUANTITY':
+      return {
+        ...state,
+        isChangingOrderQuantity: false,
+        changingOrderQuantityFor: null
       }
     case 'CHANGE_ORDER_QUANTITY':
       return {
         ...state,
         isChangingOrderQuantity: false
+      }
+    case 'PROMPT_START_MODIFY_TRANSACTION':
+      return {
+        ...state,
+        pendingModification: action.transaction
+      }
+    case 'CONFIRM_START_MODIFY_TRANSACTION':
+      return {
+        ...state,
+        pendingModification: null
+      }
+    case 'CANCEL_START_MODIFY_TRANSACTION':
+      return {
+        ...state,
+        pendingModification: null
+      }
+    case 'CHANGE_PENDING_TRANSACTION_QUANTITY':
+      return {
+        ...state,
+        pendingTransaction: {
+          ...state.pendingTransaction,
+          Qty: action.quantity
+        }
       }
     default:
       return state

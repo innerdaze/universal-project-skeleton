@@ -1,6 +1,11 @@
 import { some, isUndefined, isNull } from 'lodash'
 import { isWebUri } from 'valid-url'
-import { APP_INITIALIZE, APP_SET_API_ROOT } from '../constants/ActionTypes'
+import {
+  APP_INITIALIZE,
+  APP_SET_API_ROOT,
+  API_ROOT_VALID,
+  API_ROOT_INVALID
+} from '../constants/ActionTypes'
 import { sync } from '../actions/SyncActions'
 import { login } from '../actions/SessionActions'
 import { validate, invalidate } from '../actions/ValidationActions'
@@ -29,13 +34,30 @@ function checkInitialised(state) {
   ))
 }
 
+export function setAPIRootInvalid() {
+  return {
+    type: API_ROOT_INVALID
+  }
+}
+
+
+export function setAPIRootValid() {
+  return {
+    type: API_ROOT_VALID
+  }
+}
+
 export function testAPIRoot(url) {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     return dispatch(callApi({
-      service: '',
-      method: 'head',
-      success: () => true,
-      error: error => false
+      service: 'GeneralService.GetTimeStamp',
+      skipSessionCheck: true,
+      method: 'post',
+      success: () => dispatch(setAPIRootValid()),
+      error: error => {
+        dispatch(displayError(error.message))
+        dispatch(setAPIRootInvalid())
+      }
     }))
   }
 }
@@ -48,18 +70,25 @@ export function setApiRoot(apiRoot) {
     const fieldID = 'apiRoot'
     const error = 'Invalid URI'
 
+    dispatch(_setApiRoot(apiRoot))
+
     if (dispatch(validate({
       fieldID,
       value: apiRoot,
-      validation: url => isWebUri(url),
+      validation: async url => isWebUri(url),
       error
     }))) {
-      dispatch(_setApiRoot(apiRoot))
+      const isValid = await dispatch(testAPIRoot(apiRoot))
 
-      if (checkInitialised(getState())) {
-        await dispatch(login('apiuser', 'api.123'))
-        await dispatch(sync())
-        return dispatch(initialize())
+      if (getState().app.apiRootValid) {
+
+        if (checkInitialised(getState())) {
+          await dispatch(login('apiuser', 'api.123'))
+          await dispatch(sync())
+          return dispatch(initialize())
+        }
+      } else {
+        dispatch(_setApiRoot(null))
       }
     }
   }

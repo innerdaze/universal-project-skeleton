@@ -37,7 +37,7 @@ class AppProvider extends Component {
       transforms: [
         createFilter('orders', ['unprocessedItems', 'processedItems']),
         createFilter('products', ['items']),
-        createFilter('cashiers', ['items', 'idsByUsername', 'activeCashier']),
+        createFilter('cashiers', ['items', 'idByUsername', 'activeCashier']),
         createFilter('barcodes', ['items'])
       ]
     }, () => {

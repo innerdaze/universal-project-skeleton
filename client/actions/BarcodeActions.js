@@ -81,19 +81,19 @@ export function _findBarcodeByID(barcodeID) {
   }
 }
 
-export function createTransactionFromBarcodeID(barcodeID) {
-  return function (dispatch, getState) {
-    const barcode = dispatch(_findBarcodeByID(barcodeID))
-
-    if (barcode) {
-      dispatch(createTransactionFromBarcode({
-        mode: getState().orders.mode,
-        barcode: barcode,
-        quantity: 1
-      }))
-    }
-  }
-}
+// export function createTransactionFromBarcodeID(barcodeID) {
+//   return function (dispatch, getState) {
+//     const barcode = dispatch(_findBarcodeByID(barcodeID))
+//
+//     if (barcode) {
+//       dispatch(createTransactionFromBarcode({
+//         mode: getState().orders.mode,
+//         barcode: barcode,
+//         quantity: 1
+//       }))
+//     }
+//   }
+// }
 
 export function invalidateBarcodes() {
   return {

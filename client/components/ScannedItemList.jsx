@@ -14,53 +14,28 @@ class ScannedItemList extends Component {
     super(props)
 
     this.state = {
-      selectedOrder: null,
-      isChangingOrderQuantity: false
+      selectedOrder: null
     }
 
     this.onChangeOrderQuantityClick = this.onChangeOrderQuantityClick.bind(this)
-    this.onChangeOrderQuantitySubmit = this.onChangeOrderQuantitySubmit.bind(this)
-    this.onChangeOrderQuantityCancel = this.onChangeOrderQuantityCancel.bind(this)
     this.onDeleteItemConfirm = this.onDeleteItemConfirm.bind(this)
     this.onDeleteItemCancel = this.onDeleteItemCancel.bind(this)
   }
 
   onChangeOrderQuantityClick(order) {
-    this.setState({
-      selectedOrder: order,
-      isChangingOrderQuantity: true
-    })
-
-    this.props.onChangeOrderQuantityClick()
-  }
-
-  onChangeOrderQuantitySubmit() {
-    this.setState({
-      isChangingOrderQuantity: false,
-      selectedOrder: null
-    })
-  }
-
-  onChangeOrderQuantityCancel() {
-    this.setState({
-      isChangingOrderQuantity: false,
-      selectedOrder: null
-    })
+    this.props.onChangeOrderQuantityClick(order)
   }
 
   onDeleteItemClick(item) {
+    this.props.onDeleteItemClick()
+
     this.setState({
-      isDeletingOrder: true,
       selectedOrder: item
     })
   }
 
   onDeleteItemConfirm() {
-    this.setState({
-      isDeletingOrder: false
-    })
-
-    this.props.onDeleteItemClick(this.state.selectedOrder._id)
+    this.props.onDeleteItemConfirm(this.state.selectedOrder._id)
 
     this.setState({
       selectedOrder: null
@@ -69,7 +44,6 @@ class ScannedItemList extends Component {
 
   onDeleteItemCancel() {
     this.setState({
-      isDeletingOrder: false,
       selectedOrder: null
     })
   }
@@ -77,15 +51,8 @@ class ScannedItemList extends Component {
   render() {
     return (
       <Box>
-        { this.props.isChangingOrderQuantity &&
-          <ChangeOrderQuantityFormContainer
-            order={this.state.selectedOrder}
-            onSubmit={this.onChangeOrderQuantitySubmit}
-            onCancel={this.onChangeOrderQuantityCancel}
-            />
-        }
         {
-          this.state.isDeletingOrder &&
+          this.props.isDeletingOrder &&
           <DeleteEntityForm
             message='Confirm you would like to delete this order'
             onConfirm={this.onDeleteItemConfirm}
@@ -122,13 +89,15 @@ class ScannedItemList extends Component {
 ScannedItemList.propTypes = {
   onDeleteItemClick: PropTypes.func.isRequired,
   onChangeOrderQuantityClick: PropTypes.func.isRequired,
-  isChangingOrderQuantity: PropTypes.bool.isRequired
+  isChangingOrderQuantity: PropTypes.bool.isRequired,
+  isDeletingOrder: PropTypes.bool.isRequired
 }
 
 ScannedItemList.defaultProps = {
   onDeleteItemClick: Function.prototype,
   onChangeOrderQuantityClick: Function.prototype,
-  isChangingOrderQuantity: false
+  isChangingOrderQuantity: false,
+  isDeletingOrder: false
 }
 
 export default ScannedItemList

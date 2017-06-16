@@ -1,12 +1,17 @@
 import { connect } from 'react-redux'
 import _, { reverse } from 'lodash'
 import ScannedItemList from '../components/ScannedItemList.jsx'
-import { deleteOrder, changeOrderQuantity, startChangingOrderQuantity } from '../actions/OrderActions'
+import {
+  deleteOrder,
+  startDeletingOrder,
+  changeOrderQuantity,
+  startChangingOrderQuantity
+} from '../actions/OrderActions'
 
 const mapStateToProps = state => {
   return {
-    isChangingOrderQuantity: state.orders.isChangingOrderQuantity,
     isProcessing: state.orders.isProcessing,
+    isDeletingOrder: state.orders.isDeletingOrder,
     // TODO: optimization needed
     items: _(state.orders.unprocessedItems)
       .filter(id => {
@@ -41,10 +46,13 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onDeleteItemClick: id => {
+      dispatch(startDeletingOrder(id))
+    },
+    onDeleteItemConfirm: id => {
       dispatch(deleteOrder(id))
     },
-    onChangeOrderQuantityClick: () => {
-      dispatch(startChangingOrderQuantity())
+    onChangeOrderQuantityClick: order => {
+      dispatch(startChangingOrderQuantity(order))
     }
   }
 }

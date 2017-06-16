@@ -8,12 +8,12 @@ import Footer from 'grommet/components/Footer'
 import Button from 'grommet/components/Button'
 import Anchor from 'grommet/components/Anchor'
 import FormField from 'grommet/components/FormField'
-import NumberInput from 'grommet/components/NumberInput'
+import Label from 'grommet/components/Label'
+import Box from 'grommet/components/Box'
 import CloseIcon from 'grommet/components/icons/base/Close'
 import NextLinkIcon from 'grommet/components/icons/base/LinkNext'
 
 class ChangeOrderQuantityForm extends Component {
-
   constructor(props) {
     super(props)
 
@@ -24,12 +24,16 @@ class ChangeOrderQuantityForm extends Component {
     this.onNumberInputChange = this.onNumberInputChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
     this.onCancel = this.onCancel.bind(this)
+    this.receiveFocus = this.receiveFocus.bind(this)
   }
 
   componentDidMount() {
     this.setState({
       quantity: this.props.order.Qty
     })
+
+    this.inputRef.focus()
+    this.inputRef.select()
   }
 
   onNumberInputChange(e) {
@@ -50,6 +54,10 @@ class ChangeOrderQuantityForm extends Component {
     this.props.onCancel()
   }
 
+  receiveFocus() {
+    this.inputRef.focus()
+  }
+
   render() {
     return (
       <Layer>
@@ -59,25 +67,35 @@ class ChangeOrderQuantityForm extends Component {
               Set Quantity
             </Heading>
           </Header>
+          {this.props.order.ProductName && (
+            <Box>
+              <Label>
+                {this.props.order.ProductName}
+              </Label>
+            </Box>
+          )}
           <FormField>
-            <NumberInput
+            <input
+              type='number'
               min={1}
-              value={this.state.quantity}
+              placeholder='Enter quantity'
               onChange={this.onNumberInputChange}
+              value={this.state.quantity}
+              ref={ref => this.inputRef = ref}
               />
           </FormField>
           <Footer
             pad={{ vertical: 'medium' }}
-            justify="between"
+            justify='between'
             >
             <Anchor
-              label="Cancel"
+              label='Cancel'
               icon={<CloseIcon/>}
               onClick={this.onCancel}
               />
             <Anchor
               primary
-              label="Submit"
+              label='Update'
               icon={<NextLinkIcon/>}
               onClick={this.onSubmit}
               />

@@ -4,7 +4,8 @@ import BarcodeInputFormContainer from '../containers/BarcodeInputFormContainer.j
 import ScannedItemListContainer from '../containers/ScannedItemListContainer.jsx'
 import ProcessItemsButtonContainer from '../containers/ProcessItemsButtonContainer.jsx'
 import OrdersHeaderLayout from '../components/OrdersHeaderLayout.jsx'
-import ChangeOrderQuantityForm from '../components/ChangeOrderQuantityForm'
+import ChangeOrderQuantityFormContainer from '../containers/ChangeOrderQuantityFormContainer'
+import PromptStartModifyingTransaction from '../components/PromptStartModifyingTransaction'
 import MainMenu from '../components/MainMenu.jsx'
 import Split from 'grommet/components/Split'
 import Sidebar from 'grommet/components/Sidebar'
@@ -20,6 +21,8 @@ class OrdersLayout extends Component {
 
     this._onSetQuantityCancel = this._onSetQuantityCancel.bind(this)
     this._onSetQuantitySubmit = this._onSetQuantitySubmit.bind(this)
+    this._onPromptStartModifyingSubmit = this._onPromptStartModifyingSubmit.bind(this)
+    this._onPromptStartModifyingCancel = this._onPromptStartModifyingCancel.bind(this)
   }
 
   componentWillReceiveProps(newProps) {
@@ -40,6 +43,14 @@ class OrdersLayout extends Component {
     this.props.onChangeOrderQuantitySubmit(quantity)
   }
 
+  _onPromptStartModifyingCancel() {
+    this.props.onPromptStartModifyingCancel()
+  }
+
+  _onPromptStartModifyingSubmit() {
+    this.props.onPromptStartModifyingSubmit(this.props.pendingModification)
+  }
+
   render() {
     return (
       <Split
@@ -48,11 +59,14 @@ class OrdersLayout extends Component {
         flex='right'>
         <MainMenu/>
         <Box justify='center' pad='medium'>
-          {this.props.pendingTransaction && (
-            <ChangeOrderQuantityForm
-              order={this.props.pendingTransaction}
-              onSubmit={this._onSetQuantitySubmit}
-              onCancel={this._onSetQuantityCancel}/>
+          {this.props.pendingModification && (
+            <PromptStartModifyingTransaction
+              order={this.props.pendingModification}
+              onSubmit={this._onPromptStartModifyingSubmit}
+              onCancel={this._onPromptStartModifyingCancel}/>
+          )}
+          {this.props.isChangingOrderQuantity && (
+            <ChangeOrderQuantityFormContainer/>
           )}
           <OrdersHeaderLayout/>
           <BarcodeInputFormContainer/>
@@ -66,16 +80,20 @@ class OrdersLayout extends Component {
 
 OrdersLayout.propTypes = {
 	mainMenuVisible: PropTypes.bool,
-  pendingTransaction: PropTypes.object,
+  pendingModification: PropTypes.object,
   onChangeOrderQuantitySubmit: PropTypes.func.isRequired,
-  onChangeOrderQuantityCancel: PropTypes.func.isRequired
+  onChangeOrderQuantityCancel: PropTypes.func.isRequired,
+  onPromptStartModifyingSubmit: PropTypes.func.isRequired,
+  onPromptStartModifyingCancel: PropTypes.func.isRequired
 }
 
 OrdersLayout.defaultProps = {
 	mainMenuVisible: false,
-  pendingTransaction: null,
+  pendingModification: null,
   onChangeOrderQuantitySubmit: Function.prototype,
-  onChangeOrderQuantityCancel: Function.prototype
+  onChangeOrderQuantityCancel: Function.prototype,
+  onPromptStartModifyingSubmit: Function.prototype,
+  onPromptStartModifyingCancel: Function.prototype
 }
 
 export default OrdersLayout

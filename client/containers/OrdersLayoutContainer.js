@@ -1,14 +1,28 @@
 import { connect } from 'react-redux'
 import OrdersLayout from '../components/OrdersLayout.jsx'
-import { completPendingTransaction, discardPendingTransaction } from '../actions/OrderActions'
+import {
+  completePendingTransaction,
+  discardPendingTransaction,
+  promptStartModifyTransaction,
+  confirmStartModifyTransaction,
+  cancelStartModifyTransaction,
+  startChangingOrderQuantity
+} from '../actions/OrderActions'
 
 export default connect(
   state => ({
     mainMenuVisible: state.ui.mainMenuVisible,
-    pendingTransaction: state.orders.pendingTransaction
+    pendingTransaction: state.orders.pendingTransaction,
+    pendingModification: state.orders.pendingModification,
+    isChangingOrderQuantity: state.orders.isChangingOrderQuantity,
+    changingOrderQuantityFor: state.orders.changingOrderQuantityFor
   }),
   dispatch => ({
-    onChangeOrderQuantitySubmit: (quantity) => dispatch(completPendingTransaction(quantity)),
-    onChangeOrderQuantityCancel: () => dispatch(discardPendingTransaction())
+    onChangeOrderQuantityCancel: () => dispatch(discardPendingTransaction()),
+    onPromptStartModifyingSubmit: transaction => {
+      dispatch(confirmStartModifyTransaction())
+      dispatch(startChangingOrderQuantity(transaction))
+    },
+    onPromptStartModifyingCancel: () => dispatch(cancelStartModifyTransaction())
   })
 )(OrdersLayout)

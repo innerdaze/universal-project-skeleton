@@ -2,14 +2,28 @@ import fetch from 'isomorphic-fetch'
 import { v4 as uuidGen } from 'uuid'
 import { find, filter, includes, map } from 'lodash'
 import {
-  ADD_ORDER, DELETE_ORDER, CHANGE_ORDER_QUANTITY,
-  REQUEST_PROCESS_ORDERS, RECEIVE_PROCESS_ORDERS,
-  SUCCEED_PROCESS_ORDERS, FAIL_PROCESS_ORDERS,
-  CHANGE_OPERATION_MODE, CREATE_PENDING_TRANSACTION,
-  DISCARD_PENDING_TRANSACTION, START_CHANGING_ORDER_QUANTITY
+  ADD_ORDER,
+  DELETE_ORDER,
+  START_DELETING_ORDER,
+  CHANGE_ORDER_QUANTITY,
+  REQUEST_PROCESS_ORDERS,
+  RECEIVE_PROCESS_ORDERS,
+  SUCCEED_PROCESS_ORDERS,
+  FAIL_PROCESS_ORDERS,
+  CHANGE_OPERATION_MODE,
+  CREATE_PENDING_TRANSACTION,
+  DISCARD_PENDING_TRANSACTION,
+  START_CHANGING_ORDER_QUANTITY,
+  FINISH_CHANGING_ORDER_QUANTITY,
+  PROMPT_START_MODIFY_TRANSACTION,
+  CONFIRM_START_MODIFY_TRANSACTION,
+  CANCEL_START_MODIFY_TRANSACTION,
+  CANCEL_CHANGING_ORDER_QUANTITY,
+  CHANGE_PENDING_TRANSACTION_QUANTITY
 } from '../constants/ActionTypes'
 import { callApi } from './NetworkActions'
 import { failIfMissing } from '../helpers/Function'
+import { _findBarcodeByID } from '../actions/BarcodeActions'
 
 export function addOrder(id, order) {
   return { type: ADD_ORDER, id, order }
@@ -19,14 +33,56 @@ export function deleteOrder(id) {
   return { type: DELETE_ORDER, id }
 }
 
-export function startChangingOrderQuantity() {
+export function startDeletingOrder() {
   return {
-    type: START_CHANGING_ORDER_QUANTITY
+    type: START_DELETING_ORDER
+  }
+}
+
+export function startChangingOrderQuantity(order) {
+  return {
+    type: START_CHANGING_ORDER_QUANTITY,
+    order
+  }
+}
+
+export function finishChangingOrderQuantity() {
+  return (dispatch, getState) => {
+    dispatch({
+      type: FINISH_CHANGING_ORDER_QUANTITY
+    })
+
+    if (getState().orders.pendingTransaction) {
+      dispatch(completePendingTransaction())
+    }
+  }
+}
+
+export function cancelChangingOrderQuantity() {
+  return (dispatch, getState) => {
+    dispatch({
+      type: CANCEL_CHANGING_ORDER_QUANTITY
+    })
+
+    if (getState().orders.pendingTransaction) {
+      dispatch(discardPendingTransaction())
+    }
   }
 }
 
 export function changeOrderQuantity(id, quantity) {
-  return { type: CHANGE_ORDER_QUANTITY, id, quantity }
+  return (dispatch, getState) => {
+    if (getState().orders.pendingTransaction) {
+      dispatch({
+        type: CHANGE_PENDING_TRANSACTION_QUANTITY,
+        quantity
+      })
+    } else {
+      dispatch({
+        type: CHANGE_ORDER_QUANTITY, id, quantity
+      })
+    }
+  }
 }
 
 export function requestProcessOrders() {
@@ -106,13 +162,13 @@ export function discardPendingTransaction() {
   }
 }
 
-export function completPendingTransaction(quantity) {
+export function completePendingTransaction() {
   return (dispatch, getState) => {
     const transaction = getState().orders.pendingTransaction
 
-    if (quantity) {
-      transaction.Qty = quantity
-    }
+    // if (quantity) {
+    //   transaction.Qty = quantity
+    // }
 
     dispatch(addOrder(transaction._id, transaction))
     dispatch(discardPendingTransaction())
@@ -121,18 +177,55 @@ export function completPendingTransaction(quantity) {
 
 export function createPendingTransactionByProduct(product) {
   return (dispatch, getState) => {
-    const barcodeID = getState().barcodeIDsByProductID[product.ProductID]
+    const transaction = findTransactionByProduct(getState, product, getState().orders.mode)
 
-    dispatch(createPendingTransaction(_createTransaction({
-      getState,
-      product,
-      barcode: getState().barcodeEntities[barcodeID],
-      mode: getState().orders.mode
-    })))
+    if (transaction) {
+      dispatch(promptStartModifyTransaction(transaction))
+    } else {
+      const barcodeID = getState().barcodeIDsByProductID[product.ProductID]
+      const transaction = _createTransaction({
+        getState,
+        product,
+        barcode: getState().barcodeEntities[barcodeID],
+        mode: getState().orders.mode
+      })
+      dispatch(createPendingTransaction(transaction))
+      dispatch(startChangingOrderQuantity(transaction))
+    }
+  }
+}
+
+export function createPendingTransactionByBarcodeID(barcodeID) {
+  return (dispatch, getState) => {
+    const barcode = dispatch(_findBarcodeByID(barcodeID))
+
+    if (barcode) {
+      const transaction = findTransactionByBarcode(getState, barcode, getState().orders.mode)
+
+      if (transaction) {
+        dispatch(promptStartModifyTransaction(transaction))
+      } else {
+        const transaction = _createTransaction({
+          getState,
+          barcode,
+          mode: getState().orders.mode
+        })
+        dispatch(createPendingTransaction(transaction))
+        dispatch(startChangingOrderQuantity(transaction))
+      }
+    }
   }
 }
 
 function _createTransaction({ getState, barcode, product, quantity = 1, mode }) {
+  // TODO: Validate arguments with Flow
+
+  const productID = barcode ? barcode.ProductID : product.ProductID
+
+  if (!product) {
+    product = productID && getState().productEntities[productID]
+  }
+
   return {
     _id: uuidGen(),
     __type: 'HandheldTrans',
@@ -144,21 +237,9 @@ function _createTransaction({ getState, barcode, product, quantity = 1, mode }) 
     TermianlID: window.cordova ? device.uuid : getState().terminalID,
     TransDate: new Date().toISOString().slice(0, -1),
     TransType: mode,
-    ProductID: barcode ? barcode.ProductID : product.ProductID,
+    ProductID: productID,
+    ProductName: product && product.ProductName,
     UserID: getState().cashiers.activeCashier.CashierID
-  }
-}
-
-export function createTransactionFromBarcode({ mode, barcode, quantity }) {
-  return (dispatch, getState) => {
-    const transaction = findTransactionByBarcode(getState, barcode, mode)
-
-    if (transaction) {
-      dispatch(changeOrderQuantity(transaction._id, transaction.Qty + quantity))
-    } else {
-      const transaction = _createTransaction({ getState, barcode, quantity, mode })
-      dispatch(addOrder(transaction._id, transaction))
-    }
   }
 }
 
@@ -174,20 +255,7 @@ function findTransactionByBarcode(getState, barcode, mode) {
   )
 }
 
-export function createTransactionFromProduct({ mode, product, quantity }) {
-  return (dispatch, getState) => {
-    const transaction = findTransactionByProduct({ mode, product, getState })
-
-    if (transaction) {
-      dispatch(changeOrderQuantity(transaction._id, transaction.Qty + quantity))
-    } else {
-      const transaction = _createTransaction({ getState, product, quantity, mode })
-      dispatch(addOrder(transaction._id, transaction))
-    }
-  }
-}
-
-function findTransactionByProduct({ mode, product, getState }) {
+function findTransactionByProduct(getState, product, mode) {
   return find(
     filter(getState().orderEntities, (item, key) => {
       return includes(getState().orders.unprocessedItems, key)
@@ -198,3 +266,48 @@ function findTransactionByProduct({ mode, product, getState }) {
     }
   )
 }
+
+export function promptStartModifyTransaction(transaction) {
+  return {
+    type: PROMPT_START_MODIFY_TRANSACTION,
+    transaction
+  }
+}
+
+export function confirmStartModifyTransaction(transaction) {
+  return {
+    type: CONFIRM_START_MODIFY_TRANSACTION
+  }
+}
+
+export function cancelStartModifyTransaction() {
+  return {
+    type: CANCEL_START_MODIFY_TRANSACTION
+  }
+}
+
+// export function createTransactionFromBarcode({ mode, barcode, quantity }) {
+//   return (dispatch, getState) => {
+//     const transaction = findTransactionByBarcode(getState, barcode, mode)
+//
+//     if (transaction) {
+//       dispatch(changeOrderQuantity(transaction._id, transaction.Qty + quantity))
+//     } else {
+//       const transaction = _createTransaction({ getState, barcode, quantity, mode })
+//       dispatch(addOrder(transaction._id, transaction))
+//     }
+//   }
+// }
+
+// export function createTransactionFromProduct({ mode, product, quantity }) {
+//   return (dispatch, getState) => {
+//     const transaction = findTransactionByProduct({ mode, product, getState })
+//
+//     if (transaction) {
+//       dispatch(changeOrderQuantity(transaction._id, transaction.Qty + quantity))
+//     } else {
+//       const transaction = _createTransaction({ getState, product, quantity, mode })
+//       dispatch(addOrder(transaction._id, transaction))
+//     }
+//   }
+// }

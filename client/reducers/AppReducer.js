@@ -1,6 +1,7 @@
 export default function app(state = {
   isInitialized: false,
-  apiRoot: null
+  apiRoot: null,
+  apiRootValid: false
 }, { type, ...config }) {
   switch (type) {
     case 'APP_INITIALIZE':
@@ -12,6 +13,16 @@ export default function app(state = {
       return {
         ...state,
         apiRoot: config.apiRoot
+      }
+    case 'API_ROOT_VALID':
+      return {
+        ...state,
+        apiRootValid: true
+      }
+    case 'API_ROOT_INVALID':
+      return {
+        ...state,
+        apiRootValid: false
       }
     default:
       return state

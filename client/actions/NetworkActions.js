@@ -3,6 +3,7 @@ import {
   NET_FAIL_NO_SESSION
 } from '../constants/ActionTypes'
 import { login } from './SessionActions'
+import { displayError } from './ErrorActions'
 
 export function networkFailOffline() {
   return {
@@ -44,7 +45,7 @@ export function callApi({
         })
       })
       .then(res => res.json())
-      .then(async (data) => {
+      .then(async data => {
         if (!skipSessionCheck && !validateSession(data)) {
           await dispatch(login('apiuser', 'api.123'))
           return restart()
@@ -57,7 +58,10 @@ export function callApi({
         return data
       })
       .then(success)
-      .catch(failure)
+      .catch(error => {
+        dispatch(displayError(error.message))
+        failure(error)
+      })
     }()
   }
 }
