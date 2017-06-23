@@ -37,7 +37,10 @@ class BarcodeInputForm extends Component {
   }
 
   receiveFocus() {
-    this.inputRef.focus()
+    setTimeout(() => {
+      this.inputRef.focus()
+      this.inputRef.select()
+    }, 100)
   }
 
   onSubmit(e) {

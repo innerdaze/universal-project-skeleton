@@ -32,8 +32,10 @@ class ChangeOrderQuantityForm extends Component {
       quantity: this.props.order.Qty
     })
 
-    this.inputRef.focus()
-    this.inputRef.select()
+    setTimeout(() => {
+      this.inputRef.focus()
+      this.inputRef.select()
+    }, 100);
   }
 
   onNumberInputChange(e) {
@@ -76,8 +78,8 @@ class ChangeOrderQuantityForm extends Component {
           )}
           <FormField>
             <input
+              autoFocus
               type='number'
-              min={1}
               placeholder='Enter quantity'
               onChange={this.onNumberInputChange}
               value={this.state.quantity}

@@ -3,7 +3,7 @@ import Menu from 'grommet/components/Menu'
 import Anchor from 'grommet/components/Anchor'
 
 export default ({ handleLogoutPress = Function.prototype }) => (
-  <Menu>
+  <Menu primary={true}>
     <Anchor
       label='Logout'
       onClick={handleLogoutPress}

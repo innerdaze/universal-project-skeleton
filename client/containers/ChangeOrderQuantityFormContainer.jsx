@@ -19,7 +19,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(finishChangingOrderQuantity())
     },
     onCancel: () => {
-      dispactch(cancelChangingOrderQuantity())
+      dispatch(cancelChangingOrderQuantity())
       dispatch(finishChangingOrderQuantity())
     }
   }

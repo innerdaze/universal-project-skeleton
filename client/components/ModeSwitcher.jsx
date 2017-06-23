@@ -40,6 +40,16 @@ class ModeSwitcher extends Component {
           onClick={this.onSwitch.bind(this, Modes.DELIVERY)}
           className={this.state.mode === Modes.DELIVERY && 'active'}
           />
+        <Anchor
+          label='Shelf Labels'
+          onClick={this.onSwitch.bind(this, Modes.SHELF_LABELS)}
+          className={this.state.mode === Modes.SHELF_LABELS && 'active'}
+          />
+        <Anchor
+          label='Price Check'
+          onClick={this.onSwitch.bind(this, Modes.PRICE_CHECK)}
+          className={this.state.mode === Modes.PRICE_CHECK && 'active'}
+          />
       </Menu>
     )
   }

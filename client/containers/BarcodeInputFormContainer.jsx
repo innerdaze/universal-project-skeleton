@@ -15,6 +15,10 @@ const mapStateToProps = state => {
         !state.orders.isProcessing
       &&
         !state.orders.pendingTransaction
+      &&
+        !state.orders.isDeletingOrder
+      &&
+        !state.sync.isSyncing
     )
   }
 }

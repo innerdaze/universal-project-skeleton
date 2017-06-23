@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import { ConnectedRouter } from 'connected-react-router'
 import PropTypes from 'prop-types'
-import Layer from 'grommet/components/Layer'
+import { ConnectedRouter } from 'connected-react-router'
 import Notification from 'grommet/components/Notification'
 import history from '../history'
 import AuthenticatedRoute from '../components/AuthenticatedRoute'
@@ -12,15 +11,29 @@ import OrdersLayoutContainer from '../containers/OrdersLayoutContainer'
 import InitializeContainer from '../containers/InitializeContainer'
 import BlockingProcessDisplay from '../components/BlockingProcessDisplay'
 import BackgroundSyncProgressContainer from '../containers/BackgroundSyncProgressContainer'
-import styles from '../assets/scss/orbis/index.scss'
 
-export default ({
-  initialized = false,
-  authed = false,
-  isSyncing = false,
+Root.propTypes = {
+  initialized: PropTypes.bool.isRequired,
+  authed: PropTypes.bool.isRequired,
+  isSyncing: PropTypes.bool.isRequired,
+  handleNotificationClose: PropTypes.func.isRequired,
+  error: PropTypes.object
+}
+
+Root.defaultProps = {
+  initialized: false,
+  authed: false,
+  isSyncing: false,
+  handleNotificationClose: Function.prototype
+}
+
+export default function Root ({
+  initialized,
+  authed,
+  isSyncing,
   handleNotificationClose,
   error
-}) => (
+}) {(
   <ConnectedRouter history={history}>
     <AppLayout>
       {error && (
@@ -41,7 +54,8 @@ export default ({
               pathname: '/initialize',
               state: {
                 from: props.from
-              }}}/>
+              }
+            }}/>
         }/>
         <Route path='/initialize' render={props => initialized === false
           ? <InitializeContainer/>
@@ -52,4 +66,4 @@ export default ({
       </Switch>
     </AppLayout>
   </ConnectedRouter>
-)
+)}
