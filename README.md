@@ -1,6 +1,5 @@
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
-
 # Hej
 
 ## How to Use
@@ -57,3 +56,5 @@ For example:
 ```sh
 -> npm run start:dev 2>/dev/null
 ```
+
+By Lee.
