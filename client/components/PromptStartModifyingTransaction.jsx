@@ -47,5 +47,5 @@ const PromptStartModifyingTransaction = ({
 
 PromptStartModifyingTransaction.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  handleCancel: PropTypes.func.isRequired,
+  handleCancel: PropTypes.func.isRequired
 }

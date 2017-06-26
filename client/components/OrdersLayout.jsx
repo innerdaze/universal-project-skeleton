@@ -18,18 +18,8 @@ class OrdersLayout extends Component {
       mainMenuVisible: false
     }
 
-    this._onSetQuantityCancel = this._onSetQuantityCancel.bind(this)
-    this._onSetQuantitySubmit = this._onSetQuantitySubmit.bind(this)
     this.handlePromptStartModifyingSubmit = this.handlePromptStartModifyingSubmit.bind(this)
     this.handlePromptStartModifyingCancel = this.handlePromptStartModifyingCancel.bind(this)
-  }
-
-  _onSetQuantityCancel() {
-    this.props.onChangeOrderQuantityCancel()
-  }
-
-  _onSetQuantitySubmit(transactionID, quantity) {
-    this.props.onChangeOrderQuantitySubmit(quantity)
   }
 
   handlePromptStartModifyingCancel() {
@@ -73,8 +63,6 @@ OrdersLayout.propTypes = {
   mainMenuVisible: PropTypes.bool,
   pendingModification: PropTypes.object,
   isChangingOrderQuantity: PropTypes.bool.isRequired,
-  onChangeOrderQuantitySubmit: PropTypes.func.isRequired,
-  onChangeOrderQuantityCancel: PropTypes.func.isRequired,
   onPromptStartModifyingSubmit: PropTypes.func.isRequired,
   onPromptStartModifyingCancel: PropTypes.func.isRequired
 }
