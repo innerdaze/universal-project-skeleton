@@ -1,6 +1,6 @@
 import test from 'ava'
-import { receiveLogin } from '../../../client/actions/SessionActions'
-import { RECEIVE_LOGIN } from '../../../client/constants/ActionTypes'
+import { receiveLogin } from '../../../actions/SessionActions'
+import { RECEIVE_LOGIN } from '../../../constants/ActionTypes'
 
 test('create an action to request login', t => {
   const actualAction = receiveLogin()

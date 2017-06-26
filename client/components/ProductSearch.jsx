@@ -17,7 +17,7 @@ class ProductSearch extends Component {
     }
   }
 
-  handleSelect({ target, suggestion }) {
+  handleSelect({ suggestion }) {
     this.props.onSelect(suggestion.product)
   }
 
@@ -27,14 +27,14 @@ class ProductSearch extends Component {
         responsive
         placeHolder='Enter product name'
         dropAlign={{ left: 'left' }}
-        onDOMChange={this.handleSearch}
-        onSelect={this.handleSelect}
         suggestions={map(
           this.props.results, product => ({
             product,
             label: product.ProductName
           })
         )}
+        onDOMChange={this.handleSearch}
+        onSelect={this.handleSelect}
         />
     )
   }

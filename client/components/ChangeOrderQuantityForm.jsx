@@ -85,9 +85,9 @@ class ChangeOrderQuantityForm extends Component {
               autoFocus
               type='number'
               placeholder='Enter quantity'
+              value={this.state.quantity}
               ref={this.assignInputRef}
               onChange={this.handleNumberInputChange}
-              value={this.state.quantity}
               />
           </FormField>
           <Footer

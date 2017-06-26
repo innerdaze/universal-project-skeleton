@@ -1,6 +1,6 @@
 import test from 'ava'
-import { receiveCashiers } from '../../../client/actions/CashierActions'
-import { RECEIVE_CASHIERS } from '../../../client/constants/ActionTypes'
+import { receiveCashiers } from '../../../actions/CashierActions'
+import { RECEIVE_CASHIERS } from '../../../constants/ActionTypes'
 
 test('create an action to receive all cashiers', t => {
   const actualAction = receiveCashiers()

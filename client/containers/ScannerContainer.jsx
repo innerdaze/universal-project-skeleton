@@ -1,10 +1,6 @@
 import { connect } from 'react-redux'
-import Scanner from '../components/Scanner.jsx'
+import Scanner from '../components/Scanner'
 import { scan } from '../actions/ScannerActions'
-
-const mapStateToProps = state => {
-  return {}
-}
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -15,7 +11,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 const ScannerContainer = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Scanner)
 

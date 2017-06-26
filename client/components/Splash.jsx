@@ -31,7 +31,7 @@ Splash.defaultProps = {
   loadingText: 'Loading...',
   icon: null,
   logo: null,
-  tite: null
+  title: null
 }
 
 export default Splash

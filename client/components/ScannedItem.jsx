@@ -43,11 +43,11 @@ class ScannedItem extends Component {
 }
 
 ScannedItem.propTypes = {
-  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   onChangeQuantityClick: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,
-  productID: PropTypes.string
+  productID: PropTypes.string,
+  quantity: PropTypes.number.isRequired
 }
 
 ScannedItem.defaultProps = {

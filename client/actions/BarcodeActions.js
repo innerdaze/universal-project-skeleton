@@ -7,7 +7,6 @@ import {
   FAIL_LOOKUP_BARCODE
 } from '../constants/ActionTypes'
 import { displayError, dismissError } from '../actions/ErrorActions'
-import { failIfMissing } from '../helpers/Function'
 import { callApi } from './NetworkActions'
 
 export function requestBarcodes() {

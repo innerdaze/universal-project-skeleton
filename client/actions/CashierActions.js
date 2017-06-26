@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-fetch'
 import {
   REQUEST_CASHIERS,
   RECEIVE_CASHIERS,
@@ -25,8 +24,8 @@ export function receiveCashiers(json) {
   }
 }
 
-export function fetchCashiers(sessionID) {
-  return function (dispatch, getState) {
+export function fetchCashiers() {
+  return dispatch => {
     dispatch(requestCashiers())
 
     return dispatch(callApi({

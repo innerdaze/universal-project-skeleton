@@ -1,6 +1,6 @@
 import test from 'ava'
-import { invalidateOrders } from '../../../client/actions/OrderActions'
-import { INVALIDATE_ORDERS } from '../../../client/constants/ActionTypes'
+import { invalidateOrders } from '../../../actions/OrderActions'
+import { INVALIDATE_ORDERS } from '../../../constants/ActionTypes'
 
 test.skip('create an action to invalidate an order', t => {
   const device = { id: 'unicorn' }

@@ -1,6 +1,6 @@
 import test from 'ava'
-import { invalidateCashiers } from '../../../client/actions/CashierActions'
-import { INVALIDATE_CASHIERS } from '../../../client/constants/ActionTypes'
+import { invalidateCashiers } from '../../../actions/CashierActions'
+import { INVALIDATE_CASHIERS } from '../../../constants/ActionTypes'
 
 test('create an action to invalidate all cashiers', t => {
   const expectedAction = {

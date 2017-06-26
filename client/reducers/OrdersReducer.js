@@ -1,4 +1,4 @@
-import { map, keyBy, difference } from 'lodash'
+import { keyBy, difference } from 'lodash'
 import OperationModes from '../constants/OperationModes'
 
 export function orders(state = {

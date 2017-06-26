@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { processOrders } from '../actions/OrderActions'
-import ProcessItemsButton from '../components/ProcessItemsButton.jsx'
+import ProcessItemsButton from '../components/ProcessItemsButton'
 
 const mapStateToProps = state => {
   return {

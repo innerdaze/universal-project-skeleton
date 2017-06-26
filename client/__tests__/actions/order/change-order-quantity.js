@@ -1,6 +1,6 @@
 import test from 'ava'
-import { changeOrderQuantity } from '../../../client/actions/OrderActions'
-import { CHANGE_ORDER_QUANTITY } from '../../../client/constants/ActionTypes'
+import { changeOrderQuantity } from '../../../actions/OrderActions'
+import { CHANGE_ORDER_QUANTITY } from '../../../constants/ActionTypes'
 
 test('create an action to change an order quantity', t => {
   const id = 1

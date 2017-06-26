@@ -1,3 +1,6 @@
+import config from '../config'
+import { failIfMissing } from './Function'
+
 export default function apiCall({
   service = failIfMissing('service'),
   params = {},

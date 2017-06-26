@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import BarcodeInputForm from '../components/BarcodeInputForm.jsx'
+import BarcodeInputForm from '../components/BarcodeInputForm'
 import { createPendingTransactionByBarcodeID } from '../actions/OrderActions'
 
 const mapStateToProps = state => {

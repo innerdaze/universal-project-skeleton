@@ -1,11 +1,7 @@
 import { connect } from 'react-redux'
 import { changeOperationMode } from '../actions/OrderActions'
 import { uiHideMenu } from '../actions/UIActions'
-import ModeSwitcher from '../components/ModeSwitcher.jsx'
-
-const mapStateToProps = state => {
-  return {}
-}
+import ModeSwitcher from '../components/ModeSwitcher'
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -17,7 +13,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 const ModeSwitcherContainer = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(ModeSwitcher)
 

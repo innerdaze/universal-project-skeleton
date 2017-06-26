@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import BackgroundSyncProgress from '../components/BackgroundSyncProgress.jsx'
+import BackgroundSyncProgress from '../components/BackgroundSyncProgress'
 
 const mapStateToProps = state => {
   return {

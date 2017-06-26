@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { uiShowMenu } from '../actions/UIActions'
-import MainMenuControl from '../components/MainMenuControl.jsx'
+import MainMenuControl from '../components/MainMenuControl'
 
 const mapDispatchToProps = dispatch => {
   return {

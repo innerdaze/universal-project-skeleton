@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { setApiRoot } from '../actions/AppActions'
-import { validate } from '../actions/ValidationActions'
-import Initialize from '../components/Initialize.jsx'
+import Initialize from '../components/Initialize'
 
 export default connect(state => ({
   isLoggedIn: state.session.alive,

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { uiHideMenu } from '../actions/UIActions'
-import MainMenuHideControl from '../components/MainMenuHideControl.jsx'
+import MainMenuHideControl from '../components/MainMenuHideControl'
 
 const mapDispatchToProps = dispatch => {
   return {

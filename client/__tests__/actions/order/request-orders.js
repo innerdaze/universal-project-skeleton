@@ -1,6 +1,6 @@
 import test from 'ava'
-import { requestOrders } from '../../../client/actions/OrderActions'
-import { REQUEST_ORDERS } from '../../../client/constants/ActionTypes'
+import { requestOrders } from '../../../actions/OrderActions'
+import { REQUEST_ORDERS } from '../../../constants/ActionTypes'
 
 test.skip('create an action to request all orders', t => {
   const device = { id: 'unicorn' }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Responsive from 'grommet/utils/Responsive'
 import App from 'grommet/components/App'
 
@@ -30,6 +31,10 @@ class AppLayout extends Component {
       </App>
     )
   }
+}
+
+AppLayout.propTypes = {
+  children: PropTypes.array.isRequired
 }
 
 export default AppLayout

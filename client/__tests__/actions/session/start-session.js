@@ -1,7 +1,7 @@
 import test from 'ava'
 import { v4 as uuidGen } from 'uuid'
-import { startSession } from '../../../client/actions/SessionActions'
-import { START_SESSION } from '../../../client/constants/ActionTypes'
+import { startSession } from '../../../actions/SessionActions'
+import { START_SESSION } from '../../../constants/ActionTypes'
 
 test('create an action to start a session', t => {
   const id = uuidGen()

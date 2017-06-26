@@ -91,9 +91,9 @@ class BarcodeInputForm extends Component {
               type='number'
               min={0}
               placeholder='Enter barcode'
+              value={this.state.barcode}
               ref={this.assignInputRef}
               onChange={this.handleChange}
-              value={this.state.barcode}
               />
           </div>
           <Button

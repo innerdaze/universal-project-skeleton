@@ -8,25 +8,25 @@ class MainMenuHideControl extends Component {
   constructor(props) {
     super(props)
 
-    this.hideMenu = this.hideMenu.bind(this)
+    this.handleHideMenuClick = this.handleHideMenuClick.bind(this)
   }
 
-  hideMenu() {
+  handleHideMenuClick() {
     this.props.hideMenu()
   }
 
   render() {
     return (
       <Menu
+        inline
         direction='row'
         responsive={false}
-        inline
         alignSelf='end'
         >
         <Button
           plain
           icon={<CloseIcon/>}
-          onClick={this.hideMenu}
+          onClick={this.handleHideMenuClick}
           />
       </Menu>
     )

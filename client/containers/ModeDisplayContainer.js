@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import ModeDisplay from '../components/ModeDisplay.jsx'
+import ModeDisplay from '../components/ModeDisplay'
 
 const mapStateToProps = state => (
   {

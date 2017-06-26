@@ -1,10 +1,9 @@
 import { connect } from 'react-redux'
-import _, { reverse } from 'lodash'
-import ScannedItemList from '../components/ScannedItemList.jsx'
+import _ from 'lodash'
+import ScannedItemList from '../components/ScannedItemList'
 import {
   deleteOrder,
   startDeletingOrder,
-  changeOrderQuantity,
   startChangingOrderQuantity
 } from '../actions/OrderActions'
 
@@ -12,7 +11,6 @@ const mapStateToProps = state => {
   return {
     isProcessing: state.orders.isProcessing,
     isDeletingOrder: state.orders.isDeletingOrder,
-    // TODO: optimization needed
     items: _(state.orders.unprocessedItems)
       .filter(id => {
         return state.orderEntities[id] &&

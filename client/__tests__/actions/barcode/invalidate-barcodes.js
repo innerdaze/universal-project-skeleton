@@ -1,6 +1,6 @@
 import test from 'ava'
-import { invalidateBarcodes } from '../../../client/actions/BarcodeActions'
-import { INVALIDATE_BARCODES } from '../../../client/constants/ActionTypes'
+import { invalidateBarcodes } from '../../../actions/BarcodeActions'
+import { INVALIDATE_BARCODES } from '../../../constants/ActionTypes'
 
 test('create an action to invalidate all barcodes', t => {
   const expectedAction = {

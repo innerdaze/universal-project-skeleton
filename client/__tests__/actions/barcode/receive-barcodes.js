@@ -1,6 +1,6 @@
 import test from 'ava'
-import { receiveBarcodes } from '../../../client/actions/BarcodeActions'
-import { RECEIVE_BARCODES } from '../../../client/constants/ActionTypes'
+import { receiveBarcodes } from '../../../actions/BarcodeActions'
+import { RECEIVE_BARCODES } from '../../../constants/ActionTypes'
 
 test('create an action to receive all barcodes', t => {
   const actualAction = receiveBarcodes()

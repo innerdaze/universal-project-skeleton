@@ -4,7 +4,7 @@ import {
   finishChangingOrderQuantity,
   cancelChangingOrderQuantity
 } from '../actions/OrderActions'
-import ChangeOrderQuantityForm from '../components/ChangeOrderQuantityForm.jsx'
+import ChangeOrderQuantityForm from '../components/ChangeOrderQuantityForm'
 
 const mapStateToProps = state => {
   return {

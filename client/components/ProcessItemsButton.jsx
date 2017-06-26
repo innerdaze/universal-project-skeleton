@@ -10,10 +10,10 @@ class ProcessItemsButton extends Component {
       canProcess: true
     }
 
-    this.onClick = this.onClick.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
-  onClick(e) {
+  handleClick(e) {
     e.preventDefault()
     this.props.onProcessItemsClick()
   }
@@ -21,10 +21,10 @@ class ProcessItemsButton extends Component {
   render() {
     return (
       <Button
+        primary
         disabled={this.state.canProcess}
         label='Send'
-        onClick={this.onClick}
-        primary
+        onClick={this.handleClick}
         />
     )
   }

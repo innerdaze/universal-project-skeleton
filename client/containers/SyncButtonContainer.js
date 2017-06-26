@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { sync } from '../actions/SyncActions'
-import SyncButton from '../components/SyncButton.jsx'
+import SyncButton from '../components/SyncButton'
 
 const mapDispatchToProps = dispatch => {
   return {

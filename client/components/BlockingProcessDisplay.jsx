@@ -8,9 +8,9 @@ class BlockingProcessDisplay extends Component {
     return (
       <Layer>
         <Box
+          full
           justify='center'
           align='center'
-          full
           >
           {this.props.component}
         </Box>

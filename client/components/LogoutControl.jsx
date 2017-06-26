@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import Menu from 'grommet/components/Menu'
 import Anchor from 'grommet/components/Anchor'
 
-export default ({ handleLogoutPress = Function.prototype }) => (
+const LogoutControl = ({ handleLogoutPress = Function.prototype }) => (
   <Menu primary>
     <Anchor
       label='Logout'
@@ -10,3 +11,9 @@ export default ({ handleLogoutPress = Function.prototype }) => (
       />
   </Menu>
 )
+
+LogoutControl.propTypes = {
+  handleLogoutPress: PropTypes.func.isRequired
+}
+
+export default LogoutControl

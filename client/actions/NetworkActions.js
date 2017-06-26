@@ -2,6 +2,7 @@ import {
   NET_FAIL_OFFLINE,
   NET_FAIL_NO_SESSION
 } from '../constants/ActionTypes'
+import { failIfMissing } from '../helpers/Function'
 import { login } from './SessionActions'
 import { displayError } from './ErrorActions'
 

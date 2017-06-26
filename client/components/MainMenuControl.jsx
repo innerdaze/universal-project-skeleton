@@ -7,10 +7,10 @@ class MainMenuControl extends Component {
   constructor(props) {
     super(props)
 
-    this.showMenu = this.showMenu.bind(this)
+    this.handleShowMenuClick = this.handleShowMenuClick.bind(this)
   }
 
-  showMenu() {
+  handleShowMenuClick() {
     this.props.showMenu()
   }
 
@@ -19,7 +19,7 @@ class MainMenuControl extends Component {
       <Button
         plain
         icon={<MenuIcon/>}
-        onClick={this.showMenu}
+        onClick={this.handleShowMenuClick}
         />
     )
   }

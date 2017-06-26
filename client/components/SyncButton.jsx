@@ -7,10 +7,10 @@ export default class SyncButton extends Component {
   constructor(props) {
     super(props)
 
-    this.sync = this.sync.bind(this)
+    this.handleSyncClick = this.handleSyncClick.bind(this)
   }
 
-  sync() {
+  handleSyncClick() {
     this.props.sync()
   }
 
@@ -19,7 +19,7 @@ export default class SyncButton extends Component {
       <Button
         plain
         icon={<RefreshIcon/>}
-        onClick={this.sync}
+        onClick={this.handleSyncClick}
         />
     )
   }

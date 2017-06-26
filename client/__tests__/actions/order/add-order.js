@@ -1,6 +1,6 @@
 import test from 'ava'
-import { addOrder } from '../../../client/actions/OrderActions'
-import { ADD_ORDER } from '../../../client/constants/ActionTypes'
+import { addOrder } from '../../../actions/OrderActions'
+import { ADD_ORDER } from '../../../constants/ActionTypes'
 
 test('create an action to add an order', t => {
   const id = 1

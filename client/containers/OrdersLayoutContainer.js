@@ -1,9 +1,7 @@
 import { connect } from 'react-redux'
-import OrdersLayout from '../components/OrdersLayout.jsx'
+import OrdersLayout from '../components/OrdersLayout'
 import {
-  completePendingTransaction,
   discardPendingTransaction,
-  promptStartModifyTransaction,
   confirmStartModifyTransaction,
   cancelStartModifyTransaction,
   startChangingOrderQuantity

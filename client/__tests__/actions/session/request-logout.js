@@ -1,6 +1,6 @@
 import test from 'ava'
-import { requestLogout } from '../../../client/actions/SessionActions'
-import { REQUEST_LOGOUT } from '../../../client/constants/ActionTypes'
+import { requestLogout } from '../../../actions/SessionActions'
+import { REQUEST_LOGOUT } from '../../../constants/ActionTypes'
 
 test('create an action to start a session', t => {
   const expectedAction = {
