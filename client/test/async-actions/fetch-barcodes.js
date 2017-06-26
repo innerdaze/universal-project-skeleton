@@ -9,7 +9,7 @@ import { fetchBarcodes } from '../../actions/BarcodeActions'
 import appReducer from '../../reducers/RootReducer'
 
 test('fetch barcodes and populate the store', async t => {
-  let store = createStore(
+  const store = createStore(
     appReducer,
     applyMiddleware(
       thunkMiddleware

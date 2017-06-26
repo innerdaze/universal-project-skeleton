@@ -9,7 +9,7 @@ import { sendOrders } from '../../actions/OrderActions'
 import appReducer from '../../reducers/RootReducer'
 
 test.failing('send orders to server for processing', async t => {
-  let store = createStore(
+  const store = createStore(
     appReducer,
     applyMiddleware(
       thunkMiddleware

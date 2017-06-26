@@ -25,7 +25,7 @@ class AppLayout extends Component {
 
   render() {
     return (
-      <App centered={true}>
+      <App centered>
         { this.props.children }
       </App>
     )

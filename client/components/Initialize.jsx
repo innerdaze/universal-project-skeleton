@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Box from 'grommet/components/Box'
-import Notification from 'grommet/components/Notification'
 import Form from 'grommet/components/Form'
 import Header from 'grommet/components/Header'
 import Heading from 'grommet/components/Heading'
@@ -24,38 +22,40 @@ class Initialize extends Component {
     this._onFormSubmit = this._onFormSubmit.bind(this)
   }
 
-  _onApiRootFieldChange(e) {
+  handleApiRootFieldChange(e) {
     this.setState({ apiRoot: e.target.value })
   }
 
-  _onFormSubmit(e) {
+  handleFormSubmit(e) {
     e.preventDefault()
     this.props.onApiRootFormSubmit(this.state.apiRoot)
   }
 
   render() {
     return (
-      <Box justify='center'
+      <Box
+        full
+        justify='center'
         align='center'
-        full={true}
-        pad={{horizontal: 'medium'}}>
-        <Form onSubmit={this._onFormSubmit}>
+        pad={{ horizontal: 'medium' }}
+        >
+        <Form onSubmit={this.handleFormSubmit}>
           <Header>
             <Heading>
               Welcome
             </Heading>
           </Header>
           <Paragraph size='large'>
-            I see it's your first time here.
+            I see it\'s your first time here.
           </Paragraph>
           <Paragraph>
             Enter the API root URL provided by Orbis to get started.
           </Paragraph>
           <FormField error={this.props.apiRootValidationError}>
-            <TextInput name='apiRoot' value={this.state.apiRoot} onDOMChange={this._onApiRootFieldChange} />
+            <TextInput name='apiRoot' value={this.state.apiRoot} onDOMChange={this.handleApiRootFieldChange}/>
           </FormField>
-          <Footer pad={{vertical: 'medium'}}>
-            <Button label='Continue' type='submit' onClick={this._onFormSubmit} />
+          <Footer pad={{ vertical: 'medium' }}>
+            <Button label='Continue' type='submit' onClick={this.handleFormSubmit}/>
           </Footer>
         </Form>
       </Box>

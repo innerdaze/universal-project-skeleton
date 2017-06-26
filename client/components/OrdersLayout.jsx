@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import BarcodeInputFormContainer from '../containers/BarcodeInputFormContainer.jsx'
-import ScannedItemListContainer from '../containers/ScannedItemListContainer.jsx'
-import ProcessItemsButtonContainer from '../containers/ProcessItemsButtonContainer.jsx'
-import OrdersHeaderLayout from '../components/OrdersHeaderLayout.jsx'
+import Split from 'grommet/components/Split'
+import Box from 'grommet/components/Box'
+import BarcodeInputFormContainer from '../containers/BarcodeInputFormContainer'
+import ScannedItemListContainer from '../containers/ScannedItemListContainer'
+import ProcessItemsButtonContainer from '../containers/ProcessItemsButtonContainer'
+import OrdersHeaderLayout from '../components/OrdersHeaderLayout'
 import ChangeOrderQuantityFormContainer from '../containers/ChangeOrderQuantityFormContainer'
 import PromptStartModifyingTransaction from '../components/PromptStartModifyingTransaction'
-import MainMenu from '../components/MainMenu.jsx'
-import Split from 'grommet/components/Split'
-import Sidebar from 'grommet/components/Sidebar'
-import Box from 'grommet/components/Box'
+import MainMenu from '../components/MainMenu'
 
 class OrdersLayout extends Component {
   constructor(props) {
@@ -21,18 +20,8 @@ class OrdersLayout extends Component {
 
     this._onSetQuantityCancel = this._onSetQuantityCancel.bind(this)
     this._onSetQuantitySubmit = this._onSetQuantitySubmit.bind(this)
-    this._onPromptStartModifyingSubmit = this._onPromptStartModifyingSubmit.bind(this)
-    this._onPromptStartModifyingCancel = this._onPromptStartModifyingCancel.bind(this)
-  }
-
-  componentWillReceiveProps(newProps) {
-    if (this.state.mainMenuVisible === newProps.mainMenuVisible) {
-      return false
-    } else {
-      this.setState({
-        mainMenuVisible: newProps.mainMenuVisible
-      })
-    }
+    this.handlePromptStartModifyingSubmit = this.handlePromptStartModifyingSubmit.bind(this)
+    this.handlePromptStartModifyingCancel = this.handlePromptStartModifyingCancel.bind(this)
   }
 
   _onSetQuantityCancel() {
@@ -43,27 +32,29 @@ class OrdersLayout extends Component {
     this.props.onChangeOrderQuantitySubmit(quantity)
   }
 
-  _onPromptStartModifyingCancel() {
+  handlePromptStartModifyingCancel() {
     this.props.onPromptStartModifyingCancel()
   }
 
-  _onPromptStartModifyingSubmit() {
+  handlePromptStartModifyingSubmit() {
     this.props.onPromptStartModifyingSubmit(this.props.pendingModification)
   }
 
   render() {
     return (
       <Split
-        fixed={true}
-        priority={this.state.mainMenuVisible ? 'left' : 'right'}
-        flex='right'>
+        fixed
+        priority={this.props.mainMenuVisible ? 'left' : 'right'}
+        flex='right'
+        >
         <MainMenu/>
         <Box justify='center' pad='medium'>
           {this.props.pendingModification && (
             <PromptStartModifyingTransaction
               order={this.props.pendingModification}
-              onSubmit={this._onPromptStartModifyingSubmit}
-              onCancel={this._onPromptStartModifyingCancel}/>
+              onSubmit={this.handlePromptStartModifyingSubmit}
+              onCancel={this.handlePromptStartModifyingCancel}
+              />
           )}
           {this.props.isChangingOrderQuantity && (
             <ChangeOrderQuantityFormContainer/>
@@ -79,8 +70,9 @@ class OrdersLayout extends Component {
 }
 
 OrdersLayout.propTypes = {
-	mainMenuVisible: PropTypes.bool,
+  mainMenuVisible: PropTypes.bool,
   pendingModification: PropTypes.object,
+  isChangingOrderQuantity: PropTypes.bool.isRequired,
   onChangeOrderQuantitySubmit: PropTypes.func.isRequired,
   onChangeOrderQuantityCancel: PropTypes.func.isRequired,
   onPromptStartModifyingSubmit: PropTypes.func.isRequired,
@@ -88,12 +80,8 @@ OrdersLayout.propTypes = {
 }
 
 OrdersLayout.defaultProps = {
-	mainMenuVisible: false,
-  pendingModification: null,
-  onChangeOrderQuantitySubmit: Function.prototype,
-  onChangeOrderQuantityCancel: Function.prototype,
-  onPromptStartModifyingSubmit: Function.prototype,
-  onPromptStartModifyingCancel: Function.prototype
+  mainMenuVisible: false,
+  pendingModification: null
 }
 
 export default OrdersLayout

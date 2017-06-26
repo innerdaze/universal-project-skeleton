@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import { createStore, compose } from 'redux'
 import { Provider } from 'react-redux'
 import { persistStore } from 'redux-persist'
 import createFilter from 'redux-persist-transform-filter'
 import localForage from 'localforage'
 import PropTypes from 'prop-types'
-import reducer from '../reducers'
 import Splash from './Splash'
 
 class AppProvider extends Component {
@@ -17,7 +15,7 @@ class AppProvider extends Component {
     }
   }
 
-  componentWillMount(){
+  componentWillMount() {
     persistStore(this.props.store, {
       storage: localForage,
       whitelist: [
@@ -48,7 +46,7 @@ class AppProvider extends Component {
   }
 
   render() {
-    if(!this.state.rehydrated){
+    if (!this.state.rehydrated) {
       return <Splash/>
     }
     return (
@@ -60,11 +58,8 @@ class AppProvider extends Component {
 }
 
 AppProvider.propTypes = {
-  store: PropTypes.object.isRequired
-}
-
-AppProvider.defaultProps = {
-  store: {}
+  store: PropTypes.object.isRequired,
+  children: PropTypes.array.isRequired
 }
 
 export default AppProvider

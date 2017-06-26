@@ -5,7 +5,7 @@ import { ADD_ORDER } from '../../../client/constants/ActionTypes'
 test('create an action to add an order', t => {
   const id = 1
   const order = {
-    id: id,
+    id,
     productId: 'ABCDEFGHIJK',
     quantity: 5,
     title: 'Test Product'

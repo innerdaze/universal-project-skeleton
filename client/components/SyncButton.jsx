@@ -17,9 +17,10 @@ export default class SyncButton extends Component {
   render() {
     return (
       <Button
-        plain={true}
+        plain
         icon={<RefreshIcon/>}
-        onClick={this.sync} />
+        onClick={this.sync}
+        />
     )
   }
 }

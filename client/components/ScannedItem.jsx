@@ -13,26 +13,26 @@ class ScannedItem extends Component {
   render() {
     return (
       <ListItem
-        justify="between"
+        justify='between'
         responsive={false}
         >
-        <Box direction="row" basis="1/2" justify="between">
+        <Box direction='row' basis='1/2' justify='between'>
           <Box>{this.props.productID}</Box>
           <Box>{this.props.title}</Box>
         </Box>
-        <Box direction="row" basis="1/2" justify="end" textAlign="right">
-          <Box className="secondary">{this.props.quantity} x Units</Box>
+        <Box direction='row' basis='1/2' justify='end' textAlign='right'>
+          <Box className='secondary'>{this.props.quantity} x Units</Box>
           <Menu
             icon={<ActionsIcon/>}
             >
             <Anchor
               icon={<EditIcon/>}
-              label="Change Quantity"
+              label='Change Quantity'
               onClick={this.props.onChangeQuantityClick}
               />
             <Anchor
               icon={<TrashIcon/>}
-              label="Delete Order"
+              label='Delete Order'
               onClick={this.props.onDeleteClick}
               />
           </Menu>
@@ -45,13 +45,13 @@ class ScannedItem extends Component {
 ScannedItem.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired
+  onChangeQuantityClick: PropTypes.func.isRequired,
+  onDeleteClick: PropTypes.func.isRequired,
+  productID: PropTypes.string
 }
 
 ScannedItem.defaultProps = {
-  id: null,
-  title: null,
-  onClick: Function.prototype
+  productID: null
 }
 
 export default ScannedItem

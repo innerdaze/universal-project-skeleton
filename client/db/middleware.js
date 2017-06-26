@@ -1,16 +1,14 @@
+import { PouchMiddleware as pouchMiddleware } from 'pouch-redux-middleware'
+import PouchDB from 'pouchdb'
 import {
   RECEIVE_BARCODES
 } from '../constants/ActionTypes'
-import PouchMiddleware from 'pouch-redux-middleware'
-import PouchDB from 'pouchdb'
 
-const db = new PouchDB('/barcodes')
-
-const pouchMiddleware = PouchMiddleware({
+export default pouchMiddleware({
   path: '/barcodeEntities',
-  db,
+  db: new PouchDB('/barcodes'),
   actions: {
-    update: doc => {
+    update: () => {
       return { type: RECEIVE_BARCODES }
     }
   }

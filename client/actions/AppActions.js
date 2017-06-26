@@ -8,8 +8,9 @@ import {
 } from '../constants/ActionTypes'
 import { sync } from '../actions/SyncActions'
 import { login } from '../actions/SessionActions'
-import { validate, invalidate } from '../actions/ValidationActions'
+import { validate } from '../actions/ValidationActions'
 import { callApi } from '../actions/NetworkActions'
+import { displayError } from '../actions/ErrorActions'
 
 const requiredConfigs = [
   'apiRoot'
@@ -40,15 +41,14 @@ export function setAPIRootInvalid() {
   }
 }
 
-
 export function setAPIRootValid() {
   return {
     type: API_ROOT_VALID
   }
 }
 
-export function testAPIRoot(url) {
-  return async (dispatch, getState) => {
+export function testAPIRoot() {
+  return async dispatch => {
     return dispatch(callApi({
       service: 'GeneralService.GetTimeStamp',
       skipSessionCheck: true,
@@ -78,10 +78,9 @@ export function setApiRoot(apiRoot) {
       validation: async url => isWebUri(url),
       error
     }))) {
-      const isValid = await dispatch(testAPIRoot(apiRoot))
+      await dispatch(testAPIRoot(apiRoot))
 
       if (getState().app.apiRootValid) {
-
         if (checkInitialised(getState())) {
           await dispatch(login('apiuser', 'api.123'))
           await dispatch(sync())

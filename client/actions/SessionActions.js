@@ -1,6 +1,3 @@
-import fetch from 'isomorphic-fetch'
-import { push } from 'connected-react-router'
-import history from '../history'
 import {
   REQUEST_LOGIN,
   RECEIVE_LOGIN,
@@ -12,13 +9,12 @@ import {
   FAIL_LOGIN
 } from '../constants/ActionTypes'
 import { displayError } from '../actions/ErrorActions'
-import { checkStatusAndParseJSON } from '../helpers/Network'
 import { callApi } from './NetworkActions'
 
 export function startSession(id) {
   return {
     type: START_SESSION,
-    id: id
+    id
   }
 }
 
@@ -34,7 +30,7 @@ export function requestLogin() {
   }
 }
 
-export function receiveLogin(user) {
+export function receiveLogin() {
   return {
     type: RECEIVE_LOGIN,
     receivedAt: Date.now()
@@ -69,7 +65,7 @@ export function receiveLogout() {
 }
 
 export function login(userID, password) {
-  return (dispatch, getState) => {
+  return dispatch => {
     dispatch(requestLogin())
 
     return dispatch(callApi({
@@ -85,7 +81,7 @@ export function login(userID, password) {
         dispatch(succeedLogin(json.result.Result.UserData))
       },
       error: error => {
-        const message = error && error.message || 'Could not login at this time. Please try again later or contact support'
+        const message = error ? error.message : 'Could not login at this time. Please try again later or contact support'
         dispatch(failLogin(message))
         dispatch(displayError(message))
       }
@@ -102,7 +98,7 @@ export function logout() {
       params: {
         SessionID: getState().session.id
       },
-      success: json => {
+      success: () => {
         dispatch(receiveLogout())
         dispatch(endSession())
       }

@@ -1,7 +1,7 @@
 export default function sync(state = {
   mainMenuVisible: false
 }, action) {
-  switch(action.type) {
+  switch (action.type) {
     case 'UI_SHOW_MENU':
       return {
         ...state,

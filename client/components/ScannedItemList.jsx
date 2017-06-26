@@ -6,7 +6,6 @@ import ListPlaceholder from 'grommet-addons/components/ListPlaceholder'
 import Splash from './Splash'
 import ScannedItem from './ScannedItem'
 import BlockingProcessDisplay from './BlockingProcessDisplay'
-import ChangeOrderQuantityFormContainer from '../containers/ChangeOrderQuantityFormContainer'
 import DeleteEntityForm from './DeleteEntityForm'
 
 class ScannedItemList extends Component {
@@ -17,16 +16,15 @@ class ScannedItemList extends Component {
       selectedOrder: null
     }
 
-    this.onChangeOrderQuantityClick = this.onChangeOrderQuantityClick.bind(this)
-    this.onDeleteItemConfirm = this.onDeleteItemConfirm.bind(this)
-    this.onDeleteItemCancel = this.onDeleteItemCancel.bind(this)
+    this.handleDeleteItemConfirm = this.handleDeleteItemConfirm.bind(this)
+    this.handleDeleteItemCancel = this.handleDeleteItemCancel.bind(this)
   }
 
-  onChangeOrderQuantityClick(order) {
-    this.props.onChangeOrderQuantityClick(order)
+  handleChangeOrderQuantityClick(order) {
+    this.props.handleChangeOrderQuantityClick(order)
   }
 
-  onDeleteItemClick(item) {
+  handleDeleteItemClick(item) {
     this.props.onDeleteItemClick()
 
     this.setState({
@@ -34,7 +32,7 @@ class ScannedItemList extends Component {
     })
   }
 
-  onDeleteItemConfirm() {
+  handleDeleteItemConfirm() {
     this.props.onDeleteItemConfirm(this.state.selectedOrder._id)
 
     this.setState({
@@ -42,7 +40,7 @@ class ScannedItemList extends Component {
     })
   }
 
-  onDeleteItemCancel() {
+  handleDeleteItemCancel() {
     this.setState({
       selectedOrder: null
     })
@@ -55,8 +53,8 @@ class ScannedItemList extends Component {
           this.props.isDeletingOrder &&
           <DeleteEntityForm
             message='Confirm you would like to delete this order'
-            onConfirm={this.onDeleteItemConfirm}
-            onCancel={this.onDeleteItemCancel}
+            onConfirm={this.handleDeleteItemConfirm}
+            onCancel={this.handleDeleteItemCancel}
             />
         }
         { this.props.isProcessing &&
@@ -71,14 +69,14 @@ class ScannedItemList extends Component {
                 productID={item.ProductID}
                 title={item.productName}
                 quantity={item.Qty}
-                onChangeQuantityClick={this.onChangeOrderQuantityClick.bind(this, item)}
-                onDeleteClick={this.onDeleteItemClick.bind(this, item)}
+                onChangeQuantityClick={this.handleChangeOrderQuantityClick.bind(this, item)}
+                onDeleteClick={this.handleDeleteItemClick.bind(this, item)}
                 />
             )) : <ListPlaceholder
-                emptyMessage='Nothing to process - Add some items to get started.'
-                filteredTotal={this.props.items.length}
-                unfilteredTotal={this.props.items.length}
-                />
+              emptyMessage='Nothing to process - Add some items to get started.'
+              filteredTotal={this.props.items.length}
+              unfilteredTotal={this.props.items.length}
+              />
           }
         </List>
       </Box>
@@ -88,16 +86,20 @@ class ScannedItemList extends Component {
 
 ScannedItemList.propTypes = {
   onDeleteItemClick: PropTypes.func.isRequired,
-  onChangeOrderQuantityClick: PropTypes.func.isRequired,
-  isChangingOrderQuantity: PropTypes.bool.isRequired,
-  isDeletingOrder: PropTypes.bool.isRequired
+  onDeleteItemConfirm: PropTypes.func.isRequired,
+  handleChangeOrderQuantityClick: PropTypes.func.isRequired,
+  isDeletingOrder: PropTypes.bool.isRequired,
+  isProcessing: PropTypes.bool.isRequired,
+  items: PropTypes.array.isRequired
 }
 
 ScannedItemList.defaultProps = {
   onDeleteItemClick: Function.prototype,
-  onChangeOrderQuantityClick: Function.prototype,
-  isChangingOrderQuantity: false,
-  isDeletingOrder: false
+  onDeleteItemConfirm: Function.prototype,
+  handleChangeOrderQuantityClick: Function.prototype,
+  isDeletingOrder: false,
+  isProcessing: false,
+  items: []
 }
 
 export default ScannedItemList

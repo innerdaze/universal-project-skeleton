@@ -5,7 +5,6 @@ import Form from 'grommet/components/Form'
 import Header from 'grommet/components/Header'
 import Heading from 'grommet/components/Heading'
 import Footer from 'grommet/components/Footer'
-import Button from 'grommet/components/Button'
 import Anchor from 'grommet/components/Anchor'
 import FormField from 'grommet/components/FormField'
 import Label from 'grommet/components/Label'
@@ -21,10 +20,11 @@ class ChangeOrderQuantityForm extends Component {
       quantity: 1
     }
 
-    this.onNumberInputChange = this.onNumberInputChange.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
-    this.onCancel = this.onCancel.bind(this)
+    this.handleNumberInputChange = this.handleNumberInputChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleCancel = this.handleCancel.bind(this)
     this.receiveFocus = this.receiveFocus.bind(this)
+    this.assignInputRef = this.assignInputRef.bind(this)
   }
 
   componentDidMount() {
@@ -35,29 +35,33 @@ class ChangeOrderQuantityForm extends Component {
     setTimeout(() => {
       this.inputRef.focus()
       this.inputRef.select()
-    }, 100);
+    }, 100)
   }
 
-  onNumberInputChange(e) {
+  handleNumberInputChange(e) {
     this.setState({
-      quantity: parseInt(e.target.value)
+      quantity: parseInt(e.target.value, 10)
     })
   }
 
-  onSubmit(e) {
+  handleSubmit(e) {
     e.preventDefault()
 
-    this.props.onSubmit(this.props.order._id, this.state.quantity)
+    this.props.handleSubmit(this.props.order._id, this.state.quantity)
   }
 
-  onCancel(e) {
+  handleCancel(e) {
     e.preventDefault()
 
-    this.props.onCancel()
+    this.props.handleCancel()
   }
 
   receiveFocus() {
     this.inputRef.focus()
+  }
+
+  assignInputRef(ref) {
+    this.inputRef = ref
   }
 
   render() {
@@ -81,9 +85,9 @@ class ChangeOrderQuantityForm extends Component {
               autoFocus
               type='number'
               placeholder='Enter quantity'
-              onChange={this.onNumberInputChange}
+              ref={this.assignInputRef}
+              onChange={this.handleNumberInputChange}
               value={this.state.quantity}
-              ref={ref => this.inputRef = ref}
               />
           </FormField>
           <Footer
@@ -93,13 +97,13 @@ class ChangeOrderQuantityForm extends Component {
             <Anchor
               label='Cancel'
               icon={<CloseIcon/>}
-              onClick={this.onCancel}
+              onClick={this.handleCancel}
               />
             <Anchor
               primary
               label='Update'
               icon={<NextLinkIcon/>}
-              onClick={this.onSubmit}
+              onClick={this.handleSubmit}
               />
           </Footer>
         </Form>
@@ -110,14 +114,14 @@ class ChangeOrderQuantityForm extends Component {
 
 ChangeOrderQuantityForm.propTypes = {
   order: PropTypes.object.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  handleCancel: PropTypes.func.isRequired
 }
 
 ChangeOrderQuantityForm.propDefaults = {
   order: null,
-  onSubmit: Function.prototype,
-  onCancel: Function.prototype
+  handleSubmit: Function.prototype,
+  handleCancel: Function.prototype
 }
 
 export default ChangeOrderQuantityForm

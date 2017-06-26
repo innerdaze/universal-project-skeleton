@@ -32,7 +32,7 @@ export function callApi({
       return
     }
 
-    return function restart() {
+    return (function restart() {
       return fetch(getState().app.apiRoot, {
         method,
         headers,
@@ -62,22 +62,20 @@ export function callApi({
         dispatch(displayError(error.message))
         failure(error)
       })
-    }()
+    })()
   }
 }
 
 export function validateResCode(data) {
   return (
-    data.result.Result.ResMessage.ResCode === 0
-  ||
+    data.result.Result.ResMessage.ResCode === 0 ||
     data.result.Result.ResCode === 0
   )
 }
 
 export function validateSession(data) {
   return !(
-    data.result.Result.ResCode === 99
-  &&
+    data.result.Result.ResCode === 99 &&
     data.result.Result.ResMessage === 'Session has expired'
   )
 }
@@ -92,8 +90,7 @@ export function checkStatusAndParseJSON(response) {
   return response.json()
     .then(data => {
       if (
-        data.result.Result.ResMessage.ResCode === 0
-      ||
+        data.result.Result.ResMessage.ResCode === 0 ||
         data.result.Result.ResCode === 0
       ) {
         return data

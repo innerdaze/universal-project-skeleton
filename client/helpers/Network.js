@@ -18,18 +18,14 @@ export default function apiCall({
 
 export function validateResCode(data) {
   return (
-    data.result.Result.ResMessage.ResCode === 0
-  ||
+    data.result.Result.ResMessage.ResCode === 0 ||
     data.result.Result.ResCode === 0
   )
 }
 
 export function validateSession(data) {
-  return !Boolean(
-    data.result.Result.ResCode === 99
-  &&
-    data.result.Result.ResMessage === 'Session has expired'
-  )
+  return !(data.result.Result.ResCode === 99 &&
+    data.result.Result.ResMessage === 'Session has expired')
 }
 
 export function throwError(data, errorMessage) {
@@ -42,8 +38,7 @@ export function checkStatusAndParseJSON(response) {
   return response.json()
     .then(data => {
       if (
-        data.result.Result.ResMessage.ResCode === 0
-      ||
+        data.result.Result.ResMessage.ResCode === 0 ||
         data.result.Result.ResCode === 0
       ) {
         return data

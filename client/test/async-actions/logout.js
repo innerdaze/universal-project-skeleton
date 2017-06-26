@@ -9,7 +9,7 @@ import { logout } from '../../actions/SessionActions'
 import appReducer from '../../reducers/RootReducer'
 
 test('logout from the remote server and nuke the local session data', async t => {
-  let store = createStore(
+  const store = createStore(
     appReducer,
     applyMiddleware(
       thunkMiddleware

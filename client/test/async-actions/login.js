@@ -9,7 +9,7 @@ import { login } from '../../actions/SessionActions'
 import appReducer from '../../reducers/RootReducer'
 
 test('login to the remote server and retrieve a session ID', async t => {
-  let store = createStore(
+  const store = createStore(
     appReducer,
     applyMiddleware(
       thunkMiddleware

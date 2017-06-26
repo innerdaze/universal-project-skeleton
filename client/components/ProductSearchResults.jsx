@@ -9,8 +9,11 @@ class ProductSearchResults extends Component {
       <List>
         {this.props.items.length &&
           this.props.items.map(item => (
-            <ListItem justify='between'
-              separator='horizontal'>
+            <ListItem
+              key={item.ProductID}
+              justify='between'
+              separator='horizontal'
+              >
               <span>
                 {item.ProductName}
               </span>
@@ -22,11 +25,11 @@ class ProductSearchResults extends Component {
 }
 
 ProductSearchResults.propTypes = {
-  results: PropTypes.array.isRequired
+  items: PropTypes.array.isRequired
 }
 
 ProductSearchResults.defaultProps = {
-  results: []
+  items: []
 }
 
 export default ProductSearchResults

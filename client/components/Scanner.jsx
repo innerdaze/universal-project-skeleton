@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Form from 'grommet/components/Form'
 import FormField from 'grommet/components/FormField'
 import TextInput from 'grommet/components/TextInput'
 import Box from 'grommet/components/Box'
 import Button from 'grommet/components/Button'
-import Footer from 'grommet/components/Footer'
 
 class Scanner extends Component {
 
@@ -17,10 +17,10 @@ class Scanner extends Component {
 
     this.handleEnterBarcodeManually = this.handleEnterBarcodeManually.bind(this)
     this.handleStartScanClick = this.handleStartScanClick.bind(this)
-    this.onEnterBarcodeFieldChange = this.onEnterBarcodeFieldChange.bind(this)
+    this.handleEnterBarcodeFieldChange = this.handleEnterBarcodeFieldChange.bind(this)
   }
 
-  onEnterBarcodeFieldChange(e) {
+  handleEnterBarcodeFieldChange(e) {
     this.setState({
       barcode: e.target.value
     })
@@ -37,24 +37,29 @@ class Scanner extends Component {
 
   render() {
     return (
-      <Box direction="row">
-        <Form direction="row">
+      <Box direction='row'>
+        <Form direction='row'>
           <FormField>
             <TextInput
-              placeHolder="Enter Barcode"
-              onDOMChange={this.onEnterBarcodeFieldChange}
+              placeHolder='Enter Barcode'
+              onDOMChange={this.handleEnterBarcodeFieldChange}
               />
           </FormField>
           <Button
-            type="submit"
-            label="Submit"
             primary
+            type='submit'
+            label='Submit'
             onClick={this.handleEnterBarcodeManually}
             />
         </Form>
       </Box>
     )
   }
+}
+
+Scanner.propTypes = {
+  onSubmitBarcode: PropTypes.func.isRequired,
+  scan: PropTypes.func.isRequired
 }
 
 export default Scanner

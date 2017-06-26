@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Form from 'grommet/components/Form'
-import NumberInput from 'grommet/components/NumberInput'
-import Footer from 'grommet/components/Footer'
 import Button from 'grommet/components/Button'
-import Toast from 'grommet/components/Toast'
 import Box from 'grommet/components/Box'
 
 class BarcodeInputForm extends Component {
@@ -15,9 +12,10 @@ class BarcodeInputForm extends Component {
       barcode: ''
     }
 
-    this.onChange = this.onChange.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
     this.receiveFocus = this.receiveFocus.bind(this)
+    this.assignInputRef = this.assignInputRef.bind(this)
   }
 
   componentDidMount() {
@@ -30,7 +28,7 @@ class BarcodeInputForm extends Component {
     }
   }
 
-  onChange(e) {
+  handleChange(e) {
     this.setState({
       barcode: e.target.value
     })
@@ -43,7 +41,7 @@ class BarcodeInputForm extends Component {
     }, 100)
   }
 
-  onSubmit(e) {
+  handleSubmit(e) {
     e.preventDefault()
 
     this.props.onSubmitBarcode(this.state.barcode)
@@ -51,6 +49,10 @@ class BarcodeInputForm extends Component {
     this.setState({
       barcode: ''
     })
+  }
+
+  assignInputRef(ref) {
+    this.inputRef = ref
   }
 
   render() {
@@ -85,21 +87,21 @@ class BarcodeInputForm extends Component {
           >
           <div id='barcodeInputContainer'>
             <input
-              type='number'
               autoFocus
+              type='number'
               min={0}
               placeholder='Enter barcode'
-              onChange={this.onChange}
+              ref={this.assignInputRef}
+              onChange={this.handleChange}
               value={this.state.barcode}
-              ref={ref => this.inputRef = ref}
               />
           </div>
           <Button
-            label='Search'
-            type="submit"
             secondary
             fill
-            onClick={this.onSubmit}
+            label='Search'
+            type='submit'
+            onClick={this.handleSubmit}
             />
         </Box>
       </Form>
@@ -109,13 +111,11 @@ class BarcodeInputForm extends Component {
 
 BarcodeInputForm.propTypes = {
   onSubmitBarcode: PropTypes.func.isRequired,
-  barcodes: PropTypes.array.isRequired,
   shouldFocusField: PropTypes.bool.isRequired
 }
 
 BarcodeInputForm.defaultProps = {
   onSubmitBarcode: Function.prototype,
-  barcodes: [],
   shouldFocusField: PropTypes.bool.isRequired
 }
 

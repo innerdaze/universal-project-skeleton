@@ -16,11 +16,10 @@ class ModeDisplay extends Component {
   componentWillReceiveProps(newProps) {
     if (newProps.mode === this.state.mode) {
       return false
-    } else {
-      this.setState({
-        mode: newProps.mode
-      })
     }
+    this.setState({
+      mode: newProps.mode
+    })
   }
 
   render() {

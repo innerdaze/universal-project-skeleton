@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
-import Header from 'grommet/components/Header'
+import React from 'react'
 import Box from 'grommet/components/Box'
 import Search from 'grommet/components/Search'
-import Title from 'grommet/components/Title'
+import Header from 'grommet/components/Header'
 import MainMenuControlContainer from '../containers/MainMenuControlContainer'
 import SyncButtonContainer from '../containers/SyncButtonContainer'
 import ModeDisplayContainer from '../containers/ModeDisplayContainer'
@@ -13,11 +12,12 @@ const OrdersHeaderLayout = () => (
     <MainMenuControlContainer/>
     <ModeDisplayContainer/>
     <Box
-      flex={true}
-      fill={true}
+      flex
+      fill
       direction='row'
       justify='end'
-      responsive={false}>
+      responsive={false}
+      >
       <SyncButtonContainer/>
       <ProductSearchContainer/>
     </Box>

@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { appShortTitle } from '../config'
 import LoginForm from 'grommet/components/LoginForm'
 import Box from 'grommet/components/Box'
-import Header from 'grommet/components/Header'
-import Headline from 'grommet/components/Headline'
+import { appShortTitle } from '../config'
 
 export default class Login extends Component {
   constructor(props) {
@@ -24,14 +22,16 @@ export default class Login extends Component {
 
   render() {
     return (
-      <Box justify='center'
+      <Box
+        full
+        justify='center'
         align='center'
-        full={true}>
+        >
         <LoginForm
           title={appShortTitle}
           secondaryText='By Orbis'
-          onSubmit={this.handleLogin}
           usernameType='text'
+          onSubmit={this.handleLogin}
           />
       </Box>
     )

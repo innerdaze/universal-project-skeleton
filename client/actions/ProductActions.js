@@ -1,5 +1,4 @@
 import { filter, toLower, map } from 'lodash'
-import fetch from 'isomorphic-fetch'
 import {
   REQUEST_PRODUCTS,
   RECEIVE_PRODUCTS,
@@ -24,8 +23,8 @@ export function receiveProducts(json) {
   }
 }
 
-export function fetchProducts(sessionID) {
-  return function (dispatch, getState) {
+export function fetchProducts() {
+  return dispatch => {
     dispatch(requestProducts())
 
     return dispatch(callApi({
@@ -72,7 +71,7 @@ export function searchProducts(query, lookupFunction) {
 
     const matches = dispatch(lookupFunction(query))
 
-    if (!matches || !matches.length) {
+    if (!matches || matches.length === 0) {
       dispatch(failProductSearch(query))
       return
     }

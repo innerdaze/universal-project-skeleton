@@ -11,11 +11,11 @@ export default class NavigationBar extends Component {
       <Footer primary appCentered>
         <Menu
           inline
-          direction="row"
+          direction='row'
           responsive={false}
           fill
           >
-          <Link to="/orders">Orders</Link>
+          <Link to='/orders'>Orders</Link>
         </Menu>
       </Footer>
     )

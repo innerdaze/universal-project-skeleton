@@ -134,7 +134,7 @@ export function orderEntities(state = {}, action) {
         [action.id]: action.order
       }
     case 'DELETE_ORDER':
-      let newState = { ...state }
+      const newState = { ...state }
 
       delete newState[action.id]
 

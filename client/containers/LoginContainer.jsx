@@ -5,7 +5,7 @@ import { loginCashier } from '../actions/CashierActions'
 const mapDispatchToProps = dispatch => ({
   login: (username, password) => {
     dispatch(loginCashier(username, password))
-  },
+  }
 })
 
 const LoginContainer = connect(

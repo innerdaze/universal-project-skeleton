@@ -27,7 +27,7 @@ export function endScanning() {
 export function foundBarcode(data) {
   return {
     type: FOUND_BARCODE,
-    data: data
+    data
   }
 }
 
@@ -44,7 +44,7 @@ export function scan() {
       decoder: {
         readers: ['ean']
       }
-    }, function (err) {
+    }, err => {
       if (err) {
         console.log(err)
         return

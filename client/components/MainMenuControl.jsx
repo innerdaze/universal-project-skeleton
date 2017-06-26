@@ -16,9 +16,11 @@ class MainMenuControl extends Component {
 
   render() {
     return (
-      <Button plain={true}
+      <Button
+        plain
         icon={<MenuIcon/>}
-        onClick={this.showMenu} />
+        onClick={this.showMenu}
+        />
     )
   }
 }

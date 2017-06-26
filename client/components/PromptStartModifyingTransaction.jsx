@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import Layer from 'grommet/components/Layer'
 import Header from 'grommet/components/Header'
 import Heading from 'grommet/components/Heading'
@@ -9,9 +10,9 @@ import Anchor from 'grommet/components/Anchor'
 import CloseIcon from 'grommet/components/icons/base/Close'
 import NextLinkIcon from 'grommet/components/icons/base/LinkNext'
 
-export default ({
-  onSubmit = Function.prototype,
-  onCancel = Function.prototype
+const PromptStartModifyingTransaction = ({
+  handleSubmit = Function.prototype,
+  handleCancel = Function.prototype
 }) => (
   <Layer>
     <Header>
@@ -32,14 +33,19 @@ export default ({
       <Anchor
         label='Cancel'
         icon={<CloseIcon/>}
-        onClick={onCancel}
+        onClick={handleCancel}
         />
       <Anchor
         primary
         label='Continue'
         icon={<NextLinkIcon/>}
-        onClick={onSubmit}
+        onClick={handleSubmit}
         />
     </Footer>
   </Layer>
 )
+
+PromptStartModifyingTransaction.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  handleCancel: PropTypes.func.isRequired,
+}

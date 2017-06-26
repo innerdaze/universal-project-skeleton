@@ -17,13 +17,17 @@ class MainMenuHideControl extends Component {
 
   render() {
     return (
-      <Menu direction='row'
+      <Menu
+        direction='row'
         responsive={false}
-        inline={true}
-        alignSelf='end'>
-        <Button plain={true}
+        inline
+        alignSelf='end'
+        >
+        <Button
+          plain
           icon={<CloseIcon/>}
-          onClick={this.hideMenu} />
+          onClick={this.hideMenu}
+          />
       </Menu>
     )
   }

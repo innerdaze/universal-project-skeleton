@@ -17,14 +17,13 @@ function _validate(fieldID) {
   }
 }
 
-export function validate({fieldID, value, validation, error}) {
+export function validate({ fieldID, value, validation, error }) {
   return dispatch => {
     if (!(validation(value))) {
       dispatch(_invalidate({ fieldID, error }))
       return false
-    } else {
-      dispatch(_validate(fieldID))
-      return true
     }
+    dispatch(_validate(fieldID))
+    return true
   }
 }

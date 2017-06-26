@@ -10,21 +10,21 @@ import TrashIcon from 'grommet/components/icons/base/Trash'
 const DeleteEntityForm = ({ message, onConfirm, onCancel }) => (
   <Layer>
     <Paragraph
-      align="center"
+      align='center'
       >
       {message}
     </Paragraph>
     <Footer
-      justify="between"
+      justify='between'
       >
       <Anchor
-        label="Cancel"
+        label='Cancel'
         icon={<CloseIcon/>}
         onClick={onCancel}
         />
       <Anchor
         primary
-        label="Confirm"
+        label='Confirm'
         icon={<TrashIcon/>}
         onClick={onConfirm}
         />

@@ -7,9 +7,10 @@ class Splash extends Component {
   render() {
     return (
       <Box
+        full
         justify='center'
         align='center'
-        full={true}>
+        >
         {this.props.icon}
         {this.props.logo}
         {this.props.title}
@@ -20,14 +21,17 @@ class Splash extends Component {
 }
 
 Splash.propTypes = {
-  loadingText: PropTypes.string.isRequired,
+  loadingText: PropTypes.string,
   icon: PropTypes.instanceOf(Component),
   logo: PropTypes.instanceOf(Component),
   title: PropTypes.instanceOf(Component)
 }
 
 Splash.defaultProps = {
-  loadingText: 'Loading...'
+  loadingText: 'Loading...',
+  icon: null,
+  logo: null,
+  tite: null
 }
 
 export default Splash

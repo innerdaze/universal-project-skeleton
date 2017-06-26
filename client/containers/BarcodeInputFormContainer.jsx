@@ -6,18 +6,12 @@ const mapStateToProps = state => {
   return {
     error: state.barcodeLookup.lastError,
     shouldFocusField: (
-        !state.ui.mainMenuVisible
-      &&
-        !state.orders.isChangingOrderQuantity
-      &&
-        !state.orders.pendingModification
-      &&
-        !state.orders.isProcessing
-      &&
-        !state.orders.pendingTransaction
-      &&
-        !state.orders.isDeletingOrder
-      &&
+        !state.ui.mainMenuVisible &&
+        !state.orders.isChangingOrderQuantity &&
+        !state.orders.pendingModification &&
+        !state.orders.isProcessing &&
+        !state.orders.pendingTransaction &&
+        !state.orders.isDeletingOrder &&
         !state.sync.isSyncing
     )
   }

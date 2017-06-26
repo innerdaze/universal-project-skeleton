@@ -9,7 +9,7 @@ import { fetchProducts } from '../../actions/ProductActions'
 import appReducer from '../../reducers/RootReducer'
 
 test('fetch products and populate the store', async t => {
-  let store = createStore(
+  const store = createStore(
     appReducer,
     applyMiddleware(
       thunkMiddleware

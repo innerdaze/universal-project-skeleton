@@ -7,32 +7,35 @@ class ProductSearch extends Component {
   constructor(props) {
     super(props)
 
-    this._onSearch = this._onSearch.bind(this)
-    this._onSelect = this._onSelect.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
   }
 
-  _onSearch({ target }) {
-    target.value.length > 2 && this.props.search(target.value)
+  handleSearch({ target }) {
+    if (target.value.length > 2) {
+      this.props.search(target.value)
+    }
   }
 
-
-  _onSelect({ target, suggestion }, selected) {
+  handleSelect({ target, suggestion }) {
     this.props.onSelect(suggestion.product)
   }
 
   render() {
     return (
-      <Search responsive={true}
+      <Search
+        responsive
         placeHolder='Enter product name'
-        dropAlign={{'left':'left'}}
-        onDOMChange={this._onSearch}
-        onSelect={this._onSelect}
+        dropAlign={{ left: 'left' }}
+        onDOMChange={this.handleSearch}
+        onSelect={this.handleSelect}
         suggestions={map(
           this.props.results, product => ({
-            label: product.ProductName,
-            product
+            product,
+            label: product.ProductName
           })
-        )}/>
+        )}
+        />
     )
   }
 }
