@@ -7,6 +7,8 @@ import WebpackDashboardPlugin from 'webpack-dashboard/plugin'
 import webBuildConfig from './webpack.web'
 import cordovaBuildConfig from './webpack.cordova'
 
+process.env.NODE_ENV = 'development'
+
 const IP = process.env.IP || 'localhost'
 const PORT = process.env.PORT || 4000
 

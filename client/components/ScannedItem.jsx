@@ -32,7 +32,7 @@ class ScannedItem extends Component {
               />
             <Anchor
               icon={<TrashIcon/>}
-              label='Delete Order'
+              label='Delete Item'
               onClick={this.props.onDeleteClick}
               />
           </Menu>

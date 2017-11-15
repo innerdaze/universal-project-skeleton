@@ -15,7 +15,13 @@ export default function apiCall({
     })
   })
   .then(res => res.json())
-  .then(success)
+  .then(res => {
+    if (res.error) {
+      failure(res)
+    } else {
+      success(res)
+    }
+  })
   .catch(failure)
 }
 

@@ -5,7 +5,6 @@ export function cashiers(state = {
   didInvalidate: false,
   lastUpdated: null,
   items: [],
-  idByUsername: {},
   activeCashier: null,
   isAuthenticating: false,
   authError: null
@@ -28,8 +27,12 @@ export function cashiers(state = {
         isFetching: false,
         didInvalidate: false,
         items: map(action.cashiers, 'CashierID'),
-        idByUsername: fromPairs(map(action.cashiers, cashier => [cashier.CashierName, cashier.CashierID])),
         lastUpdated: action.receivedAt
+      }
+    case 'RESET_CASHIERS':
+      return {
+        ...state,
+        items: []
       }
     case 'LOGIN_CASHIER':
       return {
@@ -62,6 +65,8 @@ export function cashierEntities(state = {}, action) {
   switch (action.type) {
     case 'RECEIVE_CASHIERS':
       return keyBy(action.cashiers, 'CashierID')
+    case 'RESET_CASHIERS':
+      return {}
     default:
       return state
   }

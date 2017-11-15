@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { setApiRoot } from '../actions/AppActions'
+import { setApiRoot, setStoreID } from '../actions/AppActions'
 import Initialize from '../components/Initialize'
 
 export default connect(state => ({
@@ -7,5 +7,8 @@ export default connect(state => ({
   isInitialized: state.app.isInitialized,
   apiRootValidationError: state.validation.apiRoot
 }), dispatch => ({
-  onApiRootFormSubmit: config => dispatch(setApiRoot(config))
+  onApiRootFormSubmit: data => {
+    dispatch(setStoreID(data.storeID))
+    dispatch(setApiRoot(data.apiRoot))
+  }
 }))(Initialize)

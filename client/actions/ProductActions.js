@@ -3,6 +3,7 @@ import {
   REQUEST_PRODUCTS,
   RECEIVE_PRODUCTS,
   INVALIDATE_PRODUCTS,
+  RESET_PRODUCTS,
   SEARCH_PRODUCTS,
   FAIL_SEARCH_PRODUCTS,
   SUCCEED_SEARCH_PRODUCTS
@@ -18,7 +19,7 @@ export function requestProducts() {
 export function receiveProducts(json) {
   return {
     type: RECEIVE_PRODUCTS,
-    products: json,
+    products: json.filter(item => !item.Deleted),
     receivedAt: Date.now()
   }
 }
@@ -97,5 +98,11 @@ export function failProductSearch(query) {
   return {
     type: FAIL_SEARCH_PRODUCTS,
     error: `No match for: ${query}`
+  }
+}
+
+export function resetProducts() {
+  return {
+    type: RESET_PRODUCTS
   }
 }

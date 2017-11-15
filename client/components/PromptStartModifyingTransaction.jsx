@@ -11,8 +11,8 @@ import CloseIcon from 'grommet/components/icons/base/Close'
 import NextLinkIcon from 'grommet/components/icons/base/LinkNext'
 
 const PromptStartModifyingTransaction = ({
-  handleSubmit = Function.prototype,
-  handleCancel = Function.prototype
+  onSubmit = Function.prototype,
+  onCancel = Function.prototype
 }) => (
   <Layer>
     <Header>
@@ -33,19 +33,21 @@ const PromptStartModifyingTransaction = ({
       <Anchor
         label='Cancel'
         icon={<CloseIcon/>}
-        onClick={handleCancel}
+        onClick={onCancel}
         />
       <Anchor
         primary
         label='Continue'
         icon={<NextLinkIcon/>}
-        onClick={handleSubmit}
+        onClick={onSubmit}
         />
     </Footer>
   </Layer>
 )
 
 PromptStartModifyingTransaction.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  handleCancel: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired
 }
+
+export default PromptStartModifyingTransaction

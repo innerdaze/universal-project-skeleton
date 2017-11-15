@@ -2,12 +2,13 @@ import {
   REQUEST_CASHIERS,
   RECEIVE_CASHIERS,
   INVALIDATE_CASHIERS,
+  RESET_CASHIERS,
   LOGIN_CASHIER,
   LOGOUT_CASHIER,
   SUCCEED_LOGIN_CASHIER,
   FAIL_LOGIN_CASHIER
 } from '../constants/ActionTypes'
-import { displayError } from '../actions/ErrorActions'
+import { displayError, dismissError } from '../actions/ErrorActions'
 import { callApi } from './NetworkActions'
 
 export function requestCashiers() {
@@ -19,7 +20,7 @@ export function requestCashiers() {
 export function receiveCashiers(json) {
   return {
     type: RECEIVE_CASHIERS,
-    cashiers: json,
+    cashiers: json.filter(item => !item.Deleted),
     receivedAt: Date.now()
   }
 }
@@ -50,14 +51,13 @@ function _loginCashier() {
   }
 }
 
-export function loginCashier(username, password) {
+export function loginCashier(id, password) {
   return (dispatch, getState) => {
     dispatch(_loginCashier())
 
     const error = `Username or password not found`
 
-    const cashierId = getState().cashiers.idByUsername[username]
-    const cashier = getState().cashierEntities[cashierId]
+    const cashier = getState().cashierEntities[id]
 
     if (!cashier) {
       dispatch(failLoginCashier(error))
@@ -71,6 +71,7 @@ export function loginCashier(username, password) {
       return
     }
 
+    dispatch(dismissError())
     dispatch(succeedLoginCashier(cashier))
   }
 }
@@ -92,5 +93,11 @@ export function succeedLoginCashier(cashier) {
   return {
     type: SUCCEED_LOGIN_CASHIER,
     cashier
+  }
+}
+
+export function resetCashiers() {
+  return {
+    type: RESET_CASHIERS
   }
 }

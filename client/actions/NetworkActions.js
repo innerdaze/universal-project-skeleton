@@ -34,29 +34,36 @@ export function callApi({
     }
 
     return (function restart() {
+      const sessionID = getState().session.id
+
+      if (sessionID) {
+        params.SessionID = sessionID
+      }
+
       return fetch(getState().app.apiRoot, {
         method,
         headers,
         body: JSON.stringify({
           method: service,
-          params: {
-            ...params,
-            SessionID: getState().session.id
-          }
+          params
         })
       })
       .then(res => res.json())
-      .then(async data => {
-        if (!skipSessionCheck && !validateSession(data)) {
+      .then(async res => {
+        if (!skipSessionCheck && !validateSession(res)) {
           await dispatch(login('apiuser', 'api.123'))
           return restart()
         }
 
-        if (!validateResCode(data)) {
-          throwError(data, data.result.Result.ResMessage.ResMessage)
+        if (res.error) {
+          throwError(res.error)
         }
 
-        return data
+        if (!validateResCode(res)) {
+          throwError(res, res.result.Result.ResMessage.ResMessage)
+        }
+
+        return res
       })
       .then(success)
       .catch(error => {
@@ -77,7 +84,10 @@ export function validateResCode(data) {
 export function validateSession(data) {
   return !(
     data.result.Result.ResCode === 99 &&
-    data.result.Result.ResMessage === 'Session has expired'
+    ( data.result.Result.ResMessage === 'Session has expired' ||
+      data.result.Result.ResMessage.ResMessage === 'Session has expired' ||
+      data.result.Result.ResMessage === '[DBNETLIB][ConnectionOpen (Connect()).]SQL Server does not exist or access denied.'
+    )
   )
 }
 

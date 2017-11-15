@@ -2,6 +2,7 @@ import {
   REQUEST_BARCODES,
   RECEIVE_BARCODES,
   INVALIDATE_BARCODES,
+  RESET_BARCODES,
   LOOKUP_BARCODE,
   SUCCEED_LOOKUP_BARCODE,
   FAIL_LOOKUP_BARCODE
@@ -18,7 +19,7 @@ export function requestBarcodes() {
 export function receiveBarcodes(json) {
   return {
     type: RECEIVE_BARCODES,
-    barcodes: json,
+    barcodes: json.filter(item => !item.Deleted),
     receivedAt: Date.now()
   }
 }
@@ -80,5 +81,11 @@ export function _findBarcodeByID(barcodeID) {
 export function invalidateBarcodes() {
   return {
     type: INVALIDATE_BARCODES
+  }
+}
+
+export function resetBarcodes() {
+  return {
+    type: RESET_BARCODES
   }
 }

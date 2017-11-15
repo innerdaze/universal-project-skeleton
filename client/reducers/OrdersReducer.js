@@ -23,6 +23,11 @@ export function orders(state = {
           action.id
         ]
       }
+    case 'CANCEL_DELETING_ORDER':
+      return {
+        ...state,
+        isDeletingOrder: false
+      }
     case 'START_DELETING_ORDER':
       return {
         ...state,

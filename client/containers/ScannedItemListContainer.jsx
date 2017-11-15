@@ -4,6 +4,7 @@ import ScannedItemList from '../components/ScannedItemList'
 import {
   deleteOrder,
   startDeletingOrder,
+  cancelDeletingOrder,
   startChangingOrderQuantity
 } from '../actions/OrderActions'
 
@@ -48,6 +49,9 @@ const mapDispatchToProps = dispatch => {
     },
     onDeleteItemConfirm: id => {
       dispatch(deleteOrder(id))
+    },
+    onDeleteItemCancel: () => {
+      dispatch(cancelDeletingOrder())
     },
     onChangeOrderQuantityClick: order => {
       dispatch(startChangingOrderQuantity(order))

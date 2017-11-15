@@ -1,5 +1,6 @@
-NODE_TARGET=device npm run build:cordova:dev
-npm run cordova:link
-cd cordova && cordova build android
+yarn clean:cordova
+NODE_TARGET=device yarn build:cordova:dev
+yarn cordova:link
+cd cordova && cordova build android --device
 adb uninstall uk.co.orbistech.mstock
 adb install platforms/android/build/outputs/apk/android-debug.apk

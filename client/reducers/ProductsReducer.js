@@ -26,6 +26,11 @@ export function products(state = {
         items: map(action.products, 'ProductID'),
         lastUpdated: action.receivedAt
       }
+    case 'RESET_PRODUCTS':
+      return {
+        ...state,
+        items: []
+      }
     default:
       return state
   }
@@ -63,6 +68,8 @@ export function productEntities(state = {}, action) {
   switch (action.type) {
     case 'RECEIVE_PRODUCTS':
       return keyBy(action.products, 'ProductID')
+    case 'RESET_PRODUCTS':
+      return {}
     default:
       return state
   }
@@ -72,6 +79,8 @@ export function productIDsByProductName(state = {}, action) {
   switch (action.type) {
     case 'RECEIVE_PRODUCTS':
       return fromPairs(map(action.products, product => [product.ProductName, product.ProductID]))
+    case 'RESET_PRODUCTS':
+      return {}
     default:
       return state
   }

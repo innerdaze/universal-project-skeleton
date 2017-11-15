@@ -11,12 +11,18 @@ class ModeSwitcher extends Component {
     this.state = {
       mode: Modes.STOCKTAKE
     }
+
+    this.changeMode = this.changeMode.bind(this)
+    this.handleStockTakeSelect = this.handleStockTakeSelect.bind(this)
+    this.handleOrderSelect = this.handleOrderSelect.bind(this)
+    this.handleDeliverySelect = this.handleDeliverySelect.bind(this)
+    this.handleShelfLabelsSelect = this.handleShelfLabelsSelect.bind(this)
+    this.handlePriceCheckSelect = this.handlePriceCheckSelect.bind(this)
+
   }
 
   changeMode(mode) {
-    this.setState({
-      mode
-    })
+    this.setState({ mode })
 
     this.props.onSwitch(mode)
   }
@@ -63,11 +69,6 @@ class ModeSwitcher extends Component {
           label='Shelf Labels'
           className={this.state.mode === Modes.SHELF_LABELS && 'active'}
           onClick={this.handleShelfLabelsSelect}
-          />
-        <Anchor
-          label='Price Check'
-          className={this.state.mode === Modes.PRICE_CHECK && 'active'}
-          onClick={this.handlePriceCheckSelect}
           />
       </Menu>
     )

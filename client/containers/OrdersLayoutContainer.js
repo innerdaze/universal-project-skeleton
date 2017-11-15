@@ -16,7 +16,6 @@ export default connect(
     changingOrderQuantityFor: state.orders.changingOrderQuantityFor
   }),
   dispatch => ({
-    onChangeOrderQuantityCancel: () => dispatch(discardPendingTransaction()),
     onPromptStartModifyingSubmit: transaction => {
       dispatch(confirmStartModifyTransaction())
       dispatch(startChangingOrderQuantity(transaction))

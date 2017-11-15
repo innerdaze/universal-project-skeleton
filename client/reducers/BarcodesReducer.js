@@ -26,6 +26,11 @@ export function barcodes(state = {
         items: map(action.barcodes, 'Barcode'),
         lastUpdated: action.receivedAt
       }
+    case 'RESET_BARCODES':
+      return {
+        ...state,
+        items: []
+      }
     default:
       return state
   }
@@ -44,6 +49,8 @@ export function barcodeIDsByProductID(state = {}, action) {
   switch (action.type) {
     case 'RECEIVE_BARCODES':
       return fromPairs(map(action.barcodes, barcode => [barcode.ProductID, barcode.Barcode]))
+    case 'RESET_BARCODES':
+      return {}
     default:
       return state
   }

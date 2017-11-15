@@ -14,11 +14,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSubmit: (id, quantity) => {
+    handleSubmit: (id, quantity) => {
       dispatch(changeOrderQuantity(id, quantity))
       dispatch(finishChangingOrderQuantity())
     },
-    onCancel: () => {
+    handleCancel: () => {
       dispatch(cancelChangingOrderQuantity())
       dispatch(finishChangingOrderQuantity())
     }

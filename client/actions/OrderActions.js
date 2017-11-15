@@ -4,6 +4,7 @@ import {
   ADD_ORDER,
   DELETE_ORDER,
   START_DELETING_ORDER,
+  CANCEL_DELETING_ORDER,
   CHANGE_ORDER_QUANTITY,
   REQUEST_PROCESS_ORDERS,
   RECEIVE_PROCESS_ORDERS,
@@ -29,6 +30,12 @@ export function addOrder(id, order) {
 
 export function deleteOrder(id) {
   return { type: DELETE_ORDER, id }
+}
+
+export function cancelDeletingOrder() {
+  return {
+    type: CANCEL_DELETING_ORDER
+  }
 }
 
 export function startDeletingOrder() {
@@ -222,7 +229,7 @@ function _createTransaction({ getState, barcode, product, quantity = 1, mode }) 
   return {
     _id: uuidGen(),
     __type: 'HandheldTrans',
-    AreaID: '',
+    AreaID: getState().app.storeID,
     Barcode: barcode && barcode.Barcode,
     Qty: quantity,
     Ref1: '',

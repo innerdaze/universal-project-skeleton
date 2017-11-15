@@ -7,6 +7,7 @@ import Heading from 'grommet/components/Heading'
 import Paragraph from 'grommet/components/Paragraph'
 import FormField from 'grommet/components/FormField'
 import TextInput from 'grommet/components/TextInput'
+import NumberInput from 'grommet/components/NumberInput'
 import Footer from 'grommet/components/Footer'
 import Button from 'grommet/components/Button'
 
@@ -18,8 +19,13 @@ class Initialize extends Component {
       apiRoot: ''
     }
 
-    this._onApiRootFieldChange = this._onApiRootFieldChange.bind(this)
-    this._onFormSubmit = this._onFormSubmit.bind(this)
+    this.handleApiRootFieldChange = this.handleApiRootFieldChange.bind(this)
+    this.handleStoreIDFieldChange = this.handleStoreIDFieldChange.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
+  }
+
+  handleStoreIDFieldChange(e) {
+    this.setState({ storeID: e.target.value })
   }
 
   handleApiRootFieldChange(e) {
@@ -28,7 +34,10 @@ class Initialize extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault()
-    this.props.onApiRootFormSubmit(this.state.apiRoot)
+    this.props.onApiRootFormSubmit({
+      apiRoot: this.state.apiRoot,
+      storeID: this.state.storeID
+    })
   }
 
   render() {
@@ -46,13 +55,23 @@ class Initialize extends Component {
             </Heading>
           </Header>
           <Paragraph size='large'>
-            I see it\'s your first time here.
+            I see it's your first time here.
           </Paragraph>
           <Paragraph>
             Enter the API root URL provided by Orbis to get started.
           </Paragraph>
           <FormField error={this.props.apiRootValidationError}>
             <TextInput name='apiRoot' value={this.state.apiRoot} onDOMChange={this.handleApiRootFieldChange}/>
+          </FormField>
+          <Paragraph>
+            Set the ID of your store.
+          </Paragraph>
+          <FormField>
+            <TextInput
+              name='storeID'
+              value={this.state.storeID}
+              onDOMChange={this.handleStoreIDFieldChange}
+            />
           </FormField>
           <Footer pad={{ vertical: 'medium' }}>
             <Button label='Continue' type='submit' onClick={this.handleFormSubmit}/>

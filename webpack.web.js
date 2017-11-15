@@ -6,7 +6,9 @@ module.exports = {
   devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'cheap-module-eval-source-map',
   entry: [
     'babel-polyfill',
+    'react-hot-loader/patch',
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+    'webpack/hot/only-dev-server',
     path.join(__dirname, 'client', 'index.jsx')
   ],
   output: {
@@ -31,21 +33,21 @@ module.exports = {
       template: path.join(__dirname, 'client', 'templates', 'index.ejs'),
       filename: 'index.html'
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: process.env.NODE_ENV === 'production'
-    })
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: process.env.NODE_ENV === 'production'
+    // })
   ],
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         include: /client/,
-        use: {
+        use: ['react-hot-loader/webpack', {
           loader: 'babel-loader',
           query: {
             presets: ['es2015', 'react']
           }
-        }
+        }]
       },
       {
         test: /\.css$/,
@@ -81,6 +83,7 @@ module.exports = {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
         include: /client\/assets\/fonts/,
         loader: 'file-loader?name=client/assets/fonts/[name].[ext]'
-      }    ]
+      }
+    ]
   }
 }

@@ -21,7 +21,7 @@ class ScannedItemList extends Component {
   }
 
   handleChangeOrderQuantityClick(order) {
-    this.props.handleChangeOrderQuantityClick(order)
+    this.props.onChangeOrderQuantityClick(order)
   }
 
   handleDeleteItemClick(item) {
@@ -41,6 +41,8 @@ class ScannedItemList extends Component {
   }
 
   handleDeleteItemCancel() {
+    this.props.onDeleteItemCancel()
+
     this.setState({
       selectedOrder: null
     })
@@ -52,7 +54,7 @@ class ScannedItemList extends Component {
         {
           this.props.isDeletingOrder &&
           <DeleteEntityForm
-            message='Confirm you would like to delete this order'
+            message='Confirm you would like to delete this item'
             onConfirm={this.handleDeleteItemConfirm}
             onCancel={this.handleDeleteItemCancel}
             />
@@ -87,19 +89,11 @@ class ScannedItemList extends Component {
 ScannedItemList.propTypes = {
   onDeleteItemClick: PropTypes.func.isRequired,
   onDeleteItemConfirm: PropTypes.func.isRequired,
-  handleChangeOrderQuantityClick: PropTypes.func.isRequired,
+  onDeleteItemCancel: PropTypes.func.isRequired,
+  onChangeOrderQuantityClick: PropTypes.func.isRequired,
   isDeletingOrder: PropTypes.bool.isRequired,
   isProcessing: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired
-}
-
-ScannedItemList.defaultProps = {
-  onDeleteItemClick: Function.prototype,
-  onDeleteItemConfirm: Function.prototype,
-  handleChangeOrderQuantityClick: Function.prototype,
-  isDeletingOrder: false,
-  isProcessing: false,
-  items: []
 }
 
 export default ScannedItemList

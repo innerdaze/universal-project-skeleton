@@ -1,8 +1,10 @@
 import { some, isUndefined, isNull } from 'lodash'
 import { isWebUri } from 'valid-url'
 import {
+  APP_RESET,
   APP_INITIALIZE,
   APP_SET_API_ROOT,
+  APP_SET_STORE_ID,
   API_ROOT_VALID,
   API_ROOT_INVALID
 } from '../constants/ActionTypes'
@@ -11,6 +13,9 @@ import { login } from '../actions/SessionActions'
 import { validate } from '../actions/ValidationActions'
 import { callApi } from '../actions/NetworkActions'
 import { displayError } from '../actions/ErrorActions'
+import { resetCashiers, logoutCashier } from '../actions/CashierActions'
+import { resetBarcodes } from '../actions/BarcodeActions'
+import { resetProducts } from '../actions/ProductActions'
 
 const requiredConfigs = [
   'apiRoot'
@@ -26,6 +31,13 @@ export function _setApiRoot(apiRoot) {
   return {
     type: APP_SET_API_ROOT,
     apiRoot
+  }
+}
+
+export function setStoreID(storeID) {
+  return {
+    type: APP_SET_STORE_ID,
+    storeID
   }
 }
 
@@ -83,12 +95,27 @@ export function setApiRoot(apiRoot) {
       if (getState().app.apiRootValid) {
         if (checkInitialised(getState())) {
           await dispatch(login('apiuser', 'api.123'))
-          await dispatch(sync())
-          return dispatch(initialize())
+
+          if (getState().session.alive) {
+            await dispatch(sync())
+            return dispatch(initialize())
+          } else {
+            dispatch(_setApiRoot(null))
+          }
         }
       } else {
         dispatch(_setApiRoot(null))
       }
     }
+  }
+}
+
+export function reset() {
+  return async dispatch => {
+    dispatch(resetCashiers())
+    dispatch(resetProducts())
+    dispatch(resetBarcodes())
+    await dispatch(logoutCashier())
+    dispatch({type: APP_RESET})
   }
 }

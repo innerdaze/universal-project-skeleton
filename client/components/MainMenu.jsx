@@ -6,6 +6,8 @@ import Title from 'grommet/components/Title'
 import MainMenuHideControlContainer from '../containers/MainMenuHideControlContainer'
 import ModeSwitcherContainer from '../containers/ModeSwitcherContainer'
 import LogoutControlContainer from '../containers/LogoutControlContainer'
+import ReinitializeControlContainer from '../containers/ReinitializeControlContainer'
+import StoreIDLabelContainer from '../containers/StoreIDLabelContainer'
 
 const MainMenu = () => (
   <Sidebar
@@ -13,7 +15,10 @@ const MainMenu = () => (
     colorIndex='brand'
     >
     <Header
-      pad='medium'
+      pad={{
+        horizontal: 'large',
+        vertical: 'medium'
+      }}
       justify='between'
       >
       <Title>
@@ -21,11 +26,19 @@ const MainMenu = () => (
       </Title>
       <MainMenuHideControlContainer/>
     </Header>
+    <Box pad={{
+      horizontal: 'large'
+    }}>
+      <StoreIDLabelContainer/>
+    </Box>
     <Box
       flex='grow'
       justify='start'
       >
       <ModeSwitcherContainer/>
+    </Box>
+    <Box>
+      <ReinitializeControlContainer/>
     </Box>
     <Box>
       <LogoutControlContainer/>
