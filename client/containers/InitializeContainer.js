@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 import { setApiRoot, setStoreID } from '../actions/AppActions'
 import Initialize from '../components/Initialize'
-
+import InitializeSelector from '../selectors/InitializeSelector'
 export default connect(state => ({
-  isLoggedIn: state.session.alive,
-  isInitialized: state.app.isInitialized,
-  apiRootValidationError: state.validation.apiRoot
+  isLoggedIn: InitializeSelector.isLoggedIn,
+  isInitialized: InitializeSelector.isInitialized,
+  apiRootValidationError: InitializeSelector.apiRootValidationError
 }), dispatch => ({
   onApiRootFormSubmit: data => {
     dispatch(setStoreID(data.storeID))
