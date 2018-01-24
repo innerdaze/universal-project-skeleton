@@ -8,8 +8,9 @@ import { connectRouter, routerMiddleware } from 'connected-react-router'
 import cordovaSQLiteDriver from 'localforage-cordovasqlitedriver'
 import rootReducer from './reducers/RootReducer'
 import history from './history'
-
-export default async function configureStore() {
+import * as reducers from './ducks'
+import { persistStore, persistCombineReducers } from 'redux-persist'
+export default async function configureStore(initialState) {
   const loggerMiddleware = createLogger()
 
   let storeEnhancers
@@ -32,18 +33,37 @@ export default async function configureStore() {
       autoRehydrate()
     )
   }
+  const reducer = persistCombineReducers({
+    key: 'root',
+    storage: localForage
+  }, reducers)
 
   const store = createStore(
-    connectRouter(history)(rootReducer),
+    connectRouter(history)(reducer),
+    initialState,
     storeEnhancers
   )
+  const persistor = persistStore(store)
 
+  // const store = createStore(
+  //   connectRouter(history)(rootReducer),
+  //   storeEnhancers
+  // )
+
+  // if (module.hot) {
+  //   module.hot.accept('./reducers', () => {
+  //     store.replaceReducer(connectRouter(history)(rootReducer))
+  //   })
+  // }
   if (module.hot) {
-    module.hot.accept('./reducers', () => {
-      store.replaceReducer(connectRouter(history)(rootReducer))
+    module.hot.accept('./ducks/index', () => {
+      store.replaceReducer(connectRouter(history)(reducer))
+    })
+
+    module.hot.accept('./helpers/ducks', () => {
+      renderWithHotReload(require('./components/AppProvider').default, persistor, store)
     })
   }
-
   await localForage.defineDriver(cordovaSQLiteDriver)
 
   localForage.setDriver([
@@ -51,5 +71,5 @@ export default async function configureStore() {
     cordovaSQLiteDriver._driver
   ])
 
-  return store
+  return { persistor, store }
 }

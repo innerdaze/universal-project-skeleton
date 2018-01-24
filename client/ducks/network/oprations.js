@@ -1,23 +1,7 @@
-import {
-  NET_FAIL_OFFLINE,
-  NET_FAIL_NO_SESSION
-} from '../constants/ActionTypes'
-import { failIfMissing } from '../helpers/Function'
-import { login } from './SessionActions'
-import { displayError } from './ErrorActions'
-
-export function networkFailOffline() {
-  return {
-    type: NET_FAIL_OFFLINE
-  }
-}
-
-export function networkFailNoSession() {
-  return {
-    type: NET_FAIL_NO_SESSION
-  }
-}
-
+import actions from './actions'
+import { failIfMissing } from '../../helpers/Function'
+import { login } from '../../actions/SessionActions'
+import { errorOperations } from '../error'
 export function callApi({
   service = failIfMissing('service'),
   headers = {},
@@ -29,7 +13,7 @@ export function callApi({
 }) {debugger
   return function (dispatch, getState) {
     if (!isOnline()) {
-      dispatch(networkFailOffline())
+      dispatch(actions.netFailOfline())
       return
     }
 
@@ -67,7 +51,7 @@ export function callApi({
       })
       .then(success)
       .catch(error => {
-        dispatch(displayError(error.message))
+        dispatch(errorOperations.displayError(error.message))
         failure(error)
       })
     })()
@@ -113,4 +97,8 @@ export function checkStatusAndParseJSON(response) {
 
 export function isOnline() {
   return window.cordova && window.navigator ? navigator.connection.type !== navigator.connection.NONE : true
+}
+
+export default {
+  netFailNoSession,NetFailNoSession,callApi,validateResCode,validateSession,throwError,checkStatusAndParseJSON,isOnline
 }

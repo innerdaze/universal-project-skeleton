@@ -6,8 +6,8 @@ import {
 } from '../constants/ActionTypes'
 import { fetchBarcodes } from './BarcodeActions'
 import { fetchProducts } from './ProductActions'
-import { fetchCashiers } from './CashierActions'
-
+//import { fetchCashiers } from './CashierActions'
+import {cashierOperations} from '../ducks/cashier'
 export function startSync() {
   return {
     type: START_SYNC
@@ -36,7 +36,7 @@ export function sync() {
     await ProgressPromise.all([
       dispatch(fetchBarcodes(sessionID)),
       dispatch(fetchProducts(sessionID)),
-      dispatch(fetchCashiers(sessionID))
+      dispatch(cashierOperations.fetchCashiers(sessionID))
     ]).progress(results => dispatch(syncProgress(results.proportion)))
 
     dispatch(endSync())

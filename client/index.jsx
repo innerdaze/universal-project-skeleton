@@ -34,8 +34,8 @@ async function startApp() {
   } catch (e) {
     StackTrace.fromError(e)
       .then(stack => {
-        window.fabric.Crashlytics.sendNonFatalCrash(e.message, stack)
-        window.fabric.Crashlytics.sendCrash()
+       // window.fabric.Crashlytics.sendNonFatalCrash(e.message, stack)
+       // window.fabric.Crashlytics.sendCrash()
       })
   }
 }
