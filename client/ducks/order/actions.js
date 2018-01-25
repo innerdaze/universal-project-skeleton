@@ -20,7 +20,7 @@ import {
   CANCEL_START_MODIFY_TRANSACTION,
   CANCEL_CHANGING_ORDER_QUANTITY,
   CHANGE_PENDING_TRANSACTION_QUANTITY
-} from '../constants/ActionTypes'
+} from '../../constants/ActionTypes'
 const identityActions = createIdentityActionMap(
   CANCEL_DELETING_ORDER,
   START_DELETING_ORDER,

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import ProductSearch from '../components/ProductSearch'
-import { productOperations,productSelectors } from '../ducks/productNotCompleted'
+import { productOperations,productSelectors } from '../ducks/product'
 import {  orderOperations } from '../ducks/order'
 
 export default connect(state => ({

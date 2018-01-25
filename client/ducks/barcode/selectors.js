@@ -6,7 +6,7 @@ import { createSelector } from 'reselect'
  const apiRootValid = state => state.app.apiRootValid
 
 export default {
-    isInitialized,
+    lastError,
     isRaiding,
     isSleeping,
     apiRootValid

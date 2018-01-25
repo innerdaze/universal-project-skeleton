@@ -8,7 +8,7 @@ import {
   LOOKUP_BARCODE,
   SUCCEED_LOOKUP_BARCODE,
   FAIL_LOOKUP_BARCODE
-} from '../constants/ActionTypes'
+} from '../../constants/ActionTypes'
 
 const identityActions = createIdentityActionMap(
   REQUEST_BARCODES,

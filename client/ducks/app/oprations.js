@@ -29,7 +29,7 @@ const testAPIRoot=()=> {debugger
   }
   const  appReset=()=>{
     return async dispatch => {
-        return dispatch(APP_RESET)
+        return dispatch(appReset())
       }  
   }
 
@@ -57,7 +57,7 @@ const testAPIRoot=()=> {debugger
   
             if (getState().session.alive) {
               await dispatch(syncOperations.sync())
-              return dispatch(initialize())
+              return dispatch(actions.appInitialize())
             } else {
               dispatch(actions.appSetApiRoot(null))
             }
