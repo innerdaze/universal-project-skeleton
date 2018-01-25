@@ -3,7 +3,7 @@ import { networkOperations } from '../network'
 import { errorOperations } from '../error'
   debugger
 
-  export function fetchBarcodes() {
+  const fetchBarcodes=() =>{
     return dispatch => {
       dispatch(requestBarcodes())
   
@@ -17,7 +17,7 @@ import { errorOperations } from '../error'
     }
   }
   
-  export function _findBarcodeByID(barcodeID) {
+  const _findBarcodeByID=(barcodeID)=> {
     return function (dispatch, getState) {
       dispatch(actions.lookupBarcode(barcodeID))
   

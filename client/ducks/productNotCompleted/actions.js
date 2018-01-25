@@ -1,6 +1,7 @@
 import { createActions } from 'redux-actions';
 import { v4 as uuidGen } from 'uuid'
 import { find, filter, includes, map } from 'lodash'
+import { createIdentityActionMap } from '../../helpers/ducks'
 import {
   REQUEST_PRODUCTS,
   RECEIVE_PRODUCTS,
@@ -10,8 +11,6 @@ import {
   FAIL_SEARCH_PRODUCTS,
   SUCCEED_SEARCH_PRODUCTS
 } from '../../constants/ActionTypes'
-
-
 const identityActions = createIdentityActionMap(
   REQUEST_PRODUCTS,
   INVALIDATE_PRODUCTS,

@@ -1,26 +1,22 @@
 import { connect } from 'react-redux'
-import {
-  changeOrderQuantity,
-  finishChangingOrderQuantity,
-  cancelChangingOrderQuantity
-} from '../actions/OrderActions'
+import { orderOperations, orderSelectors } from '../ducks/order'
 import ChangeOrderQuantityForm from '../components/ChangeOrderQuantityForm'
 
 const mapStateToProps = state => {
   return {
-    order: state.orders.changingOrderQuantityFor
+    order: orderSelectors.changingOrderQuantityFor
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     handleSubmit: (id, quantity) => {
-      dispatch(changeOrderQuantity(id, quantity))
-      dispatch(finishChangingOrderQuantity())
+      dispatch(orderOperations.changeOrderQuantity(id, quantity))
+      dispatch(orderOperations.finishChangingOrderQuantity())
     },
     handleCancel: () => {
-      dispatch(cancelChangingOrderQuantity())
-      dispatch(finishChangingOrderQuantity())
+      dispatch(orderOperations.cancelChangingOrderQuantity())
+      dispatch(orderOperations.finishChangingOrderQuantity())
     }
   }
 }

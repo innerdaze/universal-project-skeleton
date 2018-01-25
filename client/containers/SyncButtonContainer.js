@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
-import { sync } from '../actions/SyncActions'
+import { syncOperations } from '../ducks/sync'
 import SyncButton from '../components/SyncButton'
 
 const mapDispatchToProps = dispatch => {
   return {
     sync: () => {
-      dispatch(sync())
+      dispatch(syncOperations.sync())
     }
   }
 }

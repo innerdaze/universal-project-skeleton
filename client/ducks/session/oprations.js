@@ -3,7 +3,7 @@ import { errorOperations } from '../error'
 import { networkOperations } from '../network'
   debugger
 
-  export function login(userID, password) {
+  const login=(userID, password)=> {
     return dispatch => {
       dispatch(actions.requestLogin())
   
@@ -28,7 +28,7 @@ import { networkOperations } from '../network'
     }
   }
   
-  export function logout() {
+  const logout=()=> {
     return (dispatch, getState) => {
       dispatch(actions.requestLogout())
   

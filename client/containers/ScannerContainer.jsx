@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 import Scanner from '../components/Scanner'
-import { scan } from '../actions/ScannerActions'
+import { scannerOperations } from '../ducks/scanner'
 
 const mapDispatchToProps = dispatch => {
   return {
     scan: () => {
-      dispatch(scan())
+      dispatch(scannerOperations.scan())
     }
   }
 }

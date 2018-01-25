@@ -2,7 +2,7 @@ import actions from './actions'
 import { networkOperations } from '../network'
 import { errorOperations } from '../error'
   debugger
-export function fetchCashiers() {
+const fetchCashiers=() =>{
   return dispatch => {
     dispatch(requestCashiers())
 
@@ -16,7 +16,7 @@ export function fetchCashiers() {
   }
 }
 //login varify
-  export function loginCashier(id, password) {
+  const loginCashier=(id, password)=> {
     return (dispatch, getState) => {
       dispatch(actions.loginCashier())
   
@@ -41,7 +41,7 @@ export function fetchCashiers() {
     }
   }
   //logout user
-  export function logoutCashier() {
+  const logoutCashier=() =>{
    dispatch(actions.logoutCashier());
   }
   export default {

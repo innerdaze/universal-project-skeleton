@@ -1,4 +1,5 @@
 import { createActions } from 'redux-actions';
+import { createIdentityActionMap } from '../../helpers/ducks'
 import {
   REQUEST_LOGIN,
   RECEIVE_LOGIN,

@@ -1,4 +1,5 @@
 import { createActions } from 'redux-actions';
+import { createIdentityActionMap } from '../../helpers/ducks'
 import {
   ADD_ORDER,
   DELETE_ORDER,
@@ -20,8 +21,6 @@ import {
   CANCEL_CHANGING_ORDER_QUANTITY,
   CHANGE_PENDING_TRANSACTION_QUANTITY
 } from '../constants/ActionTypes'
-
-
 const identityActions = createIdentityActionMap(
   CANCEL_DELETING_ORDER,
   START_DELETING_ORDER,

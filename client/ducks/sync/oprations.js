@@ -5,7 +5,7 @@ import { productOperations } from '../product'
 import {cashierOperations} from '../cashier'
   debugger
 
-  export function sync() {
+  const sync=()=> {
     return async (dispatch, getState) => {
       dispatch(actions.startSync())
   

@@ -1,7 +1,8 @@
 
 import { createActions } from 'redux-actions';
 import {
-  INVALIDATE, VALIDATE
+  INVALIDATE, 
+  VALIDATE
 } from '../../constants/ActionTypes'
 export default createActions({
   UI: {

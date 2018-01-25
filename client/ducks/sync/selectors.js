@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect'
 
-// const isInitialized = state => state.app.isInitialized
+ const isSyncing = state => state.sync.isSyncing
 
 export default {
+  isSyncing
   }

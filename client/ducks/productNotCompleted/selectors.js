@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
- //const isInitialized = state => state.app.isInitialized
+ const lastMatches = state => state.product.lastMatches
 export default {
-
+  lastMatches
   }

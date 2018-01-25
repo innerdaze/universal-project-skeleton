@@ -1,17 +1,17 @@
 import { connect } from 'react-redux'
-import { processOrders } from '../actions/OrderActions'
+import { orderOperations, orderSelectors} from '../ducks/order'
 import ProcessItemsButton from '../components/ProcessItemsButton'
 
 const mapStateToProps = state => {
   return {
-    mode: state.orders.mode
+    mode: orderSelectors.mode
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     onProcessItemsClick: () => {
-      dispatch(processOrders())
+      dispatch(orderOperations.processOrders())
     }
   }
 }

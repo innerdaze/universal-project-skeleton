@@ -1,4 +1,5 @@
 import { createActions } from 'redux-actions';
+import { createIdentityActionMap } from '../../helpers/ducks'
 import {
   START_SYNC,
   END_SYNC,

@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect'
 
-// const isInitialized = state => state.app.isInitialized
+ const mainMenuVisible = state => state.ui.mainMenuVisible
 
 export default {
+  mainMenuVisible
   }

@@ -3,7 +3,7 @@ import { networkOperations } from '../network'
 import { v4 as uuidGen } from 'uuid'
 import { find, filter, includes, map } from 'lodash'
   debugger
-  export function fetchProducts() {
+  const fetchProducts=()=> {
     return dispatch => {
       dispatch(actions.requestProducts())
   
@@ -17,7 +17,7 @@ import { find, filter, includes, map } from 'lodash'
     }
   }
 
-  export function findProductByProductName(productName) {
+  const findProductByProductName=(productName) =>{
     return (dispatch, getState) => {
       const productID = getState().productIDsByProductName[productName]
       return productID && getState().productEntities[productID]
@@ -29,7 +29,7 @@ import { find, filter, includes, map } from 'lodash'
  *  search functions return "starts with" results (Array)
  *  find functions return "exact match" result (Object)
  */
-export function searchProductByProductName(productNameStub) {
+const searchProductByProductName=(productNameStub)=> {
   return (dispatch, getState) => {
     const productEntities = getState().productEntities
 
@@ -38,7 +38,7 @@ export function searchProductByProductName(productNameStub) {
     )), id => productEntities[id])
   }
 }
-export function searchProducts(query, lookupFunction) {
+const searchProducts=(query, lookupFunction)=> {
   return dispatch => {
     dispatch(actions.startProductSearch())
 

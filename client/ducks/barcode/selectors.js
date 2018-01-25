@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
- const isInitialized = state => state.app.isInitialized
+ const lastError = state => state.barcode.lastError
  const isRaiding = state => state.app.apiRoot
  const isSleeping = state => state.app.storeID
  const apiRootValid = state => state.app.apiRootValid

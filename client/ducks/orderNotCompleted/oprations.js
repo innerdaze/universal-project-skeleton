@@ -5,27 +5,27 @@ import { v4 as uuidGen } from 'uuid'
 import { find, filter, includes, map } from 'lodash'
   debugger
  
-  export function addOrder(id, order) {
+  const addOrder=(id, order) =>{
     return  dispatch(actions.addOrder(id, order))
   }
   
-  export function deleteOrder(id) {
+  const deleteOrder=(id)=> {
     return dispatch(actions.deleteOrder(id))
   }
   
-  export function cancelDeletingOrder() {
+  const cancelDeletingOrder=()=> {
     return dispatch(actions.cancelDeletingOrder())
   }
   
-  export function startDeletingOrder() {
+  const startDeletingOrder=()=> {
     return dispatch(actions.startDeletingOrder())
   }
   
-  export function startChangingOrderQuantity(order) {
+  const startChangingOrderQuantity=(order)=> {
     return dispatch(actions.startDeletingOrder(order))
   }
   
-  export function finishChangingOrderQuantity() {
+  const finishChangingOrderQuantity=()=> {
     return (dispatch, getState) => {
       dispatch(actions.finishChangingOrderQuantity())
   
@@ -35,7 +35,7 @@ import { find, filter, includes, map } from 'lodash'
     }
   }
   
-  export function cancelChangingOrderQuantity() {
+  const cancelChangingOrderQuantity=()=> {
     return (dispatch, getState) => {
       dispatch(actions.cancelChangingOrderQuantity())
       if (getState().orders.pendingTransaction) {
@@ -44,7 +44,7 @@ import { find, filter, includes, map } from 'lodash'
     }
   }
   
-  export function changeOrderQuantity(id, quantity) {
+  const changeOrderQuantity=(id, quantity) =>{
     return (dispatch, getState) => {
       if (getState().orders.pendingTransaction) {
         dispatch(actions.changePendingTransactionQuantity(quantity))
@@ -54,23 +54,23 @@ import { find, filter, includes, map } from 'lodash'
     }
   }
   
-  export function requestProcessOrders() {
+  const requestProcessOrders=() =>{
     return dispatch(actions.requestProcessOrders())
   }
   
-  export function receiveProcessOrders() {
+  const receiveProcessOrders=()=> {
     return dispatch(actions.receiveProcessOrders())
   }
   
-  export function succeedProcessOrders(orderIDs) {
+  const succeedProcessOrders=(orderIDs) =>{
     return dispatch(actions.succeedProcessOrders(orderIDs))
   }
   
-  export function failProcessOrders(error) {
+  const failProcessOrders=(error)=> {
     return dispatch(actions.failProcessOrders(error))
   }
   
-  export function processOrders() {
+  const processOrders=()=> {
     return function (dispatch, getState) {
       requestProcessOrders();
   
@@ -101,19 +101,19 @@ import { find, filter, includes, map } from 'lodash'
     }
   }
   
-  export function changeOperationMode(mode) {debugger
+  const changeOperationMode=(mode)=> {debugger
     return dispatch(actions.changeOperationMode(mode))
   }
   
-  export function createPendingTransaction(transaction) {
+  const createPendingTransaction=(transaction) => {
     return dispatch(actions.createPendingTransaction(transaction))
   }
   
-  export function discardPendingTransaction() {
+  const discardPendingTransaction=()=> {
     return dispatch(actions.discardPendingTransaction())
   }
   
-  export function completePendingTransaction() {
+  const completePendingTransaction=() =>{
     return (getState) => {
       const transaction = getState().orders.pendingTransaction
   
@@ -122,7 +122,7 @@ import { find, filter, includes, map } from 'lodash'
     }
   }
   
-  export function createPendingTransactionByProduct(product) {
+  const createPendingTransactionByProduct=(product)=> {
     return (getState) => {
       const transaction = findTransactionByProduct(getState, product, getState().orders.mode)
   
@@ -142,7 +142,7 @@ import { find, filter, includes, map } from 'lodash'
     }
   }
   
-  export function createPendingTransactionByBarcodeID(barcodeID) {
+  const createPendingTransactionByBarcodeID=(barcodeID)=> {
     return (dispatch, getState) => {
       const barcode = dispatch(barcodeOperations._findBarcodeByID(barcodeID))
   
@@ -164,7 +164,7 @@ import { find, filter, includes, map } from 'lodash'
     }
   }
   
-  function _createTransaction({ getState, barcode, product, quantity = 1, mode }) {
+  const _createTransaction=({ getState, barcode, product, quantity = 1, mode })=> {
     const productID = barcode ? barcode.ProductID : product.ProductID
   
     if (!product) {
@@ -188,7 +188,7 @@ import { find, filter, includes, map } from 'lodash'
     }
   }
   
-  function findTransactionByBarcode(getState, barcode, mode) {
+  const findTransactionByBarcode=(getState, barcode, mode)=> {
     return find(
       filter(getState().orderEntities, (item, key) => {
         return includes(getState().orders.unprocessedItems, key)
@@ -200,7 +200,7 @@ import { find, filter, includes, map } from 'lodash'
     )
   }
   
-  function findTransactionByProduct(getState, product, mode) {
+  const findTransactionByProduct=(getState, product, mode) =>{
     return find(
       filter(getState().orderEntities, (item, key) => {
         return includes(getState().orders.unprocessedItems, key)
@@ -212,15 +212,15 @@ import { find, filter, includes, map } from 'lodash'
     )
   }
   
-  export function promptStartModifyTransaction(transaction) {
+  const promptStartModifyTransaction=(transaction) =>{
     return dispatch(actions.promptStartModifyTransaction(transaction))
   }
   
-  export function confirmStartModifyTransaction() {
+  const confirmStartModifyTransaction=() =>{
     return dispatch(actions.confirmStartModifyTransaction())
   }
   
-  export function cancelStartModifyTransaction() {
+  const cancelStartModifyTransaction=()=> {
     return dispatch(actions.cancelStartModifyTransaction())
   }
   
@@ -235,5 +235,9 @@ import { find, filter, includes, map } from 'lodash'
     startDeletingOrder,
     cancelDeletingOrder,
     deleteOrder,
-    addOrder
+    addOrder,
+    changeOperationMode,
+    findTransactionByProduct,
+    discardPendingTransaction,
+    processOrders
   }

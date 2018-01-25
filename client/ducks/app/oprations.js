@@ -1,27 +1,27 @@
 import actions from './actions'
 import { some, isUndefined, isNull } from 'lodash'
 import { isWebUri } from 'valid-url'
-import { sync } from '../../actions/SyncActions'
-import { login } from '../../actions/SessionActions'
-import { validate } from '../../actions/ValidationActions'
-import { callApi } from '../../actions/NetworkActions'
-import { displayError } from '../../actions/ErrorActions'
-import { resetCashiers, logoutCashier } from '../../actions/CashierActions'
-import { resetBarcodes } from '../../actions/BarcodeActions'
-import { resetProducts } from '../../actions/ProductActions'
+import { syncOperations } from '../sync'
+import { sessionOperations } from '../session'
+import { validateOperations } from '../validation'
+import { networkOperations } from '../network'
+import { errorOperations } from '../error'
+import { cashierOperations} from '../cashier'
+import { barcodeOperations } from '../barcode'
+import { productOperations } from '../product'
 const requiredConfigs = [
     'apiRoot'
   ]
   debugger
 const testAPIRoot=()=> {debugger
     return async dispatch => {
-      return dispatch(callApi({
+      return dispatch(networkOperations.callApi({
         service: 'GeneralService.GetTimeStamp',
         skipSessionCheck: true,
         method: 'post',
         success: () => dispatch(actions.setAPIRootValid()),
         error: error => {
-          dispatch(displayError(error.message))
+          dispatch(errorOperations.displayError(error.message))
           dispatch(actions.setAPIRootInvalid())
         }
       }))
@@ -43,7 +43,7 @@ const testAPIRoot=()=> {debugger
   
       dispatch(actions.appSetApiRoot(apiRoot))
   
-      if (dispatch(validate({
+      if (dispatch(validateOperations.validate({
         fieldID,
         value: apiRoot,
         validation: async url => isWebUri(url),
@@ -53,10 +53,10 @@ const testAPIRoot=()=> {debugger
   
         if (getState().app.apiRootValid) {
           if (checkInitialised(getState())) {
-            await dispatch(login('apiuser', 'api.123'))
+            await dispatch(sessionOperations.login('apiuser', 'api.123'))
   
             if (getState().session.alive) {
-              await dispatch(sync())
+              await dispatch(syncOperations.sync())
               return dispatch(initialize())
             } else {
               dispatch(actions.appSetApiRoot(null))
@@ -68,17 +68,17 @@ const testAPIRoot=()=> {debugger
       }
     }
   }
-  function checkInitialised(state) {debugger
+  const checkInitialised=(state)=> {debugger
     return !some(requiredConfigs, config => (
       isUndefined(state.app[config]) || isNull(state.app[config])
     ))
   }
   const reset=()=> {debugger
     return async dispatch => {
-      dispatch(resetCashiers())
-      dispatch(resetProducts())
-      dispatch(resetBarcodes())
-      await dispatch(logoutCashier())
+      dispatch(cashierOperations.resetCashiers())
+      dispatch(productOperations.resetProducts())
+      dispatch(barcodeOperations.resetBarcodes())
+      await dispatch(cashierOperations.logoutCashier())
       dispatch(actions.appReset())
     }
   }

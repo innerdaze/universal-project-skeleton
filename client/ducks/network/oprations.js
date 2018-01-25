@@ -1,8 +1,8 @@
 import actions from './actions'
 import { failIfMissing } from '../../helpers/Function'
-import { login } from '../../actions/SessionActions'
+import { sessionOperations } from '../../ducks/session'
 import { errorOperations } from '../error'
-export function callApi({
+const callApi=({
   service = failIfMissing('service'),
   headers = {},
   params = {},
@@ -10,7 +10,7 @@ export function callApi({
   success = json => json,
   failure = error => error,
   skipSessionCheck = false
-}) {debugger
+})=> {debugger
   return function (dispatch, getState) {
     if (!isOnline()) {
       dispatch(actions.netFailOfline())
@@ -35,7 +35,7 @@ export function callApi({
       .then(res => res.json())
       .then(async res => {
         if (!skipSessionCheck && !validateSession(res)) {
-          await dispatch(login('apiuser', 'api.123'))
+          await dispatch(sessionOperations.login('apiuser', 'api.123'))
           return restart()
         }
 
@@ -58,14 +58,14 @@ export function callApi({
   }
 }
 
-export function validateResCode(data) {
+const validateResCode=(data)=> {
   return (
     data.result.Result.ResMessage.ResCode === 0 ||
     data.result.Result.ResCode === 0
   )
 }
 
-export function validateSession(data) {
+const validateSession=(data)=> {
   return !(
     data.result.Result.ResCode === 99 &&
     ( data.result.Result.ResMessage === 'Session has expired' ||
@@ -75,13 +75,13 @@ export function validateSession(data) {
   )
 }
 
-export function throwError(data, errorMessage) {
+const throwError=(data, errorMessage)=> {
   const error = new Error(errorMessage)
   error.response = data
   throw error
 }
 
-export function checkStatusAndParseJSON(response) {
+const checkStatusAndParseJSON=(response)=> {
   return response.json()
     .then(data => {
       if (
@@ -95,7 +95,7 @@ export function checkStatusAndParseJSON(response) {
     })
 }
 
-export function isOnline() {
+const isOnline=()=> {
   return window.cordova && window.navigator ? navigator.connection.type !== navigator.connection.NONE : true
 }
 

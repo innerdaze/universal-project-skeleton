@@ -8,14 +8,6 @@ import {
   API_ROOT_VALID,
   API_ROOT_INVALID
 } from '../../constants/ActionTypes'
-import { sync } from '../../actions/SyncActions'
-import { login } from '../../actions/SessionActions'
-import { validate } from '../../actions/ValidationActions'
-import { callApi } from '../../actions/NetworkActions'
-import { displayError } from '../../actions/ErrorActions'
-import { resetCashiers, logoutCashier } from '../../actions/CashierActions'
-import { resetBarcodes } from '../../actions/BarcodeActions'
-import { resetProducts } from '../../actions/ProductActions'
 import { createActions } from 'redux-actions';
 import { createIdentityActionMap } from '../../helpers/ducks'
 debugger

@@ -1,25 +1,20 @@
 import { connect } from 'react-redux'
 import OrdersLayout from '../components/OrdersLayout'
-import {
-  discardPendingTransaction,
-  confirmStartModifyTransaction,
-  cancelStartModifyTransaction,
-  startChangingOrderQuantity
-} from '../actions/OrderActions'
+import { orderOperations,orderSelectors } from '../ducks/order'
 
 export default connect(
   state => ({
-    mainMenuVisible: state.ui.mainMenuVisible,
-    pendingTransaction: state.orders.pendingTransaction,
-    pendingModification: state.orders.pendingModification,
-    isChangingOrderQuantity: state.orders.isChangingOrderQuantity,
-    changingOrderQuantityFor: state.orders.changingOrderQuantityFor
+    mainMenuVisible: uiSelectors.mainMenuVisible,
+    pendingTransaction: orderSelectors.pendingTransaction,
+    pendingModification: orderSelectors.pendingModification,
+    isChangingOrderQuantity: orderSelectors.isChangingOrderQuantity,
+    changingOrderQuantityFor: orderSelectors.changingOrderQuantityFor
   }),
   dispatch => ({
     onPromptStartModifyingSubmit: transaction => {
-      dispatch(confirmStartModifyTransaction())
-      dispatch(startChangingOrderQuantity(transaction))
+      dispatch(orderOperations.confirmStartModifyTransaction())
+      dispatch(orderOperations.startChangingOrderQuantity(transaction))
     },
-    onPromptStartModifyingCancel: () => dispatch(cancelStartModifyTransaction())
+    onPromptStartModifyingCancel: () => dispatch(orderOperations.cancelStartModifyTransaction())
   })
 )(OrdersLayout)

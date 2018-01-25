@@ -1,7 +1,7 @@
 import actions from './actions'
 
 
-export function validate({ fieldID, value, validation, error }) {
+const validate=({ fieldID, value, validation, error })=> {
   return dispatch => {
     if (!(validation(value))) {
       dispatch(actions.invalidate({ fieldID, error }))

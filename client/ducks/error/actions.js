@@ -3,6 +3,7 @@ import {
   ERROR_DISPLAY,
   ERROR_DISMISS
 } from '../../constants/ActionTypes'
+import { createIdentityActionMap } from '../../helpers/ducks'
 const identityActions = createIdentityActionMap(
   ERROR_DISMISS
 )

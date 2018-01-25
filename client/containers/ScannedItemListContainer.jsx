@@ -1,18 +1,13 @@
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import ScannedItemList from '../components/ScannedItemList'
-import {
-  deleteOrder,
-  startDeletingOrder,
-  cancelDeletingOrder,
-  startChangingOrderQuantity
-} from '../actions/OrderActions'
+import { orderOperations, orderSelectors } from '../ducks/order'
 
 const mapStateToProps = state => {
   return {
-    isProcessing: state.orders.isProcessing,
-    isDeletingOrder: state.orders.isDeletingOrder,
-    items: _(state.orders.unprocessedItems)
+    isProcessing: orderSelectors.isProcessing,
+    isDeletingOrder: orderSelectors.isDeletingOrder,
+    items: _(orderSelectors.unprocessedItems)
       .filter(id => {
         return state.orderEntities[id] &&
           state.orderEntities[id].TransType === state.orders.mode
@@ -45,16 +40,16 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onDeleteItemClick: id => {
-      dispatch(startDeletingOrder(id))
+      dispatch(orderOperations.startDeletingOrder(id))
     },
     onDeleteItemConfirm: id => {
-      dispatch(deleteOrder(id))
+      dispatch(orderOperations.deleteOrder(id))
     },
     onDeleteItemCancel: () => {
-      dispatch(cancelDeletingOrder())
+      dispatch(orderOperations.cancelDeletingOrder())
     },
     onChangeOrderQuantityClick: order => {
-      dispatch(startChangingOrderQuantity(order))
+      dispatch(orderOperations.startChangingOrderQuantity(order))
     }
   }
 }
