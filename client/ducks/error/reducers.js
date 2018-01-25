@@ -14,7 +14,7 @@ const reducer = handleActions({
       activeError: payload
     }
   },
-  [cashier.errorDismiss] (state) {debugger
+  [error.errorDismiss] (state) {debugger
     return {
       ...state,
       activeError: null

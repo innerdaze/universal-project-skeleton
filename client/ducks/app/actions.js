@@ -19,8 +19,8 @@ const identityActions = createIdentityActionMap(
 )
 export default createActions({
   APP:{
-    APP_SET_API_ROOT:apiRoot => apiRoot,
-    APP_SET_STORE_ID: storeID => storeID,
+    APP_SET_API_ROOT: apiRoot => ({ apiRoot }),
+    APP_SET_STORE_ID: storeID => ({ storeID }),
     ...identityActions
 
 }

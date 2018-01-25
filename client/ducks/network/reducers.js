@@ -1,21 +1,21 @@
 
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions'
-import actions from './actions'
-const { network } = actions
+import { network } from './actions'
+
 const initialState = {
     isNetFailOffline:false,
     isNetFailNoSession:false
 }
 debugger
 const reducer = handleActions({
-  [network.isNetFailOffline] (state) {
+  [network.netFailOffline] (state) {
     return {
       ...state,
       isNetFailOffline: true
     }
   },
-  [network.isNetFailNoSession] (state) {
+  [network.netFailNoSession] (state) {
     return {
       ...state,
       isNetFailNoSession: false

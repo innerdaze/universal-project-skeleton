@@ -26,7 +26,7 @@ const reducer = handleActions({
   [app.appSetApiRoot] (state,{payload}) {
     return {
       ...state,
-      storeID: config.storeID
+      storeID: payload.storeID
     }
   },
   [app.apiRootValid] (state) {

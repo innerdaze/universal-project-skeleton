@@ -1,6 +1,6 @@
 export function session(state = {
   id: null,
-  alive: false,
+  alive: true,
   isRequesting: false,
   lastUpdated: null,
   error: null
