@@ -5,15 +5,14 @@ const { validation } = actions
 const initialState = {
   mainMenuVisible: false
 }
-debugger
 const reducer = handleActions({
-  [validation.invalidate] (state,{field,error}) {
+  [validation.invalidate] (state,{payload:{field,error}}) {
     return {
       ...state,
       [field]: error
     }
   },
-  [validation.validate] (state,{field}) {
+  [validation.validate] (state,{payload:{field}}) {
     return {
       ...state,
       [field]: null

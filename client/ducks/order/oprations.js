@@ -3,7 +3,6 @@ import {  barcodeOperations } from '../barcode'
 import { networkOperations } from '../network'
 import { v4 as uuidGen } from 'uuid'
 import { find, filter, includes, map } from 'lodash'
-  debugger
  
   const addOrder=(id, order) =>{
     return  dispatch(actions.addOrder(id, order))

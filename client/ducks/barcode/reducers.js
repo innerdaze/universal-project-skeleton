@@ -1,131 +1,91 @@
-
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions'
 import actions from './actions'
+import { keyBy, fromPairs } from 'lodash'
 const { barcode } = actions
-const initialState = {
+const initialStatebarcodeLookup = {
   lastQuery: null,
   lastError: null
 }
-debugger
-const reducer = handleActions({
-  [barcode.lookupBarcode] (state,{payload}) {debugger
+
+const initialStatebarcode = {
+  isFetching: false,
+  didInvalidate: false,
+  lastUpdated: null,
+  items: []
+}
+
+const initialStatebarcodeEntities = {}
+const initialStatebarcodeIDsByProductID = {}
+
+const reducerbarcodeLookup = handleActions({
+  [barcode.lookupBarcode](state, { payload: { barcodeID } }) {
     return {
       ...state,
-      payload,
-        lastQuery: payload
+      barcodeID,
+      lastQuery: barcodeID
     }
   },
-  [barcode.failLookupBarcode] (state,{payload}) {debugger
+  [barcode.failLookupBarcode](state, { payload: { barcodeID } }) {
     return {
       ...state,
-      payload,
-      error: `No match for barcode: ${payload}`
+      lastError: `No match for barcode: ${barcodeID}`
     }
   },
-  [barcode.receiveBarcodes] (state,{payload}) {
+  [barcode.succeddLookupBarcode](state) {
     return {
       ...state,
-      barcodes: payload.filter(item => !item.Deleted),
-      receivedAt: Date.now()
+      lastError: null
     }
-  },
-  [barcode.succeddLookupBarcode] (state,{payload}) {
+  }
+}, initialStatebarcodeLookup)
+
+const reducerbarcodes = handleActions({
+  [barcode.invalidateBarcodes](state) {
     return {
       ...state,
-      payload
+      didInvalidate: true
     }
   },
-  [barcode.failLookupBarcode] (state,{payload}) {
-    return {
-      ...state,
-      payload,
-      lastError: `No match for barcode: ${payload}`
-    }
-  },
-  [barcode.requestBarcodes] (state) {
+  [barcode.requestBarcodes](state) {
     return {
       ...state,
       isFetching: true,
       didInvalidate: false
     }
   },
-[barcode.invalidateBarcodes] (state) {
-  return {
-    ...state,
-    didInvalidate: true
+  [barcode.receiveBarcodes](state, { payload: { json } }) {
+    return {
+      ...state,
+      isFetching: false,
+      didInvalidate: false,
+      items: map(json.filter(item => !item.Deleted), 'Barcode'),
+      lastUpdated: Date.now()
+    }
+  },
+  [barcode.resetBarcodes](state) {
+    return {
+      ...state,
+      items: []
+    }
   }
-},
-[barcode.resetBarcodes] (state) {
-  return {
-    ...state,
-    items: [] 
+}, initialStatebarcode)
+
+const reducerbarcodeEntities = handleActions({
+  [barcode.receiveBarcodes](state, { payload: { json } }) {
+    return keyBy(json.filter(item => !item.Deleted), 'Barcode')
   }
-},
- 
-}, initialState)
+}, initialStatebarcodeEntities)
+
+const reducerbarcodeIDsByProductID = handleActions({
+  [barcode.receiveBarcodes](state, { payload: { json } }) {
+    return fromPairs(map(json.filter(item => !item.Deleted), barcode => [barcode.ProductID, barcode.Barcode]))
+  },
+  [barcode.resetBarcodes](state) {
+    return {}
+  }
+}, initialStatebarcodeIDsByProductID)
+
+const reducer = combineReducers(reducerbarcodeLookup, reducerbarcodes, reducerbarcodeEntities, reducerbarcodeIDsByProductID)
 
 export default reducer
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// export default function app(state = {
-//   isInitialized: false,
-//   apiRoot: null,
-//   apiRootValid: false,
-//   storeID: '0'
-// }, { type, ...config }) {
-//   switch (type) {
-//     case 'APP_INITIALIZE':
-//       return {
-//         ...state,
-//         isInitialized: true
-//       }
-//     case 'APP_SET_API_ROOT':
-//       return {
-//         ...state,
-//         apiRoot: config.apiRoot
-//       }
-//     case 'APP_SET_STORE_ID':
-//       return {
-//         ...state,
-//         storeID: config.storeID
-//       }
-//     case 'API_ROOT_VALID':
-//       return {
-//         ...state,
-//         apiRootValid: true
-//       }
-//     case 'API_ROOT_INVALID':
-//       return {
-//         ...state,
-//         apiRootValid: false
-//       }
-//     case 'APP_RESET':
-//       return {
-//         ...state,
-//         apiRoot: null,
-//         isInitialized: false,
-//         apiRootValid: false
-//       }
-//     default:
-//       return state
-//   }
-// }

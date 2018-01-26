@@ -7,7 +7,6 @@ const initialState = {
   isSyncing: false,
   progress: 0
 }
-debugger
 const reducer = handleActions({
   [sync.startSync] (state) {
     return {
@@ -21,10 +20,10 @@ const reducer = handleActions({
       isSyncing: false
     }
   },
-  [sync.syncProgress] (state,{payload}) {
+  [sync.syncProgress] (state,{payload:{progress}}) {
     return {
       ...state,
-      progress: payload
+      progress: progress
     }
   }
 }, initialState)

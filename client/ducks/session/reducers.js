@@ -2,7 +2,7 @@
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions'
 import actions from './actions'
-const { scanner } = actions
+const { session } = actions
 const initialState = {
   id: null,
   alive: false,
@@ -10,54 +10,57 @@ const initialState = {
   lastUpdated: null,
   error: null
 }
-debugger
-const reducer = handleActions({
-  [scanner.startSession] (state,{payload}) {
+const initialStateUser = {
+  id: null,
+  name: null
+}
+const reducer1 = handleActions({
+  [session.startSession] (state,{payload:{id}}) {
     return {
       ...state,
-      id: payload,
+      id: id,
       alive: true
     }
   },
-  [scanner.endSession] (state) {
+  [session.endSession] (state) {
     return {
       ...state,
       id: null,
       alive: false
     }
   },
-  [scanner.requestLogin] (state) {
+  [session.requestLogin] (state) {
     return {
       ...state,
       isRequesting: true
     }
   },
-  [scanner.receiveLogin] (state) {
+  [session.receiveLogin] (state) {
     return {
       ...state,
       isRequesting: false,
       lastUpdated: Date.now()
     }
   },
-  [scanner.succeedLogin] (state,{payload}) {
+  [session.succeedLogin] (state) {
     return {
       ...state,
       error: null
     }
   },
-  [scanner.failLogin] (state,{payload}) {
+  [session.failLogin] (state,{payload}) {
     return {
       ...state,
       error: payload
     }
   },
-  [scanner.requestLogout] (state) {
+  [session.requestLogout] (state) {
     return {
       ...state,
       isRequesting: true
     }
   },
-  [scanner.receiveLogout] (state) {
+  [session.receiveLogout] (state) {
     return {
       ...state,
       isRequesting: false,
@@ -66,4 +69,22 @@ const reducer = handleActions({
   }
 }, initialState)
 
-export default reducer
+const reduceruser = handleActions({
+  [session.succeedLogin] (state,{payload:{user}}) {
+    return {
+      ...state,
+      id: user.UserID,
+      name: user.UserName
+    }
+  },
+  [session.receiveLogout] (state) {
+    return {
+      ...state,
+      id: null,
+      name: null
+    }
+  }
+}, initialState)
+
+const reducer=combineReducers(reducer1,reduceruser);
+export default reducer;

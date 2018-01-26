@@ -1,13 +1,10 @@
 
 import { createActions } from 'redux-actions';
-import {
-  UI_SHOW_MENU,
-  UI_HIDE_MENU
-} from '../../constants/ActionTypes'
+import { createIdentityActionMap } from '../../helpers/ducks'
 export default createActions({
-  UI: {
-    UI_SHOW_MENU,
-    UI_HIDE_MENU
-  }
+  UI: createIdentityActionMap(
+    'UI_SHOW_MENU',
+    'UI_HIDE_MENU'
+  )
 }
 );

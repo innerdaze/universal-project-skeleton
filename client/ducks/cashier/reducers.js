@@ -12,28 +12,27 @@ const initialState = {
   isAuthenticating: false,
   authError: null
 }
-debugger
 const reducer = handleActions({
-  [cashier.invalidateCashiers] (state) {debugger
+  [cashier.invalidateCashiers] (state) {
     return {
       ...state,
       didInvalidate: true
     }
   },
-  [cashier.requestCashiers] (state) {debugger
+  [cashier.requestCashiers] (state) {
     return {
       ...state,
       isFetching: true,
       didInvalidate: false
     }
   },
-  [cashier.receiveCashiers] (state,{payload}) {
+  [cashier.receiveCashiers] (state,{payload:{json}}) {
     return {
       ...state,
       isFetching: false,
         didInvalidate: false,
-        items: map(payload.cashiers, 'CashierID'),
-        lastUpdated: payload.receivedAt
+        items: map(json.filter(item => !item.Deleted), 'CashierID'),
+        lastUpdated: Date.now()
     }
   },
   [cashier.resetCashiers] (state) {
@@ -48,18 +47,18 @@ const reducer = handleActions({
       isAuthenticating: true
     }
   },
-  [cashier.succeedLoginCashier] (state,{payload}) {
+  [cashier.succeedLoginCashier] (state,{payload:{cashier}}) {
     return {
       ...state,
       isAuthenticating: false,
-      activeCashier: payload.cashier
+      activeCashier: cashier
     }
   },
-[cashier.failLoginCashier] (state,{payload}) {
+[cashier.failLoginCashier] (state,{payload:{error}}) {
   return {
     ...state,
     isAuthenticating: false,
-    authError: payload.error
+    authError: error
   }
 },
 [cashier.logoutCashier] (state) {

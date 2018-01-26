@@ -1,7 +1,5 @@
 import actions from './actions'
 import Quagga from 'quagga'
-  debugger
-
   const scan=()=> {
     return function (dispatch) {
       dispatch(actions.initializeScanner())

@@ -1,7 +1,6 @@
 import actions from './actions'
 import { errorOperations } from '../error'
 import { networkOperations } from '../network'
-  debugger
 
   const login=(userID, password)=> {
     return dispatch => {

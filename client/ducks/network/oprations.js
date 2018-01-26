@@ -10,7 +10,7 @@ const callApi=({
   success = json => json,
   failure = error => error,
   skipSessionCheck = false
-})=> {debugger
+})=> {
   return function (dispatch, getState) {
     if (!isOnline()) {
       dispatch(actions.netFailOfline())
@@ -100,5 +100,5 @@ const isOnline=()=> {
 }
 
 export default {
-  netFailNoSession,NetFailNoSession,callApi,validateResCode,validateSession,throwError,checkStatusAndParseJSON,isOnline
+  callApi,validateResCode,validateSession,throwError,checkStatusAndParseJSON,isOnline
 }

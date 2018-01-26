@@ -1,7 +1,6 @@
 import actions from './actions'
 import { networkOperations } from '../network'
 import { errorOperations } from '../error'
-  debugger
 
   const fetchBarcodes=() =>{
     return dispatch => {

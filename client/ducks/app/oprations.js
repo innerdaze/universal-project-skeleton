@@ -12,8 +12,7 @@ import { productOperations } from '../product'
 const requiredConfigs = [
     'apiRoot'
   ]
-  debugger
-const testAPIRoot=()=> {debugger
+const testAPIRoot=()=> {
     return async dispatch => {
       return dispatch(networkOperations.callApi({
         service: 'GeneralService.GetTimeStamp',
@@ -36,7 +35,7 @@ const testAPIRoot=()=> {debugger
   /**
    * Validation is the responsibilty of the input mechanism
    */
- const setApiRoot=(apiRoot)=> {debugger
+ const setApiRoot=(apiRoot)=> {
     return async (dispatch, getState) => {
       const fieldID = 'apiRoot'
       const error = 'Invalid URI'
@@ -68,12 +67,12 @@ const testAPIRoot=()=> {debugger
       }
     }
   }
-  const checkInitialised=(state)=> {debugger
+  const checkInitialised=(state)=> {
     return !some(requiredConfigs, config => (
       isUndefined(state.app[config]) || isNull(state.app[config])
     ))
   }
-  const reset=()=> {debugger
+  const reset=()=> {
     return async dispatch => {
       dispatch(cashierOperations.resetCashiers())
       dispatch(productOperations.resetProducts())

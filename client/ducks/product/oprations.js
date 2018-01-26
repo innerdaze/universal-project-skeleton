@@ -2,7 +2,7 @@ import actions from './actions'
 import { networkOperations } from '../network'
 import { v4 as uuidGen } from 'uuid'
 import { find, filter, includes, map } from 'lodash'
-  debugger
+  
   const fetchProducts=()=> {
     return dispatch => {
       dispatch(actions.requestProducts())

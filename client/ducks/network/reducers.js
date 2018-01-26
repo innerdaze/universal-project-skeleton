@@ -4,18 +4,17 @@ import { handleActions } from 'redux-actions'
 import actions from './actions'
 const { network } = actions
 const initialState = {
-    isNetFailOffline:false,
-    isNetFailNoSession:false
+  isNetFailOffline: false,
+  isNetFailNoSession: false
 }
-debugger
 const reducer = handleActions({
-  [network.isNetFailOffline] (state) {
+  [network.NetFailOffline](state) {
     return {
       ...state,
       isNetFailOffline: true
     }
   },
-  [network.isNetFailNoSession] (state) {
+  [network.NetFailNoSession](state) {
     return {
       ...state,
       isNetFailNoSession: false

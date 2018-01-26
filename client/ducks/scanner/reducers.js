@@ -7,7 +7,6 @@ const initialState = {
   isScanning: false,
   error: null
 }
-debugger
 const reducer = handleActions({
   [scanner.startScanning] (state) {
     return {

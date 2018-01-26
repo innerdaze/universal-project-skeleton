@@ -18,9 +18,8 @@ const initialState = {
   isChangingOrderQuantity: false,
   changingOrderQuantityFor: null
 }
-debugger
 const reducer = handleActions({
-  [order.addOrder] (state,{id,payload}) {debugger
+  [order.addOrder] (state,{payload:{id,order}}) {
     return {
       ...state,
       unprocessedItems: [
@@ -35,18 +34,18 @@ const reducer = handleActions({
       isDeletingOrder: false
     }
   },
-  [order.startDeletingOrder] (state,{payload}) {
+  [order.startDeletingOrder] (state) {
     return {
       ...state,
       isDeletingOrder: true
     }
   },
-  [order.deleteOrder] (state,{payload}) {
+  [order.deleteOrder] (state,{payload:{id}}) {
     return {
       ...state,
       isDeletingOrder: false,
       unprocessedItems: state.unprocessedItems.filter(value => {
-        return value !== payload
+        return value !== id
       })
     }
   },
@@ -56,14 +55,14 @@ const reducer = handleActions({
       isProcessing: true
     }
   },
-  [order.ReceiveProcessOrders] (state,{payload}) {
+  [order.ReceiveProcessOrders] (state) {
     return {
       ...state,
       isProcessing: false,
       lastUpdated: Date.now()
     }
   },
-[order.succeedProcessOrders] (state,{payload}) {
+[order.succeedProcessOrders] (state,{payload:{orderIDs}}) {
   return {
     ...state,
     processedItems: [...state.unprocessedItems, ...state.processedItems],
@@ -71,23 +70,23 @@ const reducer = handleActions({
     unprocessedItems: difference(state.unprocessedItems, orderIDs)
   }
 },
-[order.failProcessOrders] (state,{payload}) {
+[order.failProcessOrders] (state,{payload:{error}}) {
   return {
     ...state,
-    error: payload,
+    error: error,
     isProcessing: false
   }
 },
-[order.changeOprationMode] (state,{payload}) {
+[order.changeOprationMode] (state,{payload:{mode}}) {
   return {
     ...state,
-    mode: payload
+    mode: mode
   }
 },
-[order.createPendingTransaction] (state,{payload}) {
+[order.createPendingTransaction] (state,{payload:{transaction}}) {
   return {
     ...state,
-    pendingTransaction: payload
+    pendingTransaction: transaction
   }
 },
 [order.discardPendingTransaction] (state) {
@@ -96,11 +95,11 @@ const reducer = handleActions({
     pendingTransaction: null
   }
 },
-[order.startChangingorderQuantity] (state,{payload}) {
+[order.startChangingorderQuantity] (state,{payload:{order}}) {
   return {
     ...state,
     isChangingOrderQuantity: true,
-    changingOrderQuantityFor: payload
+    changingOrderQuantityFor: order
   }
 },
 [order.finishChangingOrderQuantity] (state) {
@@ -123,10 +122,10 @@ const reducer = handleActions({
     isChangingOrderQuantity: false
   }
 },
-[order.promptStartModifyTransaction] (state,{payload}) {
+[order.promptStartModifyTransaction] (state,{payload:{transaction}}) {
   return {
     ...state,
-    pendingModification: payload
+    pendingModification: transaction
   }
 },
 [order.confirmStartModifyTransaction] (state) {
@@ -141,12 +140,12 @@ const reducer = handleActions({
     pendingModification: null
   }
 },
-[order.changePendingTransactionQuantity] (state,{payload}) {
+[order.changePendingTransactionQuantity] (state,{payload:{quantity}}) {
   return {
     ...state,
     pendingTransaction: {
       ...state.pendingTransaction,
-      Qty: payload
+      Qty: quantity
     }
   }
 },

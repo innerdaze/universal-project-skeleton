@@ -3,7 +3,6 @@ import ProgressPromise from 'progress-promise'
 import { barcodeOperations } from '../barcode'
 import { productOperations } from '../product'
 import {cashierOperations} from '../cashier'
-  debugger
 
   const sync=()=> {
     return async (dispatch, getState) => {

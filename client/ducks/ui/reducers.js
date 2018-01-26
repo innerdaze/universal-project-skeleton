@@ -2,19 +2,18 @@
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions'
 import actions from './actions'
-const { sync } = actions
+const { ui } = actions
 const initialState = {
   mainMenuVisible: false
 }
-debugger
 const reducer = handleActions({
-  [sync.uiShowMenu] (state) {
+  [ui.uiShowMenu] (state) {
     return {
       ...state,
       mainMenuVisible: true
     }
   },
-  [sync.uiHideMenu] (state) {
+  [ui.uiHideMenu] (state) {
     return {
       ...state,
       mainMenuVisible: false

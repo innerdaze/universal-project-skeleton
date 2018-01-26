@@ -2,224 +2,97 @@
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions'
 import actions from './actions'
-import { keyBy, difference } from 'lodash'
-import OperationModes from '../../constants/OperationModes'
-const { order } = actions
-const initialState = {
-  isProcessing: false,
+import { keyBy, difference, fromPairs } from 'lodash'
+const { product } = actions
+const initialStateProduct = {
+  isFetching: false,
+  didInvalidate: false,
   lastUpdated: null,
-  unprocessedItems: [],
-  processedItems: [],
-  error: null,
-  mode: OperationModes.STOCKTAKE,
-  pendingTransaction: null,
-  pendingModification: null,
-  isDeletingOrder: false,
-  isChangingOrderQuantity: false,
-  changingOrderQuantityFor: null
+  items: []
 }
-debugger
-const reducer = handleActions({
-  [order.addOrder] (state,{id,payload}) {debugger
+const initialStateProductSearch = {
+  isSearching: false,
+  lastError: null,
+  lastMatches: []
+}
+const intialStateproductEntities = {}
+const intialSatateproductIDsByProductName = {}
+
+const reducerProduct = handleActions({
+  [product.invalidateProducts](state) {
     return {
       ...state,
-      unprocessedItems: [
-        ...state.unprocessedItems,
-        id
-      ]
+      didInvalidate: true
     }
   },
-  [order.cancelDeletingOrder] (state) {
+  [product.requestProducts](state) {
     return {
       ...state,
-      isDeletingOrder: false
+      isFetching: true,
+      didInvalidate: false
     }
   },
-  [order.startDeletingOrder] (state,{payload}) {
+  [product.receiveProducts](state, { payload: { json } }) {
     return {
       ...state,
-      isDeletingOrder: true
-    }
-  },
-  [order.deleteOrder] (state,{payload}) {
-    return {
-      ...state,
-      isDeletingOrder: false,
-      unprocessedItems: state.unprocessedItems.filter(value => {
-        return value !== payload
-      })
-    }
-  },
-  [order.requestProcessOrders] (state) {
-    return {
-      ...state,
-      isProcessing: true
-    }
-  },
-  [order.ReceiveProcessOrders] (state,{payload}) {
-    return {
-      ...state,
-      isProcessing: false,
+      isFetching: false,
+      didInvalidate: false,
+      items: map(json.filter(item => !item.Deleted), 'ProductID'),
       lastUpdated: Date.now()
     }
   },
-[order.succeedProcessOrders] (state,{payload}) {
-  return {
-    ...state,
-    processedItems: [...state.unprocessedItems, ...state.processedItems],
-    // Here
-    unprocessedItems: difference(state.unprocessedItems, orderIDs)
-  }
-},
-[order.failProcessOrders] (state,{payload}) {
-  return {
-    ...state,
-    error: payload,
-    isProcessing: false
-  }
-},
-[order.changeOprationMode] (state,{payload}) {
-  return {
-    ...state,
-    mode: payload
-  }
-},
-[order.createPendingTransaction] (state,{payload}) {
-  return {
-    ...state,
-    pendingTransaction: payload
-  }
-},
-[order.discardPendingTransaction] (state) {
-  return {
-    ...state,
-    pendingTransaction: null
-  }
-},
-[order.startChangingorderQuantity] (state,{payload}) {
-  return {
-    ...state,
-    isChangingOrderQuantity: true,
-    changingOrderQuantityFor: payload
-  }
-},
-[order.finishChangingOrderQuantity] (state) {
-  return {
-    ...state,
-    isChangingOrderQuantity: false,
-    changingOrderQuantityFor: null
-  }
-},
-[order.cancelChangingOrderQuantity] (state) {
-  return {
-    ...state,
-    isChangingOrderQuantity: false,
-    changingOrderQuantityFor: null
-  }
-},
-[order.changeOrderQuantity] (state) {
-  return {
-    ...state,
-    isChangingOrderQuantity: false
-  }
-},
-[order.promptStartModifyTransaction] (state,{payload}) {
-  return {
-    ...state,
-    pendingModification: payload
-  }
-},
-[order.confirmStartModifyTransaction] (state) {
-  return {
-    ...state,
-    pendingModification: null
-  }
-},
-[order.cancelStartModifyTransaction] (state) {
-  return {
-    ...state,
-    pendingModification: null
-  }
-},
-[order.changePendingTransactionQuantity] (state,{payload}) {
-  return {
-    ...state,
-    pendingTransaction: {
-      ...state.pendingTransaction,
-      Qty: payload
+  [product.resetProducts](state) {
+    return {
+      ...state,
+      items: []
+    }
+  },
+}, initialStateProduct);
+
+const productSearch = handleActions({
+  [product.searchProducts](state) {
+    return {
+      ...state,
+      isSearching: true
+    }
+  },
+  [product.succeedSearchProducts](state, { payload: { matches } }) {
+    return {
+      ...state,
+      isSearching: false,
+      lastMatches: matches
+    }
+  },
+  [product.failSearchProducts](state, { payload: { query } }) {
+    return {
+      ...state,
+      isSearching: false,
+      lastError: `No match for: ${query}`
     }
   }
-},
-[order.finishChangingOrderQuantity] (state) {
-  return {
-    ...state,
-    isChangingOrderQuantity: false,
-    changingOrderQuantityFor: null
+}, initialStateProductSearch);
+
+
+const productEntities = handleActions({
+  [product.receiveProducts](state, { payload: { products } }) {
+    return
+    keyBy(products, 'ProductID')
+  },
+  [product.resetProducts](state, { payload: { matches } }) {
+    return {}
   }
-}
-}, initialState)
+}, intialStateproductEntities);
 
-export default reducer
+const productIDsByProductName = handleActions({
+  [product.receiveProducts](state, { payload: { products } }) {
+    return
+    fromPairs(map(products, product => [product.ProductName, product.ProductID]))
+  },
+  [product.resetProducts](state, { payload: { matches } }) {
+    return {}
+  }
+}, intialSatateproductIDsByProductName);
 
+const reducer = combineReducers(reducerProduct, productIDsByProductName, productEntities, productSearch);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// export default function app(state = {
-//   isInitialized: false,
-//   apiRoot: null,
-//   apiRootValid: false,
-//   storeID: '0'
-// }, { type, ...config }) {
-//   switch (type) {
-//     case 'APP_INITIALIZE':
-//       return {
-//         ...state,
-//         isInitialized: true
-//       }
-//     case 'APP_SET_API_ROOT':
-//       return {
-//         ...state,
-//         apiRoot: config.apiRoot
-//       }
-//     case 'APP_SET_STORE_ID':
-//       return {
-//         ...state,
-//         storeID: config.storeID
-//       }
-//     case 'API_ROOT_VALID':
-//       return {
-//         ...state,
-//         apiRootValid: true
-//       }
-//     case 'API_ROOT_INVALID':
-//       return {
-//         ...state,
-//         apiRootValid: false
-//       }
-//     case 'APP_RESET':
-//       return {
-//         ...state,
-//         apiRoot: null,
-//         isInitialized: false,
-//         apiRootValid: false
-//       }
-//     default:
-//       return state
-//   }
-// }
+export default reducer;
