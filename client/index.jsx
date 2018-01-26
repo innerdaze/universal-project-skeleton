@@ -4,6 +4,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import StackTrace from 'stacktrace-js'
+import { logError } from './helpers/reporting'
 import configureStore from './store'
 import AppProvider from './components/AppProvider'
 import RootContainer from './containers/RootContainer'
@@ -32,11 +33,7 @@ async function startApp() {
       })
     }
   } catch (e) {
-    StackTrace.fromError(e)
-      .then(stack => {
-        window.fabric.Crashlytics.sendNonFatalCrash(e.message, stack)
-        window.fabric.Crashlytics.sendCrash()
-      })
+    StackTrace.fromError(e).then(stack => logError(e, stack))
   }
 }
 

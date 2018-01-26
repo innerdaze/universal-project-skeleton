@@ -1,9 +1,12 @@
-var path = require('path')
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+var path = require('path');
+var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'cheap-module-eval-source-map',
+  devtool:
+    process.env.NODE_ENV === 'production'
+      ? 'source-map'
+      : 'cheap-module-eval-source-map',
   entry: [
     'babel-polyfill',
     'react-hot-loader/patch',
@@ -32,7 +35,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'client', 'templates', 'index.ejs'),
       filename: 'index.html'
-    }),
+    })
     // new webpack.optimize.UglifyJsPlugin({
     //   compress: process.env.NODE_ENV === 'production'
     // })
@@ -42,12 +45,15 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         include: /client/,
-        use: ['react-hot-loader/webpack', {
-          loader: 'babel-loader',
-          query: {
-            presets: ['es2015', 'react']
+        use: [
+          'react-hot-loader/webpack',
+          {
+            loader: 'babel-loader',
+            query: {
+              presets: ['es2015', 'react']
+            }
           }
-        }]
+        ]
       },
       {
         test: /\.css$/,
@@ -71,10 +77,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              includePaths: [
-                './node_modules',
-                './node_modules/grommet/scss'
-              ]
+              includePaths: ['./node_modules', './node_modules/grommet/scss']
             }
           }
         ]
@@ -86,4 +89,4 @@ module.exports = {
       }
     ]
   }
-}
+};
