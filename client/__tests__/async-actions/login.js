@@ -34,7 +34,7 @@ test('login to the remote server and retrieve a session ID', async t => {
 
   nock(apiURL)
     .post('/', {
-      method: 'SystemLoginSrevice.Login',
+      method: 'SystemLoginService.Login',
       params: {
         UserID: userID,
         Password: password

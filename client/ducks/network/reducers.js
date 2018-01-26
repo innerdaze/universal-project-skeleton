@@ -1,8 +1,8 @@
 
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions'
-import actions from './actions'
-const { network } = actions
+import { network } from './actions'
+
 const initialState = {
   isNetFailOffline: false,
   isNetFailNoSession: false
