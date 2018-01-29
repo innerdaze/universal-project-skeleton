@@ -13,7 +13,7 @@ const callApi=({
 })=> {
   return function (dispatch, getState) {
     if (!isOnline()) {
-      dispatch(actions.netFailOfline())
+      dispatch(actions.netFailOffline())
       return
     }
 

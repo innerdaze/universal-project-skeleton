@@ -10,7 +10,7 @@ const initialState = {
   storeID: '0'
 }
 const reducer = handleActions({
-  [app.appInitialize](state) {
+  [app.appInitialize](state) {debugger
     return {
       ...state,
       isInitialized: true

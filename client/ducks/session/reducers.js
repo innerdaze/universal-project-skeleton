@@ -86,5 +86,5 @@ const reduceruser = handleActions({
   }
 }, initialState)
 
-const reducer=combineReducers(reducer1,reduceruser);
-export default reducer;
+const reducer=combineReducers(reducer1,reduceruser)
+export default reducer

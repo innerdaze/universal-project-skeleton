@@ -14,14 +14,14 @@ const requiredConfigs = [
   ]
 const testAPIRoot=()=> {
     return async dispatch => {
-      return dispatch(networkOperations.callApi({
+      return dispatch(networkOperations.network.callApi({
         service: 'GeneralService.GetTimeStamp',
         skipSessionCheck: true,
         method: 'post',
-        success: () => dispatch(actions.setAPIRootValid()),
+        success: () => dispatch(actions.app.setAPIRootValid()),
         error: error => {
-          dispatch(errorOperations.displayError(error.message))
-          dispatch(actions.setAPIRootInvalid())
+          dispatch(errorOperations.error.displayError(error.message))
+          dispatch(actions.app.setAPIRootInvalid())
         }
       }))
     }
@@ -40,9 +40,9 @@ const testAPIRoot=()=> {
       const fieldID = 'apiRoot'
       const error = 'Invalid URI'
   
-      dispatch(actions.appSetApiRoot(apiRoot))
+      dispatch(actions.app.appSetApiRoot(apiRoot))
   
-      if (dispatch(validateOperations.validate({
+      if (dispatch(validateOperations.validate.validate({
         fieldID,
         value: apiRoot,
         validation: async url => isWebUri(url),
@@ -52,20 +52,25 @@ const testAPIRoot=()=> {
   
         if (getState().app.apiRootValid) {
           if (checkInitialised(getState())) {
-            await dispatch(sessionOperations.login('apiuser', 'api.123'))
+            await dispatch(sessionOperations.session.login('apiuser', 'api.123'))
   
             if (getState().session.alive) {
-              await dispatch(syncOperations.sync())
-              return dispatch(actions.appInitialize())
+              await dispatch(syncOperations.sync.sync())
+              return dispatch(actions.app.appInitialize())
             } else {
-              dispatch(actions.appSetApiRoot(null))
+              dispatch(actions.app.appSetApiRoot(null))
             }
           }
         } else {
-          dispatch(actions.appSetApiRoot(null))
+          dispatch(actions.app.appSetApiRoot(null))
         }
       }
     }
+  }
+ const setStoreID=(storeID) => {
+  return async dispatch => {
+  dispatch(actions.app.appSetStoreId(storeID))
+  }
   }
   const checkInitialised=(state)=> {
     return !some(requiredConfigs, config => (
@@ -74,11 +79,11 @@ const testAPIRoot=()=> {
   }
   const reset=()=> {
     return async dispatch => {
-      dispatch(cashierOperations.resetCashiers())
-      dispatch(productOperations.resetProducts())
-      dispatch(barcodeOperations.resetBarcodes())
-      await dispatch(cashierOperations.logoutCashier())
-      dispatch(actions.appReset())
+      dispatch(cashierOperations.cashier.resetCashiers())
+      dispatch(productOperations.product.resetProducts())
+      dispatch(barcodeOperations.barcode.resetBarcodes())
+      await dispatch(cashierOperations.cashier.logoutCashier())
+      dispatch(actions.app.appReset())
     }
   }
 
@@ -86,5 +91,6 @@ const testAPIRoot=()=> {
     testAPIRoot,
     setApiRoot,
     checkInitialised,
-    reset
+    reset,
+    setStoreID
   }

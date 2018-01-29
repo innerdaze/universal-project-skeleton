@@ -1,20 +1,21 @@
 
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions'
-import { network } from './actions'
-
+import actions from './actions'
+const {network}=actions
 const initialState = {
   isNetFailOffline: false,
   isNetFailNoSession: false
 }
+
 const reducer = handleActions({
-  [network.NetFailOffline](state) {
+  [network.netFailOffline](state) {
     return {
       ...state,
       isNetFailOffline: true
     }
   },
-  [network.NetFailNoSession](state) {
+  [network.netFailNoSession](state) {
     return {
       ...state,
       isNetFailNoSession: false

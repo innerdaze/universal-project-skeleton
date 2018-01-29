@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import OrdersLayout from '../components/OrdersLayout'
 import { orderOperations,orderSelectors } from '../ducks/order'
-
+import { uiSelectors } from '../ducks/ui'
 export default connect(
   state => ({
     mainMenuVisible: uiSelectors.mainMenuVisible,

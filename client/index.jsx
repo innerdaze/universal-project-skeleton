@@ -6,30 +6,48 @@ import { AppContainer } from 'react-hot-loader'
 import StackTrace from 'stacktrace-js'
 import { logError } from './helpers/reporting'
 import configureStore from './store'
-import AppProvider from './components/AppProvider'
+import Root from './components/Root'
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/es/integration/react'
 import RootContainer from './containers/RootContainer'
-
-function renderWithHotReload(RootElement, store) {
+function renderWithHotReload(RootElement, persistor, store) {
   render(
     <AppContainer>
-      <AppProvider store={store}>
-        <RootContainer/>
-      </AppProvider>
+      <Provider store={store}>
+        <PersistGate
+          loading={<div>Loading...</div>}
+          persistor={persistor}
+          >
+          <RootElement history={history}/>
+        </PersistGate>
+      </Provider>
     </AppContainer>,
     document.getElementById('root')
   )
 }
 
+// function renderWithHotReload(RootElement, store) {
+//   render(
+//     <AppContainer>
+//       <AppProvider store={store}>
+//         <RootContainer/>
+//       </AppProvider>
+//     </AppContainer>,
+//     document.getElementById('root')
+//   )
+// }
+
 async function startApp() {
   try {
-    const store = await configureStore()
+    const { persistor, store }  = await configureStore()
 
-    renderWithHotReload(RootContainer, store)
+    renderWithHotReload(Root,persistor, store)
 
     if (module.hot) {
-      module.hot.accept('./containers/RootContainer', () => {
-        const NextRootContainer = require('./containers/RootContainer').default
-        renderWithHotReload(<NextRootContainer/>, store)
+      module.hot.accept('./components/Root', () => {
+        renderWithHotReload(require('./components/Root').default, persistor, store)
+        // const NextRootContainer = require('./containers/RootContainer').default
+         renderWithHotReload(<NextRootContainer/>, store)
       })
     }
   } catch (e) {
