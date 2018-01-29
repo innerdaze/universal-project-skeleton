@@ -121,7 +121,7 @@
     "redux-devtools-extension": "^2.13.0",
     "redux-devtools-log-monitor": "^1.2.0",
     "redux-logger": "^3.0.1",
-    "redux-persist": "^4.8.0",
+    "redux-persist": "^5.5.0",
     "redux-persist-transform-filter": "0.0.9",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",

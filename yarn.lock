@@ -10364,13 +10364,9 @@ redux-persist-transform-filter@0.0.9:
     lodash.set "^4.3.2"
     lodash.unset "^4.5.2"
 
-redux-persist@^4.8.0:
-  version "4.9.1"
-  resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-4.9.1.tgz#271fa31d1c782ebf9082fb5174e829db24faf59e"
-  dependencies:
-    json-stringify-safe "^5.0.1"
-    lodash "^4.17.4"
-    lodash-es "^4.17.4"
+redux-persist@^5.5.0:
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-5.5.0.tgz#64b5030625cb6f863f76487975acb8bb4fe4f9bb"
 
 redux-thunk@^2.2.0:
   version "2.2.0"

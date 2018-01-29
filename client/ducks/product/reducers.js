@@ -1,9 +1,10 @@
-
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions'
 import actions from './actions'
 import { keyBy, difference, fromPairs } from 'lodash'
+
 const { product } = actions
+
 const initialStateProduct = {
   isFetching: false,
   didInvalidate: false,
@@ -15,84 +16,98 @@ const initialStateProductSearch = {
   lastError: null,
   lastMatches: []
 }
-const intialStateproductEntities = {}
-const intialSatateproductIDsByProductName = {}
+const intialStateProductEntities = {}
+const intialStateProductIDsByProductName = {}
 
-const reducerProduct = handleActions({
-  [product.invalidateProducts](state) {
-    return {
-      ...state,
-      didInvalidate: true
+const products = handleActions(
+  {
+    [product.invalidateProducts](state) {
+      return {
+        ...state,
+        didInvalidate: true
+      }
+    },
+    [product.requestProducts](state) {
+      return {
+        ...state,
+        isFetching: true,
+        didInvalidate: false
+      }
+    },
+    [product.receiveProducts](state, { payload: { json } }) {
+      return {
+        ...state,
+        isFetching: false,
+        didInvalidate: false,
+        items: map(json.filter(item => !item.Deleted), 'ProductID'),
+        lastUpdated: Date.now()
+      }
+    },
+    [product.resetProducts](state) {
+      return {
+        ...state,
+        items: []
+      }
     }
   },
-  [product.requestProducts](state) {
-    return {
-      ...state,
-      isFetching: true,
-      didInvalidate: false
+  initialStateProduct
+)
+
+const productSearch = handleActions(
+  {
+    [product.searchProducts](state) {
+      return {
+        ...state,
+        isSearching: true
+      }
+    },
+    [product.succeedSearchProducts](state, { payload: { matches } }) {
+      return {
+        ...state,
+        isSearching: false,
+        lastMatches: matches
+      }
+    },
+    [product.failSearchProducts](state, { payload: { query } }) {
+      return {
+        ...state,
+        isSearching: false,
+        lastError: `No match for: ${query}`
+      }
     }
   },
-  [product.receiveProducts](state, { payload: { json } }) {
-    return {
-      ...state,
-      isFetching: false,
-      didInvalidate: false,
-      items: map(json.filter(item => !item.Deleted), 'ProductID'),
-      lastUpdated: Date.now()
+  initialStateProductSearch
+)
+
+const productEntities = handleActions(
+  {
+    [product.receiveProducts](state, { payload: { products } }) {
+      return keyBy(products, 'ProductID')
+    },
+    [product.resetProducts](state, { payload: { matches } }) {
+      return {}
     }
   },
-  [product.resetProducts](state) {
-    return {
-      ...state,
-      items: []
+  intialStateProductEntities
+)
+
+const productIDsByProductName = handleActions(
+  {
+    [product.receiveProducts](state, { payload: { products } }) {
+      return fromPairs(
+        map(products, product => [product.ProductName, product.ProductID])
+      )
+    },
+    [product.resetProducts](state, { payload: { matches } }) {
+      return {}
     }
   },
-}, initialStateProduct);
+  intialStateProductIDsByProductName
+)
 
-const productSearch = handleActions({
-  [product.searchProducts](state) {
-    return {
-      ...state,
-      isSearching: true
-    }
-  },
-  [product.succeedSearchProducts](state, { payload: { matches } }) {
-    return {
-      ...state,
-      isSearching: false,
-      lastMatches: matches
-    }
-  },
-  [product.failSearchProducts](state, { payload: { query } }) {
-    return {
-      ...state,
-      isSearching: false,
-      lastError: `No match for: ${query}`
-    }
-  }
-}, initialStateProductSearch);
-
-
-const productEntities = handleActions({
-  [product.receiveProducts](state, { payload: { products } }) {
-    return
-    keyBy(products, 'ProductID')
-  },
-  [product.resetProducts](state, { payload: { matches } }) {
-    return {}
-  }
-}, intialStateproductEntities);
-
-const productIDsByProductName = handleActions({
-  [product.receiveProducts](state, { payload: { products } }) {
-    return
-    fromPairs(map(products, product => [product.ProductName, product.ProductID]))
-  },
-  [product.resetProducts](state, { payload: { matches } }) {
-    return {}
-  }
-}, intialSatateproductIDsByProductName);
-
-const reducer = combineReducers(reducerProduct, productIDsByProductName, productEntities, productSearch);
-
-export default reducer;
+export default combineReducers({
+  products,
+  productIDsByProductName,
+  productEntities,
+  productSearch
+})

@@ -24,24 +24,21 @@ export default async function configureStore(initialState) {
     )
   } else {
     storeEnhancers = compose(
-      applyMiddleware(
-        routerMiddleware(history),
-        thunkMiddleware
-      )
+      applyMiddleware(routerMiddleware(history), thunkMiddleware)
     )
   }
 
   await localForage.defineDriver(cordovaSQLiteDriver)
 
-  localForage.setDriver([
-    localForage.INDEXEDDB,
-    cordovaSQLiteDriver._driver
-  ])
+  localForage.setDriver([localForage.INDEXEDDB, cordovaSQLiteDriver._driver])
 
-  const reducer = persistCombineReducers({
-    key: 'root',
-    storage: localForage
-  }, reducers)
+  const reducer = persistCombineReducers(
+    {
+      key: 'root',
+      storage: localForage
+    },
+    reducers
+  )
 
   const store = createStore(
     connectRouter(history)(reducer),
@@ -57,15 +54,12 @@ export default async function configureStore(initialState) {
     })
 
     module.hot.accept('./helpers/ducks', () => {
-     // renderWithHotReload(require('./components/AppProvider').default, persistor, store)
+      // renderWithHotReload(require('./components/AppProvider').default, persistor, store)
     })
   }
 
   return { persistor, store }
 }
-
-
-
 
 // import thunkMiddleware from 'redux-thunk'
 // import { createStore, applyMiddleware, compose } from 'redux'

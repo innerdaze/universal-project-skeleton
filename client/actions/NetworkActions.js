@@ -1,7 +1,4 @@
-import {
-  NET_FAIL_OFFLINE,
-  NET_FAIL_NO_SESSION
-} from '../constants/ActionTypes'
+import { NET_FAIL_OFFLINE, NET_FAIL_NO_SESSION } from '../constants/ActionTypes'
 import { failIfMissing } from '../helpers/Function'
 import { login } from './SessionActions'
 import { displayError } from './ErrorActions'
@@ -26,8 +23,8 @@ export function callApi({
   success = json => json,
   failure = error => error,
   skipSessionCheck = false
-}) {debugger
-  return function (dispatch, getState) {
+}) {
+  return function(dispatch, getState) {
     if (!isOnline()) {
       dispatch(networkFailOffline())
       return
@@ -48,28 +45,28 @@ export function callApi({
           params
         })
       })
-      .then(res => res.json())
-      .then(async res => {
-        if (!skipSessionCheck && !validateSession(res)) {
-          await dispatch(login('apiuser', 'api.123'))
-          return restart()
-        }
+        .then(res => res.json())
+        .then(async res => {
+          if (!skipSessionCheck && !validateSession(res)) {
+            await dispatch(login('apiuser', 'api.123'))
+            return restart()
+          }
 
-        if (res.error) {
-          throwError(res.error)
-        }
+          if (res.error) {
+            throwError(res.error)
+          }
 
-        if (!validateResCode(res)) {
-          throwError(res, res.result.Result.ResMessage.ResMessage)
-        }
+          if (!validateResCode(res)) {
+            throwError(res, res.result.Result.ResMessage.ResMessage)
+          }
 
-        return res
-      })
-      .then(success)
-      .catch(error => {
-        dispatch(displayError(error.message))
-        failure(error)
-      })
+          return res
+        })
+        .then(success)
+        .catch(error => {
+          dispatch(displayError(error.message))
+          failure(error)
+        })
     })()
   }
 }
@@ -84,10 +81,10 @@ export function validateResCode(data) {
 export function validateSession(data) {
   return !(
     data.result.Result.ResCode === 99 &&
-    ( data.result.Result.ResMessage === 'Session has expired' ||
+    (data.result.Result.ResMessage === 'Session has expired' ||
       data.result.Result.ResMessage.ResMessage === 'Session has expired' ||
-      data.result.Result.ResMessage === '[DBNETLIB][ConnectionOpen (Connect()).]SQL Server does not exist or access denied.'
-    )
+      data.result.Result.ResMessage ===
+        '[DBNETLIB][ConnectionOpen (Connect()).]SQL Server does not exist or access denied.')
   )
 }
 
@@ -98,19 +95,20 @@ export function throwError(data, errorMessage) {
 }
 
 export function checkStatusAndParseJSON(response) {
-  return response.json()
-    .then(data => {
-      if (
-        data.result.Result.ResMessage.ResCode === 0 ||
-        data.result.Result.ResCode === 0
-      ) {
-        return data
-      }
+  return response.json().then(data => {
+    if (
+      data.result.Result.ResMessage.ResCode === 0 ||
+      data.result.Result.ResCode === 0
+    ) {
+      return data
+    }
 
-      throwError(data, data.result.Result.ResMessage.ResMessage)
-    })
+    throwError(data, data.result.Result.ResMessage.ResMessage)
+  })
 }
 
 export function isOnline() {
-  return window.cordova && window.navigator ? navigator.connection.type !== navigator.connection.NONE : true
+  return window.cordova && window.navigator
+    ? navigator.connection.type !== navigator.connection.NONE
+    : true
 }

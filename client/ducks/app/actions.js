@@ -1,4 +1,4 @@
-import { createActions } from 'redux-actions';
+import { createActions } from 'redux-actions'
 import { createIdentityActionMap } from '../../helpers/ducks'
 const identityActions = createIdentityActionMap(
   'APP_INITIALIZE',
@@ -11,7 +11,5 @@ export default createActions({
     APP_SET_API_ROOT: apiRoot => ({ apiRoot }),
     APP_SET_STORE_ID: storeID => ({ storeID }),
     ...identityActions
-
   }
-}
-)
+})
