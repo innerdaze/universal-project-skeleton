@@ -1,6 +1,6 @@
 import reducer from './reducer'
 
 export appSelectors from './selectors'
-export appOperations from './oprations'
+export appOperations from './operations'
 
 export default reducer

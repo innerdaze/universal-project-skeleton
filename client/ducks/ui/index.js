@@ -1,6 +1,6 @@
 import reducer from './reducers'
 
 export uiSelectors from './selectors'
-export uiOperations from './oprations'
+export uiOperations from './operations'
 
 export default reducer
