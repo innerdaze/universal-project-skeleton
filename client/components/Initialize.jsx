@@ -84,7 +84,7 @@ class Initialize extends Component {
 
 Initialize.propTypes = {
   onApiRootFormSubmit: PropTypes.func.isRequired,
-  apiRootValidationError: PropTypes.string
+  apiRootValidationError: PropTypes.any
 }
 
 Initialize.defaultProps = {

@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions'
 import actions from './actions'
-import { keyBy, fromPairs } from 'lodash'
-
+import { keyBy, fromPairs, map } from 'lodash'
 const { barcode } = actions
 
 const initialStateBarcodeLookup = {

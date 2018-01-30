@@ -2,34 +2,34 @@ import actions from './actions'
 import { networkOperations } from '../network'
 import { v4 as uuidGen } from 'uuid'
 import { find, filter, includes, map } from 'lodash'
-  
-  const fetchProducts=()=> {
-    return dispatch => {
-      dispatch(actions.requestProducts())
-  
-      return dispatch(networkOperations.callApi({
-        service: 'HandheldService.GetProducts',
-        params: {
-          GetOptions: 0
-        },
-        success: json => dispatch(actions.receiveProducts(json.result.Result.ListOfProducts))
-      }))
-    }
-  }
+const productAction = actions.product
+const fetchProducts = () => {
+  return dispatch => {
+    dispatch(productAction.requestProducts())
 
-  const findProductByProductName=(productName) =>{
-    return (dispatch, getState) => {
-      const productID = getState().productIDsByProductName[productName]
-      return productID && getState().productEntities[productID]
-    }
+    return dispatch(networkOperations.callApi({
+      service: 'HandheldService.GetProducts',
+      params: {
+        GetOptions: 0
+      },
+      success: json => dispatch(productAction.receiveProducts(json.result.Result.ListOfProducts))
+    }))
   }
+}
 
-  /**
- * Experimental Spec:
- *  search functions return "starts with" results (Array)
- *  find functions return "exact match" result (Object)
- */
-const searchProductByProductName=(productNameStub)=> {
+const findProductByProductName = (productName) => {
+  return (dispatch, getState) => {
+    const productID = getState().productIDsByProductName[productName]
+    return productID && getState().productEntities[productID]
+  }
+}
+
+/**
+* Experimental Spec:
+*  search functions return "starts with" results (Array)
+*  find functions return "exact match" result (Object)
+*/
+const searchProductByProductName = (productNameStub) => {
   return (dispatch, getState) => {
     const productEntities = getState().productEntities
 
@@ -38,23 +38,23 @@ const searchProductByProductName=(productNameStub)=> {
     )), id => productEntities[id])
   }
 }
-const searchProducts=(query, lookupFunction)=> {
+const searchProducts = (query, lookupFunction) => {
   return dispatch => {
-    dispatch(actions.startProductSearch())
+    dispatch(productAction.startProductSearch())
 
     const matches = dispatch(lookupFunction(query))
 
     if (!matches || matches.length === 0) {
-      dispatch(actions.failProductSearch(query))
+      dispatch(productAction.failProductSearch(query))
       return
     }
 
-    dispatch(actions.succeedProductSearch(matches))
+    dispatch(productAction.succeedProductSearch(matches))
   }
 }
-  export default {
-    searchProducts,
-    searchProductByProductName,
-    findProductByProductName,
-    fetchProducts
-  }
+export default {
+  searchProducts,
+  searchProductByProductName,
+  findProductByProductName,
+  fetchProducts
+}

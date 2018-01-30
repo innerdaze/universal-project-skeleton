@@ -2,6 +2,7 @@
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions'
 import actions from './actions'
+import { api } from '../../config';
 const { app } = actions
 const initialState = {
   isInitialized: false,
@@ -10,19 +11,19 @@ const initialState = {
   storeID: '0'
 }
 const reducer = handleActions({
-  [app.appInitialize](state) {debugger
+  [app.appInitialize](state) {
     return {
       ...state,
       isInitialized: true
     }
   },
-  [app.appSetApiRoot](state, { payload: { apiRoot } }) {
+  [app.appSetApiRoot](state, { payload: { apiRoot } }) {console.log('api called'+ apiRoot)
     return {
       ...state,
       apiRoot: apiRoot
     }
   },
-  [app.appSetApiRoot](state, { payload: { storeID } }) {
+  [app.appSetStoreId](state, { payload: { storeID } }) {
     return {
       ...state,
       storeID: storeID

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions'
 import actions from './actions'
-import { keyBy, difference, fromPairs } from 'lodash'
+import { keyBy, difference, fromPairs, map } from 'lodash'
 
 const { product } = actions
 

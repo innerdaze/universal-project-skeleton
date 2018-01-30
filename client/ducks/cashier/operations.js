@@ -1,51 +1,51 @@
 import actions from './actions'
 import { networkOperations } from '../network'
 import { errorOperations } from '../error'
-
-const fetchCashiers=() =>{
+const cashierAction = actions.cashier
+const fetchCashiers = () => {
   return dispatch => {
-    dispatch(requestCashiers())
+    dispatch(cashierAction.requestCashiers())
 
     return dispatch(networkOperations.callApi({
       service: 'CashierService.GetCashiers',
       params: {
         StoreID: 0
       },
-      success: json => dispatch(actions.receiveCashiers(json.result.Result.ListOfCashiers))
+      success: json => dispatch(cashierAction.receiveCashiers(json.result.Result.ListOfCashiers))
     }))
   }
 }
 //login varify
-  const loginCashier=(id, password)=> {
-    return (dispatch, getState) => {
-      dispatch(actions.loginCashier())
-  
-      const error = `Username or password not found`
-  
-      const cashier = getState().cashierEntities[id]
-  
-      if (!cashier) {
-        dispatch(actions.failLoginCashier(error))
-        dispatch(errorOperations.displayError(error))
-        return
-      }
-  
-      if (cashier.CashierPassword !== password) {
-        dispatch(actions.failLoginCashier(error))
-        dispatch(errorOperations.displayError(error))
-        return
-      }
-  
-      dispatch(errorOperations.dismissError())
-      dispatch(actions.succeedLoginCashier(cashier))
+const loginCashier = (id, password) => {
+  return (dispatch, getState) => {
+    dispatch(cashierAction.loginCashier())
+
+    const error = `Username or password not found`
+
+    const cashier = getState().cashierEntities[id]
+
+    if (!cashier) {debugger
+      dispatch(cashierAction.failLoginCashier(error))
+      dispatch(errorOperations.displayError(error))
+      return
     }
+
+    if (cashier.CashierPassword !== password) {debugger
+      dispatch(cashierAction.failLoginCashier(error))
+      dispatch(errorOperations.displayError(error))
+      return
+    }
+
+    dispatch(errorOperations.dismissError())
+    dispatch(cashierAction.succeedLoginCashier(cashier))
   }
-  //logout user
-  const logoutCashier=() =>{
-   dispatch(actions.logoutCashier());
-  }
-  export default {
-    loginCashier,
-    fetchCashiers,
-    logoutCashier
-  }
+}
+//logout user
+const logoutCashier = () => {
+  dispatch(cashierAction.logoutCashier());
+}
+export default {
+  loginCashier,
+  fetchCashiers,
+  logoutCashier
+}

@@ -1,16 +1,16 @@
 import actions from './actions'
+const validationAction = actions.validation
 
-
-const validate=({ fieldID, value, validation, error })=> {
+const validate = ({ fieldID, value, validation, error }) => {debugger
   return dispatch => {
     if (!(validation(value))) {
-      dispatch(actions.invalidate({ fieldID, error }))
+      dispatch(validationAction.invalidate({ fieldID, error }))
       return false
     }
-    dispatch(actions.validate(fieldID))
+    dispatch(validationAction.validate(fieldID))
     return true
   }
 }
-  export default {
-    validate
-  }
+export default {
+  validate
+}

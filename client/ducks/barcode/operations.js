@@ -1,39 +1,40 @@
 import actions from './actions'
 import { networkOperations } from '../network'
 import { errorOperations } from '../error'
+const barcodeAction = actions.barcode
+debugger
+const fetchBarcodes = () => {
+  return dispatch => {
+    dispatch(barcodeAction.requestBarcodes())
 
-  const fetchBarcodes=() =>{
-    return dispatch => {
-      dispatch(requestBarcodes())
-  
-      return dispatch(networkOperations.callApi({
-        service: 'HandheldService.GetBarcodes',
-        params: {
-          GetOptions: 0
-        },
-        success: json => dispatch(actions.receiveBarcodes(json.result.Result.ListOfBarcodes))
-      }))
+    return dispatch(networkOperations.callApi({
+      service: 'HandheldService.GetBarcodes',
+      params: {
+        GetOptions: 0
+      },
+      success: json => dispatch(barcodeAction.receiveBarcodes(json.result.Result.ListOfBarcodes))
+    }))
+  }
+}
+
+const _findBarcodeByID = (barcodeID) => {
+  return function (dispatch, getState) {
+    dispatch(barcodeAction.lookupBarcode(barcodeID))
+
+    const barcode = getState().barcodeEntities[barcodeID]
+
+    if (barcode) {
+      dispatch(barcodeAction.succeedLookupBarcode(barcodeID))
+      dispatch(barcodeAction.dismissError())
+    } else {
+      dispatch(barcodeAction.failLookupBarcode(barcodeID))
+      dispatch(errorOperations.displayError('No match for barcode'))
     }
+
+    return barcode
   }
-  
-  const _findBarcodeByID=(barcodeID)=> {
-    return function (dispatch, getState) {
-      dispatch(actions.lookupBarcode(barcodeID))
-  
-      const barcode = getState().barcodeEntities[barcodeID]
-  
-      if (barcode) {
-        dispatch(actions.succeedLookupBarcode(barcodeID))
-        dispatch(errorOperations.dismissError())
-      } else {
-        dispatch(actions.failLookupBarcode(barcodeID))
-        dispatch(errorOperations.displayError('No match for barcode'))
-      }
-  
-      return barcode
-    }
-  }
-  export default {
-    fetchBarcodes,
-    _findBarcodeByID
-  }
+}
+export default {
+  fetchBarcodes,
+  _findBarcodeByID
+}
