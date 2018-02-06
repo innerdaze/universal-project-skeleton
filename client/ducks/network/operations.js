@@ -40,18 +40,18 @@ const callApi = ({
             return restart()
           }
 
-          if (res.error) {debugger
+          if (res.error) {
             throwError(res.error)
           }
 
-          if (!validateResCode(res)) {debugger
+          if (!validateResCode(res)) {
             throwError(res, res.result.Result.ResMessage.ResMessage)
           }
 
           return res
         })
         .then(success)
-        .catch(error => {debugger
+        .catch(error => {
           dispatch(errorOperations.displayError(error.message))
           failure(error)
         })

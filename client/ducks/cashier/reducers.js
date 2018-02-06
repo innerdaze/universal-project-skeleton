@@ -13,7 +13,8 @@ const initialState = {
   isAuthenticating: false,
   authError: null
 }
-const reducer = handleActions({
+const initialStateEntities={}
+const cashiers = handleActions({
   [cashier.invalidateCashiers](state) {
     return {
       ...state,
@@ -67,8 +68,18 @@ const reducer = handleActions({
       ...state,
       activeCashier: null
     }
-  },
-
+  }
 }, initialState)
+const cashierEntities= handleActions({
+  [cashier.receiveCashiers](state,{payload:{json}}) {
+    return keyBy(json.filter(item => !item.Deleted), 'CashierID')
+  },
+  [cashier.resetCashiers](state) {
+    return {}
+  }
+}, initialStateEntities)
 
-export default reducer
+export default combineReducers({
+  cashiers,
+  cashierEntities
+})

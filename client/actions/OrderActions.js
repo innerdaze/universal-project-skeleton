@@ -148,7 +148,7 @@ export function processOrders() {
   }
 }
 
-export function changeOperationMode(mode) {debugger
+export function changeOperationMode(mode) {
   return {
     type: CHANGE_OPERATION_MODE,
     mode

@@ -14,12 +14,12 @@ const login = (userID, password) => {
         UserID: userID,
         Password: password
       },
-      success: json => {debugger
+      success: json => {
         dispatch(sessionAction.receiveLogin())
         dispatch(sessionAction.startSession(json.result.Result.SessionID))
         dispatch(sessionAction.succeedLogin(json.result.Result.UserData))
       },
-      error: error => {debugger
+      error: error => {
         const message = error ? error.message : 'Could not login at this time. Please try again later or contact support'
         dispatch(sessionAction.failLogin(message))
         dispatch(errorOperations.displayError(message))

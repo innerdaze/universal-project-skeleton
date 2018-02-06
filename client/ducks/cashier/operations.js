@@ -22,30 +22,29 @@ const loginCashier = (id, password) => {
 
     const error = `Username or password not found`
 
-    const cashier = getState().cashierEntities[id]
+    const cashier = getState().cashier.cashierEntities[id]
 
-    if (!cashier) {debugger
+    if (!cashier) {
       dispatch(cashierAction.failLoginCashier(error))
       dispatch(errorOperations.displayError(error))
       return
     }
 
-    if (cashier.CashierPassword !== password) {debugger
+    if (cashier.CashierPassword !== password) {
       dispatch(cashierAction.failLoginCashier(error))
       dispatch(errorOperations.displayError(error))
       return
     }
-
     dispatch(errorOperations.dismissError())
     dispatch(cashierAction.succeedLoginCashier(cashier))
   }
 }
 //logout user
-const logoutCashier = () => {
-  dispatch(cashierAction.logoutCashier());
-}
+// const logoutCashier = () => {
+//   dispatch(cashierAction.logoutCashier());
+// }
 export default {
+  ...actions.cashier,
   loginCashier,
-  fetchCashiers,
-  logoutCashier
+  fetchCashiers
 }

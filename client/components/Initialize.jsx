@@ -16,7 +16,8 @@ class Initialize extends Component {
     super(props)
 
     this.state = {
-      apiRoot: ''
+      apiRoot: '',
+      storeID:''
     }
 
     this.handleApiRootFieldChange = this.handleApiRootFieldChange.bind(this)

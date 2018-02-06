@@ -7,9 +7,9 @@ import { sessionSelectors } from '../ducks/session'
 
 export default connect(
   state => ({
-    isLoggedIn: sessionSelectors.isLoggedIn,
-    isInitialized: appSelectors.isInitialized,
-    apiRootValidationError: sessionSelectors.apiRootValidationError
+    isLoggedIn: sessionSelectors.isLoggedIn(state),
+    isInitialized: appSelectors.isInitialized(state),
+    apiRootValidationError: sessionSelectors.apiRootValidationError(state)
   }),
   dispatch => ({
     onApiRootFormSubmit: data => {

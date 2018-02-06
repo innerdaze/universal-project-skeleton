@@ -20,18 +20,18 @@ const testAPIRoot = () => {
       skipSessionCheck: true,
       method: 'post',
       success: () => dispatch(appAction.apiRootValid()),
-      error: error => {debugger
+      error: error => {
         dispatch(errorOperations.displayError(error.message))
         dispatch(appAction.apiRootInvalid())
       }
     }))
   }
 }
-const appReset = () => {
-  return async dispatch => {
-    return dispatch(appReset())
-  }
-}
+// const appReset = () => {
+//   return async dispatch => {
+//     return dispatch(appReset())
+//   }
+// }
 
 /**
  * Validation is the responsibilty of the input mechanism
@@ -92,5 +92,6 @@ export default {
   setApiRoot,
   checkInitialised,
   reset,
-  setStoreID
+  setStoreID,
+  ...actions.app
 }

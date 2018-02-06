@@ -1,21 +1,21 @@
 import { connect } from 'react-redux'
 import BarcodeInputForm from '../components/BarcodeInputForm'
-import { orderOperations } from '../ducks/order'
+import { orderOperations,orderSelectors } from '../ducks/order'
 import { barcodeSelectors } from '../ducks/barcode'
 import { syncSelectors } from '../ducks/sync'
 import { uiSelectors } from '../ducks/ui'
-import { orderSelectors } from '../ducks/barcode'
+//import { orderSelectors } from '../ducks/barcode'
 const mapStateToProps = state => {
   return {
-    error: barcodeSelectors.lastError,
+    error: barcodeSelectors.lastError(state),
     shouldFocusField: (
-        !uiSelectors.mainMenuVisible &&
-        !orderSelectors.isChangingOrderQuantity &&
-        !orderSelectors.pendingModification &&
-        !orderSelectors.isProcessing &&
-        !orderSelectors.pendingTransaction &&
-        !orderSelectors.isDeletingOrder &&
-        !syncSelectors.isSyncing
+        !uiSelectors.mainMenuVisible(state) &&
+        !orderSelectors.isChangingOrderQuantity(state) &&
+        !orderSelectors.pendingModification(state) &&
+        !orderSelectors.isProcessing(state) &&
+        !orderSelectors.pendingTransaction(state) &&
+        !orderSelectors.isDeletingOrder(state) &&
+        !syncSelectors.isSyncing(state)
     )
   }
 }

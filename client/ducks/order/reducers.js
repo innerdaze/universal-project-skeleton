@@ -18,7 +18,7 @@ const initialState = {
   isChangingOrderQuantity: false,
   changingOrderQuantityFor: null
 }
-const reducer = handleActions({
+const orders = handleActions({
   [order.addOrder] (state,{payload:{id,order}}) {
     return {
       ...state,
@@ -40,7 +40,7 @@ const reducer = handleActions({
       isDeletingOrder: true
     }
   },
-  [order.deleteOrder] (state,{payload:{id}}) {
+  [order.deleteOrder] (state,{payload:{id}}) {debugger
     return {
       ...state,
       isDeletingOrder: false,
@@ -55,7 +55,7 @@ const reducer = handleActions({
       isProcessing: true
     }
   },
-  [order.ReceiveProcessOrders] (state) {
+  [order.receiveProcessOrders] (state) {
     return {
       ...state,
       isProcessing: false,
@@ -77,7 +77,7 @@ const reducer = handleActions({
     isProcessing: false
   }
 },
-[order.changeOprationMode] (state,{payload:{mode}}) {
+[order.changeOperationMode] (state,{payload:{mode}}) {
   return {
     ...state,
     mode: mode
@@ -95,7 +95,7 @@ const reducer = handleActions({
     pendingTransaction: null
   }
 },
-[order.startChangingorderQuantity] (state,{payload:{order}}) {
+[order.startChangingOrderQuantity] (state,{payload:{order}}) {
   return {
     ...state,
     isChangingOrderQuantity: true,
@@ -157,8 +157,42 @@ const reducer = handleActions({
   }
 }
 }, initialState)
+const orderEntities=handleActions({
+  [order.addOrder] (state,{payload:{id,order}}) {
+    return {
+      ...state,
+      [id]: order
+    }
+  }  ,
+  [order.deleteOrder] (state,{payload:{id}}) {
+ 
+    const newState = { ...state }
 
-export default reducer
+    delete newState[id]
+
+    return newState
+ 
+  }
+, [order.changeOrderQuantity] (state,{payload:{id,quantity}}) {
+  return {
+    ...state,
+    [id]: {
+      ...state[id],
+      Qty: quantity
+    }
+  }
+}
+, [order.receiveOrders] (state,{payload}) {
+  return keyBy(payload, '_id')
+  }
+}, {})
+
+
+export default combineReducers({
+  orders,
+  orderEntities
+})
+
 
 
 

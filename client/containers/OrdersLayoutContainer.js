@@ -4,11 +4,11 @@ import { orderOperations,orderSelectors } from '../ducks/order'
 import { uiSelectors } from '../ducks/ui'
 export default connect(
   state => ({
-    mainMenuVisible: uiSelectors.mainMenuVisible,
-    pendingTransaction: orderSelectors.pendingTransaction,
-    pendingModification: orderSelectors.pendingModification,
-    isChangingOrderQuantity: orderSelectors.isChangingOrderQuantity,
-    changingOrderQuantityFor: orderSelectors.changingOrderQuantityFor
+    mainMenuVisible: uiSelectors.mainMenuVisible(state),
+    pendingTransaction: orderSelectors.pendingTransaction(state),
+    pendingModification: orderSelectors.pendingModification(state),
+    isChangingOrderQuantity: orderSelectors.isChangingOrderQuantity(state),
+    changingOrderQuantityFor: orderSelectors.changingOrderQuantityFor(state)
   }),
   dispatch => ({
     onPromptStartModifyingSubmit: transaction => {

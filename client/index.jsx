@@ -6,10 +6,10 @@ import { AppContainer } from 'react-hot-loader'
 import StackTrace from 'stacktrace-js'
 import { logError } from './helpers/reporting'
 import configureStore from './store'
-import Root from './components/Root'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/es/integration/react'
 import RootContainer from './containers/RootContainer'
+import App from './components/App'
 function renderWithHotReload(RootElement, persistor, store) {
   render(
     <AppContainer>
@@ -39,15 +39,14 @@ function renderWithHotReload(RootElement, persistor, store) {
 
 async function startApp() {
   try {
-    const { persistor, store }  = await configureStore()
+    const  {persistor, store}   = await configureStore()
 
-    renderWithHotReload(Root,persistor, store)
+    renderWithHotReload(RootContainer, persistor, store)
 
     if (module.hot) {
-      module.hot.accept('./components/Root', () => {
-        renderWithHotReload(require('./components/Root').default, persistor, store)
-        // const NextRootContainer = require('./containers/RootContainer').default
-         renderWithHotReload(<NextRootContainer/>, store)
+      module.hot.accept('./components/AppWrapper', () => {
+        renderWithHotReload(require('./components/AppWrapper').default, persistor, store)
+        // renderWithHotReload(<NextRootContainer/>, store)
       })
     }
   } catch (e) {

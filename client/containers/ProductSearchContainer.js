@@ -4,7 +4,7 @@ import { productOperations,productSelectors } from '../ducks/product'
 import {  orderOperations } from '../ducks/order'
 
 export default connect(state => ({
-  results: productSelectors.lastMatches
+  results: productSelectors.lastMatches(state)
 }), dispatch => ({
   search: query => dispatch(productOperations.searchProducts(query, productOperations.searchProductByProductName)),
   onSelect: product => dispatch(orderOperations.createPendingTransactionByProduct(product))

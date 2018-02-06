@@ -7,7 +7,7 @@ const initialState = {
   activeError: null
 }
 const reducer = handleActions({
-  [error.errorDisplay](state, { payload: { error } }) {
+  [error.errorDisplay](state, { payload: { error } }) {console.log('err is '+error)
     return {
       ...state,
       activeError: error

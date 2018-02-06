@@ -2,7 +2,6 @@ import actions from './actions'
 import { networkOperations } from '../network'
 import { errorOperations } from '../error'
 const barcodeAction = actions.barcode
-debugger
 const fetchBarcodes = () => {
   return dispatch => {
     dispatch(barcodeAction.requestBarcodes())
@@ -21,11 +20,11 @@ const _findBarcodeByID = (barcodeID) => {
   return function (dispatch, getState) {
     dispatch(barcodeAction.lookupBarcode(barcodeID))
 
-    const barcode = getState().barcodeEntities[barcodeID]
+    const barcode = getState().barcode.barcodeEntities[barcodeID]
 
     if (barcode) {
       dispatch(barcodeAction.succeedLookupBarcode(barcodeID))
-      dispatch(barcodeAction.dismissError())
+      dispatch(errorOperations.dismissError())
     } else {
       dispatch(barcodeAction.failLookupBarcode(barcodeID))
       dispatch(errorOperations.displayError('No match for barcode'))
@@ -35,6 +34,7 @@ const _findBarcodeByID = (barcodeID) => {
   }
 }
 export default {
+  ...actions.barcode,
   fetchBarcodes,
   _findBarcodeByID
 }
