@@ -8,7 +8,7 @@ const addOrder = (id, order) => {
   return dispatch(orderAction.addOrder(id, order))
 }
 
-const deleteOrder = (id) => {
+const deleteOrder = id => {
   return dispatch(orderAction.deleteOrder(id))
 }
 
@@ -20,7 +20,7 @@ const startDeletingOrder = () => {
   return dispatch(orderAction.startDeletingOrder())
 }
 
-const startChangingOrderQuantity = (order) => {
+const startChangingOrderQuantity = order => {
   return dispatch(orderAction.startDeletingOrder(order))
 }
 
@@ -61,51 +61,53 @@ const receiveProcessOrders = () => {
   return dispatch(orderAction.receiveProcessOrders())
 }
 
-const succeedProcessOrders = (orderIDs) => {
+const succeedProcessOrders = orderIDs => {
   return dispatch(orderAction.succeedProcessOrders(orderIDs))
 }
 
-const failProcessOrders = (error) => {
+const failProcessOrders = error => {
   return dispatch(orderAction.failProcessOrders(error))
 }
 
 const processOrders = () => {
-  return function (dispatch, getState) {
-    requestProcessOrders();
+  return function(dispatch, getState) {
+    requestProcessOrders()
 
     const { orders, orderEntities } = getState()
 
     const orderIDs = filter(orders.unprocessedItems, id => {
-      return orderEntities.hasOwnProperty(id) &&
+      return (
+        orderEntities.hasOwnProperty(id) &&
         orderEntities[id].TransType === orders.mode
+      )
     })
 
     const filteredOrders = map(orderIDs, id => {
-      return orderEntities.hasOwnProperty(id) &&
-        orderEntities[id]
+      return orderEntities.hasOwnProperty(id) && orderEntities[id]
     })
 
-    return dispatch(networkOperations.callApi({
-      service: 'HandheldService.ProcessTransactions',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      params: {
-        Data: filteredOrders
-      },
-      success: () => {
-        receiveProcessOrders();
-        succeedProcessOrders(orderIDs);
-      },
-      error: error => failProcessOrders(error)
-    }))
+    return dispatch(
+      networkOperations.callApi({
+        service: 'HandheldService.ProcessTransactions',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        params: {
+          Data: filteredOrders
+        },
+        success: () => {
+          receiveProcessOrders()
+          succeedProcessOrders(orderIDs)
+        },
+        error: error => failProcessOrders(error)
+      })
+    )
   }
 }
 
-const changeOperationMode = (mode) => {
-  debugger
+const changeOperationMode = mode => {
   return dispatch(orderAction.changeOperationMode(mode))
 }
 
-const createPendingTransaction = (transaction) => {
+const createPendingTransaction = transaction => {
   return dispatch(orderAction.createPendingTransaction(transaction))
 }
 
@@ -114,7 +116,7 @@ const discardPendingTransaction = () => {
 }
 
 const completePendingTransaction = () => {
-  return (getState) => {
+  return getState => {
     const transaction = getState().orders.pendingTransaction
 
     addOrder(transaction._id, transaction)
@@ -122,9 +124,13 @@ const completePendingTransaction = () => {
   }
 }
 
-const createPendingTransactionByProduct = (product) => {
-  return (getState) => {
-    const transaction = findTransactionByProduct(getState, product, getState().orders.mode)
+const createPendingTransactionByProduct = product => {
+  return getState => {
+    const transaction = findTransactionByProduct(
+      getState,
+      product,
+      getState().orders.mode
+    )
 
     if (transaction) {
       dispatch(promptStartModifyTransaction(transaction))
@@ -142,29 +148,39 @@ const createPendingTransactionByProduct = (product) => {
   }
 }
 
-const createPendingTransactionByBarcodeID = (barcodeID) => {
+const createPendingTransactionByBarcodeID = barcodeID => {
   return (dispatch, getState) => {
     const barcode = dispatch(barcodeOperations._findBarcodeByID(barcodeID))
 
     if (barcode) {
-      const transaction = findTransactionByBarcode(getState, barcode, getState().orders.mode)
+      const transaction = findTransactionByBarcode(
+        getState,
+        barcode,
+        getState().orders.mode
+      )
 
       if (transaction) {
-        promptStartModifyTransaction(transaction);
+        promptStartModifyTransaction(transaction)
       } else {
         const transaction = _createTransaction({
           getState,
           barcode,
           mode: getState().orders.mode
         })
-        createPendingTransaction(transaction);
-        startChangingOrderQuantity(transaction);
+        createPendingTransaction(transaction)
+        startChangingOrderQuantity(transaction)
       }
     }
   }
 }
 
-const _createTransaction = ({ getState, barcode, product, quantity = 1, mode }) => {
+const _createTransaction = ({
+  getState,
+  barcode,
+  product,
+  quantity = 1,
+  mode
+}) => {
   const productID = barcode ? barcode.ProductID : product.ProductID
 
   if (!product) {
@@ -179,7 +195,10 @@ const _createTransaction = ({ getState, barcode, product, quantity = 1, mode }) 
     Qty: quantity,
     Ref1: '',
     Ref2: '',
-    TermianlID: window.cordova && window.device ? window.device.uuid : getState().terminalID,
+    TermianlID:
+      window.cordova && window.device
+        ? window.device.uuid
+        : getState().terminalID,
     TransDate: new Date().toISOString().slice(0, -1),
     TransType: mode,
     ProductID: productID,
@@ -212,7 +231,7 @@ const findTransactionByProduct = (getState, product, mode) => {
   )
 }
 
-const promptStartModifyTransaction = (transaction) => {
+const promptStartModifyTransaction = transaction => {
   return dispatch(orderAction.promptStartModifyTransaction(transaction))
 }
 

@@ -14,11 +14,8 @@ function renderWithHotReload(RootElement, persistor, store) {
   render(
     <AppContainer>
       <Provider store={store}>
-        <PersistGate
-          loading={<div>Loading...</div>}
-          persistor={persistor}
-          >
-          <RootElement history={history}/>
+        <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
+          <RootElement history={history} />
         </PersistGate>
       </Provider>
     </AppContainer>,
@@ -39,15 +36,17 @@ function renderWithHotReload(RootElement, persistor, store) {
 
 async function startApp() {
   try {
-    const { persistor, store }  = await configureStore()
+    const { persistor, store } = await configureStore()
 
-    renderWithHotReload(Root,persistor, store)
+    renderWithHotReload(RootContainer, persistor, store)
 
     if (module.hot) {
-      module.hot.accept('./components/Root', () => {
-        renderWithHotReload(require('./components/Root').default, persistor, store)
-        // const NextRootContainer = require('./containers/RootContainer').default
-         renderWithHotReload(<NextRootContainer/>, store)
+      module.hot.accept('./containers/RootContainer', () => {
+        renderWithHotReload(
+          require('./containers/RootContainer').default,
+          persistor,
+          store
+        )
       })
     }
   } catch (e) {

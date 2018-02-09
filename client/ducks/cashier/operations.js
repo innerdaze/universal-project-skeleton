@@ -6,13 +6,18 @@ const fetchCashiers = () => {
   return dispatch => {
     dispatch(cashierAction.requestCashiers())
 
-    return dispatch(networkOperations.callApi({
-      service: 'CashierService.GetCashiers',
-      params: {
-        StoreID: 0
-      },
-      success: json => dispatch(cashierAction.receiveCashiers(json.result.Result.ListOfCashiers))
-    }))
+    return dispatch(
+      networkOperations.callApi({
+        service: 'CashierService.GetCashiers',
+        params: {
+          StoreID: 0
+        },
+        success: json =>
+          dispatch(
+            cashierAction.receiveCashiers(json.result.Result.ListOfCashiers)
+          )
+      })
+    )
   }
 }
 //login varify
@@ -22,15 +27,15 @@ const loginCashier = (id, password) => {
 
     const error = `Username or password not found`
 
-    const cashier = getState().cashierEntities[id]
+    const cashier = getState().cashier.cashierEntities[id]
 
-    if (!cashier) {debugger
+    if (!cashier) {
       dispatch(cashierAction.failLoginCashier(error))
       dispatch(errorOperations.displayError(error))
       return
     }
 
-    if (cashier.CashierPassword !== password) {debugger
+    if (cashier.CashierPassword !== password) {
       dispatch(cashierAction.failLoginCashier(error))
       dispatch(errorOperations.displayError(error))
       return
@@ -42,7 +47,7 @@ const loginCashier = (id, password) => {
 }
 //logout user
 const logoutCashier = () => {
-  dispatch(cashierAction.logoutCashier());
+  dispatch(cashierAction.logoutCashier())
 }
 export default {
   loginCashier,

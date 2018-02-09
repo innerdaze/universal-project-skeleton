@@ -16,7 +16,8 @@ class Initialize extends Component {
     super(props)
 
     this.state = {
-      apiRoot: ''
+      apiRoot: '',
+      storeID: ''
     }
 
     this.handleApiRootFieldChange = this.handleApiRootFieldChange.bind(this)
@@ -42,39 +43,36 @@ class Initialize extends Component {
 
   render() {
     return (
-      <Box
-        full
-        justify='center'
-        align='center'
-        pad={{ horizontal: 'medium' }}
-        >
+      <Box full justify="center" align="center" pad={{ horizontal: 'medium' }}>
         <Form onSubmit={this.handleFormSubmit}>
           <Header>
-            <Heading>
-              Welcome
-            </Heading>
+            <Heading>Welcome</Heading>
           </Header>
-          <Paragraph size='large'>
-            I see it's your first time here.
-          </Paragraph>
+          <Paragraph size="large">I see it's your first time here.</Paragraph>
           <Paragraph>
             Enter the API root URL provided by Orbis to get started.
           </Paragraph>
-          <FormField error={this.props.apiRootValidationError}>
-            <TextInput name='apiRoot' value={this.state.apiRoot} onDOMChange={this.handleApiRootFieldChange}/>
+          <FormField error={this.props.apiRootValidationError || ''}>
+            <TextInput
+              name="apiRoot"
+              value={this.state.apiRoot}
+              onDOMChange={this.handleApiRootFieldChange}
+            />
           </FormField>
-          <Paragraph>
-            Set the ID of your store.
-          </Paragraph>
+          <Paragraph>Set the ID of your store.</Paragraph>
           <FormField>
             <TextInput
-              name='storeID'
+              name="storeID"
               value={this.state.storeID}
               onDOMChange={this.handleStoreIDFieldChange}
             />
           </FormField>
           <Footer pad={{ vertical: 'medium' }}>
-            <Button label='Continue' type='submit' onClick={this.handleFormSubmit}/>
+            <Button
+              label="Continue"
+              type="submit"
+              onClick={this.handleFormSubmit}
+            />
           </Footer>
         </Form>
       </Box>
