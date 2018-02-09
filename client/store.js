@@ -53,9 +53,9 @@ export default async function configureStore(initialState) {
       store.replaceReducer(connectRouter(history)(reducer))
     })
 
-    module.hot.accept('./helpers/ducks', () => {
-       renderWithHotReload(require('./components/AppWrapper').default, persistor, store)
-    })
+    // module.hot.accept('./helpers/ducks', () => {
+    //    renderWithHotReload(require('./containers/RootContainer').default, persistor, store)
+    // })
   }
 
   return {persistor,store} 

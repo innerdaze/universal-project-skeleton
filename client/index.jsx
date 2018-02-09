@@ -44,8 +44,8 @@ async function startApp() {
     renderWithHotReload(RootContainer, persistor, store)
 
     if (module.hot) {
-      module.hot.accept('./components/AppWrapper', () => {
-        renderWithHotReload(require('./components/AppWrapper').default, persistor, store)
+      module.hot.accept('./containers/RootContainer', () => {
+        renderWithHotReload(require('./containers/RootContainer').default, persistor, store)
         // renderWithHotReload(<NextRootContainer/>, store)
       })
     }
