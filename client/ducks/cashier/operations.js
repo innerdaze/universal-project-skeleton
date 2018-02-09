@@ -1,21 +1,28 @@
 import actions from './actions'
 import { networkOperations } from '../network'
 import { errorOperations } from '../error'
+
 const cashierAction = actions.cashier
+
 const fetchCashiers = () => {
   return dispatch => {
     dispatch(cashierAction.requestCashiers())
 
-    return dispatch(networkOperations.callApi({
-      service: 'CashierService.GetCashiers',
-      params: {
-        StoreID: 0
-      },
-      success: json => dispatch(cashierAction.receiveCashiers(json.result.Result.ListOfCashiers))
-    }))
+    return dispatch(
+      networkOperations.callApi({
+        service: 'CashierService.GetCashiers',
+        params: {
+          StoreID: 0
+        },
+        success: json =>
+          dispatch(
+            cashierAction.receiveCashiers(json.result.Result.ListOfCashiers)
+          )
+      })
+    )
   }
 }
-//login varify
+
 const loginCashier = (id, password) => {
   return (dispatch, getState) => {
     dispatch(cashierAction.loginCashier())
@@ -39,10 +46,7 @@ const loginCashier = (id, password) => {
     dispatch(cashierAction.succeedLoginCashier(cashier))
   }
 }
-//logout user
-// const logoutCashier = () => {
-//   dispatch(cashierAction.logoutCashier());
-// }
+
 export default {
   ...actions.cashier,
   loginCashier,

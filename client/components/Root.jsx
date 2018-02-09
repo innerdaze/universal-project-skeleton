@@ -27,35 +27,51 @@ const Root = ({
           message={error}
           status='critical'
           onClose={handleNotificationClose}
-          />
+        />
       )}
-      {isSyncing && <BlockingProcessDisplay component={<BackgroundSyncProgressContainer/>}/>}
+      {isSyncing && (
+        <BlockingProcessDisplay
+          component={<BackgroundSyncProgressContainer />}
+        />
+      )}
       <Switch>
         <Route
           path='/login'
-          render={props => initialized === true ?
-          authed === false ?
-            <LoginContainer/> :
-            <Redirect to={props.from || '/'}/> :
-            <Redirect
-              to={{
-                pathname: '/initialize',
-                state: {
-                  from: props.from
-                }
-              }}
+          render={props =>
+            initialized === true ? (
+              authed === false ? (
+                <LoginContainer />
+              ) : (
+                <Redirect to={props.from || '/'} />
+              )
+            ) : (
+              <Redirect
+                to={{
+                  pathname: '/initialize',
+                  state: {
+                    from: props.from
+                  }
+                }}
               />
-        }
-          />
+            )
+          }
+        />
         <Route
           path='/initialize'
-          render={props => initialized === false ?
-            <InitializeContainer/> :
-            <Redirect to='/login'/>
-        }
-          />
-        <AuthenticatedRoute path='/orders' component={OrdersLayoutContainer} authed={authed}/>
-        <Redirect from='/' to='/orders'/>
+          render={props =>
+            initialized === false ? (
+              <InitializeContainer />
+            ) : (
+              <Redirect to='/login' />
+            )
+          }
+        />
+        <AuthenticatedRoute
+          path='/orders'
+          component={OrdersLayoutContainer}
+          authed={authed}
+        />
+        <Redirect from='/' to='/orders' />
       </Switch>
     </AppLayout>
   </ConnectedRouter>

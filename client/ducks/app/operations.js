@@ -9,45 +9,46 @@ import { errorOperations } from '../error'
 import { cashierOperations } from '../cashier'
 import { barcodeOperations } from '../barcode'
 import { productOperations } from '../product'
+
 const appAction = actions.app
-const requiredConfigs = [
-  'apiRoot'
-]
+const requiredConfigs = ['apiRoot']
+
 const testAPIRoot = () => {
   return async dispatch => {
-    return dispatch(networkOperations.callApi({
-      service: 'GeneralService.GetTimeStamp',
-      skipSessionCheck: true,
-      method: 'post',
-      success: () => dispatch(appAction.apiRootValid()),
-      error: error => {
-        dispatch(errorOperations.displayError(error.message))
-        dispatch(appAction.apiRootInvalid())
-      }
-    }))
+    return dispatch(
+      networkOperations.callApi({
+        service: 'GeneralService.GetTimeStamp',
+        skipSessionCheck: true,
+        method: 'post',
+        success: () => dispatch(appAction.apiRootValid()),
+        error: error => {
+          dispatch(errorOperations.displayError(error.message))
+          dispatch(appAction.apiRootInvalid())
+        }
+      })
+    )
   }
 }
-// const appReset = () => {
-//   return async dispatch => {
-//     return dispatch(appReset())
-//   }
-// }
 
 /**
  * Validation is the responsibilty of the input mechanism
  */
-const setApiRoot = (apiRoot) => {
+const setApiRoot = apiRoot => {
   return async (dispatch, getState) => {
     const fieldID = 'apiRoot'
     const error = 'Invalid URI'
     dispatch(appAction.appSetApiRoot(apiRoot))
 
-    if (dispatch(validationOperations.validate({
-      fieldID,
-      value: apiRoot,
-      validation: async url => isWebUri(url),
-      error
-    }))) {
+    if (
+      dispatch(
+        validationOperations.validate({
+          fieldID,
+          value: apiRoot,
+          validation: async url => isWebUri(url),
+          error
+        })
+      )
+    ) {
       await dispatch(testAPIRoot(apiRoot))
 
       if (getState().app.apiRootValid) {
@@ -67,15 +68,16 @@ const setApiRoot = (apiRoot) => {
     }
   }
 }
-const setStoreID = (storeID) => {
+const setStoreID = storeID => {
   return async dispatch => {
     dispatch(appAction.appSetStoreId(storeID))
   }
 }
-const checkInitialised = (state) => {
-  return !some(requiredConfigs, config => (
-    isUndefined(state.app[config]) || isNull(state.app[config])
-  ))
+const checkInitialised = state => {
+  return !some(
+    requiredConfigs,
+    config => isUndefined(state.app[config]) || isNull(state.app[config])
+  )
 }
 const reset = () => {
   return async dispatch => {
@@ -88,10 +90,10 @@ const reset = () => {
 }
 
 export default {
+  ...actions.app,
   testAPIRoot,
   setApiRoot,
   checkInitialised,
   reset,
-  setStoreID,
-  ...actions.app
+  setStoreID
 }

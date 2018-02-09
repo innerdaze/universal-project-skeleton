@@ -1,6 +1,6 @@
 import reducer from './reducers'
 
 export errorSelectors from './selectors'
-export errorOperations from './oprations'
+export errorOperations from './operations'
 
 export default reducer

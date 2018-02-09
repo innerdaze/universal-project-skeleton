@@ -4,7 +4,8 @@ import { errorOperations, errorSelectors } from '../ducks/error'
 import { cashierSelectors } from '../ducks/cashier'
 import { appSelectors } from '../ducks/app'
 import { syncSelectors } from '../ducks/sync'
-import {withRouter} from 'react-router-dom' 
+import { withRouter } from 'react-router-dom'
+
 export default connect(
   state => ({
     authed: Boolean(cashierSelectors.activeCashier(state)),

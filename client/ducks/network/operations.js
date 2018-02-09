@@ -13,7 +13,7 @@ const callApi = ({
   failure = error => error,
   skipSessionCheck = false
 }) => {
-  return function (dispatch, getState) {
+  return function(dispatch, getState) {
     if (!isOnline()) {
       dispatch(networkAction.netFailOffline())
       return
@@ -59,20 +59,20 @@ const callApi = ({
   }
 }
 
-const validateResCode = (data) => {
+const validateResCode = data => {
   return (
     data.result.Result.ResMessage.ResCode === 0 ||
     data.result.Result.ResCode === 0
   )
 }
 
-const validateSession = (data) => {
+const validateSession = data => {
   return !(
     data.result.Result.ResCode === 99 &&
     (data.result.Result.ResMessage === 'Session has expired' ||
       data.result.Result.ResMessage.ResMessage === 'Session has expired' ||
-      data.result.Result.ResMessage === '[DBNETLIB][ConnectionOpen (Connect()).]SQL Server does not exist or access denied.'
-    )
+      data.result.Result.ResMessage ===
+        '[DBNETLIB][ConnectionOpen (Connect()).]SQL Server does not exist or access denied.')
   )
 }
 
@@ -82,24 +82,30 @@ const throwError = (data, errorMessage) => {
   throw error
 }
 
-const checkStatusAndParseJSON = (response) => {
-  return response.json()
-    .then(data => {
-      if (
-        data.result.Result.ResMessage.ResCode === 0 ||
-        data.result.Result.ResCode === 0
-      ) {
-        return data
-      }
+const checkStatusAndParseJSON = response => {
+  return response.json().then(data => {
+    if (
+      data.result.Result.ResMessage.ResCode === 0 ||
+      data.result.Result.ResCode === 0
+    ) {
+      return data
+    }
 
-      throwError(data, data.result.Result.ResMessage.ResMessage)
-    })
+    throwError(data, data.result.Result.ResMessage.ResMessage)
+  })
 }
 
 const isOnline = () => {
-  return window.cordova && window.navigator ? navigator.connection.type !== navigator.connection.NONE : true
+  return window.cordova && window.navigator
+    ? navigator.connection.type !== navigator.connection.NONE
+    : true
 }
 
 export default {
-  callApi, validateResCode, validateSession, throwError, checkStatusAndParseJSON, isOnline
+  callApi,
+  validateResCode,
+  validateSession,
+  throwError,
+  checkStatusAndParseJSON,
+  isOnline
 }

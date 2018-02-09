@@ -6,7 +6,16 @@ import { find, filter, includes, map } from 'lodash'
 import { orderSelectors } from '../order'
 const orderAction = actions.order
 
-const { createPendingTransaction, startChangingOrderQuantity, promptStartModifyTransaction, discardPendingTransaction, addOrder, requestProcessOrders, receiveProcessOrders, succeedProcessOrders } = orderAction
+const {
+  createPendingTransaction,
+  startChangingOrderQuantity,
+  promptStartModifyTransaction,
+  discardPendingTransaction,
+  addOrder,
+  requestProcessOrders,
+  receiveProcessOrders,
+  succeedProcessOrders
+} = orderAction
 
 const finishChangingOrderQuantity = () => {
   return (dispatch, getState) => {
@@ -39,39 +48,39 @@ const changeOrderQuantity = (id, quantity) => {
 }
 
 const processOrders = () => {
-  return function (dispatch, getState) {
-    dispatch(requestProcessOrders());
+  return function(dispatch, getState) {
+    dispatch(requestProcessOrders())
 
     const state = getState()
     const orderEntities = orderSelectors.orderEntities(state)
 
     const orderIDs = filter(orderSelectors.unprocessedItems(state), id => {
-      return orderEntities.hasOwnProperty(id) &&
+      return (
+        orderEntities.hasOwnProperty(id) &&
         orderEntities[id].TransType === orderSelectors.mode(state)
+      )
     })
 
     const filteredOrders = map(orderIDs, id => {
-      return orderEntities.hasOwnProperty(id) &&
-        orderEntities[id]
+      return orderEntities.hasOwnProperty(id) && orderEntities[id]
     })
 
-    return dispatch(networkOperations.callApi({
-      service: 'HandheldService.ProcessTransactions',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      params: {
-        Data: filteredOrders
-      },
-      success: () => {
-        dispatch(receiveProcessOrders());
-        dispatch(succeedProcessOrders(orderIDs));
-      },
-      error: error => dispatch(failProcessOrders(error))
-    }))
+    return dispatch(
+      networkOperations.callApi({
+        service: 'HandheldService.ProcessTransactions',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        params: {
+          Data: filteredOrders
+        },
+        success: () => {
+          dispatch(receiveProcessOrders())
+          dispatch(succeedProcessOrders(orderIDs))
+        },
+        error: error => dispatch(failProcessOrders(error))
+      })
+    )
   }
 }
-
-
-
 
 const completePendingTransaction = () => {
   return (dispatch, getState) => {
@@ -82,7 +91,7 @@ const completePendingTransaction = () => {
   }
 }
 
-const createPendingTransactionByProduct = (product) => {
+const createPendingTransactionByProduct = product => {
   return (dispatch, getState) => {
     const state = getState()
     const orderMode = orderSelectors.mode(getState())
@@ -91,7 +100,9 @@ const createPendingTransactionByProduct = (product) => {
     if (transaction) {
       dispatch(promptStartModifyTransaction(transaction))
     } else {
-      const barcodeID = getState().barcode.barcodeIDsByProductID[product.ProductID]
+      const barcodeID = getState().barcode.barcodeIDsByProductID[
+        product.ProductID
+      ]
       const transaction = _createTransaction({
         getState,
         product,
@@ -104,7 +115,7 @@ const createPendingTransactionByProduct = (product) => {
   }
 }
 
-const createPendingTransactionByBarcodeID = (barcodeID) => {
+const createPendingTransactionByBarcodeID = barcodeID => {
   return (dispatch, getState) => {
     const barcode = dispatch(barcodeOperations._findBarcodeByID(barcodeID))
     const state = getState()
@@ -113,7 +124,7 @@ const createPendingTransactionByBarcodeID = (barcodeID) => {
       const transaction = findTransactionByBarcode(getState, barcode, orderMode)
 
       if (transaction) {
-        dispatch(promptStartModifyTransaction(transaction));
+        dispatch(promptStartModifyTransaction(transaction))
       } else {
         const transaction = _createTransaction({
           getState,
@@ -127,7 +138,13 @@ const createPendingTransactionByBarcodeID = (barcodeID) => {
   }
 }
 
-const _createTransaction = ({ getState, barcode, product, quantity = 1, mode }) => {
+const _createTransaction = ({
+  getState,
+  barcode,
+  product,
+  quantity = 1,
+  mode
+}) => {
   const productID = barcode ? barcode.ProductID : product.ProductID
 
   if (!product) {
@@ -142,7 +159,10 @@ const _createTransaction = ({ getState, barcode, product, quantity = 1, mode }) 
     Qty: quantity,
     Ref1: '',
     Ref2: '',
-    TermianlID: window.cordova && window.device ? window.device.uuid : getState().terminalID,
+    TermianlID:
+      window.cordova && window.device
+        ? window.device.uuid
+        : getState().terminalID,
     TransDate: new Date().toISOString().slice(0, -1),
     TransType: mode,
     ProductID: productID,
@@ -163,16 +183,14 @@ const findTransactionByBarcode = (getState, barcode, mode) => {
   return findTransaction(getState(), {
     TransType: mode,
     Barcode: barcode.Barcode
-  }
-  )
+  })
 }
 
 const findTransactionByProduct = (getState, product, mode) => {
   return findTransaction(getState(), {
     TransType: mode,
     ProductID: product.ProductID
-  }
-  )
+  })
 }
 
 export default {
