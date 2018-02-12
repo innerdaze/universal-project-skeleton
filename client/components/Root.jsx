@@ -11,7 +11,6 @@ import OrdersLayoutContainer from '../containers/OrdersLayoutContainer'
 import InitializeContainer from '../containers/InitializeContainer'
 import BlockingProcessDisplay from '../components/BlockingProcessDisplay'
 import BackgroundSyncProgressContainer from '../containers/BackgroundSyncProgressContainer'
-import BlueKitSite from '../dev/BlueKitSite'
 
 const Root = ({
   initialized,
@@ -56,9 +55,6 @@ const Root = ({
         }
           />
         <AuthenticatedRoute path='/orders' component={OrdersLayoutContainer} authed={authed}/>
-        { process.env.NODE_ENV === 'development' &&
-          <Route path='/bluekit' component={BlueKitSite} />
-        }
         <Redirect from='/' to='/orders'/>
       </Switch>
     </AppLayout>
