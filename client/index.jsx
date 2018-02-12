@@ -12,7 +12,7 @@ function renderWithHotReload(RootElement, store) {
   render(
     <AppContainer>
       <AppProvider store={store}>
-        <RootContainer/>
+        <RootContainer />
       </AppProvider>
     </AppContainer>,
     document.getElementById('root')
@@ -28,15 +28,14 @@ async function startApp() {
     if (module.hot) {
       module.hot.accept('./containers/RootContainer', () => {
         const NextRootContainer = require('./containers/RootContainer').default
-        renderWithHotReload(<NextRootContainer/>, store)
+        renderWithHotReload(<NextRootContainer />, store)
       })
     }
   } catch (e) {
-    StackTrace.fromError(e)
-      .then(stack => {
-        window.fabric.Crashlytics.sendNonFatalCrash(e.message, stack)
-        window.fabric.Crashlytics.sendCrash()
-      })
+    StackTrace.fromError(e).then(stack => {
+      window.fabric.Crashlytics.sendNonFatalCrash(e.message, stack)
+      window.fabric.Crashlytics.sendCrash()
+    })
   }
 }
 

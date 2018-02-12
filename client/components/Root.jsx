@@ -11,7 +11,6 @@ import OrdersLayoutContainer from '../containers/OrdersLayoutContainer'
 import InitializeContainer from '../containers/InitializeContainer'
 import BlockingProcessDisplay from '../components/BlockingProcessDisplay'
 import BackgroundSyncProgressContainer from '../containers/BackgroundSyncProgressContainer'
-import BlueKitSite from '../dev/BlueKitSite'
 
 console.log(process.env)
 
@@ -30,38 +29,51 @@ const Root = ({
           message={error}
           status='critical'
           onClose={handleNotificationClose}
-          />
+        />
       )}
-      {isSyncing && <BlockingProcessDisplay component={<BackgroundSyncProgressContainer/>}/>}
+      {isSyncing && (
+        <BlockingProcessDisplay
+          component={<BackgroundSyncProgressContainer />}
+        />
+      )}
       <Switch>
         <Route
           path='/login'
-          render={props => initialized === true ?
-          authed === false ?
-            <LoginContainer/> :
-            <Redirect to={props.from || '/'}/> :
-            <Redirect
-              to={{
-                pathname: '/initialize',
-                state: {
-                  from: props.from
-                }
-              }}
+          render={props =>
+            initialized === true ? (
+              authed === false ? (
+                <LoginContainer />
+              ) : (
+                <Redirect to={props.from || '/'} />
+              )
+            ) : (
+              <Redirect
+                to={{
+                  pathname: '/initialize',
+                  state: {
+                    from: props.from
+                  }
+                }}
               />
-        }
-          />
+            )
+          }
+        />
         <Route
           path='/initialize'
-          render={props => initialized === false ?
-            <InitializeContainer/> :
-            <Redirect to='/login'/>
-        }
-          />
-        <AuthenticatedRoute path='/orders' component={OrdersLayoutContainer} authed={authed}/>
-        { process.env.NODE_ENV === 'development' &&
-          <Route path='/bluekit' component={BlueKitSite} />
-        }
-        <Redirect from='/' to='/orders'/>
+          render={props =>
+            initialized === false ? (
+              <InitializeContainer />
+            ) : (
+              <Redirect to='/login' />
+            )
+          }
+        />
+        <AuthenticatedRoute
+          path='/orders'
+          component={OrdersLayoutContainer}
+          authed={authed}
+        />
+        <Redirect from='/' to='/orders' />
       </Switch>
     </AppLayout>
   </ConnectedRouter>

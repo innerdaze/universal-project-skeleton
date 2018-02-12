@@ -1,8 +1,6 @@
 import { PouchMiddleware as pouchMiddleware } from 'pouch-redux-middleware'
 import PouchDB from 'pouchdb'
-import {
-  RECEIVE_BARCODES
-} from '../constants/ActionTypes'
+import { RECEIVE_BARCODES } from '../constants/ActionTypes'
 
 export default pouchMiddleware({
   path: '/barcodeEntities',

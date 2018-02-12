@@ -25,18 +25,12 @@ export default async function configureStore() {
     )
   } else {
     storeEnhancers = compose(
-      applyMiddleware(
-        routerMiddleware(history),
-        thunkMiddleware
-      ),
+      applyMiddleware(routerMiddleware(history), thunkMiddleware),
       autoRehydrate()
     )
   }
 
-  const store = createStore(
-    connectRouter(history)(rootReducer),
-    storeEnhancers
-  )
+  const store = createStore(connectRouter(history)(rootReducer), storeEnhancers)
 
   if (module.hot) {
     module.hot.accept('./reducers', () => {
@@ -46,10 +40,7 @@ export default async function configureStore() {
 
   await localForage.defineDriver(cordovaSQLiteDriver)
 
-  localForage.setDriver([
-    localForage.INDEXEDDB,
-    cordovaSQLiteDriver._driver
-  ])
+  localForage.setDriver([localForage.INDEXEDDB, cordovaSQLiteDriver._driver])
 
   return store
 }
