@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
-import { changeOperationMode } from '../actions/OrderActions'
-import { uiHideMenu } from '../actions/UIActions'
+import { orderOperations } from '../ducks/order'
+import { uiOperations } from '../ducks/ui'
 import ModeSwitcher from '../components/ModeSwitcher'
 
 const mapDispatchToProps = dispatch => {
   return {
     onSwitch: mode => {
-      dispatch(changeOperationMode(mode))
-      dispatch(uiHideMenu())
+      dispatch(orderOperations.changeOperationMode(mode))
+      dispatch(uiOperations.uiHideMenu())
     }
   }
 }

@@ -12,8 +12,6 @@ import InitializeContainer from '../containers/InitializeContainer'
 import BlockingProcessDisplay from '../components/BlockingProcessDisplay'
 import BackgroundSyncProgressContainer from '../containers/BackgroundSyncProgressContainer'
 
-console.log(process.env)
-
 const Root = ({
   initialized,
   authed,

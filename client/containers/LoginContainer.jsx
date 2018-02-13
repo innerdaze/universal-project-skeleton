@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 import Login from '../components/Login'
-import { loginCashier } from '../actions/CashierActions'
-
+//import { loginCashier } from '../ducs/cashier'
+import {cashierOperations} from '../ducks/cashier'
 const mapDispatchToProps = dispatch => ({
   login: (username, password) => {
-    dispatch(loginCashier(username, password))
+    dispatch(cashierOperations.loginCashier(username, password))
   }
 })
 

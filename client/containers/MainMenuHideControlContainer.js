@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
-import { uiHideMenu } from '../actions/UIActions'
+import { uiOperations } from '../ducks/ui'
 import MainMenuHideControl from '../components/MainMenuHideControl'
 
 const mapDispatchToProps = dispatch => {
   return {
     hideMenu: () => (
-      dispatch(uiHideMenu())
+      dispatch(uiOperations.uiHideMenu())
     )
   }
 }

@@ -11,7 +11,7 @@ import {
   barcodeEntities,
   barcodeIDsByProductID
 } from './reducers/BarcodesReducer'
-import app from './reducers/AppReducer'
+import app from './ducks'
 import barcodeLookup from './reducers/BarcodeLookupReducer'
 import { session, user } from './reducers/SessionReducer'
 import sync from './reducers/SyncReducer'

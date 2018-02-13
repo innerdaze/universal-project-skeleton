@@ -1,14 +1,20 @@
 import { connect } from 'react-redux'
-import { setApiRoot, setStoreID } from '../actions/AppActions'
+//import { appOperations } from '../ducks/app'
 import Initialize from '../components/Initialize'
+//import InitializeSelector from '../selectors/InitializeSelector'
+import { appSelectors, appOperations } from '../ducks/app'
+import { sessionSelectors } from '../ducks/session'
 
-export default connect(state => ({
-  isLoggedIn: state.session.alive,
-  isInitialized: state.app.isInitialized,
-  apiRootValidationError: state.validation.apiRoot
-}), dispatch => ({
-  onApiRootFormSubmit: data => {
-    dispatch(setStoreID(data.storeID))
-    dispatch(setApiRoot(data.apiRoot))
-  }
-}))(Initialize)
+export default connect(
+  state => ({
+    isLoggedIn: sessionSelectors.isLoggedIn(state),
+    isInitialized: appSelectors.isInitialized(state),
+    apiRootValidationError: sessionSelectors.apiRootValidationError(state)
+  }),
+  dispatch => ({
+    onApiRootFormSubmit: data => {
+      dispatch(appOperations.setStoreID(data.storeID))
+      dispatch(appOperations.setApiRoot(data.apiRoot))
+    }
+  })
+)(Initialize)

@@ -1,5 +1,7 @@
 npm-debug.log
 node_modules/
+npm-debug.log
 dist/
+cordova/www/
 cordova/plugins/
 cordova/platforms/

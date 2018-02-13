@@ -103,6 +103,7 @@
     "progress-promise": "^0.0.6",
     "prop-types": "^15.5.9",
     "quagga": "^0.11.6",
+    "ramda": "^0.25.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-hot-loader": "^3.0.0-beta.7",
@@ -111,14 +112,16 @@
     "react-router-dom": "^4.0.0",
     "react-router-redux": "^5.0.0-alpha.6",
     "redux": "^3.6.0",
+    "redux-actions": "^2.2.1",
     "redux-devtools": "^3.3.2",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-extension": "^2.13.0",
     "redux-devtools-log-monitor": "^1.2.0",
     "redux-logger": "^3.0.1",
-    "redux-persist": "^4.8.0",
-    "redux-persist-transform-filter": "0.0.9",
+    "redux-persist": "^5.5.0",
+    "redux-persist-transform-filter": "^0.0.16",
     "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.1",
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.3",
     "shelljs": "^0.7.7",
@@ -138,15 +141,28 @@
     "require": "babel-register",
     "babel": "inherit"
   },
+  "eslintConfig": {
+    "plugins": [
+      "ramda"
+    ],
+    "extends": [
+      "react-app",
+      "plugin:ramda/recommended"
+    ]
+  },
   "xo": {
+    "parser": "babel-eslint",
     "space": true,
     "semicolon": false,
     "rules": {
+      "no-prototype-builtins": 0,
       "object-curly-spacing": [
-        1,
-        "always"
-      ],
-      "ava/no-skip-test": 1
+        "error",
+        "always",
+        {
+          "objectsInObjects": false
+        }
+      ]
     },
     "overrides": [
       {
@@ -162,23 +178,21 @@
         }
       },
       {
-        "extends": "xo-react",
+        "extends": [
+          "xo",
+          "xo-react"
+        ],
         "files": "client/**/*.js{,x}",
         "envs": [
           "browser"
         ],
         "rules": {
-          "unicorn/filename-case": 0,
-          "jsx-quotes": [
-            "error",
-            "prefer-single"
-          ],
-          "react/forbid-component-props": 0
+          "unicorn/filename-case": 0
         },
         "settings": {
           "import/resolver": {
             "webpack": {
-              "config": "webpack.web.js"
+              "config-index": 1
             }
           }
         }

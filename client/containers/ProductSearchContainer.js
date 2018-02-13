@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 import ProductSearch from '../components/ProductSearch'
-import { searchProductByProductName, searchProducts } from '../actions/ProductActions'
-import { createPendingTransactionByProduct } from '../actions/OrderActions'
+import { productOperations,productSelectors } from '../ducks/product'
+import {  orderOperations } from '../ducks/order'
 
 export default connect(state => ({
-  results: state.productSearch.lastMatches
+  results: productSelectors.lastMatches
 }), dispatch => ({
-  search: query => dispatch(searchProducts(query, searchProductByProductName)),
-  onSelect: product => dispatch(createPendingTransactionByProduct(product))
+  search: query => dispatch(productOperations.searchProducts(query, productOperations.searchProductByProductName)),
+  onSelect: product => dispatch(orderOperations.createPendingTransactionByProduct(product))
 }))(ProductSearch)

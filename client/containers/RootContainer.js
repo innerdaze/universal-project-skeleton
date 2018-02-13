@@ -1,17 +1,21 @@
 import { connect } from 'react-redux'
 import Root from '../components/Root'
-import { dismissError } from '../actions/ErrorActions'
-
+import { errorOperations, errorSelectors } from '../ducks/error'
+import { cashierSelectors } from '../ducks/cashier'
+import { appSelectors } from '../ducks/app'
+import { syncSelectors } from '../ducks/sync'
 export default connect(
-  state => ({
-    authed: Boolean(state.cashiers.activeCashier),
-    initialized: state.app.isInitialized,
-    error: state.error.activeError,
-    isSyncing: state.sync.isSyncing
-  }),
+  state => {
+    return {
+      authed: Boolean(cashierSelectors.activeCashier(state)),
+      initialized: appSelectors.isInitialized(state),
+      error: errorSelectors.error(state),
+      isSyncing: syncSelectors.isSyncing(state)
+    }
+  },
   dispatch => ({
     handleNotificationClose: () => {
-      dispatch(dismissError())
+      dispatch(errorOperations.dismissError())
     }
   })
 )(Root)
