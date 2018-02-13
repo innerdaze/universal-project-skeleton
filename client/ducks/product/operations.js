@@ -1,7 +1,7 @@
 import actions from './actions'
 import { networkOperations } from '../network'
 import { v4 as uuidGen } from 'uuid'
-import { find, filter, includes, map } from 'lodash'
+import { find, filter, includes, map , toLower } from 'lodash'
 const productAction = actions.product
 const fetchProducts = () => {
   return dispatch => {
@@ -19,8 +19,8 @@ const fetchProducts = () => {
 
 const findProductByProductName = (productName) => {
   return (dispatch, getState) => {
-    const productID = getState().productIDsByProductName[productName]
-    return productID && getState().productEntities[productID]
+    const productID = getState().product.productIDsByProductName[productName]
+    return productID && getState().product.productEntities[productID]
   }
 }
 
@@ -31,28 +31,29 @@ const findProductByProductName = (productName) => {
 */
 const searchProductByProductName = (productNameStub) => {
   return (dispatch, getState) => {
-    const productEntities = getState().productEntities
+    const productEntities = getState().product.productEntities
 
-    return map(filter(getState().productIDsByProductName, (id, name) => (
+    return map(filter(getState().product.productIDsByProductName, (id, name) => (
       toLower(name).includes(toLower(productNameStub))
     )), id => productEntities[id])
   }
 }
 const searchProducts = (query, lookupFunction) => {
   return dispatch => {
-    dispatch(productAction.startProductSearch())
+    dispatch(productAction.searchProducts())
 
     const matches = dispatch(lookupFunction(query))
 
     if (!matches || matches.length === 0) {
-      dispatch(productAction.failProductSearch(query))
+      dispatch(productAction.failSearchProducts(query))
       return
     }
 
-    dispatch(productAction.succeedProductSearch(matches))
+    dispatch(productAction.succeedSearchProducts(matches))
   }
 }
 export default {
+  ...actions.product,
   searchProducts,
   searchProductByProductName,
   findProductByProductName,

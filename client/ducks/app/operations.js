@@ -9,8 +9,10 @@ import { errorOperations } from '../error'
 import { cashierOperations } from '../cashier'
 import { barcodeOperations } from '../barcode'
 import { productOperations } from '../product'
+
 const appAction = actions.app
 const requiredConfigs = ['apiRoot']
+
 const testAPIRoot = () => {
   return async dispatch => {
     return dispatch(
@@ -25,11 +27,6 @@ const testAPIRoot = () => {
         }
       })
     )
-  }
-}
-const appReset = () => {
-  return async dispatch => {
-    return dispatch(appReset())
   }
 }
 
@@ -71,17 +68,20 @@ const setApiRoot = apiRoot => {
     }
   }
 }
+
 const setStoreID = storeID => {
   return async dispatch => {
     dispatch(appAction.appSetStoreId(storeID))
   }
 }
+
 const checkInitialised = state => {
   return !some(
     requiredConfigs,
     config => isUndefined(state.app[config]) || isNull(state.app[config])
   )
 }
+
 const reset = () => {
   return async dispatch => {
     dispatch(cashierOperations.resetCashiers())
@@ -93,6 +93,7 @@ const reset = () => {
 }
 
 export default {
+  ...actions.app,
   testAPIRoot,
   setApiRoot,
   checkInitialised,

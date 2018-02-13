@@ -1,7 +1,9 @@
 import actions from './actions'
 import { networkOperations } from '../network'
 import { errorOperations } from '../error'
+
 const cashierAction = actions.cashier
+
 const fetchCashiers = () => {
   return dispatch => {
     dispatch(cashierAction.requestCashiers())
@@ -20,12 +22,12 @@ const fetchCashiers = () => {
     )
   }
 }
-//login varify
+
 const loginCashier = (id, password) => {
   return (dispatch, getState) => {
     dispatch(cashierAction.loginCashier())
 
-    const error = `Username or password not found`
+    const error = 'Username or password not found'
 
     const cashier = getState().cashier.cashierEntities[id]
 
@@ -40,17 +42,13 @@ const loginCashier = (id, password) => {
       dispatch(errorOperations.displayError(error))
       return
     }
-
     dispatch(errorOperations.dismissError())
     dispatch(cashierAction.succeedLoginCashier(cashier))
   }
 }
-//logout user
-const logoutCashier = () => {
-  dispatch(cashierAction.logoutCashier())
-}
+
 export default {
+  ...actions.cashier,
   loginCashier,
-  fetchCashiers,
-  logoutCashier
+  fetchCashiers
 }

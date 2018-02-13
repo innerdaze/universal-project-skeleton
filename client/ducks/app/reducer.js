@@ -17,7 +17,7 @@ const reducer = handleActions({
       isInitialized: true
     }
   },
-  [app.appSetApiRoot](state, { payload: { apiRoot } }) {console.log('api called'+ apiRoot)
+  [app.appSetApiRoot](state, { payload: { apiRoot } }) {
     return {
       ...state,
       apiRoot: apiRoot

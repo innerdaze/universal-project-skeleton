@@ -4,7 +4,7 @@ import ProcessItemsButton from '../components/ProcessItemsButton'
 
 const mapStateToProps = state => {
   return {
-    mode: orderSelectors.mode
+    mode: orderSelectors.mode(state)
   }
 }
 

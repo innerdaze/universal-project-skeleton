@@ -1,12 +1,9 @@
-import { createActions } from 'redux-actions';
+import { createActions } from 'redux-actions'
 import { createIdentityActionMap } from '../../helpers/ducks'
-const identityActions = createIdentityActionMap(
-  'ERROR_DISMISS'
-)
+const identityActions = createIdentityActionMap('DISMISS_ERROR')
 export default createActions({
   ERROR: {
-    ERROR_DISPLAY: error => ({ error }),
+    DISPLAY_ERROR: error => ({ error }),
     ...identityActions
   }
-}
-);
+})

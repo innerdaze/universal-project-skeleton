@@ -81,10 +81,10 @@ const productSearch = handleActions(
 
 const productEntities = handleActions(
   {
-    [product.receiveProducts](state, { payload: { products } }) {
-      return keyBy(products, 'ProductID')
+    [product.receiveProducts](state, { payload:{json} }) {debugger
+      return keyBy(json, 'ProductID')
     },
-    [product.resetProducts](state, { payload: { matches } }) {
+    [product.resetProducts](state) {
       return {}
     }
   },
@@ -93,12 +93,12 @@ const productEntities = handleActions(
 
 const productIDsByProductName = handleActions(
   {
-    [product.receiveProducts](state, { payload: { products } }) {
+    [product.receiveProducts](state, { payload:{json} }) {
       return fromPairs(
-        map(products, product => [product.ProductName, product.ProductID])
+        map(json, product => [product.ProductName, product.ProductID])
       )
     },
-    [product.resetProducts](state, { payload: { matches } }) {
+    [product.resetProducts](state) {
       return {}
     }
   },

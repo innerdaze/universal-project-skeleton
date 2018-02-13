@@ -3,19 +3,18 @@ import { handleActions } from 'redux-actions'
 import actions from './actions'
 const { validation } = actions
 const initialState = {
-  mainMenuVisible: false
 }
 const reducer = handleActions({
-  [validation.invalidate] (state,{payload:{field,error}}) {
+  [validation.invalidate] (state,{payload:{fieldID,error}}) {
     return {
       ...state,
-      [field]: error
+      [fieldID]: error
     }
   },
-  [validation.validate] (state,{payload:{field}}) {
+  [validation.validate] (state,{ payload: {fieldID} }) {
     return {
       ...state,
-      [field]: null
+      [fieldID]: null
     }
   }
 }, initialState)

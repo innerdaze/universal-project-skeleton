@@ -1,24 +1,28 @@
-
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions'
 import actions from './actions'
+
 const { error } = actions
 const initialState = {
   activeError: null
 }
-const reducer = handleActions({
-  [error.errorDisplay](state, { payload: { error } }) {
-    return {
-      ...state,
-      activeError: error
+
+const reducer = handleActions(
+  {
+    [error.displayError](state, { payload: { error } }) {
+      return {
+        ...state,
+        activeError: error
+      }
+    },
+    [error.dismissError](state) {
+      return {
+        ...state,
+        activeError: null
+      }
     }
   },
-  [error.errorDismiss](state) {
-    return {
-      ...state,
-      activeError: null
-    }
-  }
-}, initialState)
+  initialState
+)
 
 export default reducer

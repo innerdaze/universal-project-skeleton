@@ -2,24 +2,26 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import ScannedItemList from '../components/ScannedItemList'
 import { orderOperations, orderSelectors } from '../ducks/order'
-
+import { map } from 'lodash'
 const mapStateToProps = state => {
+  const orderEntities=orderSelectors.orderEntities(state)
   return {
-    isProcessing: orderSelectors.isProcessing,
-    isDeletingOrder: orderSelectors.isDeletingOrder,
-    items: _(orderSelectors.unprocessedItems)
+    isProcessing: orderSelectors.isProcessing(state),
+    isDeletingOrder: orderSelectors.isDeletingOrder(state),
+    items: _(orderSelectors.unprocessedItems(state))
       .filter(id => {
-        return state.orderEntities[id] &&
-          state.orderEntities[id].TransType === state.orders.mode
+        return orderEntities[id] &&
+        orderEntities[id].TransType === orderSelectors.mode(state)
       })
       .map(id => {
-        const order = state.orderEntities[id]
+        debugger
+        const order = orderEntities[id]
 
         if (order) {
           let product
 
           if (order.ProductID) {
-            product = state.productEntities[order.ProductID]
+            product = state.product.productEntities[order.ProductID]
           }
 
           if (product) {

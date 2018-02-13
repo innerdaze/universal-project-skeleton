@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import BackgroundSyncProgress from '../components/BackgroundSyncProgress'
-
+import { syncSelectors } from '../ducks/sync'
 const mapStateToProps = state => {
   return {
-    progress: state.sync.progress
+    progress: syncSelectors.progress(state)
   }
 }
 
