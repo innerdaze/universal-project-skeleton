@@ -46,7 +46,6 @@ class ChangeOrderQuantityForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-debugger
     this.props.handleSubmit(this.props.order._id, this.state.quantity)
   }
 
@@ -69,15 +68,11 @@ debugger
       <Layer>
         <Form>
           <Header>
-            <Heading>
-              Set Quantity
-            </Heading>
+            <Heading>Set Quantity</Heading>
           </Header>
           {this.props.order.ProductName && (
             <Box>
-              <Label>
-                {this.props.order.ProductName}
-              </Label>
+              <Label>{this.props.order.ProductName}</Label>
             </Box>
           )}
           <FormField>
@@ -88,23 +83,20 @@ debugger
               value={this.state.quantity}
               ref={this.assignInputRef}
               onChange={this.handleNumberInputChange}
-              />
+            />
           </FormField>
-          <Footer
-            pad={{ vertical: 'medium' }}
-            justify='between'
-            >
+          <Footer pad={{ vertical: 'medium' }} justify='between'>
             <Anchor
               label='Cancel'
-              icon={<CloseIcon/>}
+              icon={<CloseIcon />}
               onClick={this.handleCancel}
-              />
+            />
             <Anchor
               primary
               label='Update'
-              icon={<NextLinkIcon/>}
+              icon={<NextLinkIcon />}
               onClick={this.handleSubmit}
-              />
+            />
           </Footer>
         </Form>
       </Layer>

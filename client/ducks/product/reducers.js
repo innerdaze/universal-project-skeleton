@@ -81,7 +81,7 @@ const productSearch = handleActions(
 
 const productEntities = handleActions(
   {
-    [product.receiveProducts](state, { payload:{json} }) {debugger
+    [product.receiveProducts](state, { payload: { json } }) {
       return keyBy(json, 'ProductID')
     },
     [product.resetProducts](state) {
@@ -93,7 +93,7 @@ const productEntities = handleActions(
 
 const productIDsByProductName = handleActions(
   {
-    [product.receiveProducts](state, { payload:{json} }) {
+    [product.receiveProducts](state, { payload: { json } }) {
       return fromPairs(
         map(json, product => [product.ProductName, product.ProductID])
       )

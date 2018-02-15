@@ -81,33 +81,30 @@ export default async function configureStore(initialState) {
 
   localForage.setDriver([localForage.INDEXEDDB, cordovaSQLiteDriver._driver])
 
-  const reducer = persistReducer(
-    rootPersistConfig(localForage),
-    combineReducers({
-      ...reducers,
-      app: persistReducer(appPersistConfig(localForage), reducers.app),
-      session: persistReducer(
-        sessionPersistConfig(localForage),
-        reducers.session
-      ),
-      order: persistReducer(orderPersistConfig(localForage), reducers.order),
-      product: persistReducer(
-        productPersistConfig(localForage),
-        reducers.product
-      ),
-      cashier: persistReducer(
-        cashierPersistConfig(localForage),
-        reducers.cashier
-      ),
-      barcode: persistReducer(
-        barcodePersistConfig(localForage),
-        reducers.barcode
-      )
-    })
-  )
+  const reducer = combineReducers({
+    ...reducers,
+    app: persistReducer(appPersistConfig(localForage), reducers.app),
+    session: persistReducer(
+      sessionPersistConfig(localForage),
+      reducers.session
+    ),
+    order: persistReducer(orderPersistConfig(localForage), reducers.order),
+    product: persistReducer(
+      productPersistConfig(localForage),
+      reducers.product
+    ),
+    cashier: persistReducer(
+      cashierPersistConfig(localForage),
+      reducers.cashier
+    ),
+    barcode: persistReducer(barcodePersistConfig(localForage), reducers.barcode)
+  })
 
   const store = createStore(
-    connectRouter(history)(reducer),
+    persistReducer(
+      rootPersistConfig(localForage),
+      connectRouter(history)(reducer)
+    ),
     initialState,
     storeEnhancers
   )
@@ -116,7 +113,12 @@ export default async function configureStore(initialState) {
 
   if (module.hot) {
     module.hot.accept('./ducks/index', () => {
-      store.replaceReducer(connectRouter(history)(reducer))
+      store.replaceReducer(
+        persistReducer(
+          rootPersistConfig(localForage),
+          connectRouter(history)(reducer)
+        )
+      )
     })
   }
 

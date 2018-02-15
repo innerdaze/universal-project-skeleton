@@ -19,7 +19,6 @@ const {
 
 const finishChangingOrderQuantity = () => {
   return (dispatch, getState) => {
-    debugger
     dispatch(orderAction.finishChangingOrderQuantity())
 
     if (orderSelectors.pendingTransaction(getState())) {
@@ -31,6 +30,7 @@ const finishChangingOrderQuantity = () => {
 const cancelChangingOrderQuantity = () => {
   return (dispatch, getState) => {
     dispatch(orderAction.cancelChangingOrderQuantity())
+
     if (orderSelectors.pendingTransaction(getState())) {
       dispatch(discardPendingTransaction())
     }
@@ -197,7 +197,10 @@ export default {
   ...actions.order,
   createPendingTransactionByBarcodeID,
   createPendingTransactionByProduct,
+  completePendingTransaction,
+  changeOrderQuantity,
   finishChangingOrderQuantity,
+  cancelChangingOrderQuantity,
   findTransactionByProduct,
   processOrders
 }

@@ -51,35 +51,44 @@ class ScannedItemList extends Component {
   render() {
     return (
       <Box>
-        {
-          this.props.isDeletingOrder &&
+        {this.props.isDeletingOrder && (
           <DeleteEntityForm
             message='Confirm you would like to delete this item'
             onConfirm={this.handleDeleteItemConfirm}
             onCancel={this.handleDeleteItemCancel}
-            />
-        }
-        { this.props.isProcessing &&
-          <BlockingProcessDisplay component={<Splash loadingText='Sending...'/>}/>
-        }
+          />
+        )}
+        {this.props.isProcessing && (
+          <BlockingProcessDisplay
+            component={<Splash loadingText='Sending...' />}
+          />
+        )}
         <List>
-          {this.props.items.length ?
-            this.props.items.map(item => (
-              item && <ScannedItem
-                key={item._id}
-                id={item._id}
-                productID={item.ProductID}
-                title={item.productName}
-                quantity={item.Qty}
-                onChangeQuantityClick={this.handleChangeOrderQuantityClick.bind(this, item)}
-                onDeleteClick={this.handleDeleteItemClick.bind(this, item)}
-                />
-            )) : <ListPlaceholder
+          {this.props.items.length ? (
+            this.props.items.map(
+              item =>
+                item && (
+                  <ScannedItem
+                    key={item._id}
+                    id={item._id}
+                    productID={item.ProductID}
+                    title={item.productName}
+                    quantity={item.Qty}
+                    onChangeQuantityClick={this.handleChangeOrderQuantityClick.bind(
+                      this,
+                      item
+                    )}
+                    onDeleteClick={this.handleDeleteItemClick.bind(this, item)}
+                  />
+                )
+            )
+          ) : (
+            <ListPlaceholder
               emptyMessage='Nothing to process - Add some items to get started.'
               filteredTotal={this.props.items.length}
               unfilteredTotal={this.props.items.length}
-              />
-          }
+            />
+          )}
         </List>
       </Box>
     )
@@ -91,9 +100,15 @@ ScannedItemList.propTypes = {
   onDeleteItemConfirm: PropTypes.func.isRequired,
   onDeleteItemCancel: PropTypes.func.isRequired,
   onChangeOrderQuantityClick: PropTypes.func.isRequired,
-  isDeletingOrder: PropTypes.bool.isRequired,
-  isProcessing: PropTypes.bool.isRequired,
-  items: PropTypes.array.isRequired
+  isDeletingOrder: PropTypes.bool,
+  isProcessing: PropTypes.bool,
+  items: PropTypes.array
+}
+
+ScannedItemList.defaultProps = {
+  isDeletingOrder: false,
+  isProcessing: false,
+  items: []
 }
 
 export default ScannedItemList

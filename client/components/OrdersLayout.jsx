@@ -18,8 +18,12 @@ class OrdersLayout extends Component {
       mainMenuVisible: false
     }
 
-    this.handlePromptStartModifyingSubmit = this.handlePromptStartModifyingSubmit.bind(this)
-    this.handlePromptStartModifyingCancel = this.handlePromptStartModifyingCancel.bind(this)
+    this.handlePromptStartModifyingSubmit = this.handlePromptStartModifyingSubmit.bind(
+      this
+    )
+    this.handlePromptStartModifyingCancel = this.handlePromptStartModifyingCancel.bind(
+      this
+    )
   }
 
   handlePromptStartModifyingCancel() {
@@ -36,23 +40,23 @@ class OrdersLayout extends Component {
         fixed
         priority={this.props.mainMenuVisible ? 'left' : 'right'}
         flex='right'
-        >
-        <MainMenu/>
+      >
+        <MainMenu />
         <Box justify='center' pad='medium'>
           {this.props.pendingModification && (
             <PromptStartModifyingTransaction
               order={this.props.pendingModification}
               onSubmit={this.handlePromptStartModifyingSubmit}
               onCancel={this.handlePromptStartModifyingCancel}
-              />
+            />
           )}
           {this.props.isChangingOrderQuantity && (
-            <ChangeOrderQuantityFormContainer/>
+            <ChangeOrderQuantityFormContainer />
           )}
-          <OrdersHeaderLayout/>
-          <BarcodeInputFormContainer/>
-          <ScannedItemListContainer/>
-          <ProcessItemsButtonContainer/>
+          <OrdersHeaderLayout />
+          <BarcodeInputFormContainer />
+          <ScannedItemListContainer />
+          <ProcessItemsButtonContainer />
         </Box>
       </Split>
     )
@@ -62,14 +66,15 @@ class OrdersLayout extends Component {
 OrdersLayout.propTypes = {
   mainMenuVisible: PropTypes.bool,
   pendingModification: PropTypes.object,
-  isChangingOrderQuantity: PropTypes.bool.isRequired,
+  isChangingOrderQuantity: PropTypes.bool,
   onPromptStartModifyingSubmit: PropTypes.func.isRequired,
   onPromptStartModifyingCancel: PropTypes.func.isRequired
 }
 
 OrdersLayout.defaultProps = {
   mainMenuVisible: false,
-  pendingModification: null
+  pendingModification: null,
+  isChangingOrderQuantity: false
 }
 
 export default OrdersLayout

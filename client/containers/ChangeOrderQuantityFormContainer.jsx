@@ -10,7 +10,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleSubmit: (id, quantity) => {debugger
+    handleSubmit: (id, quantity) => {
       dispatch(orderOperations.changeOrderQuantity(id, quantity))
       dispatch(orderOperations.finishChangingOrderQuantity())
     },

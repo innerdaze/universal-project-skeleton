@@ -3,18 +3,21 @@ import _ from 'lodash'
 import ScannedItemList from '../components/ScannedItemList'
 import { orderOperations, orderSelectors } from '../ducks/order'
 import { map } from 'lodash'
+
 const mapStateToProps = state => {
-  const orderEntities=orderSelectors.orderEntities(state)
+  const orderEntities = orderSelectors.orderEntities(state)
+
   return {
     isProcessing: orderSelectors.isProcessing(state),
     isDeletingOrder: orderSelectors.isDeletingOrder(state),
     items: _(orderSelectors.unprocessedItems(state))
-      .filter(id => {
-        return orderEntities[id] &&
-        orderEntities[id].TransType === orderSelectors.mode(state)
-      })
+      .filter(
+        id =>
+          orderEntities[id] &&
+          orderEntities[id].TransType === orderSelectors.mode(state)
+      )
       .map(id => {
-        debugger
+        // TODO: Move to selector
         const order = orderEntities[id]
 
         if (order) {
@@ -39,26 +42,12 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onDeleteItemClick: id => {
-      dispatch(orderOperations.startDeletingOrder(id))
-    },
-    onDeleteItemConfirm: id => {
-      dispatch(orderOperations.deleteOrder(id))
-    },
-    onDeleteItemCancel: () => {
-      dispatch(orderOperations.cancelDeletingOrder())
-    },
-    onChangeOrderQuantityClick: order => {
-      dispatch(orderOperations.startChangingOrderQuantity(order))
-    }
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  onDeleteItemClick: id => dispatch(orderOperations.startDeletingOrder(id)),
+  onDeleteItemConfirm: id => dispatch(orderOperations.deleteOrder(id)),
+  onDeleteItemCancel: () => dispatch(orderOperations.cancelDeletingOrder()),
+  onChangeOrderQuantityClick: order =>
+    dispatch(orderOperations.startChangingOrderQuantity(order))
+})
 
-const ScannedItemListContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ScannedItemList)
-
-export default ScannedItemListContainer
+export default connect(mapStateToProps, mapDispatchToProps)(ScannedItemList)

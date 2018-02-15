@@ -68,11 +68,13 @@ const validateResCode = data => {
 
 const validateSession = data => {
   return !(
-    data.result.Result.ResCode === 99 &&
+    data.result &&
+    data.result.Result &&
+    data.result.Result.ResMessage &&
     (data.result.Result.ResMessage === 'Session has expired' ||
       data.result.Result.ResMessage.ResMessage === 'Session has expired' ||
-      data.result.Result.ResMessage ===
-        '[DBNETLIB][ConnectionOpen (Connect()).]SQL Server does not exist or access denied.')
+      data.result.Result.ResMessage === 'Session not found' ||
+      data.result.Result.ResMessage.ResMessage === 'Session not found')
   )
 }
 
