@@ -31,7 +31,7 @@ const testAPIRoot = () => {
 }
 
 /**
- * Validation is the responsibilty of the input mechanism
+ * Validation is the responsibility of the input mechanism
  */
 const setApiRoot = apiRoot => {
   return async (dispatch, getState) => {
