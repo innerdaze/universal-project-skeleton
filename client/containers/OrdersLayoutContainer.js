@@ -6,10 +6,14 @@ import { uiSelectors } from '../ducks/ui'
 export default connect(
   state => ({
     mainMenuVisible: uiSelectors.mainMenuVisible(state),
-    pendingTransaction: orderSelectors.pendingTransaction(state),
-    pendingModification: orderSelectors.pendingModification(state),
-    isChangingOrderQuantity: orderSelectors.isChangingOrderQuantity(state),
-    changingOrderQuantityFor: orderSelectors.changingOrderQuantityFor(state)
+    pendingTransaction: orderSelectors.pendingTransactionSelector(state),
+    pendingModification: orderSelectors.pendingModificationSelector(state),
+    isChangingOrderQuantity: orderSelectors.isChangingOrderQuantitySelector(
+      state
+    ),
+    changingOrderQuantityFor: orderSelectors.changingOrderQuantityForSelector(
+      state
+    )
   }),
   dispatch => ({
     onPromptStartModifyingSubmit: transaction => {

@@ -4,7 +4,7 @@ import ChangeOrderQuantityForm from '../components/ChangeOrderQuantityForm'
 
 const mapStateToProps = state => {
   return {
-    order: orderSelectors.changingOrderQuantityFor(state)
+    order: orderSelectors.changingOrderQuantityForSelector(state)
   }
 }
 

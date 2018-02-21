@@ -11,7 +11,7 @@ const initialState = {
   unprocessedItems: [],
   processedItems: [],
   error: null,
-  mode: OperationModes.STOCKTAKE,
+  mode: OperationModes.ORDERING,
   pendingTransaction: null,
   pendingModification: null,
   isDeletingOrder: false,

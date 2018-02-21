@@ -2,19 +2,29 @@ import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-const AuthenticatedRoute = ({ component: RenderComponent, authed, location, ...rest }) => (
+const AuthenticatedRoute = ({
+  component: RenderComponent,
+  authed,
+  location,
+  ...rest
+}) => (
   <Route
     {...rest}
-    render={props => authed === true ?
-      <RenderComponent {...props}/> :
-      <Redirect
-        to={{
-          pathname: '/login',
-          state: {
-            from: props.location
-          } }}
-        />}
-    />
+    render={props =>
+      authed === true ? (
+        <RenderComponent {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: '/login',
+            state: {
+              from: props.location
+            }
+          }}
+        />
+      )
+    }
+  />
 )
 
 AuthenticatedRoute.propTypes = {

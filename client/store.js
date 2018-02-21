@@ -32,7 +32,9 @@ const orderPersistConfig = storage => ({
   storage,
   key: 'order',
   whitelist: ['orders', 'orderEntities'],
-  transforms: [createFilter('orders', ['unprocessedItems', 'processedItems'])]
+  transforms: [
+    createFilter('orders', ['unprocessedItems', 'processedItems', 'mode'])
+  ]
 })
 
 const productPersistConfig = storage => ({

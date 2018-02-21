@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { orderOperations } from '../ducks/order'
+import { orderOperations, orderSelectors } from '../ducks/order'
 import { uiOperations } from '../ducks/ui'
 import ModeSwitcher from '../components/ModeSwitcher'
 
@@ -13,7 +13,9 @@ const mapDispatchToProps = dispatch => {
 }
 
 const ModeSwitcherContainer = connect(
-  null,
+  state => ({
+    activeMode: orderSelectors.modeSelector(state)
+  }),
   mapDispatchToProps
 )(ModeSwitcher)
 

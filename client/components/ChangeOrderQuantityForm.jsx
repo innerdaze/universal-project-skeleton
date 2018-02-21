@@ -66,7 +66,7 @@ class ChangeOrderQuantityForm extends Component {
   render() {
     return (
       <Layer>
-        <Form>
+        <Form onSubmit={this.handleSubmit}>
           <Header>
             <Heading>Set Quantity</Heading>
           </Header>

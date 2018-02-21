@@ -11,7 +11,7 @@
     "build": "cross-env NODE_ENV=production webpack -p",
     "build:cordova:dev": "cross-env NODE_ENV=development cross-env CORDOVA=true webpack",
     "build:cordova": "cross-env NODE_ENV=production cross-env CORDOVA=true webpack --progress",
-    "build:cordova:dev:win":".\\scripts\\build-and-install-android-dev.bat",
+    "build:cordova:dev:win": ".\\scripts\\build-and-install-android-dev.bat",
     "start": "npm run babel-node",
     "clean": "rimraf dist/*",
     "clean:cordova": "rimraf dist/cordova/*",
@@ -45,10 +45,17 @@
   "author": "Lee Driscoll <lee.driscoll@orbistech.co.uk>",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.40",
+    "@babel/core": "^7.0.0-beta.40",
+    "@babel/preset-env": "^7.0.0-beta.40",
+    "@babel/preset-react": "^7.0.0-beta.40",
     "@storybook/react": "^3.1.8",
+    "autobind-decorator": "^2.1.0",
     "ava": "^0.18.2",
     "babel-cli": "^6.24.0",
-    "babel-eslint": "^7.2.1",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "7",
+    "babel-jest": "^22.4.0",
     "babel-loader": "^7.0.0",
     "babel-minify-webpack-plugin": "^0.2.0",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -59,8 +66,6 @@
     "babel-polyfill": "^6.23.0",
     "babel-preset-babili": "^0.1.4",
     "babel-preset-env": "^1.6.0",
-    "babel-preset-latest": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.24.1",
     "babelify": "^8.0.0",
@@ -74,6 +79,7 @@
     "css-loader": "^0.27.3",
     "debug": "^2.6.2",
     "eslint": "^4.17.0",
+    "eslint-config-xo": "^0.20.1",
     "eslint-config-xo-react": "^0.11.1",
     "eslint-import-resolver-webpack": "^0.8.1",
     "eslint-plugin-import": "^2.2.0",
@@ -89,6 +95,7 @@
     "html-webpack-cdn-plugin": "^0.2.0",
     "html-webpack-plugin": "^2.28.0",
     "isomorphic-fetch": "^2.2.1",
+    "jest": "^22.3.0",
     "json-loader": "^0.5.4",
     "lnk-cli": "^1.0.1",
     "localforage": "^1.5.0",
@@ -105,6 +112,7 @@
     "prop-types": "^15.5.9",
     "quagga": "^0.11.6",
     "ramda": "^0.25.0",
+    "re-reselect": "^1.0.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-hot-loader": "^3.0.0-beta.7",
@@ -122,7 +130,9 @@
     "redux-persist": "^5.5.0",
     "redux-persist-transform-filter": "^0.0.16",
     "redux-thunk": "^2.2.0",
+    "regenerator-runtime": "^0.11.1",
     "reselect": "^3.0.1",
+    "reselect-map": "^1.0.3",
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.3",
     "shelljs": "^0.7.7",
@@ -189,13 +199,6 @@
         ],
         "rules": {
           "unicorn/filename-case": 0
-        },
-        "settings": {
-          "import/resolver": {
-            "webpack": {
-              "config-index": 1
-            }
-          }
         }
       }
     ]

@@ -2,6 +2,7 @@ import actions from './actions'
 import { barcodeOperations } from '../barcode'
 import { networkOperations } from '../network'
 import { v4 as uuidGen } from 'uuid'
+import { pluck } from 'ramda'
 import { find, filter, includes, map } from 'lodash'
 import { orderSelectors } from '../order'
 const orderAction = actions.order
@@ -21,7 +22,7 @@ const finishChangingOrderQuantity = () => {
   return (dispatch, getState) => {
     dispatch(orderAction.finishChangingOrderQuantity())
 
-    if (orderSelectors.pendingTransaction(getState())) {
+    if (orderSelectors.pendingTransactionSelector(getState())) {
       dispatch(completePendingTransaction())
     }
   }
@@ -31,7 +32,7 @@ const cancelChangingOrderQuantity = () => {
   return (dispatch, getState) => {
     dispatch(orderAction.cancelChangingOrderQuantity())
 
-    if (orderSelectors.pendingTransaction(getState())) {
+    if (orderSelectors.pendingTransactionSelector(getState())) {
       dispatch(discardPendingTransaction())
     }
   }
@@ -39,7 +40,7 @@ const cancelChangingOrderQuantity = () => {
 
 const changeOrderQuantity = (id, quantity) => {
   return (dispatch, getState) => {
-    if (orderSelectors.pendingTransaction(getState())) {
+    if (orderSelectors.pendingTransactionSelector(getState())) {
       dispatch(orderAction.changePendingTransactionQuantity(quantity))
     } else {
       dispatch(orderAction.changeOrderQuantity(id, quantity))
@@ -51,30 +52,18 @@ const processOrders = () => {
   return function(dispatch, getState) {
     dispatch(requestProcessOrders())
 
-    const state = getState()
-    const orderEntities = orderSelectors.orderEntities(state)
-
-    const orderIDs = filter(orderSelectors.unprocessedItems(state), id => {
-      return (
-        orderEntities.hasOwnProperty(id) &&
-        orderEntities[id].TransType === orderSelectors.mode(state)
-      )
-    })
-
-    const filteredOrders = map(orderIDs, id => {
-      return orderEntities.hasOwnProperty(id) && orderEntities[id]
-    })
+    const pendingOrders = pendingOrdersBySelectedModeSelector(getState())
 
     return dispatch(
       networkOperations.callApi({
         service: 'HandheldService.ProcessTransactions',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         params: {
-          Data: filteredOrders
+          Data: pendingOrders
         },
         success: () => {
           dispatch(receiveProcessOrders())
-          dispatch(succeedProcessOrders(orderIDs))
+          dispatch(succeedProcessOrders(pluck('_id', pendingOrders)))
         },
         error: error => dispatch(failProcessOrders(error))
       })
@@ -84,7 +73,7 @@ const processOrders = () => {
 
 const completePendingTransaction = () => {
   return (dispatch, getState) => {
-    const transaction = orderSelectors.pendingTransaction(getState())
+    const transaction = orderSelectors.pendingTransactionSelector(getState())
 
     dispatch(addOrder(transaction._id, transaction))
     dispatch(discardPendingTransaction())
@@ -94,7 +83,7 @@ const completePendingTransaction = () => {
 const createPendingTransactionByProduct = product => {
   return (dispatch, getState) => {
     const state = getState()
-    const orderMode = orderSelectors.mode(state)
+    const orderMode = orderSelectors.modeSelector(state)
     const transaction = findTransactionByProduct(state, product, orderMode)
 
     if (transaction) {
@@ -104,7 +93,7 @@ const createPendingTransactionByProduct = product => {
         product.ProductID
       ]
       const transaction = _createTransaction({
-        getState,
+        state,
         product,
         barcode: getState().barcode.barcodeEntities[barcodeID],
         mode: orderMode
@@ -117,9 +106,10 @@ const createPendingTransactionByProduct = product => {
 
 const createPendingTransactionByBarcodeID = barcodeID => {
   return (dispatch, getState) => {
-    const barcode = dispatch(barcodeOperations._findBarcodeByID(barcodeID))
     const state = getState()
-    const orderMode = orderSelectors.mode(getState())
+    const barcode = dispatch(barcodeOperations._findBarcodeByID(barcodeID))
+    const orderMode = orderSelectors.modeSelector(getState())
+
     if (barcode) {
       const transaction = findTransactionByBarcode(state, barcode, orderMode)
 
@@ -127,7 +117,7 @@ const createPendingTransactionByBarcodeID = barcodeID => {
         dispatch(promptStartModifyTransaction(transaction))
       } else {
         const transaction = _createTransaction({
-          getState,
+          state,
           barcode,
           mode: orderMode
         })
@@ -139,7 +129,7 @@ const createPendingTransactionByBarcodeID = barcodeID => {
 }
 
 const _createTransaction = ({
-  getState,
+  state,
   barcode,
   product,
   quantity = 1,
@@ -148,34 +138,32 @@ const _createTransaction = ({
   const productID = barcode ? barcode.ProductID : product.ProductID
 
   if (!product) {
-    product = productID && getState().product.productEntities[productID]
+    product = productID && state.product.productEntities[productID]
   }
 
   return {
     _id: uuidGen(),
     __type: 'HandheldTrans',
-    AreaID: getState().app.storeID,
+    AreaID: state.app.storeID,
     Barcode: barcode && barcode.Barcode,
     Qty: quantity,
     Ref1: '',
     Ref2: '',
     TermianlID:
-      window.cordova && window.device
-        ? window.device.uuid
-        : getState().terminalID,
+      window.cordova && window.device ? window.device.uuid : state.terminalID,
     TransDate: new Date().toISOString().slice(0, -1),
     TransType: mode,
     ProductID: productID,
     ProductName: product && product.ProductName,
-    UserID: getState().cashier.cashiers.activeCashier.CashierID
+    UserID: state.cashier.cashiers.activeCashier.CashierID
   }
 }
 
 const findTransaction = (state, options) =>
   find(
-    filter(orderSelectors.orderEntities(state), (item, key) => {
-      return includes(orderSelectors.unprocessedItems(state), key)
-    }),
+    filter(orderSelectors.orderEntitiesSelector(state), (item, key) =>
+      includes(orderSelectors.unprocessedItemsSelector(state), key)
+    ),
     options
   )
 

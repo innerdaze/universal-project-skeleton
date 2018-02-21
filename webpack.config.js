@@ -22,6 +22,7 @@ module.exports = {
   },
   resolve: {
     alias: {
+      '~features': path.resolve(__dirname, 'client', 'ducks'),
       _client: path.resolve(__dirname, 'client'),
       css: path.resolve(__dirname, 'client', 'assets', 'css')
     },

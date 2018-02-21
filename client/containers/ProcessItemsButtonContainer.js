@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
-import { orderOperations, orderSelectors} from '../ducks/order'
+import { orderOperations, orderSelectors } from '../ducks/order'
 import ProcessItemsButton from '../components/ProcessItemsButton'
 
 const mapStateToProps = state => {
   return {
-    mode: orderSelectors.mode(state)
+    mode: orderSelectors.modeSelector(state)
   }
 }
 
