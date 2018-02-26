@@ -1,0 +1,6 @@
+yarn clean:cordova
+NODE_TARGET=device yarn build:cordova:dev
+yarn cordova:link
+cd cordova && cordova build android --device
+adb uninstall uk.co.orbistech.mstock
+adb install platforms/android/build/outputs/apk/android-armv7-debug.apk

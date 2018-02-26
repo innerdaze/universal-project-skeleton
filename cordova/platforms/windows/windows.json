@@ -1,0 +1,127 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "Orbis Site Assistant"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "Orbis Site Assistant"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "Orbis Site Assistant"
+        },
+        "cordova-plugin-sqlite-2": {
+            "PACKAGE_NAME": "Orbis Site Assistant"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "Orbis Site Assistant"
+        },
+        "cordova-fabric-plugin": {
+            "FABRIC_API_KEY": "dd87f6353ee085f2e98da9832d5b331e4b4b78bf",
+            "FABRIC_API_SECRET": "a2e15103d238eb04d8cbbdd9715f94a774e90bf6739ee816e988fd950bbff6a7",
+            "PACKAGE_NAME": "Orbis Site Assistant"
+        }
+    },
+    "dependent_plugins": {},
+    "modules": [
+        {
+            "id": "cordova-plugin-console.logger",
+            "file": "plugins/cordova-plugin-console/www/logger.js",
+            "pluginId": "cordova-plugin-console",
+            "clobbers": [
+                "cordova.logger"
+            ]
+        },
+        {
+            "id": "cordova-plugin-console.console",
+            "file": "plugins/cordova-plugin-console/www/console-via-logger.js",
+            "pluginId": "cordova-plugin-console",
+            "clobbers": [
+                "console"
+            ]
+        },
+        {
+            "id": "cordova-plugin-device.device",
+            "file": "plugins/cordova-plugin-device/www/device.js",
+            "pluginId": "cordova-plugin-device",
+            "clobbers": [
+                "device"
+            ]
+        },
+        {
+            "id": "cordova-plugin-device.DeviceProxy",
+            "file": "plugins/cordova-plugin-device/src/windows/DeviceProxy.js",
+            "pluginId": "cordova-plugin-device",
+            "runs": true
+        },
+        {
+            "id": "cordova-plugin-network-information.network",
+            "file": "plugins/cordova-plugin-network-information/www/network.js",
+            "pluginId": "cordova-plugin-network-information",
+            "clobbers": [
+                "navigator.connection",
+                "navigator.network.connection"
+            ]
+        },
+        {
+            "id": "cordova-plugin-network-information.Connection",
+            "file": "plugins/cordova-plugin-network-information/www/Connection.js",
+            "pluginId": "cordova-plugin-network-information",
+            "clobbers": [
+                "Connection"
+            ]
+        },
+        {
+            "id": "cordova-plugin-network-information.NetworkInfoProxy",
+            "file": "plugins/cordova-plugin-network-information/src/windows/NetworkInfoProxy.js",
+            "pluginId": "cordova-plugin-network-information",
+            "runs": true
+        },
+        {
+            "id": "cordova-plugin-sqlite-2.sqlitePlugin",
+            "file": "plugins/cordova-plugin-sqlite-2/dist/sqlite-plugin.js",
+            "pluginId": "cordova-plugin-sqlite-2",
+            "clobbers": [
+                "sqlitePlugin"
+            ]
+        },
+        {
+            "id": "cordova-fabric-plugin.FabricPlugin",
+            "file": "plugins/cordova-fabric-plugin/www/FabricPlugin.js",
+            "pluginId": "cordova-fabric-plugin",
+            "clobbers": [
+                "window.fabric.core"
+            ]
+        },
+        {
+            "id": "cordova-fabric-plugin.FabricAnswersPlugin",
+            "file": "plugins/cordova-fabric-plugin/www/FabricPlugin.Answers.js",
+            "pluginId": "cordova-fabric-plugin",
+            "clobbers": [
+                "window.fabric.Answers"
+            ]
+        },
+        {
+            "id": "cordova-fabric-plugin.FabricCrashlyticsPlugin",
+            "file": "plugins/cordova-fabric-plugin/www/FabricPlugin.Crashlytics.js",
+            "pluginId": "cordova-fabric-plugin",
+            "clobbers": [
+                "window.fabric.Crashlytics"
+            ]
+        }
+    ],
+    "plugin_metadata": {
+        "cordova-plugin-console": "1.0.6",
+        "cordova-plugin-device": "1.1.6",
+        "cordova-plugin-network-information": "1.3.2",
+        "cordova-plugin-sqlite-2": "1.0.4",
+        "cordova-plugin-whitelist": "1.3.2",
+        "cordova-fabric-plugin": "1.1.9"
+    }
+}

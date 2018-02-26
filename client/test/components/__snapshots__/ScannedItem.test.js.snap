@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render a ScannedItem 1`] = `
+<ListItem
+  align="start"
+  direction="row"
+  justify="between"
+  pad={
+    Object {
+      "horizontal": "medium",
+      "vertical": "small",
+    }
+  }
+  responsive={false}
+  role="listitem"
+  separator="bottom"
+>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    justify="end"
+    pad="none"
+    responsive={true}
+    tag="div"
+    textAlign="right"
+  >
+    <Box
+      announce={false}
+      className="secondary"
+      direction="column"
+      focusable={true}
+      pad="none"
+      responsive={true}
+      tag="div"
+    >
+      1
+       x Units
+    </Box>
+    <Menu
+      closeOnClick={true}
+      direction="column"
+      dropAlign={
+        Object {
+          "left": "left",
+          "top": "top",
+        }
+      }
+      icon={
+        <Actions
+          responsive={true}
+        />
+      }
+      pad="none"
+    >
+      <Anchor
+        animateIcon={true}
+        icon={
+          <Edit
+            responsive={true}
+          />
+        }
+        label="Change Quantity"
+        method="push"
+        onClick={[Function]}
+        tag="a"
+      />
+      <Anchor
+        animateIcon={true}
+        icon={
+          <Trash
+            responsive={true}
+          />
+        }
+        label="Delete Item"
+        method="push"
+        onClick={[Function]}
+        tag="a"
+      />
+    </Menu>
+  </Box>
+</ListItem>
+`;
+
+exports[`render a ScannedItem with data and a render prop 1`] = `
+<ListItem
+  align="start"
+  direction="row"
+  justify="between"
+  pad={
+    Object {
+      "horizontal": "medium",
+      "vertical": "small",
+    }
+  }
+  responsive={false}
+  role="listitem"
+  separator="bottom"
+>
+  <span>
+    TEST
+  </span>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    justify="end"
+    pad="none"
+    responsive={true}
+    tag="div"
+    textAlign="right"
+  >
+    <Box
+      announce={false}
+      className="secondary"
+      direction="column"
+      focusable={true}
+      pad="none"
+      responsive={true}
+      tag="div"
+    >
+      1
+       x Units
+    </Box>
+    <Menu
+      closeOnClick={true}
+      direction="column"
+      dropAlign={
+        Object {
+          "left": "left",
+          "top": "top",
+        }
+      }
+      icon={
+        <Actions
+          responsive={true}
+        />
+      }
+      pad="none"
+    >
+      <Anchor
+        animateIcon={true}
+        icon={
+          <Edit
+            responsive={true}
+          />
+        }
+        label="Change Quantity"
+        method="push"
+        onClick={[Function]}
+        tag="a"
+      />
+      <Anchor
+        animateIcon={true}
+        icon={
+          <Trash
+            responsive={true}
+          />
+        }
+        label="Delete Item"
+        method="push"
+        onClick={[Function]}
+        tag="a"
+      />
+    </Menu>
+  </Box>
+</ListItem>
+`;

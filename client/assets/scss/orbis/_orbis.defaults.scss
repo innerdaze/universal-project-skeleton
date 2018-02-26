@@ -1,0 +1,33 @@
+@import '_orbis.colors';
+
+// Colors
+$brand-color: $orbis-brand-color;
+
+//$brand-color-lighter: desaturate(lighten($brand-color, 55%), 40%);
+
+$brand-neutral-colors: ($orbis-neutral-1, $orbis-neutral-2, $orbis-neutral-3, $orbis-neutral-4) !default;
+$brand-accent-colors: ($orbis-accent-1, $orbis-accent-2, $orbis-accent-3) !default;
+// $brand-status-colors: (
+//   ok: $brand-color
+// )
+// $brand-grey-colors: (#000001, #333333, #3B3B3B, #434343, #666666);
+$brand-link-color: inherit;
+//$link-hover-color: #000;
+$brand-link-text-decoration: underline;
+//$button-accent-color: #F3A780;
+$control-brand-color: $brand-color;
+
+// Borders
+$border-radius: 0px;
+
+*:not(input):not(textarea) {
+  -webkit-touch-callout: none;    /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
+  -webkit-user-select: none;      /* prevent copy paste, to allow, change 'none' to 'text' */
+  -ms-touch-callout: none;
+  -ms-user-select: none;
+  -ms-text-size-adjust: none;
+  -moz-touch-callout: none;
+  -moz-user-select: none;
+  -moz-text-size-adjust: none;
+}

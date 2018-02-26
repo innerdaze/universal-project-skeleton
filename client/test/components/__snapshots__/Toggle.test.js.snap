@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render a Toggle 1`] = `""`;
+
+exports[`render a Toggle and change the priority through props 1`] = `
+<div>
+  RENDER B
+</div>
+`;
+
+exports[`render a Toggle and check the default priority is respected 1`] = `
+<div>
+  RENDER A
+</div>
+`;
+
+exports[`render a Toggle and initialize the priority through props 1`] = `
+<div>
+  RENDER B
+</div>
+`;
+
+exports[`render a Toggle and test a toggle control can be passed to and called from a child 1`] = `
+<div>
+  RENDER A
+  <button
+    onClick={[Function]}
+  />
+</div>
+`;

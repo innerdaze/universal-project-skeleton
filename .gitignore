@@ -1,7 +1,15 @@
+# NPM 
 npm-debug.log
 node_modules/
-npm-debug.log
+
+# Derived
 dist/
+
+# Cordova
 cordova/www/
 cordova/plugins/
-cordova/platforms/
+# cordova/platforms/
+
+# Coverage
+.nyc_output
+coverage/

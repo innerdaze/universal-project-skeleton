@@ -1,0 +1,193 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {
+      "res/xml/config.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<feature name=\"FabricPlugin\"><param name=\"android-package\" value=\"com.sarriaroman.fabric.FabricPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+              "count": 1
+            },
+            {
+              "xml": "<preference name=\"webView\" value=\"org.crosswalk.engine.XWalkWebViewEngine\" />",
+              "count": 1
+            },
+            {
+              "xml": "<preference name=\"xwalkVersion\" value=\"23+\" />",
+              "count": 1
+            },
+            {
+              "xml": "<preference name=\"xwalkLiteVersion\" value=\"xwalk_core_library_canary:17+\" />",
+              "count": 1
+            },
+            {
+              "xml": "<preference name=\"xwalkCommandLine\" value=\"--disable-pull-to-refresh-effect\" />",
+              "count": 1
+            },
+            {
+              "xml": "<preference name=\"xwalkMode\" value=\"embedded\" />",
+              "count": 1
+            },
+            {
+              "xml": "<preference name=\"xwalkMultipleApk\" value=\"true\" />",
+              "count": 1
+            },
+            {
+              "xml": "<preference name=\"android-minSdkVersion\" value=\"16\" />",
+              "count": 1
+            }
+          ]
+        }
+      },
+      "AndroidManifest.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+              "count": 2
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />",
+              "count": 1
+            }
+          ],
+          "application": [
+            {
+              "xml": "<meta-data android:name=\"io.fabric.ApiKey\" android:value=\"dd87f6353ee085f2e98da9832d5b331e4b4b78bf\" />",
+              "count": 1
+            }
+          ]
+        }
+      },
+      "config.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<feature name=\"SQLitePlugin\"><param name=\"android-package\" value=\"com.nolanlawson.cordova.sqlite.SQLitePlugin\" /></feature>",
+              "count": 1
+            }
+          ]
+        }
+      }
+    }
+  },
+  "installed_plugins": {
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "uk.co.orbistech.mstock"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "uk.co.orbistech.mstock"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "uk.co.orbistech.mstock"
+    },
+    "cordova-plugin-sqlite-2": {
+      "PACKAGE_NAME": "uk.co.orbistech.mstock"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "uk.co.orbistech.mstock"
+    },
+    "cordova-fabric-plugin": {
+      "FABRIC_API_KEY": "dd87f6353ee085f2e98da9832d5b331e4b4b78bf",
+      "FABRIC_API_SECRET": "a2e15103d238eb04d8cbbdd9715f94a774e90bf6739ee816e988fd950bbff6a7",
+      "PACKAGE_NAME": "uk.co.orbistech.mstock"
+    },
+    "cordova-plugin-crosswalk-webview": {
+      "XWALK_VERSION": "23+",
+      "XWALK_LITEVERSION": "xwalk_core_library_canary:17+",
+      "XWALK_COMMANDLINE": "--disable-pull-to-refresh-effect",
+      "XWALK_MODE": "embedded",
+      "XWALK_MULTIPLEAPK": "true",
+      "PACKAGE_NAME": "uk.co.orbistech.mstock"
+    }
+  },
+  "dependent_plugins": {},
+  "modules": [
+    {
+      "id": "cordova-plugin-device.device",
+      "file": "plugins/cordova-plugin-device/www/device.js",
+      "pluginId": "cordova-plugin-device",
+      "clobbers": [
+        "device"
+      ]
+    },
+    {
+      "id": "cordova-plugin-network-information.network",
+      "file": "plugins/cordova-plugin-network-information/www/network.js",
+      "pluginId": "cordova-plugin-network-information",
+      "clobbers": [
+        "navigator.connection",
+        "navigator.network.connection"
+      ]
+    },
+    {
+      "id": "cordova-plugin-network-information.Connection",
+      "file": "plugins/cordova-plugin-network-information/www/Connection.js",
+      "pluginId": "cordova-plugin-network-information",
+      "clobbers": [
+        "Connection"
+      ]
+    },
+    {
+      "id": "cordova-plugin-sqlite-2.sqlitePlugin",
+      "file": "plugins/cordova-plugin-sqlite-2/dist/sqlite-plugin.js",
+      "pluginId": "cordova-plugin-sqlite-2",
+      "clobbers": [
+        "sqlitePlugin"
+      ]
+    },
+    {
+      "id": "cordova-fabric-plugin.FabricPlugin",
+      "file": "plugins/cordova-fabric-plugin/www/FabricPlugin.js",
+      "pluginId": "cordova-fabric-plugin",
+      "clobbers": [
+        "window.fabric.core"
+      ]
+    },
+    {
+      "id": "cordova-fabric-plugin.FabricAnswersPlugin",
+      "file": "plugins/cordova-fabric-plugin/www/FabricPlugin.Answers.js",
+      "pluginId": "cordova-fabric-plugin",
+      "clobbers": [
+        "window.fabric.Answers"
+      ]
+    },
+    {
+      "id": "cordova-fabric-plugin.FabricCrashlyticsPlugin",
+      "file": "plugins/cordova-fabric-plugin/www/FabricPlugin.Crashlytics.js",
+      "pluginId": "cordova-fabric-plugin",
+      "clobbers": [
+        "window.fabric.Crashlytics"
+      ]
+    }
+  ],
+  "plugin_metadata": {
+    "cordova-plugin-console": "1.0.6",
+    "cordova-plugin-device": "1.1.6",
+    "cordova-plugin-network-information": "1.3.2",
+    "cordova-plugin-sqlite-2": "1.0.4",
+    "cordova-plugin-whitelist": "1.3.2",
+    "cordova-fabric-plugin": "1.1.9",
+    "cordova-plugin-crosswalk-webview": "2.3.0"
+  }
+}

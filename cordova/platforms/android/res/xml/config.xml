@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="uk.co.orbistech.mstock" version="1.0.8" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
+    <feature name="NetworkStatus">
+        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
+    </feature>
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="FabricPlugin">
+        <param name="android-package" value="com.sarriaroman.fabric.FabricPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="SQLitePlugin">
+        <param name="android-package" value="com.nolanlawson.cordova.sqlite.SQLitePlugin" />
+    </feature>
+    <name>Orbis Site Assistant</name>
+    <description>
+        A simple app for taking stock
+    </description>
+    <author email="support@orbistech.co.uk" href="https://orbistech.co.uk">
+        Orbis Tech Ltd
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <allow-intent href="market:*" />
+    <icon density="ldpi" src="platforms/android/res/mipmap-ldpi/ic_launcher.png" />
+    <icon density="mdpi" src="platforms/android/res/mipmap-mdpi/ic_launcher.png" />
+    <icon density="hdpi" src="platforms/android/res/mipmap-hdpi/ic_launcher.png" />
+    <icon density="xhdpi" src="platforms/android/res/mipmap-xhdpi/ic_launcher.png" />
+    <icon density="xxhdpi" src="platforms/android/res/mipmap-xxhdpi/ic_launcher.png" />
+    <icon density="xxxhdpi" src="platforms/android/res/mipmap-xxxhdpi/ic_launcher.png" />
+    <preference name="loglevel" value="DEBUG" />
+    <preference name="webView" value="org.crosswalk.engine.XWalkWebViewEngine" />
+    <preference name="xwalkVersion" value="23+" />
+    <preference name="xwalkLiteVersion" value="xwalk_core_library_canary:17+" />
+    <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
+    <preference name="xwalkMode" value="embedded" />
+    <preference name="xwalkMultipleApk" value="true" />
+    <preference name="android-minSdkVersion" value="16" />
+    <preference name="android-targetSdkVersion" value="22" />
+    <preference name="windows-target-version" value="10.0" />
+    <preference name="orientation" value="portrait" />
+</widget>

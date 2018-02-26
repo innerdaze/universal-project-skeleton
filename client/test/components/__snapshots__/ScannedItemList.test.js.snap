@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render a ScannedItemList 1`] = `
+<Box
+  announce={false}
+  direction="column"
+  focusable={true}
+  pad="none"
+  responsive={true}
+  tag="div"
+>
+  <List
+    role="list"
+  >
+    <ListPlaceholder
+      emptyMessage="Nothing to process - Add some items to get started."
+      filteredTotal={0}
+      unfilteredTotal={0}
+    />
+  </List>
+</Box>
+`;
