@@ -1,1 +1,0 @@
-export inventorySelectors from './selectors'
