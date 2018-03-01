@@ -7,7 +7,6 @@ import Box from 'grommet/components/Box'
 import Button from 'grommet/components/Button'
 
 class Scanner extends Component {
-
   constructor(props) {
     super(props)
 
@@ -16,8 +15,10 @@ class Scanner extends Component {
     }
 
     this.handleEnterBarcodeManually = this.handleEnterBarcodeManually.bind(this)
-    this.handleStartScanClick = this.handleStartScanClick.bind(this)
-    this.handleEnterBarcodeFieldChange = this.handleEnterBarcodeFieldChange.bind(this)
+    this.handleEnterBarcodeFieldChange = this.handleEnterBarcodeFieldChange.bind(
+      this
+    )
+    // this.handleStartScanClick = this.handleStartScanClick.bind(this)
   }
 
   handleEnterBarcodeFieldChange(e) {
@@ -31,9 +32,9 @@ class Scanner extends Component {
     this.props.onSubmitBarcode(this.state.barcode)
   }
 
-  handleStartScanClick() {
-    this.props.scan()
-  }
+  // handleStartScanClick() {
+  //   this.props.scan()
+  // }
 
   render() {
     return (
@@ -43,14 +44,14 @@ class Scanner extends Component {
             <TextInput
               placeHolder='Enter Barcode'
               onDOMChange={this.handleEnterBarcodeFieldChange}
-              />
+            />
           </FormField>
           <Button
             primary
             type='submit'
             label='Submit'
             onClick={this.handleEnterBarcodeManually}
-            />
+          />
         </Form>
       </Box>
     )

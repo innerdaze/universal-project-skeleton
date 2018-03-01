@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Scanner... Scanner layout Check there is a Form with a FormField and a Button 1`] = `
+<Box
+  announce={false}
+  direction="row"
+  focusable={true}
+  pad="none"
+  responsive={true}
+  tag="div"
+>
+  <Form
+    compact={false}
+    direction="row"
+    fill={false}
+    pad="none"
+  >
+    <FormField
+      size="medium"
+      strong={false}
+    >
+      <TextInput
+        onDOMChange={[Function]}
+        placeHolder="Enter Barcode"
+      />
+    </FormField>
+    <Button
+      label="Submit"
+      method="push"
+      onClick={[Function]}
+      primary={true}
+      type="submit"
+    />
+  </Form>
+</Box>
+`;
