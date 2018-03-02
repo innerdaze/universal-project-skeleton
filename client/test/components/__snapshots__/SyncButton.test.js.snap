@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing SyncButton SyncButton layout Expect to have a Button 1`] = `
+<Button
+  icon={
+    <Refresh
+      responsive={true}
+    />
+  }
+  method="push"
+  onClick={[Function]}
+  plain={true}
+  type="button"
+/>
+`;
+
+exports[`Testing SyncButton Test on prop Expect sync prop function to called if Button click 1`] = `
+<Button
+  icon={
+    <Refresh
+      responsive={true}
+    />
+  }
+  method="push"
+  onClick={[Function]}
+  plain={true}
+  type="button"
+/>
+`;

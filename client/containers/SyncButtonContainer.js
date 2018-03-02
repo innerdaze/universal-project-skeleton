@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { syncOperations } from '../ducks/sync'
+import { syncOperations } from '../features/sync'
 import SyncButton from '../components/SyncButton'
 
 const mapDispatchToProps = dispatch => {
@@ -10,9 +10,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const SyncButtonContainer = connect(
-  null,
-  mapDispatchToProps
-)(SyncButton)
+const SyncButtonContainer = connect(null, mapDispatchToProps)(SyncButton)
 
 export default SyncButtonContainer

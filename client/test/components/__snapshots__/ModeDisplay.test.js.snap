@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on ModeDisplay... ModeDisplay layout Expect ModeDisplay to have a Title 1`] = `
+<Title
+  responsive={true}
+  truncate={true}
+>
+  Ordering
+</Title>
+`;
+
+exports[`Testing on ModeDisplay... Test on prop Expect Title to display Delivery if mode prop change to 20 1`] = `
+<div
+  class="grommetux-box grommetux-box--direction-row grommetux-box--align-center grommetux-box--pad-none grommetux-title grommetux-title--responsive grommetux-title--truncate"
+>
+  <span>
+    Delivery
+  </span>
+</div>
+`;
+
+exports[`Testing on ModeDisplay... Test on state Expect state to change new mode prop is injected 1`] = `
+<ModeDisplay
+  mode={20}
+>
+  <Title
+    responsive={true}
+    truncate={true}
+  >
+    <Box
+      a11yTitle="Title"
+      align="center"
+      announce={false}
+      className="grommetux-title grommetux-title--responsive grommetux-title--truncate"
+      direction="row"
+      focusable={true}
+      pad="none"
+      responsive={false}
+      tag="div"
+    >
+      <div
+        className="grommetux-box grommetux-box--direction-row grommetux-box--align-center grommetux-box--pad-none grommetux-title grommetux-title--responsive grommetux-title--truncate"
+        style={Object {}}
+      >
+        <span>
+          Delivery
+        </span>
+      </div>
+    </Box>
+  </Title>
+</ModeDisplay>
+`;

@@ -3,12 +3,9 @@ import PropTypes from 'prop-types'
 import Menu from 'grommet/components/Menu'
 import Anchor from 'grommet/components/Anchor'
 
-const ReinitializeControl = ({ handleReinitializePress = Function.prototype }) => (
+const ReinitializeControl = ({ handleReinitializePress }) => (
   <Menu primary>
-    <Anchor
-      label='Reconfigure'
-      onClick={handleReinitializePress}
-      />
+    <Anchor label='Reconfigure' onClick={handleReinitializePress} />
   </Menu>
 )
 

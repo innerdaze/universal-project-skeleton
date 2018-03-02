@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import ProductSearch from '../components/ProductSearch'
-import { productOperations, productSelectors } from '../ducks/product'
-import { orderOperations } from '../ducks/order'
+import { productOperations, productSelectors } from '../features/product'
+import { orderOperations } from '../features/order'
 
 export default connect(
   state => ({

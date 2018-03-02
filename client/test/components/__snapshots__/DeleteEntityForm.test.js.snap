@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on DeleteEntityForm... DeleteEntityForm layout Expect DeleteEntityForm to have parent Layer comp and child comps Paragraph and Footer 1`] = `
+<Layer
+  align="center"
+>
+  <Paragraph
+    align="center"
+  >
+    Confirm you would like to delete this item
+  </Paragraph>
+  <Footer
+    align="center"
+    direction="row"
+    justify="between"
+    responsive={false}
+  >
+    <Anchor
+      animateIcon={true}
+      icon={
+        <Close
+          responsive={true}
+        />
+      }
+      label="Cancel"
+      method="push"
+      onClick={[MockFunction]}
+      tag="a"
+    />
+    <Anchor
+      animateIcon={true}
+      icon={
+        <Trash
+          responsive={true}
+        />
+      }
+      label="Confirm"
+      method="push"
+      onClick={[MockFunction]}
+      primary={true}
+      tag="a"
+    />
+  </Footer>
+</Layer>
+`;
+
+exports[`Testing on DeleteEntityForm... DeleteEntityForm layout Expect Footer comp to have 2 Anchor comps 1`] = `
+<Layer
+  align="center"
+>
+  <Paragraph
+    align="center"
+  >
+    Confirm you would like to delete this item
+  </Paragraph>
+  <Footer
+    align="center"
+    direction="row"
+    justify="between"
+    responsive={false}
+  >
+    <Anchor
+      animateIcon={true}
+      icon={
+        <Close
+          responsive={true}
+        />
+      }
+      label="Cancel"
+      method="push"
+      onClick={[MockFunction]}
+      tag="a"
+    />
+    <Anchor
+      animateIcon={true}
+      icon={
+        <Trash
+          responsive={true}
+        />
+      }
+      label="Confirm"
+      method="push"
+      onClick={[MockFunction]}
+      primary={true}
+      tag="a"
+    />
+  </Footer>
+</Layer>
+`;
+
+exports[`Testing on DeleteEntityForm... Test on prop Expect onCancel to call when Anchor Cancel is clicked 1`] = `
+<Layer
+  align="center"
+>
+  <Paragraph
+    align="center"
+  >
+    Confirm you would like to delete this item
+  </Paragraph>
+  <Footer
+    align="center"
+    direction="row"
+    justify="between"
+    responsive={false}
+  >
+    <Anchor
+      animateIcon={true}
+      icon={
+        <Close
+          responsive={true}
+        />
+      }
+      label="Cancel"
+      method="push"
+      onClick={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      tag="a"
+    />
+    <Anchor
+      animateIcon={true}
+      icon={
+        <Trash
+          responsive={true}
+        />
+      }
+      label="Confirm"
+      method="push"
+      onClick={[MockFunction]}
+      primary={true}
+      tag="a"
+    />
+  </Footer>
+</Layer>
+`;
+
+exports[`Testing on DeleteEntityForm... Test on prop Expect onConfirm to call when Anchor Confirm is clicked 1`] = `
+<Layer
+  align="center"
+>
+  <Paragraph
+    align="center"
+  >
+    Confirm you would like to delete this item
+  </Paragraph>
+  <Footer
+    align="center"
+    direction="row"
+    justify="between"
+    responsive={false}
+  >
+    <Anchor
+      animateIcon={true}
+      icon={
+        <Close
+          responsive={true}
+        />
+      }
+      label="Cancel"
+      method="push"
+      onClick={[MockFunction]}
+      tag="a"
+    />
+    <Anchor
+      animateIcon={true}
+      icon={
+        <Trash
+          responsive={true}
+        />
+      }
+      label="Confirm"
+      method="push"
+      onClick={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+          ],
+        }
+      }
+      primary={true}
+      tag="a"
+    />
+  </Footer>
+</Layer>
+`;

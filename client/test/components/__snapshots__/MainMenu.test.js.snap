@@ -1,0 +1,526 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on MainMenu... MainMenu layout Expect Box component to have StoreIDLabelContainer, ModeSwitcherContainer, ReinitializeControlContainer and LogoutControlContainer 1`] = `
+<Sidebar
+  colorIndex="brand"
+  direction="column"
+  full={true}
+>
+  <Header
+    align="center"
+    direction="row"
+    justify="between"
+    pad={
+      Object {
+        "horizontal": "large",
+        "vertical": "medium",
+      }
+    }
+    responsive={false}
+  >
+    <Title
+      responsive={true}
+      truncate={true}
+    >
+      Site Assistant
+    </Title>
+    <Connect(MainMenuHideControl) />
+  </Header>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad={
+      Object {
+        "horizontal": "large",
+      }
+    }
+    responsive={true}
+    tag="div"
+  >
+    <Connect(StoreIDLabel) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    flex="grow"
+    focusable={true}
+    justify="start"
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(ModeSwitcher) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(ReinitializeControl) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(LogoutControl) />
+  </Box>
+</Sidebar>
+`;
+
+exports[`Testing on MainMenu... MainMenu layout Expect Box component to have StoreIDLabelContainer, ModeSwitcherContainer, ReinitializeControlContainer and LogoutControlContainer 2`] = `
+<Sidebar
+  colorIndex="brand"
+  direction="column"
+  full={true}
+>
+  <Header
+    align="center"
+    direction="row"
+    justify="between"
+    pad={
+      Object {
+        "horizontal": "large",
+        "vertical": "medium",
+      }
+    }
+    responsive={false}
+  >
+    <Title
+      responsive={true}
+      truncate={true}
+    >
+      Site Assistant
+    </Title>
+    <Connect(MainMenuHideControl) />
+  </Header>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad={
+      Object {
+        "horizontal": "large",
+      }
+    }
+    responsive={true}
+    tag="div"
+  >
+    <Connect(StoreIDLabel) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    flex="grow"
+    focusable={true}
+    justify="start"
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(ModeSwitcher) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(ReinitializeControl) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(LogoutControl) />
+  </Box>
+</Sidebar>
+`;
+
+exports[`Testing on MainMenu... MainMenu layout Expect Box component to have StoreIDLabelContainer, ModeSwitcherContainer, ReinitializeControlContainer and LogoutControlContainer 3`] = `
+<Sidebar
+  colorIndex="brand"
+  direction="column"
+  full={true}
+>
+  <Header
+    align="center"
+    direction="row"
+    justify="between"
+    pad={
+      Object {
+        "horizontal": "large",
+        "vertical": "medium",
+      }
+    }
+    responsive={false}
+  >
+    <Title
+      responsive={true}
+      truncate={true}
+    >
+      Site Assistant
+    </Title>
+    <Connect(MainMenuHideControl) />
+  </Header>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad={
+      Object {
+        "horizontal": "large",
+      }
+    }
+    responsive={true}
+    tag="div"
+  >
+    <Connect(StoreIDLabel) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    flex="grow"
+    focusable={true}
+    justify="start"
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(ModeSwitcher) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(ReinitializeControl) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(LogoutControl) />
+  </Box>
+</Sidebar>
+`;
+
+exports[`Testing on MainMenu... MainMenu layout Expect Box component to have StoreIDLabelContainer, ModeSwitcherContainer, ReinitializeControlContainer and LogoutControlContainer 4`] = `
+<Sidebar
+  colorIndex="brand"
+  direction="column"
+  full={true}
+>
+  <Header
+    align="center"
+    direction="row"
+    justify="between"
+    pad={
+      Object {
+        "horizontal": "large",
+        "vertical": "medium",
+      }
+    }
+    responsive={false}
+  >
+    <Title
+      responsive={true}
+      truncate={true}
+    >
+      Site Assistant
+    </Title>
+    <Connect(MainMenuHideControl) />
+  </Header>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad={
+      Object {
+        "horizontal": "large",
+      }
+    }
+    responsive={true}
+    tag="div"
+  >
+    <Connect(StoreIDLabel) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    flex="grow"
+    focusable={true}
+    justify="start"
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(ModeSwitcher) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(ReinitializeControl) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(LogoutControl) />
+  </Box>
+</Sidebar>
+`;
+
+exports[`Testing on MainMenu... MainMenu layout Expect Header to have a Title and MainMenuHideControlContainer in it 1`] = `
+<Sidebar
+  colorIndex="brand"
+  direction="column"
+  full={true}
+>
+  <Header
+    align="center"
+    direction="row"
+    justify="between"
+    pad={
+      Object {
+        "horizontal": "large",
+        "vertical": "medium",
+      }
+    }
+    responsive={false}
+  >
+    <Title
+      responsive={true}
+      truncate={true}
+    >
+      Site Assistant
+    </Title>
+    <Connect(MainMenuHideControl) />
+  </Header>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad={
+      Object {
+        "horizontal": "large",
+      }
+    }
+    responsive={true}
+    tag="div"
+  >
+    <Connect(StoreIDLabel) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    flex="grow"
+    focusable={true}
+    justify="start"
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(ModeSwitcher) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(ReinitializeControl) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(LogoutControl) />
+  </Box>
+</Sidebar>
+`;
+
+exports[`Testing on MainMenu... MainMenu layout Expect Header to have a Title and MainMenuHideControlContainer in it 2`] = `
+<Sidebar
+  colorIndex="brand"
+  direction="column"
+  full={true}
+>
+  <Header
+    align="center"
+    direction="row"
+    justify="between"
+    pad={
+      Object {
+        "horizontal": "large",
+        "vertical": "medium",
+      }
+    }
+    responsive={false}
+  >
+    <Title
+      responsive={true}
+      truncate={true}
+    >
+      Site Assistant
+    </Title>
+    <Connect(MainMenuHideControl) />
+  </Header>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad={
+      Object {
+        "horizontal": "large",
+      }
+    }
+    responsive={true}
+    tag="div"
+  >
+    <Connect(StoreIDLabel) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    flex="grow"
+    focusable={true}
+    justify="start"
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(ModeSwitcher) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(ReinitializeControl) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(LogoutControl) />
+  </Box>
+</Sidebar>
+`;
+
+exports[`Testing on MainMenu... MainMenu layout Expect MainMenu to have parent Sidebar comp and Header, Title and 4 Box components 1`] = `
+<Sidebar
+  colorIndex="brand"
+  direction="column"
+  full={true}
+>
+  <Header
+    align="center"
+    direction="row"
+    justify="between"
+    pad={
+      Object {
+        "horizontal": "large",
+        "vertical": "medium",
+      }
+    }
+    responsive={false}
+  >
+    <Title
+      responsive={true}
+      truncate={true}
+    >
+      Site Assistant
+    </Title>
+    <Connect(MainMenuHideControl) />
+  </Header>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad={
+      Object {
+        "horizontal": "large",
+      }
+    }
+    responsive={true}
+    tag="div"
+  >
+    <Connect(StoreIDLabel) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    flex="grow"
+    focusable={true}
+    justify="start"
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(ModeSwitcher) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(ReinitializeControl) />
+  </Box>
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(LogoutControl) />
+  </Box>
+</Sidebar>
+`;

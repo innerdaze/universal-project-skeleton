@@ -1,0 +1,435 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+<ModeSwitcher
+  activeMode={2}
+  onSwitch={[Function]}
+>
+  <Menu
+    closeOnClick={true}
+    direction="column"
+    dropAlign={
+      Object {
+        "left": "left",
+        "top": "top",
+      }
+    }
+    pad="none"
+    primary={true}
+  >
+    <Box
+      announce={false}
+      className="grommetux-menu grommetux-menu--column grommetux-menu--primary grommetux-menu--inline"
+      direction="column"
+      focusable={true}
+      pad="none"
+      primary={false}
+      responsive={true}
+      tag="nav"
+    >
+      <nav
+        className="grommetux-box grommetux-box--direction-column grommetux-box--responsive grommetux-box--pad-none grommetux-menu grommetux-menu--column grommetux-menu--primary grommetux-menu--inline"
+        style={Object {}}
+      >
+        <Anchor
+          animateIcon={true}
+          className={false}
+          label="Stocktake"
+          method="push"
+          onClick={[Function]}
+          tag="a"
+        >
+          <a
+            className="grommetux-anchor"
+            onClick={[Function]}
+          >
+            Stocktake
+          </a>
+        </Anchor>
+        <Anchor
+          animateIcon={true}
+          className={false}
+          label="Order"
+          method="push"
+          onClick={[Function]}
+          tag="a"
+        >
+          <a
+            className="grommetux-anchor"
+            onClick={[Function]}
+          >
+            Order
+          </a>
+        </Anchor>
+        <Anchor
+          animateIcon={true}
+          className={false}
+          label="Delivery"
+          method="push"
+          onClick={[Function]}
+          tag="a"
+        >
+          <a
+            className="grommetux-anchor"
+            onClick={[Function]}
+          >
+            Delivery
+          </a>
+        </Anchor>
+        <Anchor
+          animateIcon={true}
+          className={false}
+          label="Shelf Labels"
+          method="push"
+          onClick={[Function]}
+          tag="a"
+        >
+          <a
+            className="grommetux-anchor"
+            onClick={[Function]}
+          >
+            Shelf Labels
+          </a>
+        </Anchor>
+      </nav>
+    </Box>
+  </Menu>
+</ModeSwitcher>
+`;
+
+exports[` 2`] = `
+<ModeSwitcher
+  activeMode={1}
+  onSwitch={[Function]}
+>
+  <Menu
+    closeOnClick={true}
+    direction="column"
+    dropAlign={
+      Object {
+        "left": "left",
+        "top": "top",
+      }
+    }
+    pad="none"
+    primary={true}
+  >
+    <Box
+      announce={false}
+      className="grommetux-menu grommetux-menu--column grommetux-menu--primary grommetux-menu--inline"
+      direction="column"
+      focusable={true}
+      pad="none"
+      primary={false}
+      responsive={true}
+      tag="nav"
+    >
+      <nav
+        className="grommetux-box grommetux-box--direction-column grommetux-box--responsive grommetux-box--pad-none grommetux-menu grommetux-menu--column grommetux-menu--primary grommetux-menu--inline"
+        style={Object {}}
+      >
+        <Anchor
+          animateIcon={true}
+          className={false}
+          label="Stocktake"
+          method="push"
+          onClick={[Function]}
+          tag="a"
+        >
+          <a
+            className="grommetux-anchor"
+            onClick={[Function]}
+          >
+            Stocktake
+          </a>
+        </Anchor>
+        <Anchor
+          animateIcon={true}
+          className={false}
+          label="Order"
+          method="push"
+          onClick={[Function]}
+          tag="a"
+        >
+          <a
+            className="grommetux-anchor"
+            onClick={[Function]}
+          >
+            Order
+          </a>
+        </Anchor>
+        <Anchor
+          animateIcon={true}
+          className={false}
+          label="Delivery"
+          method="push"
+          onClick={[Function]}
+          tag="a"
+        >
+          <a
+            className="grommetux-anchor"
+            onClick={[Function]}
+          >
+            Delivery
+          </a>
+        </Anchor>
+        <Anchor
+          animateIcon={true}
+          className={false}
+          label="Shelf Labels"
+          method="push"
+          onClick={[Function]}
+          tag="a"
+        >
+          <a
+            className="grommetux-anchor"
+            onClick={[Function]}
+          >
+            Shelf Labels
+          </a>
+        </Anchor>
+      </nav>
+    </Box>
+  </Menu>
+</ModeSwitcher>
+`;
+
+exports[`Testing on ModeSwitcher... ModeSwitcher layout Expect ModeSwitcher to have parent Menu comp and 4 Anchor child comp 1`] = `
+<Menu
+  closeOnClick={true}
+  direction="column"
+  dropAlign={
+    Object {
+      "left": "left",
+      "top": "top",
+    }
+  }
+  pad="none"
+  primary={true}
+>
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Stocktake"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Order"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Delivery"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Shelf Labels"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+</Menu>
+`;
+
+exports[`Testing on ModeSwitcher... Test on prop Expect onSwitch prop function to called if one of the Anchor is clicked 1`] = `
+<Menu
+  closeOnClick={true}
+  direction="column"
+  dropAlign={
+    Object {
+      "left": "left",
+      "top": "top",
+    }
+  }
+  pad="none"
+  primary={true}
+>
+  <Anchor
+    animateIcon={true}
+    className="active"
+    label="Stocktake"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Order"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Delivery"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Shelf Labels"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+</Menu>
+`;
+
+exports[`Testing on ModeSwitcher... Test on prop Expect onSwitch prop function to called if one of the Anchor is clicked 2`] = `
+<Menu
+  closeOnClick={true}
+  direction="column"
+  dropAlign={
+    Object {
+      "left": "left",
+      "top": "top",
+    }
+  }
+  pad="none"
+  primary={true}
+>
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Stocktake"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className="active"
+    label="Order"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Delivery"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Shelf Labels"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+</Menu>
+`;
+
+exports[`Testing on ModeSwitcher... Test on prop Expect onSwitch prop function to called if one of the Anchor is clicked 3`] = `
+<Menu
+  closeOnClick={true}
+  direction="column"
+  dropAlign={
+    Object {
+      "left": "left",
+      "top": "top",
+    }
+  }
+  pad="none"
+  primary={true}
+>
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Stocktake"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Order"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className="active"
+    label="Delivery"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Shelf Labels"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+</Menu>
+`;
+
+exports[`Testing on ModeSwitcher... Test on prop Expect onSwitch prop function to called if one of the Anchor is clicked 4`] = `
+<Menu
+  closeOnClick={true}
+  direction="column"
+  dropAlign={
+    Object {
+      "left": "left",
+      "top": "top",
+    }
+  }
+  pad="none"
+  primary={true}
+>
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Stocktake"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Order"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Delivery"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className="active"
+    label="Shelf Labels"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+</Menu>
+`;

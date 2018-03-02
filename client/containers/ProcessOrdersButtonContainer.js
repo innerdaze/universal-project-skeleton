@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { orderOperations, orderSelectors } from '../ducks/order'
+import { orderOperations, orderSelectors } from '../features/order'
 import ProcessItemsButton from '../components/ProcessItemsButton'
 
 const mapStateToProps = state => {

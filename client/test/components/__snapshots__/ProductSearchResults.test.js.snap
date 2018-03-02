@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on ProductSearchResults... ProductSearchResults layout Expect to have a List and ListItem comps 1`] = `
+<List
+  role="list"
+>
+  <ListItem
+    align="center"
+    direction="row"
+    justify="between"
+    key="FooID"
+    pad={
+      Object {
+        "horizontal": "medium",
+        "vertical": "small",
+      }
+    }
+    role="listitem"
+    separator="horizontal"
+  >
+    <span>
+      BarName
+    </span>
+  </ListItem>
+</List>
+`;
+
+exports[`Testing on ProductSearchResults... ProductSearchResults layout Expect to have a List and without ListItem comp if items props is empty array 1`] = `
+<List
+  role="list"
+>
+  0
+</List>
+`;
+
+exports[`Testing on ProductSearchResults... Testing on prop Expect to have multiple ListItem if more items passed in 1`] = `
+<List
+  role="list"
+>
+  <ListItem
+    align="center"
+    direction="row"
+    justify="between"
+    key="FooID"
+    pad={
+      Object {
+        "horizontal": "medium",
+        "vertical": "small",
+      }
+    }
+    role="listitem"
+    separator="horizontal"
+  >
+    <span>
+      BarName
+    </span>
+  </ListItem>
+  <ListItem
+    align="center"
+    direction="row"
+    justify="between"
+    key="FooID2"
+    pad={
+      Object {
+        "horizontal": "medium",
+        "vertical": "small",
+      }
+    }
+    role="listitem"
+    separator="horizontal"
+  >
+    <span>
+      FooName2
+    </span>
+  </ListItem>
+  <ListItem
+    align="center"
+    direction="row"
+    justify="between"
+    key="FooID3"
+    pad={
+      Object {
+        "horizontal": "medium",
+        "vertical": "small",
+      }
+    }
+    role="listitem"
+    separator="horizontal"
+  >
+    <span>
+      FooName3
+    </span>
+  </ListItem>
+</List>
+`;

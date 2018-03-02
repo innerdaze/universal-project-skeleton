@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on ReinitializeControl... ReinitializeControl Layout Expect to have a Anchor comp within Menu comp 1`] = `
+<Menu
+  closeOnClick={true}
+  direction="column"
+  dropAlign={
+    Object {
+      "left": "left",
+      "top": "top",
+    }
+  }
+  pad="none"
+  primary={true}
+>
+  <Anchor
+    animateIcon={true}
+    label="Reconfigure"
+    method="push"
+    onClick={[MockFunction]}
+    tag="a"
+  />
+</Menu>
+`;
+
+exports[`Testing on ReinitializeControl... Test on prop Expect to call prop function handleReinitializePress if Anchor click 1`] = `
+<Menu
+  closeOnClick={true}
+  direction="column"
+  dropAlign={
+    Object {
+      "left": "left",
+      "top": "top",
+    }
+  }
+  pad="none"
+  primary={true}
+>
+  <Anchor
+    animateIcon={true}
+    label="Reconfigure"
+    method="push"
+    onClick={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
+    tag="a"
+  />
+</Menu>
+`;

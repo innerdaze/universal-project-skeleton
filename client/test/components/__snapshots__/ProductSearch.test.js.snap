@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on ProductSearch... ProductSearch layout Expect ProductSearch to have a Search comp 1`] = `
+<Search
+  align="left"
+  dropAlign={
+    Object {
+      "left": "left",
+    }
+  }
+  iconAlign="end"
+  inline={false}
+  onDOMChange={[Function]}
+  onSelect={[Function]}
+  placeHolder="Enter product name"
+  responsive={true}
+  suggestions={Array []}
+/>
+`;
+
+exports[`Testing on ProductSearch... Test on prop Expect onSelect prop function to be call if Search onSelect is triggered 1`] = `
+<Search
+  align="left"
+  dropAlign={
+    Object {
+      "left": "left",
+    }
+  }
+  iconAlign="end"
+  inline={false}
+  onDOMChange={[Function]}
+  onSelect={[Function]}
+  placeHolder="Enter product name"
+  responsive={true}
+  suggestions={Array []}
+/>
+`;
+
+exports[`Testing on ProductSearch... Test on prop Expect result prop array is mapped before passed to Search suggestions prop 1`] = `
+<Search
+  align="left"
+  dropAlign={
+    Object {
+      "left": "left",
+    }
+  }
+  iconAlign="end"
+  inline={false}
+  onDOMChange={[Function]}
+  onSelect={[Function]}
+  placeHolder="Enter product name"
+  responsive={true}
+  suggestions={
+    Array [
+      Object {
+        "label": "BarName",
+        "product": Object {
+          "ProductName": "BarName",
+          "product": "FooProduct",
+        },
+      },
+    ]
+  }
+/>
+`;
+
+exports[`Testing on ProductSearch... Test on prop Expect search prop function not called if text length less than 2 1`] = `
+<Search
+  align="left"
+  dropAlign={
+    Object {
+      "left": "left",
+    }
+  }
+  iconAlign="end"
+  inline={false}
+  onDOMChange={[Function]}
+  onSelect={[Function]}
+  placeHolder="Enter product name"
+  responsive={true}
+  suggestions={Array []}
+/>
+`;
+
+exports[`Testing on ProductSearch... Test on prop Expect search prop function to be called if Search onDOMChange is triggered 1`] = `
+<Search
+  align="left"
+  dropAlign={
+    Object {
+      "left": "left",
+    }
+  }
+  iconAlign="end"
+  inline={false}
+  onDOMChange={[Function]}
+  onSelect={[Function]}
+  placeHolder="Enter product name"
+  responsive={true}
+  suggestions={Array []}
+/>
+`;

@@ -10,9 +10,9 @@ describe('Testing Scanner...', () => {
   })
 
   describe('Scanner layout', () => {
-    test('Check there is a Form with a FormField and a Button', () => {
+    test('Check there is a Form with a TextInput and a Button', () => {
       expect(wrapper.find('Form')).toHaveLength(1)
-      expect(wrapper.find('FormField')).toHaveLength(1)
+      expect(wrapper.find('TextInput')).toHaveLength(1)
       expect(wrapper.find('Button')).toHaveLength(1)
 
       expect(wrapper).toMatchSnapshot()
@@ -25,6 +25,7 @@ describe('Testing Scanner...', () => {
         preventDefault() {}
       })
       expect(onSubmitBarcode).toHaveBeenCalled()
+      expect(wrapper).toMatchSnapshot()
     })
   })
 
@@ -36,6 +37,7 @@ describe('Testing Scanner...', () => {
         }
       })
       expect(wrapper.state().barcode).toEqual('test')
+      expect(wrapper).toMatchSnapshot()
     })
   })
 })

@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing ProcessItemsButton... ProcessItemsButton layout Expect ProcessItemsButton to have a Button 1`] = `
+<Button
+  disabled={true}
+  label="Send"
+  method="push"
+  onClick={[Function]}
+  primary={true}
+  type="button"
+/>
+`;
+
+exports[`Testing ProcessItemsButton... Test on prop Expect onProcessItemsClick is called when Button click 1`] = `
+<Button
+  disabled={true}
+  label="Send"
+  method="push"
+  onClick={[Function]}
+  primary={true}
+  type="button"
+/>
+`;
+
+exports[`Testing ProcessItemsButton... Test on state Expect default state of canProcess is true 1`] = `
+<Button
+  disabled={true}
+  label="Send"
+  method="push"
+  onClick={[Function]}
+  primary={true}
+  type="button"
+/>
+`;

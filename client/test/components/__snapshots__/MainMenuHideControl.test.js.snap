@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on MainMenuHideControl... MainMenuHideControl layout Expect MainMenuHideControl to have a parent Menu comp and child Button comp 1`] = `
+<Menu
+  alignSelf="end"
+  closeOnClick={true}
+  direction="row"
+  dropAlign={
+    Object {
+      "left": "left",
+      "top": "top",
+    }
+  }
+  inline={true}
+  pad="none"
+  responsive={false}
+>
+  <Button
+    icon={
+      <Close
+        responsive={true}
+      />
+    }
+    method="push"
+    onClick={[Function]}
+    plain={true}
+    type="button"
+  />
+</Menu>
+`;
+
+exports[`Testing on MainMenuHideControl... Test on prop Expect hideMenu prop function is called if Button is clicked 1`] = `
+<Menu
+  alignSelf="end"
+  closeOnClick={true}
+  direction="row"
+  dropAlign={
+    Object {
+      "left": "left",
+      "top": "top",
+    }
+  }
+  inline={true}
+  pad="none"
+  responsive={false}
+>
+  <Button
+    icon={
+      <Close
+        responsive={true}
+      />
+    }
+    method="push"
+    onClick={[Function]}
+    plain={true}
+    type="button"
+  />
+</Menu>
+`;

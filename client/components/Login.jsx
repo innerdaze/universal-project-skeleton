@@ -17,7 +17,6 @@ export default class Login extends Component {
   }
 
   handleLogin(data) {
-    window.scrollTo(0, 0)
     this.props.login(data.username, data.password)
   }
 

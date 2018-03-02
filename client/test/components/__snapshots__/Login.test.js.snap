@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on Login... Login layout Expect Login to have parent Box comp and child LoginForm comp 1`] = `
+<Box
+  align="center"
+  announce={false}
+  direction="column"
+  focusable={true}
+  full={true}
+  justify="center"
+  pad="none"
+  responsive={true}
+  tag="div"
+>
+  <LoginForm
+    align="center"
+    defaultValues={
+      Object {
+        "rememberMe": false,
+        "username": "",
+      }
+    }
+    errors={Array []}
+    onSubmit={[Function]}
+    secondaryText="By Orbis"
+    title="Site Assistant"
+    usernameType="text"
+  />
+</Box>
+`;
+
+exports[`Testing on Login... Test on prop Expect login prop func to called if LoginForm onSubmit is triggered 1`] = `
+<Box
+  align="center"
+  announce={false}
+  direction="column"
+  focusable={true}
+  full={true}
+  justify="center"
+  pad="none"
+  responsive={true}
+  tag="div"
+>
+  <LoginForm
+    align="center"
+    defaultValues={
+      Object {
+        "rememberMe": false,
+        "username": "",
+      }
+    }
+    errors={Array []}
+    onSubmit={[Function]}
+    secondaryText="By Orbis"
+    title="Site Assistant"
+    usernameType="text"
+  />
+</Box>
+`;
+
+exports[`Testing on Login... Test on state Expect default username and password state is both empty string 1`] = `
+<Box
+  align="center"
+  announce={false}
+  direction="column"
+  focusable={true}
+  full={true}
+  justify="center"
+  pad="none"
+  responsive={true}
+  tag="div"
+>
+  <LoginForm
+    align="center"
+    defaultValues={
+      Object {
+        "rememberMe": false,
+        "username": "",
+      }
+    }
+    errors={Array []}
+    onSubmit={[Function]}
+    secondaryText="By Orbis"
+    title="Site Assistant"
+    usernameType="text"
+  />
+</Box>
+`;

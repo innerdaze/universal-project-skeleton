@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import OrdersLayout from '../components/OrdersLayout'
-import { orderOperations, orderSelectors } from '../ducks/order'
-import { wastageSelectors, wastageOperations } from '../ducks/wastage'
-import { uiSelectors } from '../ducks/ui'
+import { orderOperations, orderSelectors } from '../features/order'
+import { wastageOperations, wastageSelectors } from '../features/wastage'
+import { uiSelectors } from '../features/ui'
 
 export default connect(
   state => ({

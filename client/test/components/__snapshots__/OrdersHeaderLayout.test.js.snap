@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on OrdersHeaderLayout... OrdersHeaderLayout layout Expect Box comp to have SyncButtonContainer and ProductSearchContainer 1`] = `
+<Header
+  align="center"
+  direction="row"
+  pad={
+    Object {
+      "between": "small",
+      "horizontal": "none",
+      "vertical": "none",
+    }
+  }
+  responsive={false}
+>
+  <Connect(MainMenuControl) />
+  <Connect(ModeDisplay) />
+  <Box
+    announce={false}
+    direction="row"
+    flex={true}
+    focusable={true}
+    justify="end"
+    pad="none"
+    responsive={false}
+    tag="div"
+  >
+    <Connect(SyncButton) />
+    <Connect(ProductSearch) />
+  </Box>
+</Header>
+`;
+
+exports[`Testing on OrdersHeaderLayout... OrdersHeaderLayout layout Expect Header comp to have MainMenuControlContainer and ModeDisplayContainer 1`] = `
+<Header
+  align="center"
+  direction="row"
+  pad={
+    Object {
+      "between": "small",
+      "horizontal": "none",
+      "vertical": "none",
+    }
+  }
+  responsive={false}
+>
+  <Connect(MainMenuControl) />
+  <Connect(ModeDisplay) />
+  <Box
+    announce={false}
+    direction="row"
+    flex={true}
+    focusable={true}
+    justify="end"
+    pad="none"
+    responsive={false}
+    tag="div"
+  >
+    <Connect(SyncButton) />
+    <Connect(ProductSearch) />
+  </Box>
+</Header>
+`;
+
+exports[`Testing on OrdersHeaderLayout... OrdersHeaderLayout layout Expect OrdersHeaderLayout to have parent Header and a Box comp 1`] = `
+<Header
+  align="center"
+  direction="row"
+  pad={
+    Object {
+      "between": "small",
+      "horizontal": "none",
+      "vertical": "none",
+    }
+  }
+  responsive={false}
+>
+  <Connect(MainMenuControl) />
+  <Connect(ModeDisplay) />
+  <Box
+    announce={false}
+    direction="row"
+    flex={true}
+    focusable={true}
+    justify="end"
+    pad="none"
+    responsive={false}
+    tag="div"
+  >
+    <Connect(SyncButton) />
+    <Connect(ProductSearch) />
+  </Box>
+</Header>
+`;

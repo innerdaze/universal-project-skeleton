@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 import BarcodeInputForm from '../components/BarcodeInputForm'
-import { orderOperations, orderSelectors } from '../ducks/order'
-import { barcodeSelectors } from '../ducks/barcode'
-import { syncSelectors } from '../ducks/sync'
-import { uiSelectors } from '../ducks/ui'
-//import { orderSelectors } from '../ducks/barcode'
+import { orderOperations, orderSelectors } from '../features/order'
+import { barcodeSelectors } from '../features/barcode'
+import { syncSelectors } from '../features/sync'
+import { uiSelectors } from '../features/ui'
+//import { orderSelectors } from '../features/barcode'
 const mapStateToProps = state => {
   return {
     error: barcodeSelectors.lastError(state),

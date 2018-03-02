@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 import { map, reverse } from 'ramda'
-import { orderSelectors } from '~features/order'
-import { productSelectors } from '~features/product'
-import { barcodeSelectors } from '~features/barcode'
+import { orderSelectors } from '../order'
+import { productSelectors } from '../product'
+import { barcodeSelectors } from '../barcode'
 
 const {
   pendingOrdersBySelectedModeSelector,

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on StoreIDLabel... StoreIDLabel layout Expect to have a Label 1`] = `
+<Label
+  size="medium"
+>
+  StoreID: 
+  FooID
+</Label>
+`;
+
+exports[`Testing on StoreIDLabel... Test on prop Expect to have a Label similar with prop value passed in 1`] = `
+<label
+  class="grommetux-label grommetux-label--margin-medium grommetux-label--medium"
+>
+  StoreID: FooID
+</label>
+`;

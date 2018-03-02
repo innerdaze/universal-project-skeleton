@@ -3,12 +3,9 @@ import PropTypes from 'prop-types'
 import Menu from 'grommet/components/Menu'
 import Anchor from 'grommet/components/Anchor'
 
-const LogoutControl = ({ handleLogoutPress = Function.prototype }) => (
+const LogoutControl = ({ handleLogoutPress }) => (
   <Menu primary>
-    <Anchor
-      label='Logout'
-      onClick={handleLogoutPress}
-      />
+    <Anchor label='Logout' onClick={handleLogoutPress} />
   </Menu>
 )
 

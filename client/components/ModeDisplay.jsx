@@ -14,20 +14,15 @@ class ModeDisplay extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.mode === this.state.mode) {
-      return false
+    if (newProps.mode !== this.state.mode) {
+      this.setState({
+        mode: newProps.mode
+      })
     }
-    this.setState({
-      mode: newProps.mode
-    })
   }
 
   render() {
-    return (
-      <Title>
-        {modeNames[this.state.mode]}
-      </Title>
-    )
+    return <Title>{modeNames[this.state.mode]}</Title>
   }
 }
 

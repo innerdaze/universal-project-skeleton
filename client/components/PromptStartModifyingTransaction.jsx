@@ -10,37 +10,21 @@ import Anchor from 'grommet/components/Anchor'
 import CloseIcon from 'grommet/components/icons/base/Close'
 import NextLinkIcon from 'grommet/components/icons/base/LinkNext'
 
-const PromptStartModifyingTransaction = ({
-  onSubmit = Function.prototype,
-  onCancel = Function.prototype
-}) => (
+const PromptStartModifyingTransaction = ({ onSubmit, onCancel }) => (
   <Layer>
     <Header>
-      <Title>
-        Not so fast!
-      </Title>
+      <Title>Not so fast!</Title>
     </Header>
-    <Heading tag='h2'>
-      There is already an entry for this product.
-    </Heading>
-    <Paragraph>
-      Would you like to change the quantity?
-    </Paragraph>
-    <Footer
-      pad={{ vertical: 'medium' }}
-      justify='between'
-      >
-      <Anchor
-        label='Cancel'
-        icon={<CloseIcon/>}
-        onClick={onCancel}
-        />
+    <Heading tag='h2'>There is already an entry for this product.</Heading>
+    <Paragraph>Would you like to change the quantity?</Paragraph>
+    <Footer pad={{ vertical: 'medium' }} justify='between'>
+      <Anchor label='Cancel' icon={<CloseIcon />} onClick={onCancel} />
       <Anchor
         primary
         label='Continue'
-        icon={<NextLinkIcon/>}
+        icon={<NextLinkIcon />}
         onClick={onSubmit}
-        />
+      />
     </Footer>
   </Layer>
 )

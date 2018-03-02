@@ -1,0 +1,217 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on OrdersLayout... OrdersLayout layout Expect Box contains OrdersHeaderLayout, BarcodeInputFormContainer, ScannedItemListContainer and ProcessItemsButtonContainer by default 1`] = `
+<Split
+  fixed={true}
+  flex="right"
+  priority="right"
+  showOnResponsive="priority"
+>
+  <MainMenu />
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    justify="center"
+    pad="medium"
+    responsive={true}
+    tag="div"
+  >
+    <OrdersHeaderLayout />
+    <Connect(BarcodeInputForm) />
+    <Connect(ScannedItemList) />
+    <Connect(ProcessItemsButton) />
+  </Box>
+</Split>
+`;
+
+exports[`Testing on OrdersLayout... OrdersLayout layout Expect OrdersLayout to have a Split comp with a MainMenu and a Box comp in it 1`] = `
+<Split
+  fixed={true}
+  flex="right"
+  priority="right"
+  showOnResponsive="priority"
+>
+  <MainMenu />
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    justify="center"
+    pad="medium"
+    responsive={true}
+    tag="div"
+  >
+    <OrdersHeaderLayout />
+    <Connect(BarcodeInputForm) />
+    <Connect(ScannedItemList) />
+    <Connect(ProcessItemsButton) />
+  </Box>
+</Split>
+`;
+
+exports[`Testing on OrdersLayout... Test on prop Expect Split priority prop is set with left if mainMenuVisible is not passed 1`] = `
+<Split
+  fixed={true}
+  flex="right"
+  priority="right"
+  showOnResponsive="priority"
+>
+  <MainMenu />
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    justify="center"
+    pad="medium"
+    responsive={true}
+    tag="div"
+  >
+    <OrdersHeaderLayout />
+    <Connect(BarcodeInputForm) />
+    <Connect(ScannedItemList) />
+    <Connect(ProcessItemsButton) />
+  </Box>
+</Split>
+`;
+
+exports[`Testing on OrdersLayout... Test on prop Expect Split priority prop is set with left if mainMenuVisible prop is true 1`] = `
+<Split
+  fixed={true}
+  flex="right"
+  priority="left"
+  showOnResponsive="priority"
+>
+  <MainMenu />
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    justify="center"
+    pad="medium"
+    responsive={true}
+    tag="div"
+  >
+    <OrdersHeaderLayout />
+    <Connect(BarcodeInputForm) />
+    <Connect(ScannedItemList) />
+    <Connect(ProcessItemsButton) />
+  </Box>
+</Split>
+`;
+
+exports[`Testing on OrdersLayout... Test on prop Expect handlePromptStartModifyingSubmit prop function is called is PromptStartModifyingTransaction onCancel is trigger 1`] = `
+<Split
+  fixed={true}
+  flex="right"
+  priority="right"
+  showOnResponsive="priority"
+>
+  <MainMenu />
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    justify="center"
+    pad="medium"
+    responsive={true}
+    tag="div"
+  >
+    <PromptStartModifyingTransaction
+      onCancel={[Function]}
+      onSubmit={[Function]}
+      order={Object {}}
+    />
+    <OrdersHeaderLayout />
+    <Connect(BarcodeInputForm) />
+    <Connect(ScannedItemList) />
+    <Connect(ProcessItemsButton) />
+  </Box>
+</Split>
+`;
+
+exports[`Testing on OrdersLayout... Test on prop Expect onPromptStartModifyingCancel prop function is called is PromptStartModifyingTransaction onCancel is trigger 1`] = `
+<Split
+  fixed={true}
+  flex="right"
+  priority="right"
+  showOnResponsive="priority"
+>
+  <MainMenu />
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    justify="center"
+    pad="medium"
+    responsive={true}
+    tag="div"
+  >
+    <PromptStartModifyingTransaction
+      onCancel={[Function]}
+      onSubmit={[Function]}
+      order={Object {}}
+    />
+    <OrdersHeaderLayout />
+    <Connect(BarcodeInputForm) />
+    <Connect(ScannedItemList) />
+    <Connect(ProcessItemsButton) />
+  </Box>
+</Split>
+`;
+
+exports[`Testing on OrdersLayout... Test on prop Expect to contain ChangeOrderQuantityFormContainer if isChangingOrderQuantity is true 1`] = `
+<Split
+  fixed={true}
+  flex="right"
+  priority="right"
+  showOnResponsive="priority"
+>
+  <MainMenu />
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    justify="center"
+    pad="medium"
+    responsive={true}
+    tag="div"
+  >
+    <Connect(ChangeOrderQuantityForm) />
+    <OrdersHeaderLayout />
+    <Connect(BarcodeInputForm) />
+    <Connect(ScannedItemList) />
+    <Connect(ProcessItemsButton) />
+  </Box>
+</Split>
+`;
+
+exports[`Testing on OrdersLayout... Test on prop Expect to contain PromptStartModifyingTransaction if pendingModification is not a null object 1`] = `
+<Split
+  fixed={true}
+  flex="right"
+  priority="right"
+  showOnResponsive="priority"
+>
+  <MainMenu />
+  <Box
+    announce={false}
+    direction="column"
+    focusable={true}
+    justify="center"
+    pad="medium"
+    responsive={true}
+    tag="div"
+  >
+    <PromptStartModifyingTransaction
+      onCancel={[Function]}
+      onSubmit={[Function]}
+      order={Object {}}
+    />
+    <OrdersHeaderLayout />
+    <Connect(BarcodeInputForm) />
+    <Connect(ScannedItemList) />
+    <Connect(ProcessItemsButton) />
+  </Box>
+</Split>
+`;

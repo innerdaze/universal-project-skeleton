@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { orderOperations, orderSelectors } from '../ducks/order'
-import { uiOperations } from '../ducks/ui'
+import { orderOperations, orderSelectors } from '../features/order'
+import { uiOperations } from '../features/ui'
 import ModeSwitcher from '../components/ModeSwitcher'
 
 const mapDispatchToProps = dispatch => {

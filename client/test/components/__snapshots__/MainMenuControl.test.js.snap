@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on MainMenuControl... MainMenuControl layout Expect MainMenuControl to have a Button 1`] = `
+<Button
+  icon={
+    <Menu
+      responsive={true}
+    />
+  }
+  method="push"
+  onClick={[Function]}
+  plain={true}
+  type="button"
+/>
+`;
+
+exports[`Testing on MainMenuControl... Test on prop Expect showMenu prop function to call if Button click 1`] = `
+<Button
+  icon={
+    <Menu
+      responsive={true}
+    />
+  }
+  method="push"
+  onClick={[Function]}
+  plain={true}
+  type="button"
+/>
+`;

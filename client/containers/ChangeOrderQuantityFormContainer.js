@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { orderOperations } from '../ducks/order'
-import { inventorySelectors } from '../ducks/inventory'
+import { orderOperations } from '../features/order'
+import { inventorySelectors } from '../features/inventory'
 import ChangeOrderQuantityForm from '../components/ChangeOrderQuantityForm'
 
 const mapStateToProps = state => {

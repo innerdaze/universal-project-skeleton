@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on PromptStartModifyingTransaction... PromptStartModifyingTransaction layout Expect Footer to have 2 Anchor comps 1`] = `
+<Layer
+  align="center"
+>
+  <Header
+    align="center"
+    direction="row"
+    pad={
+      Object {
+        "between": "small",
+        "horizontal": "none",
+        "vertical": "none",
+      }
+    }
+    responsive={false}
+  >
+    <Title
+      responsive={true}
+      truncate={true}
+    >
+      Not so fast!
+    </Title>
+  </Header>
+  <Heading
+    tag="h2"
+  >
+    There is already an entry for this product.
+  </Heading>
+  <Paragraph>
+    Would you like to change the quantity?
+  </Paragraph>
+  <Footer
+    align="center"
+    direction="row"
+    justify="between"
+    pad={
+      Object {
+        "vertical": "medium",
+      }
+    }
+    responsive={false}
+  >
+    <Anchor
+      animateIcon={true}
+      icon={
+        <Close
+          responsive={true}
+        />
+      }
+      label="Cancel"
+      method="push"
+      onClick={[MockFunction]}
+      tag="a"
+    />
+    <Anchor
+      animateIcon={true}
+      icon={
+        <LinkNext
+          responsive={true}
+        />
+      }
+      label="Continue"
+      method="push"
+      onClick={[MockFunction]}
+      primary={true}
+      tag="a"
+    />
+  </Footer>
+</Layer>
+`;
+
+exports[`Testing on PromptStartModifyingTransaction... PromptStartModifyingTransaction layout Expect to have Title, Heading, Paragraph and Footer 1`] = `
+<Layer
+  align="center"
+>
+  <Header
+    align="center"
+    direction="row"
+    pad={
+      Object {
+        "between": "small",
+        "horizontal": "none",
+        "vertical": "none",
+      }
+    }
+    responsive={false}
+  >
+    <Title
+      responsive={true}
+      truncate={true}
+    >
+      Not so fast!
+    </Title>
+  </Header>
+  <Heading
+    tag="h2"
+  >
+    There is already an entry for this product.
+  </Heading>
+  <Paragraph>
+    Would you like to change the quantity?
+  </Paragraph>
+  <Footer
+    align="center"
+    direction="row"
+    justify="between"
+    pad={
+      Object {
+        "vertical": "medium",
+      }
+    }
+    responsive={false}
+  >
+    <Anchor
+      animateIcon={true}
+      icon={
+        <Close
+          responsive={true}
+        />
+      }
+      label="Cancel"
+      method="push"
+      onClick={[MockFunction]}
+      tag="a"
+    />
+    <Anchor
+      animateIcon={true}
+      icon={
+        <LinkNext
+          responsive={true}
+        />
+      }
+      label="Continue"
+      method="push"
+      onClick={[MockFunction]}
+      primary={true}
+      tag="a"
+    />
+  </Footer>
+</Layer>
+`;

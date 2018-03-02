@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on LogoutControl... LogoutControl layout Expect LogoutControl to have Menu parent comp and a Anchor child comp 1`] = `
+<Menu
+  closeOnClick={true}
+  direction="column"
+  dropAlign={
+    Object {
+      "left": "left",
+      "top": "top",
+    }
+  }
+  pad="none"
+  primary={true}
+>
+  <Anchor
+    animateIcon={true}
+    label="Logout"
+    method="push"
+    onClick={[MockFunction]}
+    tag="a"
+  />
+</Menu>
+`;
+
+exports[`Testing on LogoutControl... Test on prop Expect handleLogoutPress to be called if Anchor click 1`] = `
+<Menu
+  closeOnClick={true}
+  direction="column"
+  dropAlign={
+    Object {
+      "left": "left",
+      "top": "top",
+    }
+  }
+  pad="none"
+  primary={true}
+>
+  <Anchor
+    animateIcon={true}
+    label="Logout"
+    method="push"
+    onClick={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+      }
+    }
+    tag="a"
+  />
+</Menu>
+`;

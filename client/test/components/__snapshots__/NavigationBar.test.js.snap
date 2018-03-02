@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on NavigationBar... NavigationBar Layout Expect NavigationBar to have a parent Footer comp and child Menu comp 1`] = `
+<Footer
+  align="center"
+  appCentered={true}
+  direction="row"
+  primary={true}
+  responsive={false}
+>
+  <Menu
+    closeOnClick={true}
+    direction="row"
+    dropAlign={
+      Object {
+        "left": "left",
+        "top": "top",
+      }
+    }
+    fill={true}
+    inline={true}
+    pad="none"
+    responsive={false}
+  >
+    <Link
+      replace={false}
+      to="/orders"
+    >
+      Orders
+    </Link>
+  </Menu>
+</Footer>
+`;
