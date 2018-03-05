@@ -24,7 +24,7 @@ class ChangeOrderQuantityForm extends Component {
     this.handleNumberInputChange = this.handleNumberInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleCancel = this.handleCancel.bind(this)
-    this.receiveFocus = this.receiveFocus.bind(this)
+    // this.receiveFocus = this.receiveFocus.bind(this)
     this.assignInputRef = this.assignInputRef.bind(this)
   }
 
@@ -56,9 +56,9 @@ class ChangeOrderQuantityForm extends Component {
     this.props.handleCancel()
   }
 
-  receiveFocus() {
-    this.inputRef.focus()
-  }
+  // receiveFocus() {
+  //   this.inputRef.focus()
+  // }
 
   assignInputRef(ref) {
     this.inputRef = ref

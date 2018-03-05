@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on AppLayout... AppLayout layout Expect AppLayout to have a parent App comp 1`] = `
+<AppLayout>
+  <App
+    centered={true}
+  >
+    <div
+      className="grommet grommetux-app grommetux-app--centered"
+      lang="en-US"
+    >
+      <div
+        key="bar"
+      >
+        Foo
+      </div>
+      <SkipLinks>
+        <Layer
+          align="top"
+          hidden={true}
+          id="skip-link-layer"
+        >
+          <span
+            style={
+              Object {
+                "display": "none",
+              }
+            }
+          />
+        </Layer>
+      </SkipLinks>
+      <div
+        aria-live="polite"
+        className="grommetux-app__announcer"
+      />
+    </div>
+  </App>
+</AppLayout>
+`;
+
+exports[`Testing on AppLayout... Test on methods Expect componentWillUnmount is called when AppLayout is going to destroy 1`] = `""`;

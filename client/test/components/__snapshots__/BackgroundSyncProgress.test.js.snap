@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on BackgroundSyncProgress... BackgroundSyncProgress layout Expect BackgroundSyncProgress to have Heading and Meter comp 1`] = `
+<Box
+  align="stretch"
+  announce={false}
+  direction="column"
+  focusable={true}
+  pad="none"
+  responsive={true}
+  tag="div"
+>
+  <Heading
+    tag="h1"
+  >
+    Synchronising Data...
+  </Heading>
+  <Meter
+    label={
+      <Value
+        align="center"
+        announce={false}
+        units="%"
+        value={10}
+      />
+    }
+    max={1}
+    size="small"
+    type="bar"
+    value={0.1}
+  />
+</Box>
+`;

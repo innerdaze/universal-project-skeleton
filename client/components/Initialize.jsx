@@ -43,7 +43,7 @@ class Initialize extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault()
-    window.scrollTo(0, 0)
+    // window.scrollTo(0, 0)
     this.props.onApiRootFormSubmit({
       apiRoot: this.state.apiRoot,
       storeID: this.state.storeID,
@@ -100,13 +100,11 @@ class Initialize extends Component {
 }
 
 Initialize.propTypes = {
-  onApiRootFormSubmit: PropTypes.func.isRequired,
-  apiRootValidationError: PropTypes.any
+  onApiRootFormSubmit: PropTypes.func.isRequired
 }
 
 Initialize.defaultProps = {
-  onApiRootFormSubmit: Function.prototype,
-  apiRootValidationError: null
+  onApiRootFormSubmit: Function.prototype
 }
 
 export default Initialize

@@ -1,0 +1,671 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on ChangeOrderQuantityForm... ChangeOrderQuantityForm layout Expect ChangeOrderQuantityForm to have a Form with children comp, Header, input and Footer 1`] = `
+<Layer
+  align="center"
+>
+  <Form
+    compact={false}
+    fill={false}
+    onSubmit={[Function]}
+    pad="none"
+  >
+    <Header
+      align="center"
+      direction="row"
+      pad={
+        Object {
+          "between": "small",
+          "horizontal": "none",
+          "vertical": "none",
+        }
+      }
+      responsive={false}
+    >
+      <Heading
+        tag="h1"
+      >
+        Set Quantity
+      </Heading>
+    </Header>
+    <FormField
+      size="medium"
+      strong={false}
+    >
+      <input
+        autoFocus={true}
+        onChange={[Function]}
+        placeholder="Enter quantity"
+        type="number"
+      />
+    </FormField>
+    <Footer
+      align="center"
+      direction="row"
+      justify="between"
+      pad={
+        Object {
+          "vertical": "medium",
+        }
+      }
+      responsive={false}
+    >
+      <Anchor
+        animateIcon={true}
+        icon={
+          <Close
+            responsive={true}
+          />
+        }
+        label="Cancel"
+        method="push"
+        onClick={[Function]}
+        tag="a"
+      />
+      <Anchor
+        animateIcon={true}
+        icon={
+          <LinkNext
+            responsive={true}
+          />
+        }
+        label="Update"
+        method="push"
+        onClick={[Function]}
+        primary={true}
+        tag="a"
+      />
+    </Footer>
+  </Form>
+</Layer>
+`;
+
+exports[`Testing on ChangeOrderQuantityForm... ChangeOrderQuantityForm layout Expect Footer to have 2 Anchor child comps in it 1`] = `
+<Layer
+  align="center"
+>
+  <Form
+    compact={false}
+    fill={false}
+    onSubmit={[Function]}
+    pad="none"
+  >
+    <Header
+      align="center"
+      direction="row"
+      pad={
+        Object {
+          "between": "small",
+          "horizontal": "none",
+          "vertical": "none",
+        }
+      }
+      responsive={false}
+    >
+      <Heading
+        tag="h1"
+      >
+        Set Quantity
+      </Heading>
+    </Header>
+    <FormField
+      size="medium"
+      strong={false}
+    >
+      <input
+        autoFocus={true}
+        onChange={[Function]}
+        placeholder="Enter quantity"
+        type="number"
+      />
+    </FormField>
+    <Footer
+      align="center"
+      direction="row"
+      justify="between"
+      pad={
+        Object {
+          "vertical": "medium",
+        }
+      }
+      responsive={false}
+    >
+      <Anchor
+        animateIcon={true}
+        icon={
+          <Close
+            responsive={true}
+          />
+        }
+        label="Cancel"
+        method="push"
+        onClick={[Function]}
+        tag="a"
+      />
+      <Anchor
+        animateIcon={true}
+        icon={
+          <LinkNext
+            responsive={true}
+          />
+        }
+        label="Update"
+        method="push"
+        onClick={[Function]}
+        primary={true}
+        tag="a"
+      />
+    </Footer>
+  </Form>
+</Layer>
+`;
+
+exports[`Testing on ChangeOrderQuantityForm... ChangeOrderQuantityForm layout Expect Header to have a Heading comp in it 1`] = `
+<Layer
+  align="center"
+>
+  <Form
+    compact={false}
+    fill={false}
+    onSubmit={[Function]}
+    pad="none"
+  >
+    <Header
+      align="center"
+      direction="row"
+      pad={
+        Object {
+          "between": "small",
+          "horizontal": "none",
+          "vertical": "none",
+        }
+      }
+      responsive={false}
+    >
+      <Heading
+        tag="h1"
+      >
+        Set Quantity
+      </Heading>
+    </Header>
+    <FormField
+      size="medium"
+      strong={false}
+    >
+      <input
+        autoFocus={true}
+        onChange={[Function]}
+        placeholder="Enter quantity"
+        type="number"
+      />
+    </FormField>
+    <Footer
+      align="center"
+      direction="row"
+      justify="between"
+      pad={
+        Object {
+          "vertical": "medium",
+        }
+      }
+      responsive={false}
+    >
+      <Anchor
+        animateIcon={true}
+        icon={
+          <Close
+            responsive={true}
+          />
+        }
+        label="Cancel"
+        method="push"
+        onClick={[Function]}
+        tag="a"
+      />
+      <Anchor
+        animateIcon={true}
+        icon={
+          <LinkNext
+            responsive={true}
+          />
+        }
+        label="Update"
+        method="push"
+        onClick={[Function]}
+        primary={true}
+        tag="a"
+      />
+    </Footer>
+  </Form>
+</Layer>
+`;
+
+exports[`Testing on ChangeOrderQuantityForm... ChangeOrderQuantityForm layout Expect to show Label if order prop is valid object 1`] = `
+<Layer
+  align="center"
+>
+  <Form
+    compact={false}
+    fill={false}
+    onSubmit={[Function]}
+    pad="none"
+  >
+    <Header
+      align="center"
+      direction="row"
+      pad={
+        Object {
+          "between": "small",
+          "horizontal": "none",
+          "vertical": "none",
+        }
+      }
+      responsive={false}
+    >
+      <Heading
+        tag="h1"
+      >
+        Set Quantity
+      </Heading>
+    </Header>
+    <Box
+      announce={false}
+      direction="column"
+      focusable={true}
+      pad="none"
+      responsive={true}
+      tag="div"
+    >
+      <Label
+        size="medium"
+      >
+        Test Label
+      </Label>
+    </Box>
+    <FormField
+      size="medium"
+      strong={false}
+    >
+      <input
+        autoFocus={true}
+        onChange={[Function]}
+        placeholder="Enter quantity"
+        type="number"
+        value={2}
+      />
+    </FormField>
+    <Footer
+      align="center"
+      direction="row"
+      justify="between"
+      pad={
+        Object {
+          "vertical": "medium",
+        }
+      }
+      responsive={false}
+    >
+      <Anchor
+        animateIcon={true}
+        icon={
+          <Close
+            responsive={true}
+          />
+        }
+        label="Cancel"
+        method="push"
+        onClick={[Function]}
+        tag="a"
+      />
+      <Anchor
+        animateIcon={true}
+        icon={
+          <LinkNext
+            responsive={true}
+          />
+        }
+        label="Update"
+        method="push"
+        onClick={[Function]}
+        primary={true}
+        tag="a"
+      />
+    </Footer>
+  </Form>
+</Layer>
+`;
+
+exports[`Testing on ChangeOrderQuantityForm... Test on prop Expect prop function handleCancel to be called if Anchor Cancel is clicked 1`] = `
+<Layer
+  align="center"
+>
+  <Form
+    compact={false}
+    fill={false}
+    onSubmit={[Function]}
+    pad="none"
+  >
+    <Header
+      align="center"
+      direction="row"
+      pad={
+        Object {
+          "between": "small",
+          "horizontal": "none",
+          "vertical": "none",
+        }
+      }
+      responsive={false}
+    >
+      <Heading
+        tag="h1"
+      >
+        Set Quantity
+      </Heading>
+    </Header>
+    <FormField
+      size="medium"
+      strong={false}
+    >
+      <input
+        autoFocus={true}
+        onChange={[Function]}
+        placeholder="Enter quantity"
+        type="number"
+      />
+    </FormField>
+    <Footer
+      align="center"
+      direction="row"
+      justify="between"
+      pad={
+        Object {
+          "vertical": "medium",
+        }
+      }
+      responsive={false}
+    >
+      <Anchor
+        animateIcon={true}
+        icon={
+          <Close
+            responsive={true}
+          />
+        }
+        label="Cancel"
+        method="push"
+        onClick={[Function]}
+        tag="a"
+      />
+      <Anchor
+        animateIcon={true}
+        icon={
+          <LinkNext
+            responsive={true}
+          />
+        }
+        label="Update"
+        method="push"
+        onClick={[Function]}
+        primary={true}
+        tag="a"
+      />
+    </Footer>
+  </Form>
+</Layer>
+`;
+
+exports[`Testing on ChangeOrderQuantityForm... Test on prop Expect prop function handleSubmit to be called if Form submit or Anchor Update is clicked 1`] = `
+<Layer
+  align="center"
+>
+  <Form
+    compact={false}
+    fill={false}
+    onSubmit={[Function]}
+    pad="none"
+  >
+    <Header
+      align="center"
+      direction="row"
+      pad={
+        Object {
+          "between": "small",
+          "horizontal": "none",
+          "vertical": "none",
+        }
+      }
+      responsive={false}
+    >
+      <Heading
+        tag="h1"
+      >
+        Set Quantity
+      </Heading>
+    </Header>
+    <FormField
+      size="medium"
+      strong={false}
+    >
+      <input
+        autoFocus={true}
+        onChange={[Function]}
+        placeholder="Enter quantity"
+        type="number"
+      />
+    </FormField>
+    <Footer
+      align="center"
+      direction="row"
+      justify="between"
+      pad={
+        Object {
+          "vertical": "medium",
+        }
+      }
+      responsive={false}
+    >
+      <Anchor
+        animateIcon={true}
+        icon={
+          <Close
+            responsive={true}
+          />
+        }
+        label="Cancel"
+        method="push"
+        onClick={[Function]}
+        tag="a"
+      />
+      <Anchor
+        animateIcon={true}
+        icon={
+          <LinkNext
+            responsive={true}
+          />
+        }
+        label="Update"
+        method="push"
+        onClick={[Function]}
+        primary={true}
+        tag="a"
+      />
+    </Footer>
+  </Form>
+</Layer>
+`;
+
+exports[`Testing on ChangeOrderQuantityForm... Test on state Expect quantity state to change if input field is changed 1`] = `
+<Layer
+  align="center"
+>
+  <Form
+    compact={false}
+    fill={false}
+    onSubmit={[Function]}
+    pad="none"
+  >
+    <Header
+      align="center"
+      direction="row"
+      pad={
+        Object {
+          "between": "small",
+          "horizontal": "none",
+          "vertical": "none",
+        }
+      }
+      responsive={false}
+    >
+      <Heading
+        tag="h1"
+      >
+        Set Quantity
+      </Heading>
+    </Header>
+    <FormField
+      size="medium"
+      strong={false}
+    >
+      <input
+        autoFocus={true}
+        onChange={[Function]}
+        placeholder="Enter quantity"
+        type="number"
+      />
+    </FormField>
+    <Footer
+      align="center"
+      direction="row"
+      justify="between"
+      pad={
+        Object {
+          "vertical": "medium",
+        }
+      }
+      responsive={false}
+    >
+      <Anchor
+        animateIcon={true}
+        icon={
+          <Close
+            responsive={true}
+          />
+        }
+        label="Cancel"
+        method="push"
+        onClick={[Function]}
+        tag="a"
+      />
+      <Anchor
+        animateIcon={true}
+        icon={
+          <LinkNext
+            responsive={true}
+          />
+        }
+        label="Update"
+        method="push"
+        onClick={[Function]}
+        primary={true}
+        tag="a"
+      />
+    </Footer>
+  </Form>
+</Layer>
+`;
+
+exports[`Testing on ChangeOrderQuantityForm... Test on state Expect quantity state to equal order prop Qty value 1`] = `
+<Layer
+  align="center"
+>
+  <Form
+    compact={false}
+    fill={false}
+    onSubmit={[Function]}
+    pad="none"
+  >
+    <Header
+      align="center"
+      direction="row"
+      pad={
+        Object {
+          "between": "small",
+          "horizontal": "none",
+          "vertical": "none",
+        }
+      }
+      responsive={false}
+    >
+      <Heading
+        tag="h1"
+      >
+        Set Quantity
+      </Heading>
+    </Header>
+    <Box
+      announce={false}
+      direction="column"
+      focusable={true}
+      pad="none"
+      responsive={true}
+      tag="div"
+    >
+      <Label
+        size="medium"
+      >
+        Test Label
+      </Label>
+    </Box>
+    <FormField
+      size="medium"
+      strong={false}
+    >
+      <input
+        autoFocus={true}
+        onChange={[Function]}
+        placeholder="Enter quantity"
+        type="number"
+        value={2}
+      />
+    </FormField>
+    <Footer
+      align="center"
+      direction="row"
+      justify="between"
+      pad={
+        Object {
+          "vertical": "medium",
+        }
+      }
+      responsive={false}
+    >
+      <Anchor
+        animateIcon={true}
+        icon={
+          <Close
+            responsive={true}
+          />
+        }
+        label="Cancel"
+        method="push"
+        onClick={[Function]}
+        tag="a"
+      />
+      <Anchor
+        animateIcon={true}
+        icon={
+          <LinkNext
+            responsive={true}
+          />
+        }
+        label="Update"
+        method="push"
+        onClick={[Function]}
+        primary={true}
+        tag="a"
+      />
+    </Footer>
+  </Form>
+</Layer>
+`;

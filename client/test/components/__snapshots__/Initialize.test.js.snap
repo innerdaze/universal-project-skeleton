@@ -1,0 +1,373 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on Initialize... Initialize layout Expect Initialize to have Form as parent comp and Header, some Paragraph, 2 TextInput and a Footer with a Buuton in it 1`] = `
+<Box
+  align="center"
+  announce={false}
+  direction="column"
+  focusable={true}
+  full={true}
+  justify="center"
+  pad={
+    Object {
+      "horizontal": "medium",
+    }
+  }
+  responsive={true}
+  tag="div"
+>
+  <Form
+    compact={false}
+    fill={false}
+    onSubmit={[Function]}
+    pad="none"
+  >
+    <Header
+      align="center"
+      direction="row"
+      pad={
+        Object {
+          "between": "small",
+          "horizontal": "none",
+          "vertical": "none",
+        }
+      }
+      responsive={false}
+    >
+      <Heading
+        tag="h1"
+      >
+        Welcome
+      </Heading>
+    </Header>
+    <Paragraph
+      size="large"
+    >
+      I see it's your first time here.
+    </Paragraph>
+    <Paragraph>
+      Enter the API root URL provided by Orbis to get started.
+    </Paragraph>
+    <FormField
+      error=""
+      size="medium"
+      strong={false}
+    >
+      <TextInput
+        name="apiRoot"
+        onDOMChange={[Function]}
+        value=""
+      />
+    </FormField>
+    <Paragraph>
+      Set the ID of your store.
+    </Paragraph>
+    <FormField
+      size="medium"
+      strong={false}
+    >
+      <TextInput
+        name="storeID"
+        onDOMChange={[Function]}
+        value=""
+      />
+    </FormField>
+    <Footer
+      align="center"
+      direction="row"
+      pad={
+        Object {
+          "vertical": "medium",
+        }
+      }
+      responsive={false}
+    >
+      <Button
+        label="Continue"
+        method="push"
+        onClick={[Function]}
+        type="submit"
+      />
+    </Footer>
+  </Form>
+</Box>
+`;
+
+exports[`Testing on Initialize... Test on prop Expect onApiRootFormSubmit is called when Form is submitted or Button Continue is clicked  1`] = `
+<Box
+  align="center"
+  announce={false}
+  direction="column"
+  focusable={true}
+  full={true}
+  justify="center"
+  pad={
+    Object {
+      "horizontal": "medium",
+    }
+  }
+  responsive={true}
+  tag="div"
+>
+  <Form
+    compact={false}
+    fill={false}
+    onSubmit={[Function]}
+    pad="none"
+  >
+    <Header
+      align="center"
+      direction="row"
+      pad={
+        Object {
+          "between": "small",
+          "horizontal": "none",
+          "vertical": "none",
+        }
+      }
+      responsive={false}
+    >
+      <Heading
+        tag="h1"
+      >
+        Welcome
+      </Heading>
+    </Header>
+    <Paragraph
+      size="large"
+    >
+      I see it's your first time here.
+    </Paragraph>
+    <Paragraph>
+      Enter the API root URL provided by Orbis to get started.
+    </Paragraph>
+    <FormField
+      error=""
+      size="medium"
+      strong={false}
+    >
+      <TextInput
+        name="apiRoot"
+        onDOMChange={[Function]}
+        value=""
+      />
+    </FormField>
+    <Paragraph>
+      Set the ID of your store.
+    </Paragraph>
+    <FormField
+      size="medium"
+      strong={false}
+    >
+      <TextInput
+        name="storeID"
+        onDOMChange={[Function]}
+        value=""
+      />
+    </FormField>
+    <Footer
+      align="center"
+      direction="row"
+      pad={
+        Object {
+          "vertical": "medium",
+        }
+      }
+      responsive={false}
+    >
+      <Button
+        label="Continue"
+        method="push"
+        onClick={[Function]}
+        type="submit"
+      />
+    </Footer>
+  </Form>
+</Box>
+`;
+
+exports[`Testing on Initialize... Test on state Expect storeID state to change if TextInput apiRoot is change 1`] = `
+<Box
+  align="center"
+  announce={false}
+  direction="column"
+  focusable={true}
+  full={true}
+  justify="center"
+  pad={
+    Object {
+      "horizontal": "medium",
+    }
+  }
+  responsive={true}
+  tag="div"
+>
+  <Form
+    compact={false}
+    fill={false}
+    onSubmit={[Function]}
+    pad="none"
+  >
+    <Header
+      align="center"
+      direction="row"
+      pad={
+        Object {
+          "between": "small",
+          "horizontal": "none",
+          "vertical": "none",
+        }
+      }
+      responsive={false}
+    >
+      <Heading
+        tag="h1"
+      >
+        Welcome
+      </Heading>
+    </Header>
+    <Paragraph
+      size="large"
+    >
+      I see it's your first time here.
+    </Paragraph>
+    <Paragraph>
+      Enter the API root URL provided by Orbis to get started.
+    </Paragraph>
+    <FormField
+      error=""
+      size="medium"
+      strong={false}
+    >
+      <TextInput
+        name="apiRoot"
+        onDOMChange={[Function]}
+        value=""
+      />
+    </FormField>
+    <Paragraph>
+      Set the ID of your store.
+    </Paragraph>
+    <FormField
+      size="medium"
+      strong={false}
+    >
+      <TextInput
+        name="storeID"
+        onDOMChange={[Function]}
+        value=""
+      />
+    </FormField>
+    <Footer
+      align="center"
+      direction="row"
+      pad={
+        Object {
+          "vertical": "medium",
+        }
+      }
+      responsive={false}
+    >
+      <Button
+        label="Continue"
+        method="push"
+        onClick={[Function]}
+        type="submit"
+      />
+    </Footer>
+  </Form>
+</Box>
+`;
+
+exports[`Testing on Initialize... Test on state Expect storeID state to change if TextInput storeID is change 1`] = `
+<Box
+  align="center"
+  announce={false}
+  direction="column"
+  focusable={true}
+  full={true}
+  justify="center"
+  pad={
+    Object {
+      "horizontal": "medium",
+    }
+  }
+  responsive={true}
+  tag="div"
+>
+  <Form
+    compact={false}
+    fill={false}
+    onSubmit={[Function]}
+    pad="none"
+  >
+    <Header
+      align="center"
+      direction="row"
+      pad={
+        Object {
+          "between": "small",
+          "horizontal": "none",
+          "vertical": "none",
+        }
+      }
+      responsive={false}
+    >
+      <Heading
+        tag="h1"
+      >
+        Welcome
+      </Heading>
+    </Header>
+    <Paragraph
+      size="large"
+    >
+      I see it's your first time here.
+    </Paragraph>
+    <Paragraph>
+      Enter the API root URL provided by Orbis to get started.
+    </Paragraph>
+    <FormField
+      error=""
+      size="medium"
+      strong={false}
+    >
+      <TextInput
+        name="apiRoot"
+        onDOMChange={[Function]}
+        value=""
+      />
+    </FormField>
+    <Paragraph>
+      Set the ID of your store.
+    </Paragraph>
+    <FormField
+      size="medium"
+      strong={false}
+    >
+      <TextInput
+        name="storeID"
+        onDOMChange={[Function]}
+        value=""
+      />
+    </FormField>
+    <Footer
+      align="center"
+      direction="row"
+      pad={
+        Object {
+          "vertical": "medium",
+        }
+      }
+      responsive={false}
+    >
+      <Button
+        label="Continue"
+        method="push"
+        onClick={[Function]}
+        type="submit"
+      />
+    </Footer>
+  </Form>
+</Box>
+`;

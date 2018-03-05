@@ -1,0 +1,373 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing on BarcodeInputForm... BarcodeInputForm layout Expect BarcodeInputForm to have a Form with an input field and Button as child comps 1`] = `
+<Form
+  compact={false}
+  fill={false}
+  pad="none"
+  plain={true}
+>
+  <style>
+    
+      #barcodeInputContainer .grommetux-button__icon {
+        display: none;
+      }
+
+      #barcodeInputContainer .grommetux-number-input {
+        display: block;
+      }
+
+      #barcodeInputContainer input {
+        width: 100%;
+      }
+
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+      input[type="number"] {
+          -moz-appearance: textfield;
+      }
+    
+  </style>
+  <Box
+    alignContent="stretch"
+    announce={false}
+    direction="row"
+    focusable={true}
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <div
+      id="barcodeInputContainer"
+    >
+      <input
+        autoFocus={true}
+        onChange={[Function]}
+        placeholder="Enter barcode"
+        value=""
+      />
+    </div>
+    <Button
+      fill={true}
+      label="Search"
+      method="push"
+      onClick={[Function]}
+      secondary={true}
+      type="submit"
+    />
+  </Box>
+</Form>
+`;
+
+exports[`Testing on BarcodeInputForm... Test on methods Expect componentDidMount and receiveFocus is called 1`] = `
+<BarcodeInputForm
+  onSubmitBarcode={[MockFunction]}
+  shouldFocusField={false}
+>
+  <Form
+    compact={false}
+    fill={false}
+    pad="none"
+    plain={true}
+  >
+    <form
+      className="grommetux-form grommetux-form--pad-none grommetux-form--plain"
+    >
+      <style>
+        
+      #barcodeInputContainer .grommetux-button__icon {
+        display: none;
+      }
+
+      #barcodeInputContainer .grommetux-number-input {
+        display: block;
+      }
+
+      #barcodeInputContainer input {
+        width: 100%;
+      }
+
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+      input[type="number"] {
+          -moz-appearance: textfield;
+      }
+    
+      </style>
+      <Box
+        alignContent="stretch"
+        announce={false}
+        direction="row"
+        focusable={true}
+        pad="none"
+        responsive={true}
+        tag="div"
+      >
+        <div
+          className="grommetux-box grommetux-box--direction-row grommetux-box--align-content-stretch grommetux-box--responsive grommetux-box--pad-none"
+          style={Object {}}
+        >
+          <div
+            id="barcodeInputContainer"
+          >
+            <input
+              autoFocus={true}
+              onChange={[Function]}
+              placeholder="Enter barcode"
+              value=""
+            />
+          </div>
+          <Button
+            fill={true}
+            label="Search"
+            method="push"
+            onClick={[Function]}
+            secondary={true}
+            type="submit"
+          >
+            <button
+              className="grommetux-button grommetux-button--secondary grommetux-button--fill"
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onMouseDown={[Function]}
+              onMouseUp={[Function]}
+              type="submit"
+            >
+              <span
+                className="grommetux-button__label"
+              >
+                Search
+              </span>
+            </button>
+          </Button>
+        </div>
+      </Box>
+    </form>
+  </Form>
+</BarcodeInputForm>
+`;
+
+exports[`Testing on BarcodeInputForm... Test on methods Expect componentWillReceiveProps is called when shouldFocusField change from false to true 1`] = `
+<BarcodeInputForm
+  onSubmitBarcode={[MockFunction]}
+  shouldFocusField={true}
+>
+  <Form
+    compact={false}
+    fill={false}
+    pad="none"
+    plain={true}
+  >
+    <form
+      className="grommetux-form grommetux-form--pad-none grommetux-form--plain"
+    >
+      <style>
+        
+      #barcodeInputContainer .grommetux-button__icon {
+        display: none;
+      }
+
+      #barcodeInputContainer .grommetux-number-input {
+        display: block;
+      }
+
+      #barcodeInputContainer input {
+        width: 100%;
+      }
+
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+      input[type="number"] {
+          -moz-appearance: textfield;
+      }
+    
+      </style>
+      <Box
+        alignContent="stretch"
+        announce={false}
+        direction="row"
+        focusable={true}
+        pad="none"
+        responsive={true}
+        tag="div"
+      >
+        <div
+          className="grommetux-box grommetux-box--direction-row grommetux-box--align-content-stretch grommetux-box--responsive grommetux-box--pad-none"
+          style={Object {}}
+        >
+          <div
+            id="barcodeInputContainer"
+          >
+            <input
+              autoFocus={true}
+              onChange={[Function]}
+              placeholder="Enter barcode"
+              value=""
+            />
+          </div>
+          <Button
+            fill={true}
+            label="Search"
+            method="push"
+            onClick={[Function]}
+            secondary={true}
+            type="submit"
+          >
+            <button
+              className="grommetux-button grommetux-button--secondary grommetux-button--fill"
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onMouseDown={[Function]}
+              onMouseUp={[Function]}
+              type="submit"
+            >
+              <span
+                className="grommetux-button__label"
+              >
+                Search
+              </span>
+            </button>
+          </Button>
+        </div>
+      </Box>
+    </form>
+  </Form>
+</BarcodeInputForm>
+`;
+
+exports[`Testing on BarcodeInputForm... Test on prop Expect onSubmitBarcode prop function is called when submit Button is clicked 1`] = `
+<Form
+  compact={false}
+  fill={false}
+  pad="none"
+  plain={true}
+>
+  <style>
+    
+      #barcodeInputContainer .grommetux-button__icon {
+        display: none;
+      }
+
+      #barcodeInputContainer .grommetux-number-input {
+        display: block;
+      }
+
+      #barcodeInputContainer input {
+        width: 100%;
+      }
+
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+      input[type="number"] {
+          -moz-appearance: textfield;
+      }
+    
+  </style>
+  <Box
+    alignContent="stretch"
+    announce={false}
+    direction="row"
+    focusable={true}
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <div
+      id="barcodeInputContainer"
+    >
+      <input
+        autoFocus={true}
+        onChange={[Function]}
+        placeholder="Enter barcode"
+        value=""
+      />
+    </div>
+    <Button
+      fill={true}
+      label="Search"
+      method="push"
+      onClick={[Function]}
+      secondary={true}
+      type="submit"
+    />
+  </Box>
+</Form>
+`;
+
+exports[`Testing on BarcodeInputForm... Test on state Expect barcode state to change when input field is changed 1`] = `
+<Form
+  compact={false}
+  fill={false}
+  pad="none"
+  plain={true}
+>
+  <style>
+    
+      #barcodeInputContainer .grommetux-button__icon {
+        display: none;
+      }
+
+      #barcodeInputContainer .grommetux-number-input {
+        display: block;
+      }
+
+      #barcodeInputContainer input {
+        width: 100%;
+      }
+
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+      input[type="number"] {
+          -moz-appearance: textfield;
+      }
+    
+  </style>
+  <Box
+    alignContent="stretch"
+    announce={false}
+    direction="row"
+    focusable={true}
+    pad="none"
+    responsive={true}
+    tag="div"
+  >
+    <div
+      id="barcodeInputContainer"
+    >
+      <input
+        autoFocus={true}
+        onChange={[Function]}
+        placeholder="Enter barcode"
+        value=""
+      />
+    </div>
+    <Button
+      fill={true}
+      label="Search"
+      method="push"
+      onClick={[Function]}
+      secondary={true}
+      type="submit"
+    />
+  </Box>
+</Form>
+`;
