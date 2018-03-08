@@ -8,7 +8,9 @@ const initialState = {
   didInvalidate: false,
   lastUpdated: null,
   items: [],
-  activeCashier: null,
+  activeCashier: {
+    CashierID: 1
+  },
   isAuthenticating: false,
   authError: null,
   error: null

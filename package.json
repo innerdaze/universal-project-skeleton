@@ -259,6 +259,8 @@
     ]
   },
   "dependencies": {
+    "redux-mock-store": "^1.5.1",
+    "redux-test-utils": "^0.2.2",
     "sinon": "^4.4.2"
   }
 }

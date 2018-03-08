@@ -8,7 +8,7 @@ import localForage from 'localforage'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 import cordovaSQLiteDriver from 'localforage-cordovasqlitedriver'
 import history from './history'
-import * as reducers from './ducks'
+import * as reducers from './features'
 
 // Persist Configs
 const rootPersistConfig = storage => ({
@@ -126,7 +126,7 @@ export default async function configureStore(initialState) {
   const persistor = persistStore(store)
 
   if (module.hot) {
-    module.hot.accept('./ducks/index', () => {
+    module.hot.accept('./features/index', () => {
       store.replaceReducer(
         persistReducer(
           rootPersistConfig(localForage),

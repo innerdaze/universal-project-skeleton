@@ -5,8 +5,8 @@ import actions from './actions'
 const { session } = actions
 
 const initialState = {
-  id: null,
-  alive: false,
+  id: '123',
+  alive: true,
   isRequesting: false,
   lastUpdated: null,
   error: null

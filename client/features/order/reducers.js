@@ -99,13 +99,6 @@ const orders = handleActions(
         changingOrderQuantityFor: order
       }
     },
-    [order.finishChangingOrderQuantity](state) {
-      return {
-        ...state,
-        isChangingOrderQuantity: false,
-        changingOrderQuantityFor: null
-      }
-    },
     [order.cancelChangingOrderQuantity](state) {
       return {
         ...state,
@@ -180,10 +173,10 @@ const orderEntities = handleActions(
           Qty: quantity
         }
       }
-    },
-    [order.receiveOrders](state, { payload }) {
-      return keyBy(payload, '_id')
     }
+    // [order.receiveOrders](state, { payload }) {
+    //   return keyBy(payload, '_id')
+    // }
   },
   {}
 )

@@ -10,9 +10,9 @@ const initialState = {
 const reducer = handleActions(
   {
     [error.displayError](state, { payload: { error } }) {
-      if (error === 'Cannot read property \'Result\' of undefined') {
-        debugger
-      }
+      // if (error === 'Cannot read property \'Result\' of undefined') {
+      //   debugger
+      // }
       return {
         ...state,
         activeError: error

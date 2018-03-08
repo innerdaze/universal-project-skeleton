@@ -4,14 +4,14 @@ import {
   productEntities,
   productIDsByProductName,
   productSearch
- } from './reducers/ProductsReducer'
+} from './reducers/ProductsReducer'
 import { cashiers, cashierEntities } from './reducers/CashiersReducer'
 import {
   barcodes,
   barcodeEntities,
   barcodeIDsByProductID
 } from './reducers/BarcodesReducer'
-import app from './ducks'
+import app from './features'
 import barcodeLookup from './reducers/BarcodeLookupReducer'
 import { session, user } from './reducers/SessionReducer'
 import sync from './reducers/SyncReducer'

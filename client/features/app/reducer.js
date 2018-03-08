@@ -4,7 +4,7 @@ import actions from './actions'
 import { api } from '../../config'
 const { app } = actions
 const initialState = {
-  isInitialized: false,
+  isInitialized: true,
   apiRoot: null,
   apiRootValid: false,
   storeID: '0',
