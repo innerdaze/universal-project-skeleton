@@ -107,7 +107,7 @@ describe('Testing on barcode reducers', () => {
         isFetching: false,
         lastUpdated: null,
         items: [1, 3],
-        lastUpdated: Date.now()
+        lastUpdated: expect.any(Number)
       }
 
       expect(barcodeReducers({}, action).barcodes).toEqual(expectedState)

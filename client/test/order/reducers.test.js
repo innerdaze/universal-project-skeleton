@@ -282,7 +282,7 @@ describe('Testing on orderReducers...', () => {
       let expectedState = {
         ...initialState,
         isProcessing: false,
-        lastUpdated: Date.now()
+        lastUpdated: expect.any(Number)
       }
 
       expect(orderReducers({}, action).orders).toEqual(expectedState)

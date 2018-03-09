@@ -105,7 +105,7 @@ describe('Testing on cashier reducers', () => {
         isFetching: false,
         didInvalidate: false,
         items: [1],
-        lastUpdated: Date.now()
+        lastUpdated: expect.any(Number)
       }
 
       expect(cashierReducers({}, action).cashiers).toEqual(expectedState)
