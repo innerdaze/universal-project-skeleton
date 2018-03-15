@@ -3,13 +3,13 @@ import {
   barcodes as barcodesReducer,
   barcodeEntities as barcodeEntitiesReducer,
   barcodeIDsByProductID as barcodeIDsByProductIDReducer
-} from '../../barcode/reducers'
+} from '../reducers'
 //import barcodeReducers from '../../barcode/reducers'
-import operations from '../../barcode/operations'
+import operations from '../operations'
 import {
   generatebarcodeModel,
   generatebarcodeModelArray,
-} from '../../__fixtures__/barcode'
+} from '../__fixtures__'
 import { pluck, indexBy, prop } from 'ramda'
 const initialStateBarcodeLookup = {
   lastQuery: null,
