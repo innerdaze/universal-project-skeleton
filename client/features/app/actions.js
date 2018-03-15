@@ -3,7 +3,7 @@ import { createIdentityActionMap } from '../../helpers/ducks'
 
 const identityActions = createIdentityActionMap(
   'APP_INITIALIZE',
-  'API_ROOT_VALID',
+  'API_ROOT_VALIDATE', //Changed action name API_ROOT_VALID to API_ROOT_VALIDATE by KK on 15/03/2018 because of same name of action and property
   'API_ROOT_INVALID',
   'APP_RESET'
 )

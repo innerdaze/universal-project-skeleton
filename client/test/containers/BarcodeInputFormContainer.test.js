@@ -4,7 +4,7 @@ import { createMockStore } from 'redux-test-utils'
 
 let wrapper, context, store, state
 
-describe('Testing on BarcodeInputFormContainer...', () => {
+ describe('Testing on BarcodeInputFormContainer...', () => {
   beforeEach(() => {
     state = {
       barcode: {
@@ -51,4 +51,4 @@ describe('Testing on BarcodeInputFormContainer...', () => {
       expect(store.isActionTypeDispatched(action.type)).toBe(true)
     })
   })
-})
+ })

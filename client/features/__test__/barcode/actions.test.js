@@ -1,4 +1,4 @@
-import barcodeActions from '../../features/barcode/actions'
+import barcodeActions from '../../barcode/actions'
 
 describe('Testing on barcode actions', () => {
   test('Test receiveBarcodes', () => {

@@ -1,2 +1,11 @@
 {
+<<<<<<< HEAD
+=======
+  "editor.tabSize": 2,
+  "editor.formatonsave": true,
+  "prettier.eslintIntegration": true,
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "javascript.implicitProjectConfig.experimentalDecorators": true
+>>>>>>> new structure for testing implemented for app reducer file
 }

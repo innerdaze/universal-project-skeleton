@@ -1,7 +1,7 @@
-import { barcodeOperations } from '../../features/barcode'
-import { networkOperations } from '../../features/network'
-import { errorOperations } from '../../features/error'
-import barcodeActions from '../../features/barcode/actions'
+import { barcodeOperations } from '../../barcode'
+import { networkOperations } from '../../network'
+import { errorOperations } from '../../error'
+import barcodeActions from '../../barcode/actions'
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 

@@ -19,7 +19,7 @@ const initialStateBarcode = {
 const initialStateBarcodeEntities = {}
 const initialStateBarcodeIDsByProductID = {}
 
-const barcodeLookup = handleActions(
+export const barcodeLookup = handleActions(
   {
     [barcode.lookupBarcode](state, { payload: { barcodeID } }) {
       return {
@@ -44,7 +44,7 @@ const barcodeLookup = handleActions(
   initialStateBarcodeLookup
 )
 
-const barcodes = handleActions(
+export const barcodes = handleActions(
   {
     [barcode.invalidateBarcodes](state) {
       return {
@@ -78,7 +78,7 @@ const barcodes = handleActions(
   initialStateBarcode
 )
 
-const barcodeEntities = handleActions(
+export const barcodeEntities = handleActions(
   {
     [barcode.receiveBarcodes](state, { payload: { json } }) {
       return keyBy(json.filter(item => !item.Deleted), 'Barcode')
@@ -87,7 +87,7 @@ const barcodeEntities = handleActions(
   initialStateBarcodeEntities
 )
 
-const barcodeIDsByProductID = handleActions(
+export const barcodeIDsByProductID = handleActions(
   {
     [barcode.receiveBarcodes](state, { payload: { json } }) {
       return fromPairs(

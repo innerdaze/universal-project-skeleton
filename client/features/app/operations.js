@@ -20,7 +20,7 @@ const testAPIRoot = () => {
         service: 'GeneralService.GetTimeStamp',
         skipSessionCheck: true,
         method: 'post',
-        success: () => dispatch(appAction.apiRootValid()),
+        success: () => dispatch(appAction.apiRootValidate()),//Changed action name API_ROOT_VALID to API_ROOT_VALIDATE by KK on 15/03/2018 because of same name of action and property
         error: error => {
           dispatch(errorOperations.displayError(error.message))
           dispatch(appAction.apiRootInvalid())
@@ -51,7 +51,7 @@ const setApiRoot = apiRoot => {
     ) {
       await dispatch(testAPIRoot(apiRoot))
 
-      if (getState().app.apiRootValid) {
+      if (getState().app.apiRootValidate) {
         if (checkInitialised(getState())) {
           await dispatch(sessionOperations.login('apiuser', 'api.123'))
 

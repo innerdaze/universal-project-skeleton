@@ -30,7 +30,7 @@ const reducer = handleActions(
         storeID
       }
     },
-    [app.apiRootValid](state) {
+    [app.apiRootValidate](state) { //Changed action name API_ROOT_VALID to API_ROOT_VALIDATE by KK on 15/03/2018 because of same name of action and property
       return {
         ...state,
         apiRootValid: true
