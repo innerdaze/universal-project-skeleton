@@ -1,5 +1,5 @@
 import { createActions } from 'redux-actions'
-import { createIdentityActionMap } from '../../helpers/ducks'
+import { createIdentityActionMap } from '../../helpers/features'
 const identityActions = createIdentityActionMap(
   'NET_FAIL_OFFLINE',
   'NET_FAIL_NO_SESSION'

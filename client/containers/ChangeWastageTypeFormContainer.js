@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { wastageOperations, wastageSelectors } from '../ducks/wastage'
+import { wastageOperations, wastageSelectors } from '../features/wastage'
 import ChangeWastageTypeForm from '../components/ChangeWastageTypeForm'
 
 const mapStateToProps = state => {

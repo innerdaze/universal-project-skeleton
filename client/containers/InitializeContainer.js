@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-//import { appOperations } from '../ducks/app'
+//import { appOperations } from '../features/app'
 import Initialize from '../components/Initialize'
 //import InitializeSelector from '../selectors/InitializeSelector'
 import { appSelectors, appOperations } from '../features/app'
