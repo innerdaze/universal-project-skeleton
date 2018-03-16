@@ -1,4 +1,5 @@
-import uiReducers from '../reducers'
+import { reducer as uiReducers } from '../reducers'
+import { uiShowMenu, uiHideMenu } from '../operations'
 
 let initialState = {
   mainMenuVisible: false
@@ -6,28 +7,14 @@ let initialState = {
 
 describe('Testing on ui reducers', () => {
   test('Expect handle UI_SHOW_MENU', () => {
-    let action = {
-      type: 'UI/UI_SHOW_MENU'
-    }
+    const { mainMenuVisible } = uiReducers(initialState, uiShowMenu())
 
-    let expectedState = {
-      ...initialState,
-      mainMenuVisible: true
-    }
-
-    expect(uiReducers(initialState, action)).toEqual(expectedState)
+    expect(mainMenuVisible).toEqual(true)
   })
 
   test('Expect handle UI_HIDE_MENU', () => {
-    let action = {
-      type: 'UI/UI_HIDE_MENU'
-    }
+    const { mainMenuVisible } = uiReducers(initialState, uiHideMenu())
 
-    let expectedState = {
-      ...initialState,
-      mainMenuVisible: false
-    }
-
-    expect(uiReducers(initialState, action)).toEqual(expectedState)
+    expect(mainMenuVisible).toEqual(false)
   })
 })

@@ -1,5 +1,6 @@
 import actions from './actions'
-const validationAction = actions.validation
+
+export const validationAction = actions.validation
 
 const validate = ({ fieldID, value, validation, error }) => dispatch => {
   if (!validation(value)) {

@@ -1,7 +1,8 @@
 import actions from './actions'
 
-  const { uiShowMenu, uiHideMenu } = actions.ui
+export const { uiShowMenu, uiHideMenu } = actions.ui
 
-  export default {
-    uiShowMenu, uiHideMenu
-  }
+export default {
+  uiShowMenu,
+  uiHideMenu
+}

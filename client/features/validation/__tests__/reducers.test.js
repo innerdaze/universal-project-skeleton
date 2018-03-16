@@ -1,39 +1,29 @@
-import validationReducers from '../reducers'
+import { reducer as validationReducers } from '../reducers'
+import { validationAction } from '../operations'
+
+let initialState = {}
 
 describe('Testing on validation reducers', () => {
   test('Expect handle INVALIDATE', () => {
-    let fieldID = 'foo'
-    let error = 'bar'
+    let mockFieldID = 'foo'
+    let mockError = 'bar'
 
-    let action = {
-      type: 'VALIDATION/INVALIDATE',
-      payload: {
-        fieldID,
-        error
-      }
-    }
+    const returnedState = validationReducers(
+      initialState,
+      validationAction.invalidate(mockFieldID, mockError)
+    )
 
-    let expectedState = {
-      [fieldID]: error
-    }
-
-    expect(validationReducers({}, action)).toEqual(expectedState)
+    expect(returnedState[mockFieldID]).toEqual(mockError)
   })
 
   test('Expect handle VALIDATE', () => {
-    let fieldID = 'foo'
+    let mockFieldID = 'foo'
 
-    let action = {
-      type: 'VALIDATION/VALIDATE',
-      payload: {
-        fieldID
-      }
-    }
+    const returnedState = validationReducers(
+      initialState,
+      validationAction.validate(mockFieldID)
+    )
 
-    let expectedState = {
-      [fieldID]: null
-    }
-
-    expect(validationReducers({}, action)).toEqual(expectedState)
+    expect(returnedState[mockFieldID]).toBeNull()
   })
 })
