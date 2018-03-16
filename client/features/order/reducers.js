@@ -19,7 +19,7 @@ const initialState = {
   changingOrderQuantityFor: null
 }
 
-const orders = handleActions(
+export const orders = handleActions(
   {
     [order.addOrder](state, { payload: { id, order } }) {
       return {
@@ -102,7 +102,7 @@ const orders = handleActions(
     [order.cancelChangingOrderQuantity](state) {
       return {
         ...state,
-        isChangingOrderQuantity: false,
+        cancelChangingOrderQuantity: false,
         changingOrderQuantityFor: null
       }
     },
@@ -150,7 +150,7 @@ const orders = handleActions(
   initialState
 )
 
-const orderEntities = handleActions(
+export const orderEntities = handleActions(
   {
     [order.addOrder](state, { payload: { id, order } }) {
       return {

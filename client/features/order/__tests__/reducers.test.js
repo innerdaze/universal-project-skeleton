@@ -1,6 +1,12 @@
+import orderActions from '../actions'
 import orderReducers from '../reducers'
+import {
+  orders as ordersReducer,
+  orderEntities as orderEntitiesReducer
+} from '../reducers'
 import OperationModes from '../../../constants/OperationModes'
 import { difference } from 'lodash'
+import { orderModel } from '../__fixtures__'
 
 const initialState = {
   isProcessing: false,
@@ -19,366 +25,260 @@ const initialState = {
 describe('Testing on orderReducers...', () => {
   describe('Test on orders reducer', () => {
     test('Expect handle ADD_ORDER', () => {
-      let id = 'foo'
-      let order = []
-      let action = {
-        type: 'ORDER/ADD_ORDER',
-        payload: {
-          id,
-          order
-        }
-      }
+      let mockId = orderModel.id
+      let mockOrder = orderModel.order
 
-      let expectedState = {
-        ...initialState,
-        unprocessedItems: [...initialState.unprocessedItems, id]
-      }
+      const { unprocessedItems } = ordersReducer(
+        initialState,
+        orderActions.order.addOrder(mockId, mockOrder)
+      )
 
-      expect(orderReducers({}, action).orders).toEqual(expectedState)
+      expect(unprocessedItems).toEqual([
+        ...initialState.unprocessedItems,
+        mockId
+      ])
     })
 
     test('Expect handle DELETE_ORDER', () => {
-      let id = 'foo'
-      let action = {
-        type: 'ORDER/DELETE_ORDER',
-        payload: {
-          id
-        }
-      }
+      let mockId = orderModel.id
 
-      let state = {
-        ...initialState,
-        unprocessedItems: []
-      }
+      const { unprocessedItems, isDeletingOrder } = ordersReducer(
+        initialState,
+        orderActions.order.deleteOrder(mockId)
+      )
 
-      let expectedState = {
-        ...state,
-        isDeletingOrder: false,
-        unprocessedItems: state.unprocessedItems.filter(value => value !== id)
-      }
-
-      expect(orderReducers({}, action).orders).toEqual(expectedState)
+      expect(unprocessedItems).toEqual([])
+      expect(isDeletingOrder).toEqual(false)
     })
 
     test('Expect handle CHANGE_ORDER_QUANTITY', () => {
-      let id = 'foo'
-      let quantity = 1
-      let action = {
-        type: 'ORDER/CHANGE_ORDER_QUANTITY',
-        payload: {
-          id,
-          quantity
-        }
-      }
+      let mockId = orderModel.id
+      let mockQuantity = orderModel.quantity
 
-      let expectedState = {
-        ...initialState,
-        isChangingOrderQuantity: false
-      }
+      const { isChangingOrderQuantity } = ordersReducer(
+        initialState,
+        orderActions.order.changeOrderQuantity(mockId, mockQuantity)
+      )
 
-      expect(orderReducers({}, action).orders).toEqual(expectedState)
+      expect(isChangingOrderQuantity).toEqual(false)
     })
 
     test('Expect handle SUCCEED_PROCESS_ORDERS', () => {
-      let orderIDs = 'foo'
-      let action = {
-        type: 'ORDER/SUCCEED_PROCESS_ORDERS',
-        payload: {
-          orderIDs
-        }
-      }
+      let mockOrderIDs = orderModel.orderIDs
 
-      let expectedState = {
-        ...initialState,
-        processedItems: [
-          ...initialState.unprocessedItems,
-          ...initialState.processedItems
-        ],
-        unprocessedItems: difference(initialState.unprocessedItems, orderIDs)
-      }
+      const { processedItems, unprocessedItems } = ordersReducer(
+        initialState,
+        orderActions.order.succeedProcessOrders(mockOrderIDs)
+      )
 
-      expect(orderReducers({}, action).orders).toEqual(expectedState)
+      expect(processedItems).toEqual([
+        ...initialState.unprocessedItems,
+        ...initialState.processedItems
+      ])
+      expect(unprocessedItems).toEqual(
+        difference(initialState.unprocessedItems, mockOrderIDs)
+      )
     })
 
     test('Expect handle FAIL_PROCESS_ORDERS', () => {
-      let error = 'Error message'
-      let action = {
-        type: 'ORDER/FAIL_PROCESS_ORDERS',
-        payload: {
-          error
-        }
-      }
+      let mockErrorMsg = orderModel.error
 
-      let expectedState = {
-        ...initialState,
-        error: error,
-        isProcessing: false
-      }
+      const { error, isProcessing } = ordersReducer(
+        initialState,
+        orderActions.order.failProcessOrders(mockErrorMsg)
+      )
 
-      expect(orderReducers({}, action).orders).toEqual(expectedState)
+      expect(error).toEqual(mockErrorMsg)
+      expect(isProcessing).toEqual(false)
     })
 
     test('Expect handle CHANGE_OPERATION_MODE', () => {
-      let mode = 'test'
-      let action = {
-        type: 'ORDER/CHANGE_OPERATION_MODE',
-        payload: {
-          mode
-        }
-      }
+      let mockMode = orderModel.mode
 
-      let expectedState = {
-        ...initialState,
-        mode: mode
-      }
+      const { mode } = ordersReducer(
+        initialState,
+        orderActions.order.changeOperationMode(mockMode)
+      )
 
-      expect(orderReducers({}, action).orders).toEqual(expectedState)
+      expect(mode).toEqual(mockMode)
     })
 
     test('Expect handle CREATE_PENDING_TRANSACTION', () => {
-      let transaction = 'foo'
-      let action = {
-        type: 'ORDER/CREATE_PENDING_TRANSACTION',
-        payload: {
-          transaction
-        }
-      }
+      let mockTransaction = orderModel.transaction
 
-      let expectedState = {
-        ...initialState,
-        pendingTransaction: transaction
-      }
+      const { pendingTransaction } = ordersReducer(
+        initialState,
+        orderActions.order.createPendingTransaction(mockTransaction)
+      )
 
-      expect(orderReducers({}, action).orders).toEqual(expectedState)
+      expect(pendingTransaction).toEqual(mockTransaction)
     })
 
     test('Expect handle START_CHANGING_ORDER_QUANTITY', () => {
-      let order = 'foo'
-      let action = {
-        type: 'ORDER/START_CHANGING_ORDER_QUANTITY',
-        payload: {
-          order
-        }
-      }
+      let mockOrder = orderModel.order
 
-      let expectedState = {
-        ...initialState,
-        isChangingOrderQuantity: true,
-        changingOrderQuantityFor: order
-      }
+      const {
+        isChangingOrderQuantity,
+        changingOrderQuantityFor
+      } = ordersReducer(
+        initialState,
+        orderActions.order.startChangingOrderQuantity(mockOrder)
+      )
 
-      expect(orderReducers({}, action).orders).toEqual(expectedState)
+      expect(isChangingOrderQuantity).toEqual(true)
+      expect(changingOrderQuantityFor).toEqual(mockOrder)
     })
 
     test('Expect handle PROMPT_START_MODIFY_TRANSACTION', () => {
-      let transaction = 'foo'
-      let action = {
-        type: 'ORDER/PROMPT_START_MODIFY_TRANSACTION',
-        payload: {
-          transaction
-        }
-      }
+      let mockTransaction = orderModel.transaction
 
-      let expectedState = {
-        ...initialState,
-        pendingModification: transaction
-      }
+      const { pendingModification } = ordersReducer(
+        initialState,
+        orderActions.order.promptStartModifyTransaction(mockTransaction)
+      )
 
-      expect(orderReducers({}, action).orders).toEqual(expectedState)
+      expect(pendingModification).toEqual(mockTransaction)
     })
 
     test('Expect handle CHANGE_PENDING_TRANSACTION_QUANTITY', () => {
-      let quantity = 10
-      let action = {
-        type: 'ORDER/CHANGE_PENDING_TRANSACTION_QUANTITY',
-        payload: {
-          quantity
-        }
-      }
+      let mockQuantity = orderModel.quantity
 
-      let expectedState = {
-        ...initialState,
-        pendingTransaction: {
-          ...initialState.pendingTransaction,
-          Qty: quantity
-        }
-      }
+      const { pendingTransaction } = ordersReducer(
+        initialState,
+        orderActions.order.changePendingTransactionQuantity(mockQuantity)
+      )
 
-      expect(orderReducers({}, action).orders).toEqual(expectedState)
+      expect(pendingTransaction).toHaveProperty('Qty', mockQuantity)
     })
 
     test('Expect handle CANCEL_DELETING_ORDER', () => {
-      let action = {
-        type: 'ORDER/CANCEL_DELETING_ORDER'
-      }
+      const { isDeletingOrder } = ordersReducer(
+        initialState,
+        orderActions.order.cancelDeletingOrder()
+      )
 
-      let expectedState = {
-        ...initialState,
-        isDeletingOrder: false
-      }
-
-      expect(orderReducers({}, action).orders).toEqual(expectedState)
+      expect(isDeletingOrder).toEqual(false)
     })
 
     test('Expect handle START_DELETING_ORDER', () => {
-      let action = {
-        type: 'ORDER/START_DELETING_ORDER'
-      }
+      const { isDeletingOrder } = ordersReducer(
+        initialState,
+        orderActions.order.startDeletingOrder()
+      )
 
-      let expectedState = {
-        ...initialState,
-        isDeletingOrder: true
-      }
-
-      expect(orderReducers({}, action).orders).toEqual(expectedState)
+      expect(isDeletingOrder).toEqual(true)
     })
 
     test('Expect handle FINISH_CHANGING_ORDER_QUANTITY', () => {
-      let action = {
-        type: 'ORDER/FINISH_CHANGING_ORDER_QUANTITY'
-      }
+      const {
+        isChangingOrderQuantity,
+        changingOrderQuantityFor
+      } = ordersReducer(
+        initialState,
+        orderActions.order.finishChangingOrderQuantity()
+      )
 
-      let expectedState = {
-        ...initialState,
-        isChangingOrderQuantity: false,
-        changingOrderQuantityFor: null
-      }
-
-      expect(orderReducers({}, action).orders).toEqual(expectedState)
+      expect(isChangingOrderQuantity).toEqual(false)
+      expect(changingOrderQuantityFor).toBeNull()
     })
 
     test('Expect handle CANCEL_CHANGING_ORDER_QUANTITY', () => {
-      let action = {
-        type: 'ORDER/CANCEL_CHANGING_ORDER_QUANTITY'
-      }
+      const {
+        isChangingOrderQuantity,
+        changingOrderQuantityFor
+      } = ordersReducer(
+        initialState,
+        orderActions.order.cancelChangingOrderQuantity()
+      )
 
-      let expectedState = {
-        ...initialState,
-        isChangingOrderQuantity: false,
-        changingOrderQuantityFor: null
-      }
-
-      expect(orderReducers({}, action).orders).toEqual(expectedState)
+      expect(isChangingOrderQuantity).toEqual(false)
+      expect(changingOrderQuantityFor).toBeNull()
     })
 
     test('Expect handle REQUEST_PROCESS_ORDERS', () => {
-      let action = {
-        type: 'ORDER/REQUEST_PROCESS_ORDERS'
-      }
+      const { isProcessing } = ordersReducer(
+        initialState,
+        orderActions.order.requestProcessOrders()
+      )
 
-      let expectedState = {
-        ...initialState,
-        isProcessing: true
-      }
-
-      expect(orderReducers({}, action).orders).toEqual(expectedState)
+      expect(isProcessing).toEqual(true)
     })
 
     test('Expect handle RECEIVE_PROCESS_ORDERS', () => {
-      let action = {
-        type: 'ORDER/RECEIVE_PROCESS_ORDERS'
-      }
+      const { isProcessing, lastUpdated } = ordersReducer(
+        initialState,
+        orderActions.order.receiveProcessOrders()
+      )
 
-      let expectedState = {
-        ...initialState,
-        isProcessing: false,
-        lastUpdated: expect.any(Number)
-      }
-
-      expect(orderReducers({}, action).orders).toEqual(expectedState)
+      expect(isProcessing).toEqual(false)
+      expect(lastUpdated).toEqual(expect.any(Number))
     })
 
     test('Expect handle DISCARD_PENDING_TRANSACTION', () => {
-      let action = {
-        type: 'ORDER/DISCARD_PENDING_TRANSACTION'
-      }
+      const { pendingTransaction } = ordersReducer(
+        initialState,
+        orderActions.order.discardPendingTransaction()
+      )
 
-      let expectedState = {
-        ...initialState,
-        pendingTransaction: null
-      }
-
-      expect(orderReducers({}, action).orders).toEqual(expectedState)
+      expect(pendingTransaction).toBeNull()
     })
 
     test('Expect handle CONFIRM_START_MODIFY_TRANSACTION', () => {
-      let action = {
-        type: 'ORDER/CONFIRM_START_MODIFY_TRANSACTION'
-      }
+      const { pendingModification } = ordersReducer(
+        initialState,
+        orderActions.order.confirmStartModifyTransaction()
+      )
 
-      let expectedState = {
-        ...initialState,
-        pendingModification: null
-      }
-
-      expect(orderReducers({}, action).orders).toEqual(expectedState)
+      expect(pendingModification).toBeNull()
     })
 
     test('Expect handle CANCEL_START_MODIFY_TRANSACTION', () => {
-      let action = {
-        type: 'ORDER/CANCEL_START_MODIFY_TRANSACTION'
-      }
+      const { pendingModification } = ordersReducer(
+        initialState,
+        orderActions.order.cancelStartModifyTransaction()
+      )
 
-      let expectedState = {
-        ...initialState,
-        pendingModification: null
-      }
-
-      expect(orderReducers({}, action).orders).toEqual(expectedState)
+      expect(pendingModification).toBeNull()
     })
   })
 
   describe('Test on orderEntities reducer', () => {
     test('Expect handle ADD_ORDER', () => {
-      let id = 'foo'
-      let order = []
-      let action = {
-        type: 'ORDER/ADD_ORDER',
-        payload: {
-          id,
-          order
-        }
-      }
+      let mockId = orderModel.id
+      let mockOrder = orderModel.order
 
-      let expectedValue = {
-        [id]: order
-      }
+      const returnState = orderEntitiesReducer(
+        initialState,
+        orderActions.order.addOrder(mockId, mockOrder)
+      )
 
-      expect(orderReducers({}, action).orderEntities).toEqual(expectedValue)
+      expect(returnState).toHaveProperty(mockId, mockOrder)
     })
 
     test('Expect handle DELETE_ORDER', () => {
-      let id = 'foo'
-      let action = {
-        type: 'ORDER/DELETE_ORDER',
-        payload: {
-          id
-        }
-      }
+      let mockId = orderModel.id
 
-      let expectedValue = {}
+      initialState[mockId] = []
 
-      expect(orderReducers({}, action).orderEntities).toEqual(expectedValue)
+      const returnState = orderEntitiesReducer(
+        initialState,
+        orderActions.order.deleteOrder(mockId)
+      )
+
+      expect(returnState).not.toHaveProperty(mockId)
     })
 
     test('Expect handle CHANGE_ORDER_QUANTITY', () => {
-      let id = 'foo'
-      let quantity = 20
-      let action = {
-        type: 'ORDER/CHANGE_ORDER_QUANTITY',
-        payload: {
-          id,
-          quantity
-        }
-      }
+      let mockId = orderModel.id
+      let mockQuantity = orderModel.quantity
 
-      let expectedValue = {
-        [id]: {
-          Qty: quantity
-        }
-      }
+      const returnState = orderEntitiesReducer(
+        initialState,
+        orderActions.order.changeOrderQuantity(mockId, mockQuantity)
+      )
 
-      expect(orderReducers({}, action).orderEntities).toEqual(expectedValue)
+      expect(returnState).toHaveProperty(mockId)
+      expect(returnState[mockId]).toHaveProperty('Qty', mockQuantity)
     })
   })
 })
