@@ -15,7 +15,7 @@ const initialState = {
   authError: null,
   error: null
 }
-const cashiers = handleActions(
+export const cashiers = handleActions(
   {
     [cashier.invalidateCashiers](state) {
       return {
@@ -54,7 +54,7 @@ const cashiers = handleActions(
         items: []
       }
     },
-    [cashier.loginCashier](state) {
+    [cashier.loginCashierAuth](state) { //Name changed because of duplicate function name in operation files edited by KK on 16/03/2018
       return {
         ...state,
         isAuthenticating: true
@@ -84,7 +84,7 @@ const cashiers = handleActions(
   initialState
 )
 
-const cashierEntities = handleActions(
+export const cashierEntities = handleActions(
   {
     [cashier.receiveCashiers]: {
       next(state, { payload: { json } }) {

@@ -4,7 +4,7 @@ import { createIdentityActionMap } from '../../helpers/ducks'
 const identityActions = createIdentityActionMap(
   'REQUEST_CASHIERS',
   'INVALIDATE_CASHIERS',
-  'LOGIN_CASHIER',
+  'LOGIN_CASHIER_AUTH',  //Name changed because of duplicate function name in operation files edited by KK on 16/03/2018
   'LOGOUT_CASHIER',
   'RESET_CASHIERS'
 )
