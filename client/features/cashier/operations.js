@@ -4,7 +4,7 @@ import { errorOperations } from '../error'
 
 const cashierAction = actions.cashier
 
-const fetchCashiers = () => {
+export const fetchCashiers = () => {
   return dispatch => {
     dispatch(cashierAction.requestCashiers())
 
@@ -23,7 +23,7 @@ const fetchCashiers = () => {
   }
 }
 
-const loginCashier = (id, password) => {
+export const loginCashier = (id, password) => {
   return (dispatch, getState) => {
     dispatch(cashierAction.loginCashier())
 
