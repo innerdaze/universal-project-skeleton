@@ -1,4 +1,3 @@
-
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions'
 import actions from './actions'
@@ -7,19 +6,22 @@ const initialState = {
   isScanning: false,
   error: null
 }
-const reducer = handleActions({
-  [scanner.startScanning] (state) {
-    return {
-      ...state,
-      isScanning: true
+export const reducer = handleActions(
+  {
+    [scanner.startScanning](state) {
+      return {
+        ...state,
+        isScanning: true
+      }
+    },
+    [scanner.endScanning](state) {
+      return {
+        ...state,
+        isScanning: false
+      }
     }
   },
-  [scanner.endScanning] (state) {
-    return {
-      ...state,
-      isScanning: false
-    }
-  }
-}, initialState)
+  initialState
+)
 
 export default reducer

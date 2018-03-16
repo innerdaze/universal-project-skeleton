@@ -1,4 +1,5 @@
-import scannerReducers from '../reducers'
+import { reducer as scannerReducers } from '../reducers'
+import { scannerAction } from '../operations'
 
 let initialState = {
   isScanning: false,
@@ -7,18 +8,20 @@ let initialState = {
 
 describe('Testing on scanner reducers...', () => {
   test('Expect handle START_SCANNING', () => {
-    let action = {
-      type: 'SCANNER/START_SCANNING'
-    }
+    const { isScanning } = scannerReducers(
+      initialState,
+      scannerAction.startScanning()
+    )
 
-    expect(scannerReducers({}, action)).toHaveProperty('isScanning', true)
+    expect(isScanning).toEqual(true)
   })
 
   test('Expect handle END_SCANNING', () => {
-    let action = {
-      type: 'SCANNER/END_SCANNING'
-    }
+    const { isScanning } = scannerReducers(
+      initialState,
+      scannerAction.endScanning()
+    )
 
-    expect(scannerReducers({}, action)).toHaveProperty('isScanning', false)
+    expect(isScanning).toEqual(false)
   })
 })
