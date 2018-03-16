@@ -1,4 +1,4 @@
-import orderActions from '../actions'
+import { orderAction } from '../operations'
 import orderReducers from '../reducers'
 import {
   orders as ordersReducer,
@@ -30,7 +30,7 @@ describe('Testing on orderReducers...', () => {
 
       const { unprocessedItems } = ordersReducer(
         initialState,
-        orderActions.order.addOrder(mockId, mockOrder)
+        orderAction.addOrder(mockId, mockOrder)
       )
 
       expect(unprocessedItems).toEqual([
@@ -44,7 +44,7 @@ describe('Testing on orderReducers...', () => {
 
       const { unprocessedItems, isDeletingOrder } = ordersReducer(
         initialState,
-        orderActions.order.deleteOrder(mockId)
+        orderAction.deleteOrder(mockId)
       )
 
       expect(unprocessedItems).toEqual([])
@@ -57,7 +57,7 @@ describe('Testing on orderReducers...', () => {
 
       const { isChangingOrderQuantity } = ordersReducer(
         initialState,
-        orderActions.order.changeOrderQuantity(mockId, mockQuantity)
+        orderAction.changeOrderQuantity(mockId, mockQuantity)
       )
 
       expect(isChangingOrderQuantity).toEqual(false)
@@ -68,7 +68,7 @@ describe('Testing on orderReducers...', () => {
 
       const { processedItems, unprocessedItems } = ordersReducer(
         initialState,
-        orderActions.order.succeedProcessOrders(mockOrderIDs)
+        orderAction.succeedProcessOrders(mockOrderIDs)
       )
 
       expect(processedItems).toEqual([
@@ -85,7 +85,7 @@ describe('Testing on orderReducers...', () => {
 
       const { error, isProcessing } = ordersReducer(
         initialState,
-        orderActions.order.failProcessOrders(mockErrorMsg)
+        orderAction.failProcessOrders(mockErrorMsg)
       )
 
       expect(error).toEqual(mockErrorMsg)
@@ -97,7 +97,7 @@ describe('Testing on orderReducers...', () => {
 
       const { mode } = ordersReducer(
         initialState,
-        orderActions.order.changeOperationMode(mockMode)
+        orderAction.changeOperationMode(mockMode)
       )
 
       expect(mode).toEqual(mockMode)
@@ -108,7 +108,7 @@ describe('Testing on orderReducers...', () => {
 
       const { pendingTransaction } = ordersReducer(
         initialState,
-        orderActions.order.createPendingTransaction(mockTransaction)
+        orderAction.createPendingTransaction(mockTransaction)
       )
 
       expect(pendingTransaction).toEqual(mockTransaction)
@@ -122,7 +122,7 @@ describe('Testing on orderReducers...', () => {
         changingOrderQuantityFor
       } = ordersReducer(
         initialState,
-        orderActions.order.startChangingOrderQuantity(mockOrder)
+        orderAction.startChangingOrderQuantity(mockOrder)
       )
 
       expect(isChangingOrderQuantity).toEqual(true)
@@ -134,7 +134,7 @@ describe('Testing on orderReducers...', () => {
 
       const { pendingModification } = ordersReducer(
         initialState,
-        orderActions.order.promptStartModifyTransaction(mockTransaction)
+        orderAction.promptStartModifyTransaction(mockTransaction)
       )
 
       expect(pendingModification).toEqual(mockTransaction)
@@ -145,7 +145,7 @@ describe('Testing on orderReducers...', () => {
 
       const { pendingTransaction } = ordersReducer(
         initialState,
-        orderActions.order.changePendingTransactionQuantity(mockQuantity)
+        orderAction.changePendingTransactionQuantity(mockQuantity)
       )
 
       expect(pendingTransaction).toHaveProperty('Qty', mockQuantity)
@@ -154,7 +154,7 @@ describe('Testing on orderReducers...', () => {
     test('Expect handle CANCEL_DELETING_ORDER', () => {
       const { isDeletingOrder } = ordersReducer(
         initialState,
-        orderActions.order.cancelDeletingOrder()
+        orderAction.cancelDeletingOrder()
       )
 
       expect(isDeletingOrder).toEqual(false)
@@ -163,7 +163,7 @@ describe('Testing on orderReducers...', () => {
     test('Expect handle START_DELETING_ORDER', () => {
       const { isDeletingOrder } = ordersReducer(
         initialState,
-        orderActions.order.startDeletingOrder()
+        orderAction.startDeletingOrder()
       )
 
       expect(isDeletingOrder).toEqual(true)
@@ -173,10 +173,7 @@ describe('Testing on orderReducers...', () => {
       const {
         isChangingOrderQuantity,
         changingOrderQuantityFor
-      } = ordersReducer(
-        initialState,
-        orderActions.order.finishChangingOrderQuantity()
-      )
+      } = ordersReducer(initialState, orderAction.finishChangingOrderQuantity())
 
       expect(isChangingOrderQuantity).toEqual(false)
       expect(changingOrderQuantityFor).toBeNull()
@@ -186,10 +183,7 @@ describe('Testing on orderReducers...', () => {
       const {
         isChangingOrderQuantity,
         changingOrderQuantityFor
-      } = ordersReducer(
-        initialState,
-        orderActions.order.cancelChangingOrderQuantity()
-      )
+      } = ordersReducer(initialState, orderAction.cancelChangingOrderQuantity())
 
       expect(isChangingOrderQuantity).toEqual(false)
       expect(changingOrderQuantityFor).toBeNull()
@@ -198,7 +192,7 @@ describe('Testing on orderReducers...', () => {
     test('Expect handle REQUEST_PROCESS_ORDERS', () => {
       const { isProcessing } = ordersReducer(
         initialState,
-        orderActions.order.requestProcessOrders()
+        orderAction.requestProcessOrders()
       )
 
       expect(isProcessing).toEqual(true)
@@ -207,7 +201,7 @@ describe('Testing on orderReducers...', () => {
     test('Expect handle RECEIVE_PROCESS_ORDERS', () => {
       const { isProcessing, lastUpdated } = ordersReducer(
         initialState,
-        orderActions.order.receiveProcessOrders()
+        orderAction.receiveProcessOrders()
       )
 
       expect(isProcessing).toEqual(false)
@@ -217,7 +211,7 @@ describe('Testing on orderReducers...', () => {
     test('Expect handle DISCARD_PENDING_TRANSACTION', () => {
       const { pendingTransaction } = ordersReducer(
         initialState,
-        orderActions.order.discardPendingTransaction()
+        orderAction.discardPendingTransaction()
       )
 
       expect(pendingTransaction).toBeNull()
@@ -226,7 +220,7 @@ describe('Testing on orderReducers...', () => {
     test('Expect handle CONFIRM_START_MODIFY_TRANSACTION', () => {
       const { pendingModification } = ordersReducer(
         initialState,
-        orderActions.order.confirmStartModifyTransaction()
+        orderAction.confirmStartModifyTransaction()
       )
 
       expect(pendingModification).toBeNull()
@@ -235,7 +229,7 @@ describe('Testing on orderReducers...', () => {
     test('Expect handle CANCEL_START_MODIFY_TRANSACTION', () => {
       const { pendingModification } = ordersReducer(
         initialState,
-        orderActions.order.cancelStartModifyTransaction()
+        orderAction.cancelStartModifyTransaction()
       )
 
       expect(pendingModification).toBeNull()
@@ -249,7 +243,7 @@ describe('Testing on orderReducers...', () => {
 
       const returnState = orderEntitiesReducer(
         initialState,
-        orderActions.order.addOrder(mockId, mockOrder)
+        orderAction.addOrder(mockId, mockOrder)
       )
 
       expect(returnState).toHaveProperty(mockId, mockOrder)
@@ -262,7 +256,7 @@ describe('Testing on orderReducers...', () => {
 
       const returnState = orderEntitiesReducer(
         initialState,
-        orderActions.order.deleteOrder(mockId)
+        orderAction.deleteOrder(mockId)
       )
 
       expect(returnState).not.toHaveProperty(mockId)
@@ -274,7 +268,7 @@ describe('Testing on orderReducers...', () => {
 
       const returnState = orderEntitiesReducer(
         initialState,
-        orderActions.order.changeOrderQuantity(mockId, mockQuantity)
+        orderAction.changeOrderQuantity(mockId, mockQuantity)
       )
 
       expect(returnState).toHaveProperty(mockId)
