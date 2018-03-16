@@ -1,4 +1,6 @@
-import syncReducers from '../reducers'
+import { reducer as syncReducers } from '../reducers'
+import { syncAction } from '../operations'
+import { syncModel } from '../__fixtures__'
 
 let initialState = {
   isSyncing: false,
@@ -7,44 +9,25 @@ let initialState = {
 
 describe('Testing on sync reducers', () => {
   test('Expect handle SYNC_PROGRESS', () => {
-    let progress = 0.2
-    let action = {
-      type: 'SYNC/SYNC_PROGRESS',
-      payload: {
-        progress
-      }
-    }
-    let expectedState = {
-      ...initialState,
-      progress: progress
-    }
+    let mockProgress = syncModel.progress
 
-    expect(syncReducers(initialState, action)).toEqual(expectedState)
+    const { progress } = syncReducers(
+      initialState,
+      syncAction.syncProgress(mockProgress)
+    )
+
+    expect(progress).toEqual(mockProgress)
   })
 
   test('Expect handle START_SYNC', () => {
-    let action = {
-      type: 'SYNC/START_SYNC'
-    }
+    const { isSyncing } = syncReducers(initialState, syncAction.startSync())
 
-    let expectedState = {
-      ...initialState,
-      isSyncing: true
-    }
-
-    expect(syncReducers(initialState, action)).toEqual(expectedState)
+    expect(isSyncing).toEqual(true)
   })
 
   test('Expect handle END_SYNC', () => {
-    let action = {
-      type: 'SYNC/END_SYNC'
-    }
+    const { isSyncing } = syncReducers(initialState, syncAction.endSync())
 
-    let expectedState = {
-      ...initialState,
-      isSyncing: false
-    }
-
-    expect(syncReducers(initialState, action)).toEqual(expectedState)
+    expect(isSyncing).toEqual(false)
   })
 })

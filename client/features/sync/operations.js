@@ -7,7 +7,7 @@ import { cashierOperations } from '../cashier'
 import { sessionSelectors } from '../session'
 import { wastageOperations } from '../wastage'
 
-const syncAction = actions.sync
+export const syncAction = actions.sync
 
 const sync = () => (dispatch, getState) => {
   dispatch(syncAction.startSync())
