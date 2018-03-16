@@ -19,7 +19,7 @@ const initialStateProductSearch = {
 const intialStateProductEntities = {}
 const intialStateProductIDsByProductName = {}
 
-const products = handleActions(
+export const products = handleActions(
   {
     [product.invalidateProducts](state) {
       return {
@@ -53,7 +53,7 @@ const products = handleActions(
   initialStateProduct
 )
 
-const productSearch = handleActions(
+export const productSearch = handleActions(
   {
     [product.searchProducts](state) {
       return {
@@ -79,7 +79,7 @@ const productSearch = handleActions(
   initialStateProductSearch
 )
 
-const productEntities = handleActions(
+export const productEntities = handleActions(
   {
     [product.receiveProducts](state, { payload: { json } }) {
       return keyBy(json, 'ProductID')
@@ -91,7 +91,7 @@ const productEntities = handleActions(
   intialStateProductEntities
 )
 
-const productIDsByProductName = handleActions(
+export const productIDsByProductName = handleActions(
   {
     [product.receiveProducts](state, { payload: { json } }) {
       return fromPairs(

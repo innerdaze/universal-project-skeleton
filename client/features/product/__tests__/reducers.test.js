@@ -1,4 +1,11 @@
-import productReducers from '../reducers'
+import {
+  products as productsReducer,
+  productSearch as productSearchReducer,
+  productEntities as productEntitiesReducer,
+  productIDsByProductName as productIDsByProductNameReducer
+} from '../reducers'
+import productActions from '../actions'
+import { productModel } from '../__fixtures__'
 
 let initialStateProduct = {
   isFetching: false,
@@ -17,43 +24,31 @@ let intialStateProductIDsByProductName = {}
 describe('Testing on product reducers...', () => {
   describe('Test products reducer', () => {
     test('Expect handle REQUEST_PRODUCTS', () => {
-      let action = {
-        type: 'PRODUCT/REQUEST_PRODUCTS'
-      }
+      const { isFetching, didInvalidate } = productsReducer(
+        initialStateProduct,
+        productActions.product.requestProducts()
+      )
 
-      let expectedState = {
-        ...initialStateProduct,
-        isFetching: true,
-        didInvalidate: false
-      }
-
-      expect(productReducers({}, action).products).toEqual(expectedState)
+      expect(isFetching).toEqual(true)
+      expect(didInvalidate).toEqual(false)
     })
 
     test('Expect handle INVALIDATE_PRODUCTS', () => {
-      let action = {
-        type: 'PRODUCT/INVALIDATE_PRODUCTS'
-      }
+      const { didInvalidate } = productsReducer(
+        initialStateProduct,
+        productActions.product.invalidateProducts()
+      )
 
-      let expectedState = {
-        ...initialStateProduct,
-        didInvalidate: true
-      }
-
-      expect(productReducers({}, action).products).toEqual(expectedState)
+      expect(didInvalidate).toEqual(true)
     })
 
     test('Expect handle RESET_PRODUCTS', () => {
-      let action = {
-        type: 'PRODUCT/RESET_PRODUCTS'
-      }
+      const { items } = productsReducer(
+        initialStateProduct,
+        productActions.product.resetProducts()
+      )
 
-      let expectedState = {
-        ...initialStateProduct,
-        items: []
-      }
-
-      expect(productReducers({}, action).products).toEqual(expectedState)
+      expect(items).toHaveLength(0)
     })
 
     test('Expect handle RECEIVE_PRODUCTS', () => {
@@ -68,76 +63,57 @@ describe('Testing on product reducers...', () => {
         }
       ]
 
-      let action = {
-        type: 'PRODUCT/RECEIVE_PRODUCTS',
-        payload: {
-          json
-        }
-      }
+      const { isFetching, didInvalidate, items, lastUpdated } = productsReducer(
+        initialStateProduct,
+        productActions.product.receiveProducts(json)
+      )
 
-      let expectedState = {
-        ...initialStateProduct,
-        isFetching: false,
-        didInvalidate: false,
-        items: ['foo'],
-        lastUpdated: expect.any(Number)
-      }
-
-      expect(productReducers({}, action).products).toEqual(expectedState)
+      expect(isFetching).toEqual(false)
+      expect(didInvalidate).toEqual(false)
+      expect(items).toHaveLength(1)
+      expect(lastUpdated).toEqual(expect.any(Number))
     })
   })
 
   describe('Test productSearch reducer', () => {
     test('Expect handle SEARCH_PRODUCTS', () => {
-      let expectedState = {
-        ...initialStateProductSearch,
-        isSearching: true
-      }
+      const { isSearching } = productSearchReducer(
+        initialStateProductSearch,
+        productActions.product.searchProducts()
+      )
 
-      let action = {
-        type: 'PRODUCT/SEARCH_PRODUCTS'
-      }
-      expect(productReducers({}, action).productSearch).toEqual(expectedState)
+      expect(isSearching).toEqual(true)
     })
 
     test('Expect handle SUCCEED_SEARCH_PRODUCTS', () => {
-      let matches = []
-
-      let expectedState = {
-        ...initialStateProductSearch,
-        isSearching: false,
-        lastMatches: matches
+      let matches = {
+        ProductID: 'foo',
+        Deleted: false
       }
 
-      let action = {
-        type: 'PRODUCT/SUCCEED_SEARCH_PRODUCTS',
-        payload: {
-          matches
-        }
-      }
-      expect(productReducers({}, action).productSearch).toEqual(expectedState)
+      const { isSearching, lastMatches } = productSearchReducer(
+        initialStateProductSearch,
+        productActions.product.succeedSearchProducts(matches)
+      )
+
+      expect(isSearching).toEqual(false)
+      expect(lastMatches).toEqual(matches)
     })
 
     test('Expect handle FAIL_SEARCH_PRODUCTS', () => {
-      let query = 'foo'
+      let mockQuery = productModel.query
 
-      let expectedState = {
-        ...initialStateProductSearch,
-        isSearching: false,
-        lastError: `No match for: ${query}`
-      }
+      const { isSearching, lastError } = productSearchReducer(
+        initialStateProduct,
+        productActions.product.failSearchProducts(mockQuery)
+      )
 
-      let action = {
-        type: 'PRODUCT/FAIL_SEARCH_PRODUCTS',
-        payload: {
-          query
-        }
-      }
-      expect(productReducers({}, action).productSearch).toEqual(expectedState)
+      expect(isSearching).toEqual(false)
+      expect(lastError).toEqual(`No match for: ${mockQuery}`)
     })
   })
 
-  describe('Test productSearch reducer', () => {
+  describe('Test productEntities reducer', () => {
     test('Expect handle RECEIVE_PRODUCTS', () => {
       let json = [
         {
@@ -149,13 +125,6 @@ describe('Testing on product reducers...', () => {
           Deleted: true
         }
       ]
-
-      let action = {
-        type: 'PRODUCT/RECEIVE_PRODUCTS',
-        payload: {
-          json
-        }
-      }
 
       let expectedState = {
         ...intialStateProductEntities,
@@ -163,23 +132,25 @@ describe('Testing on product reducers...', () => {
         bar: json[1]
       }
 
-      expect(productReducers({}, action).productEntities).toEqual(expectedState)
+      const returnState = productEntitiesReducer(
+        intialStateProductEntities,
+        productActions.product.receiveProducts(json)
+      )
+
+      expect(returnState).toEqual(expectedState)
     })
 
     test('Expect handle RESET_PRODUCTS', () => {
-      let action = {
-        type: 'PRODUCT/RESET_PRODUCTS'
-      }
+      const returnState = productEntitiesReducer(
+        intialStateProductEntities,
+        productActions.product.resetProducts()
+      )
 
-      let expectedState = {
-        ...intialStateProductEntities
-      }
-
-      expect(productReducers({}, action).productEntities).toEqual(expectedState)
+      expect(returnState).toEqual({})
     })
   })
 
-  describe('Test productSearch reducer', () => {
+  describe('Test productIDsByProductName reducer', () => {
     test('Expect handle RECEIVE_PRODUCTS', () => {
       let json = [
         {
@@ -194,22 +165,27 @@ describe('Testing on product reducers...', () => {
         }
       ]
 
-      let action = {
-        type: 'PRODUCT/RECEIVE_PRODUCTS',
-        payload: {
-          json
-        }
-      }
-
       let expectedState = {
         ...intialStateProductIDsByProductName,
         fooname: 'foo',
         barname: 'bar'
       }
 
-      expect(productReducers({}, action).productIDsByProductName).toEqual(
-        expectedState
+      const returnState = productIDsByProductNameReducer(
+        intialStateProductEntities,
+        productActions.product.receiveProducts(json)
       )
+
+      expect(returnState).toEqual(expectedState)
+    })
+
+    test('Expect handle RESET_PRODUCTS', () => {
+      const returnState = productIDsByProductNameReducer(
+        intialStateProductIDsByProductName,
+        productActions.product.resetProducts()
+      )
+
+      expect(returnState).toEqual({})
     })
   })
 })
