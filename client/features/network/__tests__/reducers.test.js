@@ -1,5 +1,6 @@
 import networkReducers from '../reducers'
-
+import actions from '../actions'
+const networkAction=actions.network
 const initialState = {
   isNetFailOffline: false,
   isNetFailNoSession: false
@@ -7,21 +8,12 @@ const initialState = {
 
 describe('Testing networkReducers', () => {
   test('Expect handle NET_FAIL_OFFLINE', () => {
-    let action = {
-      type: 'NETWORK/NET_FAIL_OFFLINE'
-    }
-
-    expect(networkReducers({}, action)).toHaveProperty('isNetFailOffline', true)
+    const{isNetFailOffline}=networkReducers(initialState,networkAction.netFailOffline())
+    expect(isNetFailOffline).toEqual(true)
   })
 
   test('Expect handle NET_FAIL_NO_SESSION', () => {
-    let action = {
-      type: 'NETWORK/NET_FAIL_NO_SESSION'
-    }
-
-    expect(networkReducers({}, action)).toHaveProperty(
-      'isNetFailNoSession',
-      false
-    )
+    const{isNetFailNoSession}=networkReducers(initialState,networkAction.netFailNoSession())
+    expect(isNetFailNoSession).toEqual(false)
   })
 })
