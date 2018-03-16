@@ -20,10 +20,8 @@ const flippedProp = flip(prop)
 
 const pendingOrdersBySelectedModeSelector = createSelector(
   [unprocessedItemsSelector, orderEntitiesSelector, modeSelector],
-  (unprocessedItems, orderEntities, mode) => {
-    const orders = map(flippedProp(orderEntities), unprocessedItems)
-    return filterByTransType(mode)(orders)
-  }
+  (unprocessedItems, orderEntities, mode) =>
+    filterByTransType(mode)(map(flippedProp(orderEntities), unprocessedItems))
 )
 
 export default {

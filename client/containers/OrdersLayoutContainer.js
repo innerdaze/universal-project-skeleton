@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import OrdersLayout from '../components/OrdersLayout'
 import { orderOperations, orderSelectors } from '../ducks/order'
+import { wastageSelectors, wastageOperations } from '../ducks/wastage'
 import { uiSelectors } from '../ducks/ui'
 
 export default connect(
@@ -11,9 +12,17 @@ export default connect(
     isChangingOrderQuantity: orderSelectors.isChangingOrderQuantitySelector(
       state
     ),
-    changingOrderQuantityFor: orderSelectors.changingOrderQuantityForSelector(
+    isChangingWastageType: wastageSelectors.isChangingWastageTypeSelector(
       state
-    )
+    ),
+    activeMode: orderSelectors.modeSelector(state),
+    wastageTypeNameForOrderId: orderId => {
+      const type = wastageSelectors.wastageTypeForOrderIdSelector(
+        state,
+        orderId
+      )
+      return type && type.Name
+    }
   }),
   dispatch => ({
     onPromptStartModifyingSubmit: transaction => {
@@ -21,6 +30,8 @@ export default connect(
       dispatch(orderOperations.startChangingOrderQuantity(transaction))
     },
     onPromptStartModifyingCancel: () =>
-      dispatch(orderOperations.cancelStartModifyTransaction())
+      dispatch(orderOperations.cancelStartModifyTransaction()),
+    onChangeWastageTypeClick: order =>
+      dispatch(wastageOperations.startChangingWastageType(order))
   })
 )(OrdersLayout)

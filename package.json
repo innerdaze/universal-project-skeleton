@@ -4,13 +4,16 @@
   "description": "",
   "main": "server/_app/index.js",
   "scripts": {
-    "babel-node": "cross-env NODE_PATH=server babel-node .",
+    "babel-node":
+      "cross-env BABEL_ENV=development cross-env NODE_PATH=server babel-node .",
     "prebuild": "npm run clean",
     "prebuild:cordova": "npm run clean",
-    "build:dev": "cross-env NODE_ENV=development webpack",
-    "build": "cross-env NODE_ENV=production webpack -p",
+    "build:dev":
+      "cross-env NODE_ENV=development cross-env BABEL_ENV=development webpack",
+    "build":
+      "cross-env NODE_ENV=production cross-env BABEL_ENV=production webpack -p",
     "build:cordova:dev":
-      "cross-env NODE_ENV=development cross-env CORDOVA=true webpack",
+      "cross-env NODE_ENV=development cross-env BABEL_ENV=development cross-env CORDOVA=true webpack",
     "build:cordova":
       "cross-env NODE_ENV=production cross-env CORDOVA=true webpack --progress",
     "build:cordova:dev:win": ".\\scripts\\build-and-install-android-dev.bat",
@@ -25,11 +28,12 @@
       "cross-env BABEL_ENV=test nyc --reporter=lcov jest --coverage",
     "prestart:server:dev": "npm t",
     "start:server:dev": "npm start",
-    "start:client:dev": "babel-node webpack.dev-server.js",
+    "start:client:dev":
+      "cross-env BABEL_ENV=development cross-env NODE_ENV=development babel-node webpack.dev-server.js",
     "watch:server":
       "cross-env NODE_ENV=development nodemon -w server -w package.json -x npm run start:server:dev",
     "watch:client":
-      "cross-env NODE_ENV=development nodemon -w webpack.web.js -w webpack.dev-server.js -x npm run start:client:dev",
+      "cross-env BABEL_ENV=development cross-env NODE_ENV=development nodemon -w webpack.web.js -w webpack.dev-server.js -x npm run start:client:dev",
     "webpack-dashboard": "webpack-dashboard -- npm run watch:client",
     "postwatch:client": "npm run tunnel",
     "cordova:init":
@@ -65,10 +69,12 @@
     "babel-loader": "^7.1.2",
     "babel-minify-webpack-plugin": "^0.2.0",
     "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-module-resolver": "^3.1.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-es2015-classes": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-react-jsx-source": "^6.22.0",
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-es2015": "^6.24.1",
@@ -96,6 +102,8 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-react": "^7.7.0",
     "express": "^4.15.2",
+    "faker": "^4.1.0",
+    "fetch-mock": "^6.0.1",
     "file-loader": "^0.11.1",
     "grommet": "^1.10.1",
     "grommet-addons": "^0.6.0",
@@ -134,6 +142,7 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.6",
     "react-test-renderer": "^16.2.0",
+    "react-toggle": "^4.0.2",
     "redux": "^3.6.0",
     "redux-actions": "^2.2.1",
     "redux-devtools": "^3.3.2",
@@ -141,6 +150,7 @@
     "redux-devtools-extension": "^2.13.0",
     "redux-devtools-log-monitor": "^1.2.0",
     "redux-logger": "^3.0.1",
+    "redux-mock-store": "^1.5.1",
     "redux-persist": "^5.5.0",
     "redux-persist-transform-filter": "^0.0.16",
     "redux-thunk": "^2.2.0",
@@ -169,12 +179,29 @@
     "setupFiles": ["./client/test/jest-setup.js"],
     "snapshotSerializers": ["enzyme-to-json/serializer"],
     "moduleNameMapper": {
-      "^.+\\.(css|scss)$": "identity-obj-proxy"
+      "^.+\\.(css|scss)$": "identity-obj-proxy",
+      "^~features(.*)$": "<rootDir>/client/ducks/$1",
+      "^~components(.*)$": "<rootDir>/client/components/$1"
     },
     "transform": {
       "^.+\\.jsx$": "babel-jest",
       "^.+\\.js$": "babel-jest"
-    }
+    },
+    "collectCoverageFrom": [
+      "{client,server}/**/*.{js,jsx}",
+      "!**/__fixtures/**"
+    ]
+  },
+  "nyc": {
+    "exclude": [
+      "coverage/**",
+      "test/**",
+      "test{,-*}.js",
+      "**/*.test.js",
+      "**/__tests__/**",
+      "**/node_modules/**",
+      "**/__fixtures__/**"
+    ]
   },
   "ava": {
     "require": "babel-register",

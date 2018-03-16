@@ -22,7 +22,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onSubmitBarcode: barcodeID =>
-      dispatch(orderOperations.createPendingTransactionByBarcodeID(barcodeID))
+      dispatch(orderOperations.submitBarcode(barcodeID))
   }
 }
 

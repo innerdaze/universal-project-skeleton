@@ -2,13 +2,15 @@
 npm-debug.log
 node_modules/
 
+# Yarn
+yarn-error.log
+
 # Derived
 dist/
 
 # Cordova
 cordova/www/
 cordova/plugins/
-# cordova/platforms/
 
 # Coverage
 .nyc_output

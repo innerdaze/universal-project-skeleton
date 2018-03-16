@@ -23,7 +23,7 @@ module.exports = {
   resolve: {
     alias: {
       '~features': path.resolve(__dirname, 'client', 'ducks'),
-      _client: path.resolve(__dirname, 'client'),
+      '~components': path.resolve(__dirname, 'client', 'components'),
       css: path.resolve(__dirname, 'client', 'assets', 'css')
     },
     extensions: ['.js', '.jsx', '.json', '.css', '.scss']

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import autobind from 'autobind-decorator'
 import Box from 'grommet/components/Box'
 import Form from 'grommet/components/Form'
 import Header from 'grommet/components/Header'
@@ -8,6 +9,7 @@ import Paragraph from 'grommet/components/Paragraph'
 import FormField from 'grommet/components/FormField'
 import TextInput from 'grommet/components/TextInput'
 import NumberInput from 'grommet/components/NumberInput'
+import CheckBox from 'grommet/components/CheckBox'
 import Footer from 'grommet/components/Footer'
 import Button from 'grommet/components/Button'
 
@@ -17,7 +19,8 @@ class Initialize extends Component {
 
     this.state = {
       apiRoot: '',
-      storeID: ''
+      storeID: '',
+      allowPriceUpdate: false
     }
 
     this.handleApiRootFieldChange = this.handleApiRootFieldChange.bind(this)
@@ -33,12 +36,18 @@ class Initialize extends Component {
     this.setState({ apiRoot: e.target.value })
   }
 
+  @autobind
+  handleAllowPriceUpdateFieldChange(e) {
+    this.setState({ allowPriceUpdate: e.target.checked })
+  }
+
   handleFormSubmit(e) {
     e.preventDefault()
     window.scrollTo(0, 0)
     this.props.onApiRootFormSubmit({
       apiRoot: this.state.apiRoot,
-      storeID: this.state.storeID
+      storeID: this.state.storeID,
+      allowPriceUpdate: this.state.allowPriceUpdate
     })
   }
 
@@ -68,6 +77,15 @@ class Initialize extends Component {
               onDOMChange={this.handleStoreIDFieldChange}
             />
           </FormField>
+          <Paragraph>
+            <CheckBox
+              toggle
+              name='allowPriceUpdate'
+              label='Allow price updates'
+              checked={this.state.allowPriceUpdate}
+              onChange={this.handleAllowPriceUpdateFieldChange}
+            />
+          </Paragraph>
           <Footer pad={{ vertical: 'medium' }}>
             <Button
               label='Continue'

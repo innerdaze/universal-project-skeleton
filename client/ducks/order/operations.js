@@ -1,10 +1,13 @@
+import { v4 as uuidGen } from 'uuid'
+import { pluck } from 'ramda'
 import actions from './actions'
 import { barcodeOperations } from '../barcode'
 import { networkOperations } from '../network'
-import { v4 as uuidGen } from 'uuid'
-import { pluck } from 'ramda'
 import { find, filter, includes, map } from 'lodash'
 import { orderSelectors } from '../order'
+import { priceCheckOperations } from '../price-check'
+import Modes from '../../constants/OperationModes'
+
 const orderAction = actions.order
 
 const {
@@ -183,6 +186,32 @@ const findTransactionByProduct = (state, product, mode) => {
   })
 }
 
+const submitProduct = product => (dispatch, getState) => {
+  const state = getState()
+  const orderMode = orderSelectors.modeSelector(state)
+
+  if (orderMode === Modes.PRICE_CHECK) {
+    dispatch(priceCheckOperations.getPrice({ productId: product.ProductID }))
+  } else {
+    dispatch(createPendingTransactionByProduct(product))
+  }
+}
+
+const submitBarcode = barcodeId => (dispatch, getState) => {
+  const state = getState()
+  const orderMode = orderSelectors.modeSelector(state)
+
+  if (orderMode === Modes.PRICE_CHECK) {
+    const barcode = dispatch(barcodeOperations._findBarcodeByID(barcodeId))
+
+    if (barcode && barcode.ProductID) {
+      dispatch(priceCheckOperations.getPrice({ productId: barcode.ProductID }))
+    }
+  } else {
+    dispatch(createPendingTransactionByBarcodeID(barcodeId))
+  }
+}
+
 export default {
   ...actions.order,
   createPendingTransactionByBarcodeID,
@@ -192,5 +221,7 @@ export default {
   finishChangingOrderQuantity,
   cancelChangingOrderQuantity,
   findTransactionByProduct,
-  processOrders
+  processOrders,
+  submitBarcode,
+  submitProduct
 }

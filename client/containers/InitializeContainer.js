@@ -15,6 +15,7 @@ export default connect(
     onApiRootFormSubmit: data => {
       dispatch(appOperations.setStoreID(data.storeID))
       dispatch(appOperations.setApiRoot(data.apiRoot))
+      dispatch(appOperations.setAllowPriceUpdate(data.allowPriceUpdate))
     }
   })
 )(Initialize)

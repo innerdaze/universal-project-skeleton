@@ -11,6 +11,7 @@ import Label from 'grommet/components/Label'
 import Box from 'grommet/components/Box'
 import CloseIcon from 'grommet/components/icons/base/Close'
 import NextLinkIcon from 'grommet/components/icons/base/LinkNext'
+import OrderMeta from './OrderMeta'
 
 class ChangeOrderQuantityForm extends Component {
   constructor(props) {
@@ -71,10 +72,19 @@ class ChangeOrderQuantityForm extends Component {
             <Heading>Set Quantity</Heading>
           </Header>
           {this.props.order.ProductName && (
-            <Box>
-              <Label>{this.props.order.ProductName}</Label>
+            <Box margin={{ bottom: 'large' }}>
+              <Label margin='none'>{this.props.order.ProductName}</Label>
             </Box>
           )}
+          <Box
+            direction='row'
+            justify='between'
+            margin={{ bottom: 'medium' }}
+            responsive={false}
+            wrap
+          >
+            <OrderMeta order={this.props.order} />
+          </Box>
           <FormField>
             <input
               autoFocus
@@ -96,6 +106,7 @@ class ChangeOrderQuantityForm extends Component {
               label='Update'
               icon={<NextLinkIcon />}
               onClick={this.handleSubmit}
+              disabled={!Boolean(this.state.quantity)}
             />
           </Footer>
         </Form>

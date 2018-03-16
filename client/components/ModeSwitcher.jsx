@@ -66,6 +66,11 @@ class ModeSwitcher extends Component {
     this.changeMode(Modes.PRICE_CHECK)
   }
 
+  @autobind
+  handleWastageSelect() {
+    this.changeMode(Modes.WASTAGE)
+  }
+
   render() {
     return (
       <Menu primary>
@@ -88,6 +93,16 @@ class ModeSwitcher extends Component {
           label='Shelf Labels'
           className={this.state.mode === Modes.SHELF_LABELS && 'active'}
           onClick={this.handleShelfLabelsSelect}
+        />
+        <Anchor
+          label='Wastage'
+          className={this.state.mode === Modes.WASTAGE && 'active'}
+          onClick={this.handleWastageSelect}
+        />
+        <Anchor
+          label='Price Check'
+          className={this.state.mode === Modes.PRICE_CHECK && 'active'}
+          onClick={this.handlePriceCheckSelect}
         />
       </Menu>
     )

@@ -1,10 +1,13 @@
 import { connect } from 'react-redux'
-import { orderOperations, orderSelectors } from '../ducks/order'
+import { orderOperations } from '../ducks/order'
+import { inventorySelectors } from '../ducks/inventory'
 import ChangeOrderQuantityForm from '../components/ChangeOrderQuantityForm'
 
 const mapStateToProps = state => {
   return {
-    order: orderSelectors.changingOrderQuantityForSelector(state)
+    order: inventorySelectors.currentlyChangeQuantityForWithProductSelector(
+      state
+    )
   }
 }
 

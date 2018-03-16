@@ -1,28 +1,28 @@
 import actions from './actions'
-import ProgressPromise from 'progress-promise'
+// import ProgressPromise from 'progress-promise'
+import ProgressPromise from '../../helpers/ProgressPromise'
 import { barcodeOperations } from '../barcode'
 import { productOperations } from '../product'
 import { cashierOperations } from '../cashier'
 import { sessionSelectors } from '../session'
+import { wastageOperations } from '../wastage'
 
 const syncAction = actions.sync
 
-const sync = () => {
-  return async (dispatch, getState) => {
-    dispatch(syncAction.startSync())
+const sync = () => (dispatch, getState) => {
+  dispatch(syncAction.startSync())
 
-    const sessionID = getState().session.session.id
+  const sessionID = sessionSelectors.id(getState())
 
-    await ProgressPromise.all([
+  return ProgressPromise.all(
+    [
       dispatch(barcodeOperations.fetchBarcodes(sessionID)),
       dispatch(productOperations.fetchProducts(sessionID)),
-      dispatch(cashierOperations.fetchCashiers(sessionID))
-    ]).progress(results =>
-      dispatch(syncAction.syncProgress(results.proportion))
-    )
-
-    dispatch(syncAction.endSync())
-  }
+      dispatch(cashierOperations.fetchCashiers(sessionID)),
+      dispatch(wastageOperations.fetchWastageTypes(sessionID))
+    ],
+    proportion => dispatch(syncAction.syncProgress(proportion))
+  ).then(() => dispatch(syncAction.endSync()))
 }
 
 export default {

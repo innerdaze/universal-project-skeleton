@@ -1,10 +1,13 @@
 import { connect } from 'react-redux'
 import ScannedItemList from '../components/ScannedItemList'
 import { orderOperations, orderSelectors } from '~features/order'
+import { wastageSelectors } from '~features/wastage'
 import { inventorySelectors } from '~features/inventory'
 
 const mapStateToProps = state => ({
-  isProcessing: orderSelectors.isProcessingSelector(state),
+  isProcessing:
+    wastageSelectors.isProcessingSelector(state) ||
+    orderSelectors.isProcessingSelector(state),
   isDeletingOrder: orderSelectors.isDeletingOrderSelector(state),
   items: inventorySelectors.pendingOrdersBySelectedModeWithProductsReversedSelector(
     state

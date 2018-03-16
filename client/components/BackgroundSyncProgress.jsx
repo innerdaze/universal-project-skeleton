@@ -9,17 +9,16 @@ class BackgroundSyncProgress extends Component {
   render() {
     return (
       <Box align='stretch'>
-        <Heading>Synchronising Data...</Heading>
+        <Heading>Synchronizing Data...</Heading>
         <Meter
           type='bar'
           max={1}
           size='small'
           value={this.props.progress}
-          label={<Value
-            units='%'
-            value={Math.floor(this.props.progress * 100, 2)}
-            />}
-          />
+          label={
+            <Value units='%' value={Math.floor(this.props.progress * 100, 2)} />
+          }
+        />
       </Box>
     )
   }

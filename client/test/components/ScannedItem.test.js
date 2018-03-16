@@ -25,3 +25,43 @@ test('render a ScannedItem with data and a render prop', () => {
   expect(wrapper).toMatchSnapshot()
   expect(wrapper.find('span').text()).toEqual('TEST')
 })
+
+test('onChangeQuantityClick fires with passed data prop', () => {
+  const spy = jest.fn()
+  const mockData = {}
+
+  const wrapper = shallow(
+    <ScannedItem
+      data={mockData}
+      render={Function.prototype}
+      onDeleteClick={Function.prototype}
+      onChangeQuantityClick={spy}
+    />
+  )
+
+  const anchor = wrapper.find('Anchor').get(0)
+
+  shallow(anchor).simulate('click')
+
+  expect(spy).toHaveBeenCalledWith(mockData)
+})
+
+test('onDeleteClick fires with passed data prop', () => {
+  const spy = jest.fn()
+  const mockData = {}
+
+  const wrapper = shallow(
+    <ScannedItem
+      data={mockData}
+      render={Function.prototype}
+      onDeleteClick={spy}
+      onChangeQuantityClick={Function.prototype}
+    />
+  )
+
+  const anchor = wrapper.find('Anchor').get(1)
+
+  shallow(anchor).simulate('click')
+
+  expect(spy).toHaveBeenCalledWith(mockData)
+})

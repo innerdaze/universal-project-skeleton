@@ -5,7 +5,12 @@ import { orderSelectors } from '~features/order'
 import { productSelectors } from '~features/product'
 import { barcodeSelectors } from '~features/barcode'
 
-const { pendingOrdersBySelectedModeSelector, modeSelector } = orderSelectors
+const {
+  pendingOrdersBySelectedModeSelector,
+  modeSelector,
+  orderEntitiesSelector,
+  changingOrderQuantityForSelector
+} = orderSelectors
 const { productEntitiesSelector } = productSelectors
 const { barcodeEntitiesSelector } = barcodeSelectors
 
@@ -68,7 +73,31 @@ const pendingOrdersBySelectedModeWithProductsReversedSelector = createSelector(
   reverse
 )
 
+const currentlyChangeQuantityForWithProductSelector = createSelector(
+  changingOrderQuantityForSelector,
+  productEntitiesSelector,
+  barcodeEntitiesSelector,
+  (order, productEntities, barcodeEntities) => {
+    if (order.ProductID) {
+      order.product = productEntities[order.ProductID]
+    }
+
+    if (!order.product && order.Barcode) {
+      const barcodeEntity = barcodeEntities[order.Barcode]
+      barcodeEntity &&
+        (order.product = productEntities[barcodeEntity.ProductID])
+    }
+
+    if (!order.product) {
+      order.product = { ProductName: productMappingError }
+    }
+
+    return order
+  }
+)
+
 export default {
   pendingOrdersBySelectedModeWithProductsSelector,
-  pendingOrdersBySelectedModeWithProductsReversedSelector
+  pendingOrdersBySelectedModeWithProductsReversedSelector,
+  currentlyChangeQuantityForWithProductSelector
 }

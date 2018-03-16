@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "module": "commonjs",
+    "baseUrl": "./",
+    "paths": {
+      "~features/*": ["client/ducks/*"],
+      "~components/*": ["client/components/*"]
+    }
+  },
+  "exclude": [".nyc_output", "cordova", "coverage", "dist", "node_modules"]
+}

@@ -1,5 +1,6 @@
-import { createActions } from 'redux-actions';
+import { createActions } from 'redux-actions'
 import { createIdentityActionMap } from '../../helpers/ducks'
+
 const identityActions = createIdentityActionMap(
   'REQUEST_CASHIERS',
   'INVALIDATE_CASHIERS',
@@ -7,6 +8,7 @@ const identityActions = createIdentityActionMap(
   'LOGOUT_CASHIER',
   'RESET_CASHIERS'
 )
+
 export default createActions({
   CASHIER: {
     RECEIVE_CASHIERS: json => ({ json }),
@@ -14,5 +16,4 @@ export default createActions({
     FAIL_LOGIN_CASHIER: error => ({ error }),
     ...identityActions
   }
-}
-);
+})

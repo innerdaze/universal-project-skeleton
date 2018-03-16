@@ -38,9 +38,22 @@ test('render a Toggle and change the priority through props', () => {
       renderB={() => <div>RENDER B</div>}
     />
   )
-  wrapper.setProps({ priority: 'B' })
+
+  const setStateSpy = jest.spyOn(Toggle.prototype, 'setState')
+
+  const newProps = { priority: 'B' }
+
+  wrapper.setProps(newProps)
+
   expect(wrapper).toMatchSnapshot()
   expect(wrapper.find('div').text()).toEqual('RENDER B')
+
+  expect(setStateSpy).toHaveBeenCalledTimes(1)
+  expect(setStateSpy).toHaveBeenCalledWith(newProps)
+
+  wrapper.setProps(newProps)
+
+  expect(setStateSpy).toHaveBeenCalledTimes(1)
 })
 
 test('render a Toggle and test a toggle control can be passed to and called from a child', () => {
@@ -52,7 +65,12 @@ test('render a Toggle and test a toggle control can be passed to and called from
           <button onClick={toggle} />
         </div>
       )}
-      renderB={() => <div>RENDER B</div>}
+      renderB={toggle => (
+        <div>
+          RENDER B
+          <button onClick={toggle} />
+        </div>
+      )}
     />
   )
   expect(wrapper).toMatchSnapshot()
@@ -60,4 +78,8 @@ test('render a Toggle and test a toggle control can be passed to and called from
   wrapper.find('button').simulate('click')
 
   expect(wrapper.find('div').text()).toEqual('RENDER B')
+
+  wrapper.find('button').simulate('click')
+
+  expect(wrapper.find('div').text()).toEqual('RENDER A')
 })
