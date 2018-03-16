@@ -1,8 +1,13 @@
-import sessionReducers from '../reducers'
+import {
+  sessionReducer as sessionReducers,
+  user as userReducers
+} from '../reducers'
+import { sessionAction } from '../operations'
+import { sessionModel } from '../__fixtures__'
 
 let initialState = {
-  id: '123',
-  alive: true,
+  id: '',
+  alive: false,
   isRequesting: false,
   lastUpdated: null,
   error: null
@@ -11,160 +16,111 @@ let initialState = {
 describe('Testing on session reducers', () => {
   describe('Test on session reducers', () => {
     test('Expect handle START_SESSION', () => {
-      let id = 'foo'
-      let action = {
-        type: 'SESSION/START_SESSION',
-        payload: {
-          id
-        }
-      }
+      let mockId = sessionModel.id
 
-      let expectedState = {
-        ...initialState,
-        id: id,
-        alive: true
-      }
+      const { id, alive } = sessionReducers(
+        initialState,
+        sessionAction.startSession(mockId)
+      )
 
-      expect(sessionReducers({}, action).session).toEqual(expectedState)
+      expect(id).toEqual(mockId)
+      expect(alive).toEqual(true)
     })
 
     test('Expect handle SUCCEED_LOGIN', () => {
-      let user = 'barUser'
-      let action = {
-        type: 'SESSION/SUCCEED_LOGIN',
-        payload: {
-          user
-        }
-      }
+      const { error } = sessionReducers(
+        initialState,
+        sessionAction.startSession()
+      )
 
-      let expectedState = {
-        ...initialState,
-        error: null
-      }
-
-      expect(sessionReducers({}, action).session).toEqual(expectedState)
+      expect(error).toBeNull()
     })
 
     test('Expect handle FAIL_LOGIN', () => {
-      let error = 'Error message'
-      let action = {
-        type: 'SESSION/FAIL_LOGIN',
-        payload: {
-          error
-        }
-      }
+      let mockPayload = sessionModel.payload
 
-      let expectedState = {
-        ...initialState,
-        error: { error }
-      }
+      const { error } = sessionReducers(
+        initialState,
+        sessionAction.failLogin(mockPayload)
+      )
 
-      expect(sessionReducers({}, action).session).toEqual(expectedState)
+      expect(error).toHaveProperty('error')
+      expect(error.error).toEqual(mockPayload)
     })
 
     test('Expect handle REQUEST_LOGIN', () => {
-      let action = {
-        type: 'SESSION/REQUEST_LOGIN'
-      }
+      const { isRequesting } = sessionReducers(
+        initialState,
+        sessionAction.requestLogin()
+      )
 
-      let expectedState = {
-        ...initialState,
-        isRequesting: true
-      }
-
-      expect(sessionReducers({}, action).session).toEqual(expectedState)
+      expect(isRequesting).toEqual(true)
     })
 
     test('Expect handle RECEIVE_LOGIN', () => {
-      let action = {
-        type: 'SESSION/RECEIVE_LOGIN'
-      }
+      const { isRequesting, lastUpdated } = sessionReducers(
+        initialState,
+        sessionAction.receiveLogin()
+      )
 
-      let expectedState = {
-        ...initialState,
-        isRequesting: false,
-        lastUpdated: expect.any(Number)
-      }
-
-      expect(sessionReducers({}, action).session).toEqual(expectedState)
+      expect(isRequesting).toEqual(false)
+      expect(lastUpdated).toEqual(expect.any(Number))
     })
 
     test('Expect handle REQUEST_LOGOUT', () => {
-      let action = {
-        type: 'SESSION/REQUEST_LOGOUT'
-      }
+      const { isRequesting } = sessionReducers(
+        initialState,
+        sessionAction.requestLogout()
+      )
 
-      let expectedState = {
-        ...initialState,
-        isRequesting: true
-      }
-
-      expect(sessionReducers({}, action).session).toEqual(expectedState)
+      expect(isRequesting).toEqual(true)
     })
 
     test('Expect handle RECEIVE_LOGOUT', () => {
-      let action = {
-        type: 'SESSION/RECEIVE_LOGOUT'
-      }
+      const { isRequesting, lastUpdated } = sessionReducers(
+        initialState,
+        sessionAction.receiveLogout()
+      )
 
-      let expectedState = {
-        ...initialState,
-        isRequesting: false,
-        lastUpdated: expect.any(Number)
-      }
-
-      expect(sessionReducers({}, action).session).toEqual(expectedState)
+      expect(isRequesting).toEqual(false)
+      expect(lastUpdated).toEqual(expect.any(Number))
     })
 
     test('Expect handle END_SESSION', () => {
-      let action = {
-        type: 'SESSION/END_SESSION'
-      }
+      const { id, alive } = sessionReducers(
+        initialState,
+        sessionAction.endSession()
+      )
 
-      let expectedState = {
-        ...initialState,
-        id: null,
-        alive: false
-      }
-
-      expect(sessionReducers({}, action).session).toEqual(expectedState)
+      expect(id).toBeNull()
+      expect(alive).toEqual(false)
     })
   })
 
   describe('Test on user reducers', () => {
     test('Expect handle SUCCEED_LOGIN', () => {
-      let user = {
-        UserID: 'foo',
-        UserName: 'bar'
-      }
-      let action = {
-        type: 'SESSION/SUCCEED_LOGIN',
-        payload: {
-          user
-        }
+      let mockUser = {
+        UserID: sessionModel.id,
+        UserName: sessionModel.user
       }
 
-      let expectedState = {
-        ...initialState,
-        id: user.UserID,
-        name: user.UserName
-      }
+      const { id, name } = userReducers(
+        initialState,
+        sessionAction.succeedLogin(mockUser)
+      )
 
-      expect(sessionReducers({}, action).user).toEqual(expectedState)
+      expect(id).toEqual(mockUser.UserID)
+      expect(name).toEqual(mockUser.UserName)
     })
 
     test('Expect handle RECEIVE_LOGOUT', () => {
-      let action = {
-        type: 'SESSION/RECEIVE_LOGOUT'
-      }
+      const { id, name } = userReducers(
+        initialState,
+        sessionAction.receiveLogout()
+      )
 
-      let expectedState = {
-        ...initialState,
-        id: null,
-        name: null
-      }
-
-      expect(sessionReducers({}, action).user).toEqual(expectedState)
+      expect(id).toBeNull()
+      expect(name).toBeNull()
     })
   })
 })

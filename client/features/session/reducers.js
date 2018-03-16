@@ -5,8 +5,8 @@ import actions from './actions'
 const { session } = actions
 
 const initialState = {
-  id: '123',
-  alive: true,
+  id: '',
+  alive: false,
   isRequesting: false,
   lastUpdated: null,
   error: null
@@ -15,7 +15,7 @@ const initialStateUser = {
   id: null,
   name: null
 }
-const sessionReducer = handleActions(
+export const sessionReducer = handleActions(
   {
     [session.startSession](state, { payload: { id } }) {
       return {
@@ -73,7 +73,7 @@ const sessionReducer = handleActions(
   initialState
 )
 
-const user = handleActions(
+export const user = handleActions(
   {
     [session.succeedLogin](state, { payload: { user } }) {
       return {
