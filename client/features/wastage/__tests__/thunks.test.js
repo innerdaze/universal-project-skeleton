@@ -18,7 +18,7 @@ describe('WASTAGE/THUNKS', () => {
   test('fetchWastageTypes ➤ Success', () => {
     const mockResultData = generateWastageTypeArray(3)
 
-    fetchMock.postOnce('*', {
+    fetchMock.postOnce('/', {
       body: {
         result: {
           Result: {

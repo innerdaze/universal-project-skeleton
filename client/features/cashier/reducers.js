@@ -42,7 +42,7 @@ export const cashiers = handleActions(
       },
       throw(state, { payload }) {
         return {
-          isFetching: true,
+          isFetching: false,
           didInvalidate: true,
           error: payload
         }

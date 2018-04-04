@@ -1,6 +1,6 @@
 import reducer from './reducers'
 
-export networkSelectors from './selectors'
-export networkOperations from './operations'
+export { default as networkSelectors } from './selectors'
+export { default as networkOperations } from './operations'
 
 export default reducer

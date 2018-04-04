@@ -1,4 +1,4 @@
-import { orderAction } from '../operations'
+import orderAction from '../actions'
 import orderReducers from '../reducers'
 import {
   orders as ordersReducer,

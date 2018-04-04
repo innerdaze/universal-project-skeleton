@@ -1,6 +1,6 @@
 import reducer from './reducers'
 
-export errorSelectors from './selectors'
-export errorOperations from './operations'
+export { default as errorSelectors } from './selectors'
+export { default as errorOperations } from './operations'
 
 export default reducer

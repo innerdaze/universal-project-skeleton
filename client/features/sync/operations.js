@@ -1,6 +1,6 @@
 import actions from './actions'
 // import ProgressPromise from 'progress-promise'
-import ProgressPromise from '../../helpers/ProgressPromise'
+import ProgressPromise from '~/helpers/ProgressPromise'
 import { barcodeOperations } from '../barcode'
 import { productOperations } from '../product'
 import { cashierOperations } from '../cashier'

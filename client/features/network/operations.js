@@ -1,6 +1,6 @@
 import { is } from 'ramda'
 import actions from './actions'
-import { failIfMissing } from '../../helpers/Function'
+import { failIfMissing } from '~/helpers/Function'
 import { sessionOperations } from '../../features/session'
 import { errorOperations } from '../error'
 import { sessionSelectors } from '../session'

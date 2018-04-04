@@ -1,15 +1,15 @@
 import networkOperations from '../operations'
 import networkActions from '../actions'
-import { failIfMissing } from '../../../helpers/function'
+import { failIfMissing } from '~helpers/function'
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
-let mockStore, middlewares, store
+let mockStore, middleware, store
 
 describe('Testing on network operations', () => {
   beforeEach(() => {
-    middlewares = [thunk]
-    mockStore = configureStore(middlewares)
+    middleware = [thunk]
+    mockStore = configureStore(middleware)
     store = mockStore({
       app: {
         apiRoot: null

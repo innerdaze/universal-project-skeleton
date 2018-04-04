@@ -1,5 +1,5 @@
 import { createActions } from 'redux-actions'
-import { createIdentityActionMap } from '../../helpers/features'
+import { createIdentityActionMap } from '~/helpers/features'
 
 const identityActions = createIdentityActionMap(
   'REQUEST_LOGIN',

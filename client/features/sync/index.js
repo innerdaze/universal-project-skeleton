@@ -1,6 +1,6 @@
 import reducer from './reducers'
 
-export syncSelectors from './selectors'
-export syncOperations from './operations'
+export { default as syncSelectors } from './selectors'
+export { default as syncOperations } from './operations'
 
 export default reducer

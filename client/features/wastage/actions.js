@@ -1,5 +1,5 @@
 import { createActions } from 'redux-actions'
-import { createIdentityActionMap } from '../../helpers/features'
+import { createIdentityActionMap } from '~/helpers/features'
 
 export default createActions({
   WASTAGE: {

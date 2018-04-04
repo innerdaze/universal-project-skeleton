@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions'
 import actions from './actions'
-import { api } from '../../config'
+
 const { app } = actions
+
 const initialState = {
   isInitialized: true,
   apiRoot: null,
@@ -10,6 +11,7 @@ const initialState = {
   storeID: '0',
   allowPriceUpdate: false
 }
+
 const reducer = handleActions(
   {
     [app.appInitialize](state) {
@@ -30,7 +32,8 @@ const reducer = handleActions(
         storeID
       }
     },
-    [app.apiRootValidate](state) { //Changed action name API_ROOT_VALID to API_ROOT_VALIDATE by KK on 15/03/2018 because of same name of action and property
+    [app.apiRootValidate](state) {
+      //Changed action name API_ROOT_VALID to API_ROOT_VALIDATE by KK on 15/03/2018 because of same name of action and property
       return {
         ...state,
         apiRootValid: true
@@ -60,4 +63,5 @@ const reducer = handleActions(
   },
   initialState
 )
+
 export default reducer

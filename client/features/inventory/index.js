@@ -1,1 +1,1 @@
-export inventorySelectors from './selectors'
+export { default as inventorySelectors } from './selectors'

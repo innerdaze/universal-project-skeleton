@@ -8,7 +8,7 @@ import PriceCheck from '../components/PriceCheck'
 import BarcodeInputFormContainer from '../containers/BarcodeInputFormContainer'
 import ScannedItemListContainer from '../containers/ScannedItemListContainer'
 import WastageListContainer from '../containers/WastageListContainer'
-import ProcessOrdersButtonContainer from '../containers/ProcessOrdersButtonContainer'
+import ProcessItemsButtonContainer from '../containers/ProcessItemsButtonContainer'
 import ProcessWastageButtonContainer from '../containers/ProcessWastageButtonContainer'
 import ChangeOrderQuantityFormContainer from '../containers/ChangeOrderQuantityFormContainer'
 import ChangeWastageTypeFormContainer from '../containers/ChangeWastageTypeFormContainer'
@@ -18,6 +18,7 @@ import OrderMetaToggle from './OrderMetaToggle'
 import ScannedItem from './ScannedItem'
 import WastageItem from './WastageItem'
 import MainMenu from './MainMenu'
+import LoadingScreen from 'react-loading-screen'
 
 class OrdersLayout extends Component {
   state = {
@@ -118,7 +119,7 @@ class OrdersLayout extends Component {
         ButtonComponent = null
         break
       default:
-        ButtonComponent = <ProcessOrdersButtonContainer />
+        ButtonComponent = <ProcessItemsButtonContainer />
     }
 
     return ButtonComponent
@@ -133,6 +134,7 @@ class OrdersLayout extends Component {
       >
         <MainMenu />
         <Box justify='center' pad='medium'>
+          <LoadingScreen title='Loading' subTitle='More text' isOpen={true} />
           {this.props.pendingModification && (
             <PromptStartModifyingTransaction
               order={this.props.pendingModification}
