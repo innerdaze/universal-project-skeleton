@@ -91,6 +91,8 @@ export default async function configureStore(initialState) {
 
   localForage.setDriver([localForage.INDEXEDDB, cordovaSQLiteDriver._driver])
 
+  // TODO - Make a withPersistence HOR
+
   const reducer = combineReducers({
     ...reducers,
     app: persistReducer(appPersistConfig(localForage), reducers.app),
