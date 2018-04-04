@@ -9,7 +9,10 @@ export default connect(
   state => ({
     isLoggedIn: sessionSelectors.isLoggedIn(state),
     isInitialized: appSelectors.isInitialized(state),
-    apiRootValidationError: sessionSelectors.apiRootValidationError(state)
+    apiRootValidationError: sessionSelectors.apiRootValidationError(state),
+    storeId: appSelectors.storeID(state),
+    allowPriceUpdate: appSelectors.allowPriceUpdateSelector(state),
+    apiRoot: appSelectors.apiRoot(state)
   }),
   dispatch => ({
     onApiRootFormSubmit: data => {

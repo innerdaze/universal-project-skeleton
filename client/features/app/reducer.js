@@ -45,13 +45,11 @@ const reducer = handleActions(
         apiRootValid: false
       }
     },
-    [app.appReset](state) {
+    [app.appReconfigure](state) {
       return {
         ...state,
-        apiRoot: null,
         isInitialized: false,
-        apiRootValid: false,
-        allowPriceUpdate: false
+        apiRootValid: false
       }
     },
     [app.setAllowPriceUpdate](state, { payload: { allowPriceUpdate } }) {

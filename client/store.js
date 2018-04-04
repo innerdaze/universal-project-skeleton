@@ -20,7 +20,13 @@ const rootPersistConfig = storage => ({
 const appPersistConfig = storage => ({
   storage,
   key: 'app',
-  whitelist: ['apiRoot', 'isInitialized', 'storeID']
+  whitelist: [
+    'apiRoot',
+    'isInitialized',
+    'storeID',
+    'allowPriceUpdate',
+    'apiRootValid'
+  ]
 })
 
 const sessionPersistConfig = storage => ({

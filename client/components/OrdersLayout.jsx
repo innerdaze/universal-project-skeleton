@@ -134,7 +134,7 @@ class OrdersLayout extends Component {
       >
         <MainMenu />
         <Box justify='center' pad='medium'>
-          <LoadingScreen title='Loading' subTitle='More text' isOpen={true} />
+          {/* <LoadingScreen title='Loading' subTitle='More text' isOpen={true} /> */}
           {this.props.pendingModification && (
             <PromptStartModifyingTransaction
               order={this.props.pendingModification}

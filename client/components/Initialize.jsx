@@ -18,9 +18,9 @@ class Initialize extends Component {
     super(props)
 
     this.state = {
-      apiRoot: '',
-      storeID: '',
-      allowPriceUpdate: false
+      apiRoot: this.props.apiRoot || '',
+      storeID: this.props.storeId || '',
+      allowPriceUpdate: this.props.allowPriceUpdate
     }
 
     this.handleApiRootFieldChange = this.handleApiRootFieldChange.bind(this)
@@ -100,11 +100,17 @@ class Initialize extends Component {
 }
 
 Initialize.propTypes = {
-  onApiRootFormSubmit: PropTypes.func.isRequired
+  onApiRootFormSubmit: PropTypes.func.isRequired,
+  storeId: PropTypes.string,
+  apiRoot: PropTypes.string,
+  allowPriceUpdate: PropTypes.bool
 }
 
 Initialize.defaultProps = {
-  onApiRootFormSubmit: Function.prototype
+  onApiRootFormSubmit: Function.prototype,
+  storeId: '',
+  apiRoot: '',
+  allowPriceUpdate: false
 }
 
 export default Initialize

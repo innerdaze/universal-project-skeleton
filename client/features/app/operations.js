@@ -1,6 +1,7 @@
-import actions from './actions'
 import { some, isUndefined, isNull } from 'lodash'
 import { isWebUri } from 'valid-url'
+import actions from './actions'
+import selectors from './selectors'
 import { syncOperations } from '../sync'
 import { sessionOperations } from '../session'
 import { validationOperations } from '../validation'
@@ -13,60 +14,53 @@ import { productOperations } from '../product'
 const appAction = actions.app
 const requiredConfigs = ['apiRoot']
 
-const testAPIRoot = () => {
-  return async dispatch => {
-    return dispatch(
-      networkOperations.callApi({
-        service: 'GeneralService.GetTimeStamp',
-        skipSessionCheck: true,
-        method: 'post',
-        success: () => dispatch(appAction.apiRootValidate()),//Changed action name API_ROOT_VALID to API_ROOT_VALIDATE by KK on 15/03/2018 because of same name of action and property
-        error: error => {
-          dispatch(errorOperations.displayError(error.message))
-          dispatch(appAction.apiRootInvalid())
-        }
-      })
-    )
-  }
-}
+const testAPIRoot = () => async dispatch =>
+  dispatch(
+    networkOperations.callApi({
+      service: 'GeneralService.GetTimeStamp',
+      skipSessionCheck: true,
+      method: 'post'
+    })
+  )
+    .then(() => dispatch(appAction.apiRootValidate()))
+    .catch(error => {
+      dispatch(errorOperations.displayError(error.message))
+      dispatch(appAction.apiRootInvalid())
+    })
 
 /**
  * Validation is the responsibility of the input mechanism
  */
-const setApiRoot = apiRoot => {
-  return async (dispatch, getState) => {
-    const fieldID = 'apiRoot'
-    const error = 'Invalid URI'
-    dispatch(appAction.appSetApiRoot(apiRoot))
+const setApiRoot = apiRoot => async (dispatch, getState) => {
+  const fieldID = 'apiRoot'
+  const error = 'Invalid URI'
+  const state = getState()
 
-    if (
-      dispatch(
-        validationOperations.validate({
-          fieldID,
-          value: apiRoot,
-          validation: async url => isWebUri(url),
-          error
-        })
-      )
-    ) {
-      await dispatch(testAPIRoot(apiRoot))
+  dispatch(appAction.appSetApiRoot(apiRoot))
 
-      if (getState().app.apiRootValidate) {
-        if (checkInitialised(getState())) {
-          await dispatch(sessionOperations.login('apiuser', 'api.123'))
-
-          if (getState().session.session.alive) {
-            await dispatch(syncOperations.sync())
-            return dispatch(appAction.appInitialize())
-          } else {
-            dispatch(appAction.appSetApiRoot(null))
-          }
-        }
-      } else {
-        dispatch(appAction.appSetApiRoot(null))
+  dispatch(
+    validationOperations.validateP({
+      fieldID,
+      value: apiRoot,
+      validation: isWebUri,
+      error
+    })
+  )
+    .then(valid => dispatch(testAPIRoot(apiRoot)))
+    .then(() => {
+      if (checkInitialised(getState())) {
+        return dispatch(sessionOperations.login('apiuser', 'api.123'))
       }
-    }
-  }
+      throw Error('Initialization Failed')
+    })
+    .then(() => {
+      if (getState().session.session.alive) {
+        return dispatch(syncOperations.sync())
+      }
+      throw Error('Session Login Failed')
+    })
+    .then(() => dispatch(appAction.appInitialize()))
+    .catch(error => dispatch(appAction.appSetApiRoot(null)))
 }
 
 const setStoreID = storeID => {
@@ -88,7 +82,7 @@ const reset = () => {
     dispatch(productOperations.resetProducts())
     dispatch(barcodeOperations.resetBarcodes())
     await dispatch(cashierOperations.logoutCashier())
-    dispatch(appAction.appReset())
+    dispatch(appAction.appReconfigure())
   }
 }
 

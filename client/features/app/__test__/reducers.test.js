@@ -4,7 +4,7 @@ import { generateappModel, generateappModelArray } from '../__fixtures__'
 import { pluck, indexBy, prop } from 'ramda'
 //import faker from 'faker'
 //const AppAction=actions.app
-let intialSt = {
+let initialState = {
   isInitialized: false,
   apiRoot: null,
   apiRootValid: false,
@@ -13,46 +13,46 @@ let intialSt = {
 
 describe('app reducer test', () => {
   test('test APP_SET_API_ROOT', () => {
-    const appModelFixutre = generateappModel()
+    const appModelFixture = generateappModel()
     const { appSetApiRoot } = operations
     const { apiRoot } = reducer(
-      intialSt,
-      appSetApiRoot(appModelFixutre.apiRoot)
+      initialState,
+      appSetApiRoot(appModelFixture.apiRoot)
     )
-    expect(apiRoot).toEqual(appModelFixutre.apiRoot)
+    expect(apiRoot).toEqual(appModelFixture.apiRoot)
   })
   test('testAPP_INITIALIZE', () => {
     const { appInitialize } = operations
-    const { isInitialized } = reducer(intialSt, appInitialize())
+    const { isInitialized } = reducer(initialState, appInitialize())
     expect(isInitialized).toEqual(true)
   })
   test('test API_ROOT_VALID', () => {
     const { apiRootValidate } = operations
-    const { apiRootValid } = reducer(intialSt, apiRootValidate())
+    const { apiRootValid } = reducer(initialState, apiRootValidate())
     expect(apiRootValid).toEqual(true)
   })
   test('test API_ROOT_INVALID', () => {
     const { apiRootInvalid } = operations
-    const { apiRootValid } = reducer(intialSt, apiRootInvalid())
+    const { apiRootValid } = reducer(initialState, apiRootInvalid())
     expect(apiRootValid).toEqual(false)
   })
   test('test APP_RESET', () => {
-    const { appReset } = operations
+    const { appReconfigure } = operations
     const { apiRootValid, isInitialized, apiRoot } = reducer(
-      intialSt,
-      appReset()
+      initialState,
+      appReconfigure()
     )
     expect(apiRootValid).toEqual(false)
     expect(isInitialized).toEqual(false)
     expect(apiRoot).toEqual(null)
   })
   test('test APP_SET_STORE_ID', () => {
-    const appModelFixutre = generateappModel()
+    const appModelFixture = generateappModel()
     const { appSetStoreId } = operations
     const { storeID } = reducer(
-      intialSt,
-      appSetStoreId(appModelFixutre.storeID)
+      initialState,
+      appSetStoreId(appModelFixture.storeID)
     )
-    expect(storeID).toEqual(appModelFixutre.storeID)
+    expect(storeID).toEqual(appModelFixture.storeID)
   })
 })

@@ -11,6 +11,17 @@ const validate = ({ fieldID, value, validation, error }) => dispatch => {
   return true
 }
 
+const validateP = ({ fieldID, value, validation, error }) => dispatch =>
+  new Promise((resolve, reject) => {
+    if (!validation(value)) {
+      dispatch(validationAction.invalidate(fieldID, error))
+      reject(error)
+    }
+    dispatch(validationAction.validate(fieldID))
+    resolve(true)
+  })
+
 export default {
-  validate
+  validate,
+  validateP
 }
