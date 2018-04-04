@@ -165,6 +165,15 @@ exports[`Testing on Initialize... Test on prop Expect onApiRootFormSubmit is cal
         value=""
       />
     </FormField>
+    <Paragraph>
+      <CheckBox
+        checked={false}
+        label="Allow price updates"
+        name="allowPriceUpdate"
+        onChange={[Function]}
+        toggle={true}
+      />
+    </Paragraph>
     <Footer
       align="center"
       direction="row"
@@ -258,6 +267,15 @@ exports[`Testing on Initialize... Test on state Expect storeID state to change i
         value=""
       />
     </FormField>
+    <Paragraph>
+      <CheckBox
+        checked={false}
+        label="Allow price updates"
+        name="allowPriceUpdate"
+        onChange={[Function]}
+        toggle={true}
+      />
+    </Paragraph>
     <Footer
       align="center"
       direction="row"
@@ -351,6 +369,15 @@ exports[`Testing on Initialize... Test on state Expect storeID state to change i
         value=""
       />
     </FormField>
+    <Paragraph>
+      <CheckBox
+        checked={false}
+        label="Allow price updates"
+        name="allowPriceUpdate"
+        onChange={[Function]}
+        toggle={true}
+      />
+    </Paragraph>
     <Footer
       align="center"
       direction="row"

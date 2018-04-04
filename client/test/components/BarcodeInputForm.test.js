@@ -1,6 +1,5 @@
 import React from 'react'
 import BarcodeInputForm from '../../components/BarcodeInputForm'
-import sinon from 'sinon'
 
 let wrapper, onSubmitBarcode, shouldFocusField
 

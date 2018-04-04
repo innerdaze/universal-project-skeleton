@@ -28,6 +28,25 @@ exports[`Testing on ChangeOrderQuantityForm... ChangeOrderQuantityForm layout Ex
         Set Quantity
       </Heading>
     </Header>
+    <Box
+      announce={false}
+      direction="row"
+      focusable={true}
+      justify="between"
+      margin={
+        Object {
+          "bottom": "medium",
+        }
+      }
+      pad="none"
+      responsive={false}
+      tag="div"
+      wrap={true}
+    >
+      <OrderMeta
+        order={Object {}}
+      />
+    </Box>
     <FormField
       size="medium"
       strong={false}
@@ -64,6 +83,7 @@ exports[`Testing on ChangeOrderQuantityForm... ChangeOrderQuantityForm layout Ex
       />
       <Anchor
         animateIcon={true}
+        disabled={true}
         icon={
           <LinkNext
             responsive={true}
@@ -108,6 +128,25 @@ exports[`Testing on ChangeOrderQuantityForm... ChangeOrderQuantityForm layout Ex
         Set Quantity
       </Heading>
     </Header>
+    <Box
+      announce={false}
+      direction="row"
+      focusable={true}
+      justify="between"
+      margin={
+        Object {
+          "bottom": "medium",
+        }
+      }
+      pad="none"
+      responsive={false}
+      tag="div"
+      wrap={true}
+    >
+      <OrderMeta
+        order={Object {}}
+      />
+    </Box>
     <FormField
       size="medium"
       strong={false}
@@ -144,6 +183,7 @@ exports[`Testing on ChangeOrderQuantityForm... ChangeOrderQuantityForm layout Ex
       />
       <Anchor
         animateIcon={true}
+        disabled={true}
         icon={
           <LinkNext
             responsive={true}
@@ -188,6 +228,25 @@ exports[`Testing on ChangeOrderQuantityForm... ChangeOrderQuantityForm layout Ex
         Set Quantity
       </Heading>
     </Header>
+    <Box
+      announce={false}
+      direction="row"
+      focusable={true}
+      justify="between"
+      margin={
+        Object {
+          "bottom": "medium",
+        }
+      }
+      pad="none"
+      responsive={false}
+      tag="div"
+      wrap={true}
+    >
+      <OrderMeta
+        order={Object {}}
+      />
+    </Box>
     <FormField
       size="medium"
       strong={false}
@@ -224,6 +283,7 @@ exports[`Testing on ChangeOrderQuantityForm... ChangeOrderQuantityForm layout Ex
       />
       <Anchor
         animateIcon={true}
+        disabled={true}
         icon={
           <LinkNext
             responsive={true}
@@ -272,15 +332,46 @@ exports[`Testing on ChangeOrderQuantityForm... ChangeOrderQuantityForm layout Ex
       announce={false}
       direction="column"
       focusable={true}
+      margin={
+        Object {
+          "bottom": "large",
+        }
+      }
       pad="none"
       responsive={true}
       tag="div"
     >
       <Label
+        margin="none"
         size="medium"
       >
         Test Label
       </Label>
+    </Box>
+    <Box
+      announce={false}
+      direction="row"
+      focusable={true}
+      justify="between"
+      margin={
+        Object {
+          "bottom": "medium",
+        }
+      }
+      pad="none"
+      responsive={false}
+      tag="div"
+      wrap={true}
+    >
+      <OrderMeta
+        order={
+          Object {
+            "ProductName": "Test Label",
+            "Qty": 2,
+            "_id": 1,
+          }
+        }
+      />
     </Box>
     <FormField
       size="medium"
@@ -319,6 +410,7 @@ exports[`Testing on ChangeOrderQuantityForm... ChangeOrderQuantityForm layout Ex
       />
       <Anchor
         animateIcon={true}
+        disabled={false}
         icon={
           <LinkNext
             responsive={true}
@@ -363,6 +455,25 @@ exports[`Testing on ChangeOrderQuantityForm... Test on prop Expect prop function
         Set Quantity
       </Heading>
     </Header>
+    <Box
+      announce={false}
+      direction="row"
+      focusable={true}
+      justify="between"
+      margin={
+        Object {
+          "bottom": "medium",
+        }
+      }
+      pad="none"
+      responsive={false}
+      tag="div"
+      wrap={true}
+    >
+      <OrderMeta
+        order={Object {}}
+      />
+    </Box>
     <FormField
       size="medium"
       strong={false}
@@ -399,6 +510,7 @@ exports[`Testing on ChangeOrderQuantityForm... Test on prop Expect prop function
       />
       <Anchor
         animateIcon={true}
+        disabled={true}
         icon={
           <LinkNext
             responsive={true}
@@ -443,6 +555,25 @@ exports[`Testing on ChangeOrderQuantityForm... Test on prop Expect prop function
         Set Quantity
       </Heading>
     </Header>
+    <Box
+      announce={false}
+      direction="row"
+      focusable={true}
+      justify="between"
+      margin={
+        Object {
+          "bottom": "medium",
+        }
+      }
+      pad="none"
+      responsive={false}
+      tag="div"
+      wrap={true}
+    >
+      <OrderMeta
+        order={Object {}}
+      />
+    </Box>
     <FormField
       size="medium"
       strong={false}
@@ -479,6 +610,7 @@ exports[`Testing on ChangeOrderQuantityForm... Test on prop Expect prop function
       />
       <Anchor
         animateIcon={true}
+        disabled={true}
         icon={
           <LinkNext
             responsive={true}
@@ -523,6 +655,25 @@ exports[`Testing on ChangeOrderQuantityForm... Test on state Expect quantity sta
         Set Quantity
       </Heading>
     </Header>
+    <Box
+      announce={false}
+      direction="row"
+      focusable={true}
+      justify="between"
+      margin={
+        Object {
+          "bottom": "medium",
+        }
+      }
+      pad="none"
+      responsive={false}
+      tag="div"
+      wrap={true}
+    >
+      <OrderMeta
+        order={Object {}}
+      />
+    </Box>
     <FormField
       size="medium"
       strong={false}
@@ -559,6 +710,7 @@ exports[`Testing on ChangeOrderQuantityForm... Test on state Expect quantity sta
       />
       <Anchor
         animateIcon={true}
+        disabled={true}
         icon={
           <LinkNext
             responsive={true}
@@ -607,15 +759,46 @@ exports[`Testing on ChangeOrderQuantityForm... Test on state Expect quantity sta
       announce={false}
       direction="column"
       focusable={true}
+      margin={
+        Object {
+          "bottom": "large",
+        }
+      }
       pad="none"
       responsive={true}
       tag="div"
     >
       <Label
+        margin="none"
         size="medium"
       >
         Test Label
       </Label>
+    </Box>
+    <Box
+      announce={false}
+      direction="row"
+      focusable={true}
+      justify="between"
+      margin={
+        Object {
+          "bottom": "medium",
+        }
+      }
+      pad="none"
+      responsive={false}
+      tag="div"
+      wrap={true}
+    >
+      <OrderMeta
+        order={
+          Object {
+            "ProductName": "Test Label",
+            "Qty": 2,
+            "_id": 1,
+          }
+        }
+      />
     </Box>
     <FormField
       size="medium"
@@ -654,6 +837,7 @@ exports[`Testing on ChangeOrderQuantityForm... Test on state Expect quantity sta
       />
       <Anchor
         animateIcon={true}
+        disabled={false}
         icon={
           <LinkNext
             responsive={true}

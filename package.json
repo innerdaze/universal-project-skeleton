@@ -15,7 +15,7 @@
     "build:cordova:dev":
       "cross-env NODE_ENV=development cross-env BABEL_ENV=development cross-env CORDOVA=true webpack",
     "build:cordova":
-      "cross-env NODE_ENV=production cross-env CORDOVA=true webpack --progress",
+      "cross-env NODE_ENV=production cross-env cross-env BABEL_ENV=production CORDOVA=true webpack --progress",
     "build:cordova:dev:win": ".\\scripts\\build-and-install-android-dev.bat",
     "start": "npm run babel-node",
     "clean": "rimraf dist/*",
@@ -180,6 +180,7 @@
     "snapshotSerializers": ["enzyme-to-json/serializer"],
     "moduleNameMapper": {
       "^.+\\.(css|scss)$": "identity-obj-proxy",
+      "^~(.*)$": "<rootDir>/client/$1",
       "^~features(.*)$": "<rootDir>/client/features/$1",
       "^~components(.*)$": "<rootDir>/client/components/$1"
     },
@@ -249,7 +250,6 @@
   "dependencies": {
     "faker": "^4.1.0",
     "redux-mock-store": "^1.5.1",
-    "redux-test-utils": "^0.2.2",
-    "sinon": "^4.4.2"
+    "redux-test-utils": "^0.2.2"
   }
 }

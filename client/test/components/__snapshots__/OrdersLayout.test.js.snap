@@ -44,7 +44,9 @@ exports[`Testing on OrdersLayout... OrdersLayout layout Expect OrdersLayout to h
   >
     <OrdersHeaderLayout />
     <Connect(BarcodeInputForm) />
-    <Connect(ScannedItemList) />
+    <Connect(ScannedItemList)
+      renderItem={[Function]}
+    />
     <Connect(ProcessItemsButton) />
   </Box>
 </Split>
@@ -69,7 +71,9 @@ exports[`Testing on OrdersLayout... Test on prop Expect Split priority prop is s
   >
     <OrdersHeaderLayout />
     <Connect(BarcodeInputForm) />
-    <Connect(ScannedItemList) />
+    <Connect(ScannedItemList)
+      renderItem={[Function]}
+    />
     <Connect(ProcessItemsButton) />
   </Box>
 </Split>
@@ -94,7 +98,9 @@ exports[`Testing on OrdersLayout... Test on prop Expect Split priority prop is s
   >
     <OrdersHeaderLayout />
     <Connect(BarcodeInputForm) />
-    <Connect(ScannedItemList) />
+    <Connect(ScannedItemList)
+      renderItem={[Function]}
+    />
     <Connect(ProcessItemsButton) />
   </Box>
 </Split>
@@ -124,7 +130,9 @@ exports[`Testing on OrdersLayout... Test on prop Expect handlePromptStartModifyi
     />
     <OrdersHeaderLayout />
     <Connect(BarcodeInputForm) />
-    <Connect(ScannedItemList) />
+    <Connect(ScannedItemList)
+      renderItem={[Function]}
+    />
     <Connect(ProcessItemsButton) />
   </Box>
 </Split>
@@ -154,7 +162,9 @@ exports[`Testing on OrdersLayout... Test on prop Expect onPromptStartModifyingCa
     />
     <OrdersHeaderLayout />
     <Connect(BarcodeInputForm) />
-    <Connect(ScannedItemList) />
+    <Connect(ScannedItemList)
+      renderItem={[Function]}
+    />
     <Connect(ProcessItemsButton) />
   </Box>
 </Split>
@@ -180,7 +190,9 @@ exports[`Testing on OrdersLayout... Test on prop Expect to contain ChangeOrderQu
     <Connect(ChangeOrderQuantityForm) />
     <OrdersHeaderLayout />
     <Connect(BarcodeInputForm) />
-    <Connect(ScannedItemList) />
+    <Connect(ScannedItemList)
+      renderItem={[Function]}
+    />
     <Connect(ProcessItemsButton) />
   </Box>
 </Split>
@@ -210,7 +222,9 @@ exports[`Testing on OrdersLayout... Test on prop Expect to contain PromptStartMo
     />
     <OrdersHeaderLayout />
     <Connect(BarcodeInputForm) />
-    <Connect(ScannedItemList) />
+    <Connect(ScannedItemList)
+      renderItem={[Function]}
+    />
     <Connect(ProcessItemsButton) />
   </Box>
 </Split>

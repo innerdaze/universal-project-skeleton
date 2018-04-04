@@ -22,6 +22,7 @@ module.exports = {
   },
   resolve: {
     alias: {
+      '~': path.resolve(__dirname, 'client'),
       '~features': path.resolve(__dirname, 'client', 'features'),
       '~components': path.resolve(__dirname, 'client', 'components'),
       css: path.resolve(__dirname, 'client', 'assets', 'css')

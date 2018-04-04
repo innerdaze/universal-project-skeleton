@@ -91,6 +91,36 @@ exports[` 1`] = `
             Shelf Labels
           </a>
         </Anchor>
+        <Anchor
+          animateIcon={true}
+          className={false}
+          label="Wastage"
+          method="push"
+          onClick={[Function]}
+          tag="a"
+        >
+          <a
+            className="grommetux-anchor"
+            onClick={[Function]}
+          >
+            Wastage
+          </a>
+        </Anchor>
+        <Anchor
+          animateIcon={true}
+          className={false}
+          label="Price Check"
+          method="push"
+          onClick={[Function]}
+          tag="a"
+        >
+          <a
+            className="grommetux-anchor"
+            onClick={[Function]}
+          >
+            Price Check
+          </a>
+        </Anchor>
       </nav>
     </Box>
   </Menu>
@@ -186,6 +216,36 @@ exports[` 2`] = `
             onClick={[Function]}
           >
             Shelf Labels
+          </a>
+        </Anchor>
+        <Anchor
+          animateIcon={true}
+          className={false}
+          label="Wastage"
+          method="push"
+          onClick={[Function]}
+          tag="a"
+        >
+          <a
+            className="grommetux-anchor"
+            onClick={[Function]}
+          >
+            Wastage
+          </a>
+        </Anchor>
+        <Anchor
+          animateIcon={true}
+          className={false}
+          label="Price Check"
+          method="push"
+          onClick={[Function]}
+          tag="a"
+        >
+          <a
+            className="grommetux-anchor"
+            onClick={[Function]}
+          >
+            Price Check
           </a>
         </Anchor>
       </nav>
@@ -287,6 +347,22 @@ exports[`Testing on ModeSwitcher... Test on prop Expect onSwitch prop function t
     onClick={[Function]}
     tag="a"
   />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Wastage"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Price Check"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
 </Menu>
 `;
 
@@ -331,6 +407,22 @@ exports[`Testing on ModeSwitcher... Test on prop Expect onSwitch prop function t
     animateIcon={true}
     className={false}
     label="Shelf Labels"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Wastage"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Price Check"
     method="push"
     onClick={[Function]}
     tag="a"
@@ -383,6 +475,22 @@ exports[`Testing on ModeSwitcher... Test on prop Expect onSwitch prop function t
     onClick={[Function]}
     tag="a"
   />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Wastage"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Price Check"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
 </Menu>
 `;
 
@@ -427,6 +535,22 @@ exports[`Testing on ModeSwitcher... Test on prop Expect onSwitch prop function t
     animateIcon={true}
     className="active"
     label="Shelf Labels"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Wastage"
+    method="push"
+    onClick={[Function]}
+    tag="a"
+  />
+  <Anchor
+    animateIcon={true}
+    className={false}
+    label="Price Check"
     method="push"
     onClick={[Function]}
     tag="a"

@@ -7,6 +7,7 @@
     "module": "commonjs",
     "baseUrl": "./",
     "paths": {
+      "~/*": ["client/*"],
       "~features/*": ["client/features/*"],
       "~components/*": ["client/components/*"]
     }

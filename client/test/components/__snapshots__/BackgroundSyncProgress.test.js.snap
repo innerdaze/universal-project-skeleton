@@ -13,7 +13,7 @@ exports[`Testing on BackgroundSyncProgress... BackgroundSyncProgress layout Expe
   <Heading
     tag="h1"
   >
-    Synchronising Data...
+    Synchronizing Data...
   </Heading>
   <Meter
     label={
