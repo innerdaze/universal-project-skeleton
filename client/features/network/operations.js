@@ -102,9 +102,11 @@ const checkStatusAndParseJSON = response =>
     throwError(data, data.result.Result.ResMessage.ResMessage)
   })
 
-const isOnline = () =>
-  window.cordova && window.navigator
-    ? navigator.connection.type !== navigator.connection.NONE
+export const isOnline = () =>
+  window.navigator
+    ? window.cordova
+      ? navigator.connection.type !== navigator.connection.NONE
+      : window.navigator.onLine
     : true
 
 export default {

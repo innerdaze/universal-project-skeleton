@@ -1,9 +1,15 @@
-import { callApi } from '~features/network/operations'
+import { callApi, isOnline } from '~features/network/operations'
+import { isNil } from 'ramda'
 import actions from './actions'
+import selectors from './selectors'
+import { barcodeOperations, barcodeSelectors } from '~features/barcode'
+import { productOperations, productSelectors } from '~features/product'
 
 const priceCheckActions = actions.priceCheck
 
-export const getPrice = ({ productId, barcode }) => dispatch => {
+export const fetchPrice = ({ productId, barcode }) => (dispatch, getState) => {
+  const state = getState()
+
   dispatch(priceCheckActions.requestGetPrice())
 
   const currentContext = {
@@ -11,21 +17,69 @@ export const getPrice = ({ productId, barcode }) => dispatch => {
     value: productId || barcode
   }
 
-  dispatch(
-    callApi({
-      service: 'HandheldService.GetPrice',
-      params: barcode ? { Barcode: barcode } : { ProductID: productId },
-      success(data) {
+  if (isOnline()) {
+    dispatch(
+      callApi({
+        service: 'HandheldService.GetPrice',
+        params: barcode ? { Barcode: barcode } : { ProductID: productId }
+      })
+    )
+      .then(data => {
+        dispatch(priceCheckActions.setCurrentContext(currentContext))
+
         dispatch(
           priceCheckActions.receiveGetPrice(data.result.Result.ProductPrice)
         )
-        dispatch(priceCheckActions.setCurrentContext(currentContext))
-      },
-      failure(error) {
+      })
+      .catch(error => {
         dispatch(priceCheckActions.receiveGetPrice(error))
+      })
+  } else {
+    dispatch(priceCheckActions.setCurrentContext(currentContext))
+
+    let productPrice
+
+    if (barcode) {
+      const barcodeEntity = (barcodeSelectors.barcodeEntitiesSelector(state) ||
+        {})[barcode]
+
+      if (barcodeEntity) {
+        productPrice = selectors.byIdSelector(state)[barcodeEntity.ProductID]
       }
-    })
-  )
+    } else if (productId) {
+      productPrice = selectors.byIdSelector(state)[productId]
+    }
+
+    if (isNil(productPrice)) {
+      productPrice = dispatch(getSellingPrice({ barcode, productId }))
+
+      if (productPrice) {
+        productPrice = {
+          ...selectors.createPriceCheckModelForProductIdSelector(
+            state,
+            productId
+          ),
+          SellingPrice: productPrice
+        }
+      }
+    }
+
+    dispatch(
+      priceCheckActions.receiveGetPrice(
+        !productPrice ? Error('Could not match product') : productPrice
+      )
+    )
+  }
+}
+
+const getSellingPrice = ({ productId, barcode }) => (dispatch, getState) => {
+  const state = getState()
+
+  if (productId) {
+    return productSelectors.priceByProductIdSelector(state, productId)
+  } else if (barcode) {
+    return barcodeSelectors.priceByBarcodeSelector(state, barcode)
+  }
 }
 
 export const updatePrice = ({ productId, barcode, price }) => dispatch => {
@@ -43,7 +97,7 @@ export const updatePrice = ({ productId, barcode, price }) => dispatch => {
           priceCheckActions.receiveUpdatePrice(productId || barcode, price)
         )
         dispatch(
-          getPrice({
+          getSellingPrice({
             [productId ? 'productId' : 'barcode']: productId || barcode
           })
         )
@@ -57,6 +111,7 @@ export const updatePrice = ({ productId, barcode, price }) => dispatch => {
 
 export default {
   ...actions.priceCheck,
-  getPrice,
+  fetchPrice,
+  getSellingPrice,
   updatePrice
 }

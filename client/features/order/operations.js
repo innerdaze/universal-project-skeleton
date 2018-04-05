@@ -191,7 +191,7 @@ const submitProduct = product => (dispatch, getState) => {
   const orderMode = orderSelectors.modeSelector(state)
 
   if (orderMode === Modes.PRICE_CHECK) {
-    dispatch(priceCheckOperations.getPrice({ productId: product.ProductID }))
+    dispatch(priceCheckOperations.fetchPrice({ productId: product.ProductID }))
   } else {
     dispatch(createPendingTransactionByProduct(product))
   }
@@ -205,7 +205,9 @@ const submitBarcode = barcodeId => (dispatch, getState) => {
     const barcode = dispatch(barcodeOperations._findBarcodeByID(barcodeId))
 
     if (barcode && barcode.ProductID) {
-      dispatch(priceCheckOperations.getPrice({ productId: barcode.ProductID }))
+      dispatch(
+        priceCheckOperations.fetchPrice({ productId: barcode.ProductID })
+      )
     }
   } else {
     dispatch(createPendingTransactionByBarcodeID(barcodeId))

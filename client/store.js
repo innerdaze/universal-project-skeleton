@@ -74,6 +74,12 @@ const wastagePersistConfig = storage => ({
   transforms: [createFilter('barcodes', ['items'])]
 })
 
+const priceCheckPersistConfig = storage => ({
+  storage,
+  key: 'priceCheck',
+  whitelist: ['byId']
+})
+
 export default async function configureStore(initialState) {
   const loggerMiddleware = createLogger()
 
@@ -119,7 +125,14 @@ export default async function configureStore(initialState) {
       barcodePersistConfig(localForage),
       reducers.barcode
     ),
-    wastage: persistReducer(wastagePersistConfig(localForage), reducers.wastage)
+    wastage: persistReducer(
+      wastagePersistConfig(localForage),
+      reducers.wastage
+    ),
+    priceCheck: persistReducer(
+      priceCheckPersistConfig(localForage),
+      reducers.priceCheck
+    )
   })
 
   const store = createStore(

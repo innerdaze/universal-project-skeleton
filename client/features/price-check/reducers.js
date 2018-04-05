@@ -9,7 +9,8 @@ const initialState = {
   isUpdatingPrice: false,
   lastPriceCheck: null,
   lastPriceUpdate: null,
-  priceUpdateIntent: false
+  priceUpdateIntent: false,
+  byId: {}
 }
 
 export default handleActions(
@@ -26,7 +27,11 @@ export default handleActions(
           ...state,
           isGettingPrice: false,
           lastPriceCheck: price,
-          error: null
+          error: null,
+          byId: {
+            ...state.byId,
+            [state.currentContext.value]: price
+          }
         }
       },
       throw(state, { payload: error }) {
