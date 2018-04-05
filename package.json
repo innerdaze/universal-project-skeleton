@@ -53,7 +53,12 @@
     "bluekit":
       "bluekit --baseDir ./client/components --paths . --exclude \"./(Layout|StyledComponent).tsx\"",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prepare-release-notes": "cat ./release-notes/* > ./RELEASE.md",
+    "preview-release-notes":
+      "npm run prepare-release-notes && markdownb ./RELEASE.md",
+    "build-release-notes":
+      "npm run prepare-release-notes && markdown ./RELEASE.md > RELEASE.html"
   },
   "keywords": [],
   "author": "Lee Driscoll <lee.driscoll@orbistech.co.uk>",
@@ -122,6 +127,7 @@
     "localforage-cordovasqlitedriver": "^1.6.0",
     "localtunnel": "^1.8.2",
     "lodash": "^4.17.4",
+    "markdown-to-html": "^0.0.13",
     "nock": "^9.0.11",
     "node-sass": "^4.5.2",
     "nodemon": "^1.11.0",

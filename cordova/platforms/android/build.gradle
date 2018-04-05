@@ -89,7 +89,6 @@ ext {
 
 // PLUGIN GRADLE EXTENSIONS START
 apply from: "cordova-fabric-plugin/mstock-build-extras.gradle"
-apply from: "cordova-plugin-crosswalk-webview/mstock-xwalk.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras = file('build-extras.gradle').exists()
