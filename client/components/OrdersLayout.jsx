@@ -18,8 +18,6 @@ import OrderMetaToggle from './OrderMetaToggle'
 import ScannedItem from './ScannedItem'
 import WastageItem from './WastageItem'
 import MainMenu from './MainMenu'
-import LoadingScreen from 'react-loading-screen'
-
 class OrdersLayout extends Component {
   state = {
     mainMenuVisible: false

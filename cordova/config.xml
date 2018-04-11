@@ -21,12 +21,12 @@
     <allow-intent href="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
-        <icon density="ldpi" src="platforms/android/res/mipmap-ldpi/ic_launcher.png" />
-        <icon density="mdpi" src="platforms/android/res/mipmap-mdpi/ic_launcher.png" />
-        <icon density="hdpi" src="platforms/android/res/mipmap-hdpi/ic_launcher.png" />
-        <icon density="xhdpi" src="platforms/android/res/mipmap-xhdpi/ic_launcher.png" />
-        <icon density="xxhdpi" src="platforms/android/res/mipmap-xxhdpi/ic_launcher.png" />
-        <icon density="xxxhdpi" src="platforms/android/res/mipmap-xxxhdpi/ic_launcher.png" />
+        <icon density="ldpi" src="res/mipmap-ldpi/ic_launcher.png" />
+        <icon density="mdpi" src="res/mipmap-mdpi/ic_launcher.png" />
+        <icon density="hdpi" src="res/mipmap-hdpi/ic_launcher.png" />
+        <icon density="xhdpi" src="res/mipmap-xhdpi/ic_launcher.png" />
+        <icon density="xxhdpi" src="res/mipmap-xxhdpi/ic_launcher.png" />
+        <icon density="xxxhdpi" src="res/mipmap-xxxhdpi/ic_launcher.png" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />

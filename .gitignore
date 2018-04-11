@@ -11,6 +11,7 @@ dist/
 # Cordova
 cordova/www/
 cordova/plugins/
+cordova/platforms/
 
 # Coverage
 .nyc_output
