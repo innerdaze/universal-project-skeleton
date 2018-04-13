@@ -95,7 +95,7 @@ class ModeSwitcher extends Component {
           onClick={this.handleShelfLabelsSelect}
         />
         <Anchor
-          label='Wastage'
+          label='Stock Adjustment'
           className={this.state.mode === Modes.WASTAGE && 'active'}
           onClick={this.handleWastageSelect}
         />

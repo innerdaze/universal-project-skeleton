@@ -4,7 +4,7 @@ const ModeNames = {
   30: 'Shelf Labels',
   40: 'Stock Take',
   98: 'Price Check',
-  99: 'Wastage'
+  99: 'Stock Adjustments'
 }
 
 export default ModeNames

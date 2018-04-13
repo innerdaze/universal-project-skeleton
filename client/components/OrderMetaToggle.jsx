@@ -7,7 +7,7 @@ import Button from 'grommet/components/Button'
 import OrderMeta from './OrderMeta'
 import Toggle from './Toggle'
 
-const OrderMetaToggle = ({ order }) => (
+const OrderMetaToggle = ({ order, mode }) => (
   <Toggle
     renderA={toggle => (
       <Button plain onClick={toggle}>
@@ -25,7 +25,7 @@ const OrderMetaToggle = ({ order }) => (
     renderB={toggle => (
       <Box>
         <Box direction='row' justify='between' responsive={false} wrap>
-          <OrderMeta order={order} />
+          <OrderMeta order={order} mode={mode} />
         </Box>
         <Button plain onClick={toggle}>
           <Box

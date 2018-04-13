@@ -65,7 +65,7 @@ class ChangeWastageTypeForm extends Component {
       <Layer>
         <Form onSubmit={this.handleSubmit}>
           <Header>
-            <Heading>Change Wastage Type</Heading>
+            <Heading>Change Stock Adjustment Type</Heading>
           </Header>
           {this.props.order.ProductName && (
             <Box margin={{ bottom: 'large' }}>

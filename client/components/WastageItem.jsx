@@ -47,7 +47,7 @@ class WastageItem extends PureComponent {
           <Menu icon={<ActionsIcon />}>
             <Anchor
               icon={<EditIcon />}
-              label='Change Wastage Type'
+              label='Change Stock Adjustment Type'
               onClick={this.onChangeWastageTypeClick}
             />
             <Anchor

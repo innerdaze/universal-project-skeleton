@@ -86,11 +86,15 @@ class OrdersLayout extends Component {
                 id={item._id}
                 data={item}
                 quantity={item.Qty}
+                mode={this.props.activeMode}
                 render={() => (
                   <Box flex={true}>
                     <Box>{item.ProductID}</Box>
                     <Box style={{ fontWeight: 600 }}>{item.ProductName}</Box>
-                    <OrderMetaToggle order={item} />
+                    <OrderMetaToggle
+                      order={item}
+                      mode={this.props.activeMode}
+                    />
                   </Box>
                 )}
                 onChangeQuantityClick={item.onChangeQuantityClick}

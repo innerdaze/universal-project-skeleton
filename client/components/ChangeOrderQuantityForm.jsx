@@ -83,7 +83,7 @@ class ChangeOrderQuantityForm extends Component {
             responsive={false}
             wrap
           >
-            <OrderMeta order={this.props.order} />
+            <OrderMeta order={this.props.order} mode={this.props.mode} />
           </Box>
           <FormField>
             <input

@@ -8,6 +8,7 @@ import Anchor from 'grommet/components/Anchor'
 import ActionsIcon from 'grommet/components/icons/base/Actions'
 import EditIcon from 'grommet/components/icons/base/Edit'
 import TrashIcon from 'grommet/components/icons/base/Trash'
+import Modes from '../constants/OperationModes'
 
 class ScannedItem extends PureComponent {
   static propTypes = {
@@ -15,7 +16,8 @@ class ScannedItem extends PureComponent {
     data: PropTypes.object.isRequired,
     onChangeQuantityClick: PropTypes.func.isRequired,
     onDeleteClick: PropTypes.func.isRequired,
-    render: PropTypes.func.isRequired
+    render: PropTypes.func.isRequired,
+    mode: PropTypes.number
   }
 
   static defaultProps = {
@@ -37,7 +39,13 @@ class ScannedItem extends PureComponent {
       <ListItem justify='between' align='start' responsive={false}>
         {this.props.render(this.props.data)}
         <Box justify='end' textAlign='right'>
-          <Box className='secondary'>{this.props.quantity} x Units</Box>
+          <Box className='secondary'>
+            {this.props.quantity} x{' '}
+            {this.props.mode === Modes.ORDERING ||
+            this.props.mode === Modes.DELIVERY
+              ? 'Qty'
+              : 'Units'}
+          </Box>
           <Menu icon={<ActionsIcon />}>
             <Anchor
               icon={<EditIcon />}
