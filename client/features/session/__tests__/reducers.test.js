@@ -2,8 +2,10 @@ import {
   sessionReducer as sessionReducers,
   user as userReducers
 } from '../reducers'
-import { sessionAction } from '../operations'
+import actions from '../actions'
 import { sessionModel } from '../__fixtures__'
+
+const { session: sessionActions } = actions
 
 let initialState = {
   id: '',
@@ -20,7 +22,7 @@ describe('Testing on session reducers', () => {
 
       const { id, alive } = sessionReducers(
         initialState,
-        sessionAction.startSession(mockId)
+        sessionActions.startSession(mockId)
       )
 
       expect(id).toEqual(mockId)
@@ -30,7 +32,7 @@ describe('Testing on session reducers', () => {
     test('Expect handle SUCCEED_LOGIN', () => {
       const { error } = sessionReducers(
         initialState,
-        sessionAction.startSession()
+        sessionActions.startSession()
       )
 
       expect(error).toBeNull()
@@ -41,7 +43,7 @@ describe('Testing on session reducers', () => {
 
       const { error } = sessionReducers(
         initialState,
-        sessionAction.failLogin(mockPayload)
+        sessionActions.failLogin(mockPayload)
       )
 
       expect(error).toHaveProperty('error')
@@ -51,7 +53,7 @@ describe('Testing on session reducers', () => {
     test('Expect handle REQUEST_LOGIN', () => {
       const { isRequesting } = sessionReducers(
         initialState,
-        sessionAction.requestLogin()
+        sessionActions.requestLogin()
       )
 
       expect(isRequesting).toEqual(true)
@@ -60,7 +62,7 @@ describe('Testing on session reducers', () => {
     test('Expect handle RECEIVE_LOGIN', () => {
       const { isRequesting, lastUpdated } = sessionReducers(
         initialState,
-        sessionAction.receiveLogin()
+        sessionActions.receiveLogin()
       )
 
       expect(isRequesting).toEqual(false)
@@ -70,7 +72,7 @@ describe('Testing on session reducers', () => {
     test('Expect handle REQUEST_LOGOUT', () => {
       const { isRequesting } = sessionReducers(
         initialState,
-        sessionAction.requestLogout()
+        sessionActions.requestLogout()
       )
 
       expect(isRequesting).toEqual(true)
@@ -79,7 +81,7 @@ describe('Testing on session reducers', () => {
     test('Expect handle RECEIVE_LOGOUT', () => {
       const { isRequesting, lastUpdated } = sessionReducers(
         initialState,
-        sessionAction.receiveLogout()
+        sessionActions.receiveLogout()
       )
 
       expect(isRequesting).toEqual(false)
@@ -89,7 +91,7 @@ describe('Testing on session reducers', () => {
     test('Expect handle END_SESSION', () => {
       const { id, alive } = sessionReducers(
         initialState,
-        sessionAction.endSession()
+        sessionActions.endSession()
       )
 
       expect(id).toBeNull()
@@ -106,7 +108,7 @@ describe('Testing on session reducers', () => {
 
       const { id, name } = userReducers(
         initialState,
-        sessionAction.succeedLogin(mockUser)
+        sessionActions.succeedLogin(mockUser)
       )
 
       expect(id).toEqual(mockUser.UserID)
@@ -116,7 +118,7 @@ describe('Testing on session reducers', () => {
     test('Expect handle RECEIVE_LOGOUT', () => {
       const { id, name } = userReducers(
         initialState,
-        sessionAction.receiveLogout()
+        sessionActions.receiveLogout()
       )
 
       expect(id).toBeNull()

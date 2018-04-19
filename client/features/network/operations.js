@@ -1,10 +1,10 @@
+import 'whatwg-fetch'
 import { is } from 'ramda'
 import actions from './actions'
 import { failIfMissing } from '~/helpers/Function'
 import { sessionOperations } from '../../features/session'
 import { errorOperations } from '../error'
 import { sessionSelectors } from '../session'
-import fetch from 'isomorphic-fetch'
 
 const networkAction = actions.network
 
@@ -62,13 +62,21 @@ export const callApi = ({
   })()
 }
 
-const validateResCode = ({ result: { Result } }) => {
-  if (is(Number, Result.ResCode)) {
-    if (Result.ResCode !== 0) return Result.ResMessage
-  }
+const validateResCode = ({ result }) => {
+  if (result) {
+    const { Result } = result
 
-  if (is(Number, Result.ResMessage.ResCode)) {
-    if (Result.ResMessage.ResCode !== 0) return Result.ResMessage.ResCode
+    if (Result) {
+      if (is(Number, Result.ResCode)) {
+        if (Result.ResCode !== 0) return Result.ResMessage
+      }
+
+      if (Result.ResMessage) {
+        if (is(Number, Result.ResMessage.ResCode)) {
+          if (Result.ResMessage.ResCode !== 0) return Result.ResMessage.ResCode
+        }
+      }
+    }
   }
 }
 

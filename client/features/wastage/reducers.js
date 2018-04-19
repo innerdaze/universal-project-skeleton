@@ -82,61 +82,12 @@ export const wastageProcessing = handleActions(
 )
 
 const wastageEntitiesInitialState = {
-  allIds: [],
-  byId: {}
+  isChangingWastageType: false,
+  changingWastageTypeFor: null
 }
 
 export const wastageEntities = handleActions(
   {
-    [wastage.receiveProcessWastage]: {
-      next(state, { payload }) {
-        return {
-          ...state,
-          allIds: [],
-          byId: {}
-        }
-      }
-    },
-    [wastage.addWastage](
-      state,
-      {
-        payload: { model }
-      }
-    ) {
-      return {
-        ...state,
-        allIds: [...state.allIds, model._id],
-        byId: { ...state.byId, [model._id]: model }
-      }
-    },
-    [wastage.updateWastageQuantity](
-      state,
-      {
-        payload: { id, quantity }
-      }
-    ) {
-      return {
-        ...state,
-        byId: assocPath([id, 'Qty'], quantity, state.byId)
-      }
-    },
-    // [wastage.updateWastageTypeMapping](state, { payload: { id, typeId } }) {
-    //   return {
-    //     ...state,
-    //     byId: assocPath([id, 'TypeID'], typeId, state.byId)
-    //   }
-    // },
-    [wastage.deleteWastage](
-      state,
-      {
-        payload: { id }
-      }
-    ) {
-      return {
-        allIds: without(of(id), state.allIds),
-        byId: dissoc(id, state.byId)
-      }
-    },
     [wastage.startChangingWastageType](
       state,
       {

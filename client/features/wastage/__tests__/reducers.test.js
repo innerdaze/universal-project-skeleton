@@ -3,7 +3,8 @@ import operations from '../operations'
 import {
   wastageTypes as wastageTypesReducer,
   wastageProcessing as wastageProcessingReducer,
-  wastageEntities as wastageEntitiesReducer
+  wastageEntities as wastageEntitiesReducer,
+  wastageTypeToOrderMap as wastageTypeToOrderMapReducer
 } from '../reducers'
 import {
   generateWastage,
@@ -105,15 +106,8 @@ describe('WASTAGE/ACTIONS', () => {
       receiveProcessWastage()
     )
 
-    const { allIds, byId } = wastageEntitiesReducer(
-      initialEntitiesState,
-      receiveProcessWastage()
-    )
-
     expect(isProcessing).toBe(false)
     expect(error).toBeNull()
-    expect(allIds).toEqual([])
-    expect(byId).toEqual({})
   })
 
   test('RECEIVE_PROCESS_WASTAGE ➤ Error', () => {
@@ -133,101 +127,18 @@ describe('WASTAGE/ACTIONS', () => {
     expect(error).toBe(mockError)
   })
 
-  test('ADD_WASTAGE', () => {
-    const { addWastage } = operations
-    const initialState = {
-      allIds: [],
-      byId: {}
-    }
-    const wastageEntity = generateWastage()
-    const { _id } = wastageEntity
-
-    const { allIds, byId } = wastageEntitiesReducer(
-      initialState,
-      addWastage(wastageEntity)
-    )
-
-    expect(allIds).toEqual([_id])
-    expect(byId).toEqual({
-      [_id]: wastageEntity
-    })
-  })
-
   test('UPDATE_WASTAGE_TYPE_MAPPING', () => {
     const { updateWastageTypeMapping } = operations
     const wastageEntity = generateWastage()
     const { _id } = wastageEntity
 
-    const initialState = {
-      byId: {
-        [_id]: wastageEntity
-      }
-    }
+    const initialState = {}
 
-    const { byId } = wastageEntitiesReducer(
+    const map = wastageTypeToOrderMapReducer(
       initialState,
       updateWastageTypeMapping(_id, 'TEST')
     )
 
-    expect(byId[_id].TypeID).toBe('TEST')
-  })
-
-  test('UPDATE_WASTAGE_QUANTITY', () => {
-    const { updateWastageQuantity } = operations
-    const wastageEntity = generateWastage()
-    const { _id } = wastageEntity
-
-    const initialState = {
-      byId: {
-        [_id]: wastageEntity
-      }
-    }
-
-    const { byId } = wastageEntitiesReducer(
-      initialState,
-      updateWastageQuantity(_id, 5)
-    )
-
-    expect(byId[_id].Qty).toBe(5)
-  })
-
-  test('DELETE_WASTAGE ➤ CONFIRM', () => {
-    const { deleteWastageConfirm } = operations
-    const wastageEntity = generateWastage()
-    const { _id } = wastageEntity
-
-    const initialEntitiesState = {
-      allIds: [_id],
-      byId: {
-        [_id]: wastageEntity
-      }
-    }
-
-    const { allIds, byId } = wastageEntitiesReducer(
-      initialEntitiesState,
-      deleteWastageConfirm()
-    )
-
-    expect(allIds).toEqual([])
-    expect(byId).toEqual({})
-
-    const initialProcessingState = {
-      isDeleting: false
-    }
-  })
-
-  test('DELETE_WASTAGE ➤ CANCEL', () => {
-    const { deleteWastageCancel } = operations
-
-    const initialState = {
-      isDeleting: true
-    }
-
-    const { isDeleting } = wastageProcessingReducer(
-      initialState,
-      deleteWastageCancel()
-    )
-
-    expect(isDeleting).toBe(false)
+    expect(map[_id]).toBe('TEST')
   })
 })

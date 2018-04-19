@@ -24,10 +24,10 @@ const productMappingError = 'Error mapping barcode to product'
  * @param {String} barcode. The barcode ID to find a product for
  * @type {Product}
  */
-const productByBarcodeSelector = createCachedSelector(
+export const productByBarcodeSelector = createCachedSelector(
   productEntitiesSelector,
   barcodeEntitiesSelector,
-  barcode => barcode,
+  (state, barcode) => barcode,
   (productEntities, barcodeEntities, barcode) => {
     const barcodeEntity = barcodeEntities[barcode]
     return barcodeEntity && productEntities[barcodeEntity.ProductID]

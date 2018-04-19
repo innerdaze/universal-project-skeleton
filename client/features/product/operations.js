@@ -5,7 +5,7 @@ import { find, filter, includes, map, toLower } from 'lodash'
 
 const productAction = actions.product
 
-const fetchProducts = () => dispatch => {
+export const fetchProducts = () => dispatch => {
   dispatch(productAction.requestProducts())
 
   return dispatch(
@@ -22,7 +22,7 @@ const fetchProducts = () => dispatch => {
   )
 }
 
-const findProductByProductName = productName => (dispatch, getState) => {
+export const findProductByProductName = productName => (dispatch, getState) => {
   const productID = getState().product.productIDsByProductName[productName]
   return productID && getState().product.productEntities[productID]
 }
@@ -32,7 +32,10 @@ const findProductByProductName = productName => (dispatch, getState) => {
  *  search functions return "starts with" results (Array)
  *  find functions return "exact match" result (Object)
  */
-const searchProductByProductName = productNameStub => (dispatch, getState) => {
+export const searchProductByProductName = productNameStub => (
+  dispatch,
+  getState
+) => {
   const productEntities = getState().product.productEntities
 
   return map(
@@ -43,7 +46,7 @@ const searchProductByProductName = productNameStub => (dispatch, getState) => {
   )
 }
 
-const searchProducts = (query, lookupFunction) => dispatch => {
+export const searchProducts = (query, lookupFunction) => dispatch => {
   dispatch(productAction.searchProducts())
 
   const matches = dispatch(lookupFunction(query))

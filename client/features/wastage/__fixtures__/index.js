@@ -25,3 +25,20 @@ export const wastageTypeModel = {
 
 export const generateWastageType = applySpec(wastageTypeModel)
 export const generateWastageTypeArray = compose(map(generateWastageType), Array)
+
+export const orderModel = {
+  _id: faker.random.uuid,
+  __type: always('HandheldTrans'),
+  AreaID: faker.random.word,
+  Barcode: faker.random.word,
+  Qty: faker.random.number,
+  Ref1: faker.random.word,
+  Ref2: faker.random.word,
+  TransDate: faker.date.recent,
+  TransType: faker.random.number,
+  ProductID: faker.random.word,
+  ProductName: faker.commerce.productName,
+  UserID: faker.random.uuid
+}
+
+export const generateOrder = applySpec(orderModel)

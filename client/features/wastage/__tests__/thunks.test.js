@@ -4,7 +4,12 @@ import fetchMock from 'fetch-mock'
 import expect from 'expect'
 import { indexBy, pluck, prop } from 'ramda'
 import operations from '../operations'
-import { generateWastageTypeArray, generateWastageArray } from '../__fixtures__'
+import {
+  generateWastage,
+  generateWastageTypeArray,
+  generateWastageArray,
+  generateOrder
+} from '../__fixtures__'
 
 const middleWares = [thunk]
 const mockStore = configureMockStore(middleWares)
@@ -119,7 +124,16 @@ describe('WASTAGE/THUNKS', () => {
       }
     })
 
-    const wastageLines = generateWastageArray(3)
+    const orderEntity = generateOrder({})
+    const wastageEntity = generateWastage({})
+
+    orderEntity.TransType = 99
+
+    const { _id } = orderEntity
+    wastageEntity._id = _id
+    wastageEntity.ProductID = orderEntity.ProductID
+    wastageEntity.Qty = orderEntity.Qty
+    wastageEntity.StoreID = 0
 
     const expectedActions = [
       {
@@ -127,20 +141,38 @@ describe('WASTAGE/THUNKS', () => {
       },
       {
         type: 'WASTAGE/RECEIVE_PROCESS_WASTAGE'
+      },
+      {
+        type: 'ORDER/RECEIVE_PROCESS_ORDERS'
+      },
+      {
+        type: 'ORDER/SUCCEED_PROCESS_ORDERS',
+        payload: { orderIDs: [_id] }
       }
     ]
 
     const store = mockStore({
       app: {
-        apiRoot: '/'
+        apiRoot: '/',
+        storeID: 0
       },
       session: {
         session: { id: '0' }
       },
+      order: {
+        orders: {
+          mode: 99,
+          unprocessedItems: [_id]
+        },
+        orderEntities: { [_id]: orderEntity }
+      },
       wastage: {
         wastageEntities: {
-          byId: indexBy(prop('_id'), wastageLines),
-          allIds: pluck('_id', wastageLines)
+          isChangingWastageType: false,
+          changingWastageTypeFor: null
+        },
+        wastageTypeToOrderMap: {
+          [_id]: wastageEntity.TypeID
         }
       }
     })
@@ -152,7 +184,7 @@ describe('WASTAGE/THUNKS', () => {
       const lastBody = JSON.parse(fetchMock.lastOptions().body)
 
       expect(lastBody.method).toBe('WastageService.ProcessWastage')
-      expect(lastBody.params.ListOfWastageLines).toEqual(wastageLines)
+      expect(lastBody.params.ListOfWastageLines).toEqual([wastageEntity])
     })
   })
 
@@ -169,6 +201,17 @@ describe('WASTAGE/THUNKS', () => {
       status: 500
     })
 
+    const orderEntity = generateOrder({})
+    const wastageEntity = generateWastage({})
+
+    orderEntity.TransType = 99
+
+    const { _id } = orderEntity
+    wastageEntity._id = _id
+    wastageEntity.ProductID = orderEntity.ProductID
+    wastageEntity.Qty = orderEntity.Qty
+    wastageEntity.StoreID = 0
+
     const expectedActions = [
       {
         type: 'WASTAGE/REQUEST_PROCESS_WASTAGE'
@@ -181,6 +224,14 @@ describe('WASTAGE/THUNKS', () => {
         type: 'WASTAGE/RECEIVE_PROCESS_WASTAGE',
         error: true,
         payload: Error('TEST ERROR')
+      },
+      {
+        type: 'ORDER/RECEIVE_PROCESS_ORDERS'
+      },
+      {
+        type: 'ORDER/FAIL_PROCESS_ORDERS',
+        payload: Error('TEST ERROR'),
+        error: true
       }
     ]
 
@@ -188,13 +239,26 @@ describe('WASTAGE/THUNKS', () => {
 
     const store = mockStore({
       app: {
-        apiRoot: '/'
+        apiRoot: '/',
+        storeID: 0
       },
-      session: { session: { id: 0 } },
+      session: {
+        session: { id: '0' }
+      },
+      order: {
+        orders: {
+          mode: 99,
+          unprocessedItems: [_id]
+        },
+        orderEntities: { [_id]: orderEntity }
+      },
       wastage: {
         wastageEntities: {
-          byId: indexBy(prop('_id'), wastageLines),
-          allIds: pluck('_id', wastageLines)
+          isChangingWastageType: false,
+          changingWastageTypeFor: null
+        },
+        wastageTypeToOrderMap: {
+          [_id]: wastageEntity.TypeID
         }
       }
     })

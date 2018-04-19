@@ -47,9 +47,9 @@ export const processWastage = () => (dispatch, getState) => {
         )
       },
       failure(error) {
-        dispatch(wastageActions.receiveProcessWastage())
+        dispatch(wastageActions.receiveProcessWastage(error))
         dispatch(orderOperations.receiveProcessOrders())
-        dispatch(orderOperations.succeedProcessOrders(error))
+        dispatch(orderOperations.failProcessOrders(error))
       }
     })
   )

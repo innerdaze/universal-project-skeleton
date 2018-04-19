@@ -1,4 +1,4 @@
-import orderAction from '../actions'
+import actions from '../actions'
 import orderReducers from '../reducers'
 import {
   orders as ordersReducer,
@@ -7,6 +7,8 @@ import {
 import OperationModes from '../../../constants/OperationModes'
 import { difference } from 'lodash'
 import { orderModel } from '../__fixtures__'
+
+const { order: orderAction } = actions
 
 const initialState = {
   isProcessing: false,

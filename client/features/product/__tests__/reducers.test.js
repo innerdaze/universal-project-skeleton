@@ -4,8 +4,10 @@ import {
   productEntities as productEntitiesReducer,
   productIDsByProductName as productIDsByProductNameReducer
 } from '../reducers'
-import { productAction } from '../operations'
+import actions from '../actions'
 import { productModel } from '../__fixtures__'
+
+const { product: productActions } = actions
 
 let initialStateProduct = {
   isFetching: false,
@@ -18,15 +20,15 @@ let initialStateProductSearch = {
   lastError: null,
   lastMatches: []
 }
-let intialStateProductEntities = {}
-let intialStateProductIDsByProductName = {}
+let initialStateProductEntities = {}
+let initialStateProductIDsByProductName = {}
 
 describe('Testing on product reducers...', () => {
   describe('Test products reducer', () => {
     test('Expect handle REQUEST_PRODUCTS', () => {
       const { isFetching, didInvalidate } = productsReducer(
         initialStateProduct,
-        productAction.requestProducts()
+        productActions.requestProducts()
       )
 
       expect(isFetching).toEqual(true)
@@ -36,7 +38,7 @@ describe('Testing on product reducers...', () => {
     test('Expect handle INVALIDATE_PRODUCTS', () => {
       const { didInvalidate } = productsReducer(
         initialStateProduct,
-        productAction.invalidateProducts()
+        productActions.invalidateProducts()
       )
 
       expect(didInvalidate).toEqual(true)
@@ -45,7 +47,7 @@ describe('Testing on product reducers...', () => {
     test('Expect handle RESET_PRODUCTS', () => {
       const { items } = productsReducer(
         initialStateProduct,
-        productAction.resetProducts()
+        productActions.resetProducts()
       )
 
       expect(items).toHaveLength(0)
@@ -65,7 +67,7 @@ describe('Testing on product reducers...', () => {
 
       const { isFetching, didInvalidate, items, lastUpdated } = productsReducer(
         initialStateProduct,
-        productAction.receiveProducts(json)
+        productActions.receiveProducts(json)
       )
 
       expect(isFetching).toEqual(false)
@@ -79,7 +81,7 @@ describe('Testing on product reducers...', () => {
     test('Expect handle SEARCH_PRODUCTS', () => {
       const { isSearching } = productSearchReducer(
         initialStateProductSearch,
-        productAction.searchProducts()
+        productActions.searchProducts()
       )
 
       expect(isSearching).toEqual(true)
@@ -93,7 +95,7 @@ describe('Testing on product reducers...', () => {
 
       const { isSearching, lastMatches } = productSearchReducer(
         initialStateProductSearch,
-        productAction.succeedSearchProducts(matches)
+        productActions.succeedSearchProducts(matches)
       )
 
       expect(isSearching).toEqual(false)
@@ -105,7 +107,7 @@ describe('Testing on product reducers...', () => {
 
       const { isSearching, lastError } = productSearchReducer(
         initialStateProduct,
-        productAction.failSearchProducts(mockQuery)
+        productActions.failSearchProducts(mockQuery)
       )
 
       expect(isSearching).toEqual(false)
@@ -127,14 +129,14 @@ describe('Testing on product reducers...', () => {
       ]
 
       let expectedState = {
-        ...intialStateProductEntities,
+        ...initialStateProductEntities,
         foo: json[0],
         bar: json[1]
       }
 
       const returnState = productEntitiesReducer(
-        intialStateProductEntities,
-        productAction.receiveProducts(json)
+        initialStateProductEntities,
+        productActions.receiveProducts(json)
       )
 
       expect(returnState).toEqual(expectedState)
@@ -142,8 +144,8 @@ describe('Testing on product reducers...', () => {
 
     test('Expect handle RESET_PRODUCTS', () => {
       const returnState = productEntitiesReducer(
-        intialStateProductEntities,
-        productAction.resetProducts()
+        initialStateProductEntities,
+        productActions.resetProducts()
       )
 
       expect(returnState).toEqual({})
@@ -166,14 +168,14 @@ describe('Testing on product reducers...', () => {
       ]
 
       let expectedState = {
-        ...intialStateProductIDsByProductName,
+        ...initialStateProductIDsByProductName,
         fooname: 'foo',
         barname: 'bar'
       }
 
       const returnState = productIDsByProductNameReducer(
-        intialStateProductEntities,
-        productAction.receiveProducts(json)
+        initialStateProductEntities,
+        productActions.receiveProducts(json)
       )
 
       expect(returnState).toEqual(expectedState)
@@ -181,8 +183,8 @@ describe('Testing on product reducers...', () => {
 
     test('Expect handle RESET_PRODUCTS', () => {
       const returnState = productIDsByProductNameReducer(
-        intialStateProductIDsByProductName,
-        productAction.resetProducts()
+        initialStateProductIDsByProductName,
+        productActions.resetProducts()
       )
 
       expect(returnState).toEqual({})
