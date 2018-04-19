@@ -37,11 +37,14 @@ class ChangeWastageTypeForm extends Component {
   @autobind
   handleSubmit(e) {
     e.preventDefault()
-
     const { type } = this.state
-
     if (type) {
-      this.props.handleSubmit(this.props.order._id, type.TypeID)
+      //Third parameter added here to send temporary transaction to open quantity model for the same order. Added by KK on 19/04/2018
+      this.props.handleSubmit(
+        this.props.order._id,
+        type.TypeID,
+        this.props.tempTransaction
+      )
     }
   }
 

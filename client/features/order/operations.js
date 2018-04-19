@@ -7,7 +7,8 @@ import { find, filter, includes, map } from 'lodash'
 import { orderSelectors } from '../order'
 import { priceCheckOperations } from '../price-check'
 import Modes from '../../constants/OperationModes'
-
+import wastageActions from '../wastage/actions'
+const wastageAction = wastageActions.wastage
 const orderAction = actions.order
 
 const {
@@ -127,7 +128,13 @@ const createPendingTransactionByBarcodeID = barcodeID => {
           mode: orderMode
         })
         dispatch(createPendingTransaction(transaction))
-        dispatch(startChangingOrderQuantity(transaction))
+        //if mode is wastage we need to open add wastage popup first. Added by KK on 19/04/2018
+        if (orderMode === Modes.WASTAGE) {
+          dispatch(wastageAction.startChangingWastageType(transaction))
+        } else {
+          //this will execute except wastage otherwise it will open two popups wastage and quantity so to make difference this condition has been applied
+          dispatch(startChangingOrderQuantity(transaction))
+        }
       }
     }
   }

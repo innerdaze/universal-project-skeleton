@@ -25,7 +25,7 @@ class ProcessItemsButton extends Component {
         disabled={this.state.canProcess}
         label='Send'
         onClick={this.handleClick}
-        />
+      />
     )
   }
 }

@@ -21,7 +21,12 @@ const initialState = {
 
 export const orders = handleActions(
   {
-    [order.addOrder](state, { payload: { id, order } }) {
+    [order.addOrder](
+      state,
+      {
+        payload: { id, order }
+      }
+    ) {
       return {
         ...state,
         unprocessedItems: [...state.unprocessedItems, id]
@@ -39,7 +44,12 @@ export const orders = handleActions(
         isDeletingOrder: true
       }
     },
-    [order.deleteOrder](state, { payload: { id } }) {
+    [order.deleteOrder](
+      state,
+      {
+        payload: { id }
+      }
+    ) {
       return {
         ...state,
         isDeletingOrder: false,
@@ -59,7 +69,12 @@ export const orders = handleActions(
         lastUpdated: Date.now()
       }
     },
-    [order.succeedProcessOrders](state, { payload: { orderIDs } }) {
+    [order.succeedProcessOrders](
+      state,
+      {
+        payload: { orderIDs }
+      }
+    ) {
       return {
         ...state,
         processedItems: [...state.unprocessedItems, ...state.processedItems],
@@ -67,20 +82,35 @@ export const orders = handleActions(
         unprocessedItems: difference(state.unprocessedItems, orderIDs)
       }
     },
-    [order.failProcessOrders](state, { payload: { error } }) {
+    [order.failProcessOrders](
+      state,
+      {
+        payload: { error }
+      }
+    ) {
       return {
         ...state,
         error: error,
         isProcessing: false
       }
     },
-    [order.changeOperationMode](state, { payload: { mode } }) {
+    [order.changeOperationMode](
+      state,
+      {
+        payload: { mode }
+      }
+    ) {
       return {
         ...state,
         mode: mode
       }
     },
-    [order.createPendingTransaction](state, { payload: { transaction } }) {
+    [order.createPendingTransaction](
+      state,
+      {
+        payload: { transaction }
+      }
+    ) {
       return {
         ...state,
         pendingTransaction: transaction
@@ -92,7 +122,12 @@ export const orders = handleActions(
         pendingTransaction: null
       }
     },
-    [order.startChangingOrderQuantity](state, { payload: { order } }) {
+    [order.startChangingOrderQuantity](
+      state,
+      {
+        payload: { order }
+      }
+    ) {
       return {
         ...state,
         isChangingOrderQuantity: true,
@@ -112,7 +147,12 @@ export const orders = handleActions(
         isChangingOrderQuantity: false
       }
     },
-    [order.promptStartModifyTransaction](state, { payload: { transaction } }) {
+    [order.promptStartModifyTransaction](
+      state,
+      {
+        payload: { transaction }
+      }
+    ) {
       return {
         ...state,
         pendingModification: transaction
@@ -130,7 +170,12 @@ export const orders = handleActions(
         pendingModification: null
       }
     },
-    [order.changePendingTransactionQuantity](state, { payload: { quantity } }) {
+    [order.changePendingTransactionQuantity](
+      state,
+      {
+        payload: { quantity }
+      }
+    ) {
       return {
         ...state,
         pendingTransaction: {
@@ -152,20 +197,35 @@ export const orders = handleActions(
 
 export const orderEntities = handleActions(
   {
-    [order.addOrder](state, { payload: { id, order } }) {
+    [order.addOrder](
+      state,
+      {
+        payload: { id, order }
+      }
+    ) {
       return {
         ...state,
         [id]: order
       }
     },
-    [order.deleteOrder](state, { payload: { id } }) {
+    [order.deleteOrder](
+      state,
+      {
+        payload: { id }
+      }
+    ) {
       const newState = { ...state }
 
       delete newState[id]
 
       return newState
     },
-    [order.changeOrderQuantity](state, { payload: { id, quantity } }) {
+    [order.changeOrderQuantity](
+      state,
+      {
+        payload: { id, quantity }
+      }
+    ) {
       return {
         ...state,
         [id]: {

@@ -4,7 +4,7 @@ import Initialize from '../components/Initialize'
 //import InitializeSelector from '../selectors/InitializeSelector'
 import { appSelectors, appOperations } from '../features/app'
 import { sessionSelectors } from '../features/session'
-
+import { errorOperations } from '../features/error'
 export default connect(
   state => ({
     isLoggedIn: sessionSelectors.isLoggedIn(state),
@@ -19,6 +19,8 @@ export default connect(
       dispatch(appOperations.setStoreID(data.storeID))
       dispatch(appOperations.setApiRoot(data.apiRoot))
       dispatch(appOperations.setAllowPriceUpdate(data.allowPriceUpdate))
+      //set flag to true to display offline notification message on app load
+      //dispatch(errorOperations.setOfflineFlag())
     }
   })
 )(Initialize)

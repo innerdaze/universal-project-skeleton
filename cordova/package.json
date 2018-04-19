@@ -4,7 +4,6 @@
   "displayName": "Orbis Site Assistant",
   "cordova": {
     "platforms": [
-      "android",
       "windows"
     ],
     "plugins": {

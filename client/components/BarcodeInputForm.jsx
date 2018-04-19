@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import Form from 'grommet/components/Form'
 import Button from 'grommet/components/Button'
 import Box from 'grommet/components/Box'
-
+import Modes from '../constants/OperationModes'
+import { orderSelectors } from '../features/order'
 class BarcodeInputForm extends Component {
   constructor(props) {
     super(props)
@@ -46,9 +47,7 @@ class BarcodeInputForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-
     this.props.onSubmitBarcode(this.state.barcode)
-
     this.setState({
       barcode: ''
     })

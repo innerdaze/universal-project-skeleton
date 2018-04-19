@@ -4,10 +4,11 @@ import { orderOperations, orderSelectors } from '../features/order'
 import { barcodeSelectors } from '../features/barcode'
 import { syncSelectors } from '../features/sync'
 import { uiSelectors } from '../features/ui'
-//import { orderSelectors } from '../features/barcode'
+import { wastageOperations } from '../features/wastage'
 const mapStateToProps = state => {
   return {
     error: barcodeSelectors.lastError(state),
+    orderMode: orderSelectors.modeSelector(state),
     shouldFocusField:
       !uiSelectors.mainMenuVisible(state) &&
       !orderSelectors.isChangingOrderQuantitySelector(state) &&

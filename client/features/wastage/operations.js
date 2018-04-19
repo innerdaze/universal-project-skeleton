@@ -3,7 +3,9 @@ import { callApi } from '~features/network/operations'
 import { orderOperations, orderSelectors } from '~features/order'
 import actions from './actions'
 import selectors from './selectors'
-
+import { barcodeOperations } from '~features/barcode'
+import { find, filter, includes, map } from 'lodash'
+import { v4 as uuidGen } from 'uuid'
 const wastageActions = actions.wastage
 
 export const fetchWastageTypes = () => dispatch => {
@@ -52,7 +54,6 @@ export const processWastage = () => (dispatch, getState) => {
     })
   )
 }
-
 export default {
   ...actions.wastage,
   fetchWastageTypes,

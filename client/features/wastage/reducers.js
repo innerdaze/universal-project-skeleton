@@ -23,7 +23,12 @@ export const wastageTypes = handleActions(
       }
     },
     [wastage.receiveWastageTypes]: {
-      next(state, { payload: { models } }) {
+      next(
+        state,
+        {
+          payload: { models }
+        }
+      ) {
         return {
           ...state,
           isFetching: false,
@@ -92,14 +97,24 @@ export const wastageEntities = handleActions(
         }
       }
     },
-    [wastage.addWastage](state, { payload: { model } }) {
+    [wastage.addWastage](
+      state,
+      {
+        payload: { model }
+      }
+    ) {
       return {
         ...state,
         allIds: [...state.allIds, model._id],
         byId: { ...state.byId, [model._id]: model }
       }
     },
-    [wastage.updateWastageQuantity](state, { payload: { id, quantity } }) {
+    [wastage.updateWastageQuantity](
+      state,
+      {
+        payload: { id, quantity }
+      }
+    ) {
       return {
         ...state,
         byId: assocPath([id, 'Qty'], quantity, state.byId)
@@ -111,13 +126,23 @@ export const wastageEntities = handleActions(
     //     byId: assocPath([id, 'TypeID'], typeId, state.byId)
     //   }
     // },
-    [wastage.deleteWastage](state, { payload: { id } }) {
+    [wastage.deleteWastage](
+      state,
+      {
+        payload: { id }
+      }
+    ) {
       return {
         allIds: without(of(id), state.allIds),
         byId: dissoc(id, state.byId)
       }
     },
-    [wastage.startChangingWastageType](state, { payload: { order } }) {
+    [wastage.startChangingWastageType](
+      state,
+      {
+        payload: { order }
+      }
+    ) {
       return {
         ...state,
         isChangingWastageType: true,
@@ -144,7 +169,12 @@ export const wastageEntities = handleActions(
 
 export const wastageTypeToOrderMap = handleActions(
   {
-    [wastage.updateWastageTypeMapping](state, { payload: { id, typeId } }) {
+    [wastage.updateWastageTypeMapping](
+      state,
+      {
+        payload: { id, typeId }
+      }
+    ) {
       return {
         ...state,
         [id]: typeId
