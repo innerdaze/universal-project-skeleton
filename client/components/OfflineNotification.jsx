@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-import Box from 'grommet/components/Box'
-
-const StatusBar = ({
-  background,
-  color,
-  text,
-  fontSize,
-  height,
-  textAlign
-}) => (
-  <Box style={{ background, color, fontSize, height, textAlign }}>{text}</Box>
-)
-
-export default StatusBar
-=======
 import React, { Component } from 'react'
 import Box from 'grommet/components/Box'
 import autobind from 'autobind-decorator'
@@ -73,4 +56,3 @@ OfflineNotification.propTypes = {
 OfflineNotification.defaultProps = {
   setIsOfflineFlag: Function.prototype
 }
->>>>>>> 7324_wastage_flow_change

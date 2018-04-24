@@ -88,13 +88,6 @@ const wastageEntitiesInitialState = {
 
 export const wastageEntities = handleActions(
   {
-<<<<<<< HEAD
-    [wastage.startChangingWastageType](
-      state,
-      {
-        payload: { order }
-      }
-=======
     [wastage.receiveProcessWastage]: {
       next(state, { payload }) {
         return {
@@ -149,7 +142,6 @@ export const wastageEntities = handleActions(
       {
         payload: { order }
       }
->>>>>>> 7324_wastage_flow_change
     ) {
       return {
         ...state,
