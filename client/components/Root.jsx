@@ -13,7 +13,7 @@ import BlockingProcessDisplay from '../components/BlockingProcessDisplay'
 import BackgroundSyncProgressContainer from '../containers/BackgroundSyncProgressContainer'
 import { Offline, Online } from 'react-detect-offline'
 import { errorOperations, errorSelectors } from '../features/error'
-import StatusBar from '../components/OfflineNotification'
+import OfflineNotificationContainer from '../containers/OfflineNotificationContainer'
 const Root = ({
   initialized,
   authed,
@@ -31,20 +31,16 @@ const Root = ({
           onClose={handleNotificationClose}
         />
       )}
-      <Offline>
-        {
-          <StatusBar
-            background='#FFD602'
-            color='black'
-            text='You are offline. Sync unavailable'
-            fontSize='15px'
-            height='25px'
-            textAlign='center'
-          />
-        }
-      </Offline>
-      {/*   isOffline && (   onClose={handleOfflineNotificationClose} <Online>{<div onload={handleOfflineNotificationClose} />}</Online> */}
-
+      {
+        <OfflineNotificationContainer
+          background='#FFD602'
+          color='black'
+          text='You are offline. Sync unavailable'
+          fontSize='15px'
+          height='25px'
+          textAlign='center'
+        />
+      }
       {isSyncing && (
         <BlockingProcessDisplay
           component={<BackgroundSyncProgressContainer />}

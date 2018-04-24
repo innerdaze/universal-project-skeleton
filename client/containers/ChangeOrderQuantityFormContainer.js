@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { orderOperations, orderSelectors } from '../features/order'
 import { inventorySelectors } from '../features/inventory'
 import ChangeOrderQuantityForm from '../components/ChangeOrderQuantityForm'
-
+import { wastageOperations } from '../features/wastage'
 const mapStateToProps = state => {
   return {
     mode: orderSelectors.modeSelector(state),

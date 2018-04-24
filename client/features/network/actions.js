@@ -5,5 +5,8 @@ const identityActions = createIdentityActionMap(
   'NET_FAIL_NO_SESSION'
 )
 export default createActions({
-  NETWORK: { ...identityActions }
+  NETWORK: {
+    ...identityActions,
+    SET_IS_OFFLINE: flag => ({ flag })
+  }
 })

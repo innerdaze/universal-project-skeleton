@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
- //const isInitialized = state => state.app.isInitialized
+const isOffline = state => state.network.isOffline
 export default {
- 
-  }
+  isOffline
+}

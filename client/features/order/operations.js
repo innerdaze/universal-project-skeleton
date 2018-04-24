@@ -91,7 +91,6 @@ const createPendingTransactionByProduct = product => {
     const state = getState()
     const orderMode = orderSelectors.modeSelector(state)
     const transaction = findTransactionByProduct(state, product, orderMode)
-
     if (transaction) {
       dispatch(promptStartModifyTransaction(transaction))
     } else {
@@ -105,7 +104,13 @@ const createPendingTransactionByProduct = product => {
         mode: orderMode
       })
       dispatch(createPendingTransaction(transaction))
-      dispatch(startChangingOrderQuantity(transaction))
+      //if mode is wastage we need to open add wastage popup first. Added by KK on 19/04/2018
+      if (orderMode === Modes.WASTAGE) {
+        dispatch(wastageAction.startChangingWastageType(transaction))
+      } else {
+        //this will execute except wastage otherwise it will open two popups wastage and quantity so to make difference this condition has been applied
+        dispatch(startChangingOrderQuantity(transaction))
+      }
     }
   }
 }
@@ -207,7 +212,6 @@ const submitProduct = product => (dispatch, getState) => {
 const submitBarcode = barcodeId => (dispatch, getState) => {
   const state = getState()
   const orderMode = orderSelectors.modeSelector(state)
-
   if (orderMode === Modes.PRICE_CHECK) {
     const barcode = dispatch(barcodeOperations._findBarcodeByID(barcodeId))
 

@@ -97,7 +97,6 @@ const throwError = (data, errorMessage) => {
   error.response = data
   throw error
 }
-
 const checkStatusAndParseJSON = response =>
   response.json().then(data => {
     if (
@@ -118,6 +117,7 @@ export const isOnline = () =>
     : true
 
 export default {
+  ...actions.network,
   callApi,
   validateResCode,
   validateSession,

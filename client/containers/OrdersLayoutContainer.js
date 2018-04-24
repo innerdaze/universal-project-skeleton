@@ -26,8 +26,9 @@ export default connect(
   }),
   dispatch => ({
     onPromptStartModifyingSubmit: transaction => {
-      dispatch(orderOperations.confirmStartModifyTransaction())
-      dispatch(orderOperations.startChangingOrderQuantity(transaction))
+      dispatch(wastageOperations.startChangingWastageType(transaction))
+
+      //dispatch(orderOperations.startChangingOrderQuantity(transaction))
     },
     onPromptStartModifyingCancel: () =>
       dispatch(orderOperations.cancelStartModifyTransaction()),

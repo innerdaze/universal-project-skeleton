@@ -44,6 +44,7 @@ async function startApp() {
 }
 
 if (window.cordova) {
+  console.log(JSON.stringify(window.cordova))
   document.addEventListener('deviceready', startApp, false)
 } else {
   startApp()

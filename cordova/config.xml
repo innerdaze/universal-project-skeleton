@@ -41,4 +41,5 @@
         <variable name="FABRIC_API_KEY" value="dd87f6353ee085f2e98da9832d5b331e4b4b78bf" />
         <variable name="FABRIC_API_SECRET" value="a2e15103d238eb04d8cbbdd9715f94a774e90bf6739ee816e988fd950bbff6a7" />
     </plugin>
+    <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
 </widget>
