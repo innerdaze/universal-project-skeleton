@@ -15,11 +15,11 @@ export const cashierModel = {
       Deleted: true
     }
   ]),
-  error:always('error')
+  error: always('error')
 }
 
-export const generatecashierModel = applySpec(cashierModel)
-export const generatecashierModelArray = compose(
-  map(generatecashierModel),
+export const generateCashierModel = applySpec(cashierModel)
+export const generateCashierModelArray = compose(
+  map(generateCashierModel),
   Array
 )

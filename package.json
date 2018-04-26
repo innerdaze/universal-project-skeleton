@@ -176,7 +176,11 @@
     "webpack-dashboard": "^0.3.0",
     "webpack-dev-middleware": "^1.10.2",
     "webpack-hot-middleware": "^2.17.1",
-    "xo": "^0.18.2"
+    "xo": "^0.18.2",
+    "faker": "^4.1.0",
+    "react-detect-offline": "^2.0.1",
+    "redux-mock-store": "^1.5.1",
+    "redux-test-utils": "^0.2.2"
   },
   "jest": {
     "globals": {
@@ -253,10 +257,5 @@
       }
     ]
   },
-  "dependencies": {
-    "faker": "^4.1.0",
-    "react-detect-offline": "^2.0.1",
-    "redux-mock-store": "^1.5.1",
-    "redux-test-utils": "^0.2.2"
-  }
+  "dependencies": {}
 }

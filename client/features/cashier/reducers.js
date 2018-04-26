@@ -8,9 +8,7 @@ const initialState = {
   didInvalidate: false,
   lastUpdated: null,
   items: [],
-  activeCashier: {
-    CashierID: 1
-  },
+  activeCashier: null,
   isAuthenticating: false,
   authError: null,
   error: null
@@ -31,7 +29,12 @@ export const cashiers = handleActions(
       }
     },
     [cashier.receiveCashiers]: {
-      next(state, { payload: { json } }) {
+      next(
+        state,
+        {
+          payload: { json }
+        }
+      ) {
         return {
           ...state,
           isFetching: false,
@@ -54,20 +57,31 @@ export const cashiers = handleActions(
         items: []
       }
     },
-    [cashier.loginCashierAuth](state) { //Name changed because of duplicate function name in operation files edited by KK on 16/03/2018
+    [cashier.loginCashierAuth](state) {
+      //Name changed because of duplicate function name in operation files edited by KK on 16/03/2018
       return {
         ...state,
         isAuthenticating: true
       }
     },
-    [cashier.succeedLoginCashier](state, { payload: { cashier } }) {
+    [cashier.succeedLoginCashier](
+      state,
+      {
+        payload: { cashier }
+      }
+    ) {
       return {
         ...state,
         isAuthenticating: false,
         activeCashier: cashier
       }
     },
-    [cashier.failLoginCashier](state, { payload: { error } }) {
+    [cashier.failLoginCashier](
+      state,
+      {
+        payload: { error }
+      }
+    ) {
       return {
         ...state,
         isAuthenticating: false,
@@ -87,7 +101,12 @@ export const cashiers = handleActions(
 export const cashierEntities = handleActions(
   {
     [cashier.receiveCashiers]: {
-      next(state, { payload: { json } }) {
+      next(
+        state,
+        {
+          payload: { json }
+        }
+      ) {
         return keyBy(json, 'CashierID')
       },
       throw(state, { payload }) {

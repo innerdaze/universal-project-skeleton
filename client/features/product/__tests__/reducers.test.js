@@ -54,7 +54,7 @@ describe('Testing on product reducers...', () => {
     })
 
     test('Expect handle RECEIVE_PRODUCTS', () => {
-      let json = [
+      let products = [
         {
           ProductID: 'foo',
           Deleted: false
@@ -67,12 +67,18 @@ describe('Testing on product reducers...', () => {
 
       const { isFetching, didInvalidate, items, lastUpdated } = productsReducer(
         initialStateProduct,
-        productActions.receiveProducts(json)
+        productActions.receiveProducts(products)
+      )
+
+      const entities = productEntitiesReducer(
+        {},
+        productActions.receiveProducts(products)
       )
 
       expect(isFetching).toEqual(false)
       expect(didInvalidate).toEqual(false)
       expect(items).toHaveLength(1)
+      expect(items).toEqual(products)
       expect(lastUpdated).toEqual(expect.any(Number))
     })
   })
@@ -117,7 +123,7 @@ describe('Testing on product reducers...', () => {
 
   describe('Test productEntities reducer', () => {
     test('Expect handle RECEIVE_PRODUCTS', () => {
-      let json = [
+      let products = [
         {
           ProductID: 'foo',
           Deleted: false
@@ -130,13 +136,13 @@ describe('Testing on product reducers...', () => {
 
       let expectedState = {
         ...initialStateProductEntities,
-        foo: json[0],
-        bar: json[1]
+        foo: products[0],
+        bar: products[1]
       }
 
       const returnState = productEntitiesReducer(
         initialStateProductEntities,
-        productActions.receiveProducts(json)
+        productActions.receiveProducts(products)
       )
 
       expect(returnState).toEqual(expectedState)
@@ -154,7 +160,7 @@ describe('Testing on product reducers...', () => {
 
   describe('Test productIDsByProductName reducer', () => {
     test('Expect handle RECEIVE_PRODUCTS', () => {
-      let json = [
+      let products = [
         {
           ProductID: 'foo',
           ProductName: 'fooname',
@@ -175,7 +181,7 @@ describe('Testing on product reducers...', () => {
 
       const returnState = productIDsByProductNameReducer(
         initialStateProductEntities,
-        productActions.receiveProducts(json)
+        productActions.receiveProducts(products)
       )
 
       expect(returnState).toEqual(expectedState)

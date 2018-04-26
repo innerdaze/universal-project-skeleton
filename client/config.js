@@ -4,7 +4,7 @@ export const isDevelopment = process.env.NODE_ENV === 'development'
 // Everything for remote calls should go in here
 export const api = {
   protocol: isDevelopment ? 'http' : 'http',
-  host: isDevelopment ? 'git.orbistech.co.uk' : '192.168.16.33',
+  host: isDevelopment ? 'http://212.188.254.94/' : '192.168.16.33',
   port: isDevelopment ? 7417 : 8099
 }
 

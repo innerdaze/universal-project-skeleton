@@ -5,7 +5,7 @@ import actions from './actions'
 const { app } = actions
 
 const initialState = {
-  isInitialized: true,
+  isInitialized: false,
   apiRoot: null,
   apiRootValid: false,
   storeID: '0',
@@ -20,13 +20,23 @@ const reducer = handleActions(
         isInitialized: true
       }
     },
-    [app.appSetApiRoot](state, { payload: { apiRoot } }) {
+    [app.appSetApiRoot](
+      state,
+      {
+        payload: { apiRoot }
+      }
+    ) {
       return {
         ...state,
         apiRoot
       }
     },
-    [app.appSetStoreId](state, { payload: { storeID } }) {
+    [app.appSetStoreId](
+      state,
+      {
+        payload: { storeID }
+      }
+    ) {
       return {
         ...state,
         storeID
@@ -52,7 +62,12 @@ const reducer = handleActions(
         apiRootValid: false
       }
     },
-    [app.setAllowPriceUpdate](state, { payload: { allowPriceUpdate } }) {
+    [app.setAllowPriceUpdate](
+      state,
+      {
+        payload: { allowPriceUpdate }
+      }
+    ) {
       return {
         ...state,
         allowPriceUpdate

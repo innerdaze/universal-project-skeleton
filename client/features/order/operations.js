@@ -132,6 +132,7 @@ const createPendingTransactionByBarcodeID = barcodeID => {
           barcode,
           mode: orderMode
         })
+
         dispatch(createPendingTransaction(transaction))
         //if mode is wastage we need to open add wastage popup first. Added by KK on 19/04/2018
         if (orderMode === Modes.WASTAGE) {

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="uk.co.orbistech.mstock" version="1.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="uk.co.orbistech.mstock" version="1.3.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Orbis Site Assistant</name>
     <preference name="android-minSdkVersion" value="16" />
     <preference name="android-targetSdkVersion" value="22" />

@@ -4,9 +4,10 @@ import {
 } from '../reducers'
 import operations from '../operations'
 import {
-  generatecashierModel,
-  generatecashierModelArray
+  generateCashierModel,
+  generateCashierModelArray
 } from '../__fixtures__'
+
 let initialState = {
   isFetching: false,
   didInvalidate: false,
@@ -23,136 +24,138 @@ let initialState = {
 describe('Testing on cashier reducers', () => {
   describe('Test cashiers reducer', () => {
     test('Expect handle INVALIDATE_CASHIERS', () => {
-    const { invalidateCashiers } = operations
-    const { isFetching, didInvalidate } = cashierReducers(
-      initialState,
-      invalidateCashiers()
-    )
-    expect(didInvalidate).toEqual(true)
-  })
+      const { invalidateCashiers } = operations
+      const { isFetching, didInvalidate } = cashierReducers(
+        initialState,
+        invalidateCashiers()
+      )
+      expect(didInvalidate).toEqual(true)
+    })
 
-  test('Expect handle REQUEST_CASHIERS', () => {
-    const { requestCashiers } = operations
-    const { isFetching, didInvalidate } = cashierReducers(
-      initialState,
-      requestCashiers()
-    )
+    test('Expect handle REQUEST_CASHIERS', () => {
+      const { requestCashiers } = operations
+      const { isFetching, didInvalidate } = cashierReducers(
+        initialState,
+        requestCashiers()
+      )
 
-    expect(didInvalidate).toEqual(false)
-    expect(isFetching).toEqual(true)
-  })
+      expect(didInvalidate).toEqual(false)
+      expect(isFetching).toEqual(true)
+    })
 
-  test('Expect handle RESET_CASHIERS', () => {
-    const { resetCashiers } = operations
-    const { items } = cashierReducers(initialState, resetCashiers())
-    expect(items).toEqual([])
-  })
+    test('Expect handle RESET_CASHIERS', () => {
+      const { resetCashiers } = operations
+      const { items } = cashierReducers(initialState, resetCashiers())
+      expect(items).toEqual([])
+    })
 
-  test('Expect handle LOGIN_CASHIER', () => {
-    const { loginCashierAuth } = operations
-    console.log(loginCashierAuth())
-    const { isAuthenticating } = cashierReducers(initialState, loginCashierAuth())
-  
-    expect(isAuthenticating).toEqual(true)
-  })
+    test('Expect handle LOGIN_CASHIER', () => {
+      const { loginCashierAuth } = operations
+      const { isAuthenticating } = cashierReducers(
+        initialState,
+        loginCashierAuth()
+      )
 
-  test('Expect handle LOGOUT_CASHIER', () => {
-    const { logoutCashier } = operations
-    const { activeCashier } = cashierReducers(initialState, logoutCashier())
-    expect(activeCashier).toEqual(null)
-  })
+      expect(isAuthenticating).toEqual(true)
+    })
 
-  test('Expect handle RECEIVE_CASHIERS', () => {
-    const { receiveCashiers } = operations
-    const generatecashierModelFixture = generatecashierModel()
-    const { isFetching, didInvalidate ,items} = cashierReducers(
-      initialState,
-      receiveCashiers(generatecashierModelFixture.json)
-    )
-    expect(isFetching).toEqual(false)
-    expect(didInvalidate).toEqual(false)
-    expect(items).toEqual([1])
-  })
+    test('Expect handle LOGOUT_CASHIER', () => {
+      const { logoutCashier } = operations
+      const { activeCashier } = cashierReducers(initialState, logoutCashier())
+      expect(activeCashier).toEqual(null)
+    })
 
-  test('Expect handle SUCCEED_LOGIN_CASHIER', () => {
-    let cashier = [
-      {
-        CashierID: 1,
-        Deleted: false
-      },
-      {
-        CashierID: 2,
-        Deleted: true
+    test('Expect handle RECEIVE_CASHIERS', () => {
+      const { receiveCashiers } = operations
+      const ashierModelFixture = generateCashierModel()
+      const { isFetching, didInvalidate, items } = cashierReducers(
+        initialState,
+        receiveCashiers(generateCashierModelFixture.json)
+      )
+      expect(isFetching).toEqual(false)
+      expect(didInvalidate).toEqual(false)
+      expect(items).toEqual([1])
+    })
+
+    test('Expect handle SUCCEED_LOGIN_CASHIER', () => {
+      let cashier = [
+        {
+          CashierID: 1,
+          Deleted: false
+        },
+        {
+          CashierID: 2,
+          Deleted: true
+        }
+      ]
+
+      let action = {
+        type: 'CASHIER/SUCCEED_LOGIN_CASHIER',
+        payload: {
+          cashier
+        }
       }
-    ]
 
-    let action = {
-      type: 'CASHIER/SUCCEED_LOGIN_CASHIER',
-      payload: {
-        cashier
+      let expectedState = {
+        ...initialState,
+        isAuthenticating: false,
+        activeCashier: cashier
       }
-    }
+      const { succeedLoginCashier } = operations
+      const generateCashierModelFixture = generateCashierModel()
+      const { isAuthenticating, activeCashier } = cashierReducers(
+        initialState,
+        succeedLoginCashier(generateCashierModelFixture.json)
+      )
+      expect(isAuthenticating).toEqual(false)
+      expect(activeCashier).toEqual(generateCashierModelFixture.json)
+    })
 
-    let expectedState = {
-      ...initialState,
-      isAuthenticating: false,
-      activeCashier: cashier
-    }
-    const { succeedLoginCashier } = operations
-    const generatecashierModelFixture = generatecashierModel()
-    const { isAuthenticating, activeCashier } = cashierReducers(
-      initialState,
-      succeedLoginCashier(generatecashierModelFixture.json)
-    )
-    expect(isAuthenticating).toEqual(false)
-    expect(activeCashier).toEqual(generatecashierModelFixture.json)
+    test('Expect handle FAIL_LOGIN_CASHIER', () => {
+      let error = 'Error message'
+
+      let action = {
+        type: 'CASHIER/FAIL_LOGIN_CASHIER',
+        payload: {
+          error
+        }
+      }
+
+      let expectedState = {
+        ...initialState,
+        isAuthenticating: false,
+        authError: error
+      }
+      const { failLoginCashier } = operations
+      const generateCashierModelFixture = generateCashierModel()
+      const { isAuthenticating, authError } = cashierReducers(
+        initialState,
+        failLoginCashier(generateCashierModelFixture.error)
+      )
+      expect(isAuthenticating).toEqual(false)
+      expect(authError).toEqual(generateCashierModelFixture.error)
+    })
   })
 
-  test('Expect handle FAIL_LOGIN_CASHIER', () => {
-    let error = 'Error message'
-
-    let action = {
-      type: 'CASHIER/FAIL_LOGIN_CASHIER',
-      payload: {
-        error
+  describe('Test cashierEntities reducer', () => {
+    test('Expect handle RECEIVE_CASHIERS', () => {
+      let expectedValue = {
+        '1': {
+          CashierID: 1,
+          Deleted: false
+        },
+        '2': {
+          CashierID: 2,
+          Deleted: true
+        }
       }
-    }
-
-    let expectedState = {
-      ...initialState,
-      isAuthenticating: false,
-      authError: error
-    }
-    const { failLoginCashier } = operations
-    const generatecashierModelFixture = generatecashierModel()
-    const { isAuthenticating, authError } = cashierReducers(
-      initialState,
-      failLoginCashier(generatecashierModelFixture.error)
-    )
-    expect(isAuthenticating).toEqual(false)
-    expect(authError).toEqual(generatecashierModelFixture.error)
+      const { receiveCashiers } = operations
+      const generateCashierModelFixture = generateCashierModel()
+      const response = cashierEntitiesReducers(
+        initialState,
+        receiveCashiers(generateCashierModelFixture.json)
+      )
+      expect(response).toEqual(expectedValue)
+    })
   })
-})
-
-describe('Test cashierEntities reducer', () => {
-  test('Expect handle RECEIVE_CASHIERS', () => {
-    let expectedValue = {
-      '1': {
-        CashierID: 1,
-        Deleted: false
-      },
-      '2': {
-        CashierID: 2,
-        Deleted: true
-      }
-    }
-    const { receiveCashiers } = operations
-    const generatecashierModelFixture = generatecashierModel()
-    const response = cashierEntitiesReducers(
-      initialState,
-      receiveCashiers(generatecashierModelFixture.json)
-    )
-    expect(response).toEqual(expectedValue)
-  })
-})
 })
