@@ -5,9 +5,14 @@ import { sessionSelectors } from '../session'
 
 const sessionAction = actions.session
 
-export const login = (userID, password) => dispatch => {
+export const login = (userID, password) => (dispatch, getState) => {
+  debugger
   dispatch(sessionAction.requestLogin())
-
+  if (sessionSelectors.requiresDomainSelector(getState())) {
+    userID = sessionSelectors.domainSelector(getState())
+      ? userID + sessionSelectors.domainSelector(getState())
+      : userID
+  }
   return dispatch(
     networkOperations.callApi({
       service: 'SystemLoginService.Login',

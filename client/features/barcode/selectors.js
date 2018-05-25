@@ -7,13 +7,13 @@ const barcodeEntitiesSelector = state => state.barcode.barcodeEntities
 const priceByBarcodeSelector = createCachedSelector(
   barcodeEntitiesSelector,
   productEntitiesSelector,
-  barcode => barcode,
+  (state, barcode) => barcode,
   (barcodeEntities, productEntities, barcode) => {
     const barcodeEntity = barcodeEntities[barcode]
 
     if (barcodeEntity) {
       if (barcodeEntity.SellingPrice) {
-        return barcode.SellingPrice
+        return barcodeEntity.SellingPrice
       }
 
       const product = productEntities[barcodeEntity.ProductID]

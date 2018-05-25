@@ -9,7 +9,9 @@ const initialState = {
   alive: false,
   isRequesting: false,
   lastUpdated: null,
-  error: null
+  error: null,
+  requiresDomain: true,
+  domain: '@domain.com'
 }
 const initialStateUser = {
   id: null,
@@ -17,7 +19,12 @@ const initialStateUser = {
 }
 export const sessionReducer = handleActions(
   {
-    [session.startSession](state, { payload: { id } }) {
+    [session.startSession](
+      state,
+      {
+        payload: { id }
+      }
+    ) {
       return {
         ...state,
         id: id,
@@ -68,6 +75,18 @@ export const sessionReducer = handleActions(
         isRequesting: false,
         lastUpdated: Date.now()
       }
+    },
+    [session.setDomain](
+      state,
+      {
+        payload: { requiresDomain, domain }
+      }
+    ) {
+      return {
+        ...state,
+        requiresDomain: requiresDomain,
+        domain: domain
+      }
     }
   },
   initialState
@@ -75,7 +94,12 @@ export const sessionReducer = handleActions(
 
 export const user = handleActions(
   {
-    [session.succeedLogin](state, { payload: { user } }) {
+    [session.succeedLogin](
+      state,
+      {
+        payload: { user }
+      }
+    ) {
       return {
         ...state,
         id: user.UserID,
