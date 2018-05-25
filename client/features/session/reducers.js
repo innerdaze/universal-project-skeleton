@@ -76,15 +76,25 @@ export const sessionReducer = handleActions(
         lastUpdated: Date.now()
       }
     },
-    [session.setDomain](
+    [session.setDomainFlag](
       state,
       {
-        payload: { requiresDomain, domain }
+        payload: { requiresDomain }
       }
     ) {
       return {
         ...state,
-        requiresDomain: requiresDomain,
+        requiresDomain: requiresDomain
+      }
+    },
+    [session.setDomainKey](
+      state,
+      {
+        payload: { domain }
+      }
+    ) {
+      return {
+        ...state,
         domain: domain
       }
     }
