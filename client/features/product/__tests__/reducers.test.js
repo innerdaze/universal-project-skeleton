@@ -1,3 +1,4 @@
+import { keyBy } from 'lodash'
 import {
   products as productsReducer,
   productSearch as productSearchReducer,
@@ -78,7 +79,7 @@ describe('Testing on product reducers...', () => {
       expect(isFetching).toEqual(false)
       expect(didInvalidate).toEqual(false)
       expect(items).toHaveLength(1)
-      expect(items).toEqual(products)
+      expect(entities).toEqual(keyBy(products, 'ProductID'))
       expect(lastUpdated).toEqual(expect.any(Number))
     })
   })
