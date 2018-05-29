@@ -85,28 +85,27 @@ const getSellingPrice = ({ productId, barcode }) => (dispatch, getState) => {
 export const updatePrice = ({ productId, barcode, price }) => dispatch => {
   dispatch(priceCheckActions.requestUpdatePrice())
 
-  dispatch(
+  return dispatch(
     callApi({
       service: 'HandheldService.UpdatePrice',
       params: {
         [productId ? 'ProductID' : 'Barcode']: productId || barcode,
         NewPrice: price
-      },
-      success(data) {
-        dispatch(
-          priceCheckActions.receiveUpdatePrice(productId || barcode, price)
-        )
-        dispatch(
-          getSellingPrice({
-            [productId ? 'productId' : 'barcode']: productId || barcode
-          })
-        )
-      },
-      failure(error) {
-        dispatch(priceCheckActions.receiveUpdatePrice(error))
       }
     })
   )
+    .then(data => {
+      dispatch(
+        priceCheckActions.receiveUpdatePrice(productId || barcode, price)
+      )
+
+      return dispatch(
+        fetchPrice({
+          [productId ? 'productId' : 'barcode']: productId || barcode
+        })
+      )
+    })
+    .catch(error => dispatch(priceCheckActions.receiveUpdatePrice(error)))
 }
 
 export default {

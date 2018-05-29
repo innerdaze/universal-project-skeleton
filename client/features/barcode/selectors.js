@@ -2,18 +2,19 @@ import { createSelector } from 'reselect'
 import createCachedSelector from 're-reselect'
 import { productEntitiesSelector } from '~features/product/selectors'
 
-const lastError = state => state.barcode.barcodeLookup.lastError
-const barcodeEntitiesSelector = state => state.barcode.barcodeEntities
-const priceByBarcodeSelector = createCachedSelector(
+export const lastError = state => state.barcode.barcodeLookup.lastError
+export const barcodeEntitiesSelector = state => state.barcode.barcodeEntities
+
+export const priceByBarcodeSelector = createCachedSelector(
   barcodeEntitiesSelector,
   productEntitiesSelector,
-  barcode => barcode,
+  (state, barcode) => barcode,
   (barcodeEntities, productEntities, barcode) => {
     const barcodeEntity = barcodeEntities[barcode]
 
     if (barcodeEntity) {
       if (barcodeEntity.SellingPrice) {
-        return barcode.SellingPrice
+        return barcodeEntity.SellingPrice
       }
 
       const product = productEntities[barcodeEntity.ProductID]

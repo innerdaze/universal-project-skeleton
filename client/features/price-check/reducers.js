@@ -22,7 +22,12 @@ export default handleActions(
       }
     },
     [priceCheckActions.receiveGetPrice]: {
-      next(state, { payload: { price } }) {
+      next(
+        state,
+        {
+          payload: { price }
+        }
+      ) {
         return {
           ...state,
           isGettingPrice: false,
@@ -48,7 +53,12 @@ export default handleActions(
       }
     },
     [priceCheckActions.receiveUpdatePrice]: {
-      next(state, { payload: { id, price } }) {
+      next(
+        state,
+        {
+          payload: { id, price }
+        }
+      ) {
         return {
           ...state,
           isUpdatingPrice: false,
@@ -66,7 +76,9 @@ export default handleActions(
     },
     [priceCheckActions.setCurrentContext](
       state,
-      { payload: { currentContext } }
+      {
+        payload: { currentContext }
+      }
     ) {
       return {
         ...state,
