@@ -58,7 +58,8 @@
     "preview-release-notes":
       "npm run prepare-release-notes && markdownb ./RELEASE.md",
     "build-release-notes":
-      "npm run prepare-release-notes && markdown ./RELEASE.md > RELEASE.html"
+      "npm run prepare-release-notes && markdown ./RELEASE.md > RELEASE.html",
+    "cypress:open": "cypress open"
   },
   "keywords": [],
   "author": "Lee Driscoll <lee.driscoll@orbistech.co.uk>",

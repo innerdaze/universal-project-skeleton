@@ -14,6 +14,8 @@ export default createActions({
     START_SESSION: id => ({ id }),
     SUCCEED_LOGIN: user => ({ user }),
     FAIL_LOGIN: error => ({ error }),
+    SET_DOMAIN_FLAG: requiresDomain => ({ requiresDomain }),
+    SET_DOMAIN_KEY:  domain => ({ domain }),
     ...identityActions
   }
 })

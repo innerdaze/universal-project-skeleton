@@ -4,8 +4,12 @@ import { createSelector } from 'reselect'
 const isLoggedIn = state => state.session.session.alive
 const apiRootValidationError = state => state.session.session.error
 const id = state => state.session.id
+const requiresDomainSelector = state => state.session.session.requiresDomain
+const domainSelector = state => state.session.session.domain
 export default {
   isLoggedIn,
   apiRootValidationError,
-  id
+  id,
+  requiresDomainSelector,
+  domainSelector
 }
