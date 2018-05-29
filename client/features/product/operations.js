@@ -1,18 +1,19 @@
 import actions from './actions'
 import { networkOperations } from '../network'
+import { storeID } from '~features/app/selectors'
 import { v4 as uuidGen } from 'uuid'
 import { find, filter, includes, map, toLower } from 'lodash'
 
 const productAction = actions.product
 
-export const fetchProducts = () => dispatch => {
+export const fetchProducts = () => (dispatch, getState) => {
   dispatch(productAction.requestProducts())
 
   return dispatch(
     networkOperations.callApi({
       service: 'HandheldService.GetProducts',
       params: {
-        GetOptions: 0
+        StoreID: storeID(getState())
       },
       success: json =>
         dispatch(

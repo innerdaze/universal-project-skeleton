@@ -1,16 +1,17 @@
-import actions from './actions'
+import { storeID } from '~features/app/selectors'
 import { networkOperations } from '../network'
 import { errorOperations } from '../error'
+import actions from './actions'
 
 const barcodeAction = actions.barcode
-const fetchBarcodes = () => dispatch => {
+const fetchBarcodes = () => (dispatch, getState) => {
   dispatch(barcodeAction.requestBarcodes())
 
   return dispatch(
     networkOperations.callApi({
       service: 'HandheldService.GetBarcodes',
       params: {
-        GetOptions: 0
+        StoreID: storeID(getState())
       },
       success: json =>
         dispatch(
