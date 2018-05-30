@@ -6,13 +6,18 @@ import { sessionSelectors } from '../session'
 const sessionAction = actions.session
 
 export const login = (userID, password) => (dispatch, getState) => {
-  debugger
   dispatch(sessionAction.requestLogin())
-  if (sessionSelectors.requiresDomainSelector(getState())) {
-    userID = sessionSelectors.domainSelector(getState())
-      ? userID + sessionSelectors.domainSelector(getState())
-      : userID
+
+  const state = getState()
+
+  if (sessionSelectors.requiresDomainSelector(state)) {
+    const domain = sessionSelectors.domainSelector(state)
+
+    if (domain) {
+      userID = `${userID}@${domain}`
+    }
   }
+
   return dispatch(
     networkOperations.callApi({
       service: 'SystemLoginService.Login',
@@ -54,7 +59,10 @@ export const logout = () => (dispatch, getState) => {
   )
 }
 
+const { setDomain } = actions.session
+
 export default {
+  setDomain,
   logout,
   login
 }

@@ -94,7 +94,7 @@ exports[` 1`] = `
         <Anchor
           animateIcon={true}
           className={false}
-          label="Wastage"
+          label="Stock Adjustment"
           method="push"
           onClick={[Function]}
           tag="a"
@@ -103,7 +103,7 @@ exports[` 1`] = `
             className="grommetux-anchor"
             onClick={[Function]}
           >
-            Wastage
+            Stock Adjustment
           </a>
         </Anchor>
         <Anchor
@@ -221,7 +221,7 @@ exports[` 2`] = `
         <Anchor
           animateIcon={true}
           className={false}
-          label="Wastage"
+          label="Stock Adjustment"
           method="push"
           onClick={[Function]}
           tag="a"
@@ -230,7 +230,7 @@ exports[` 2`] = `
             className="grommetux-anchor"
             onClick={[Function]}
           >
-            Wastage
+            Stock Adjustment
           </a>
         </Anchor>
         <Anchor
@@ -350,7 +350,7 @@ exports[`Testing on ModeSwitcher... Test on prop Expect onSwitch prop function t
   <Anchor
     animateIcon={true}
     className={false}
-    label="Wastage"
+    label="Stock Adjustment"
     method="push"
     onClick={[Function]}
     tag="a"
@@ -414,7 +414,7 @@ exports[`Testing on ModeSwitcher... Test on prop Expect onSwitch prop function t
   <Anchor
     animateIcon={true}
     className={false}
-    label="Wastage"
+    label="Stock Adjustment"
     method="push"
     onClick={[Function]}
     tag="a"
@@ -478,7 +478,7 @@ exports[`Testing on ModeSwitcher... Test on prop Expect onSwitch prop function t
   <Anchor
     animateIcon={true}
     className={false}
-    label="Wastage"
+    label="Stock Adjustment"
     method="push"
     onClick={[Function]}
     tag="a"
@@ -542,7 +542,7 @@ exports[`Testing on ModeSwitcher... Test on prop Expect onSwitch prop function t
   <Anchor
     animateIcon={true}
     className={false}
-    label="Wastage"
+    label="Stock Adjustment"
     method="push"
     onClick={[Function]}
     tag="a"

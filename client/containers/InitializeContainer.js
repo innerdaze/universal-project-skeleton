@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 //import { appOperations } from '../features/app'
 import Initialize from '../components/Initialize'
-//import InitializeSelector from '../selectors/InitializeSelector'
 import { appSelectors, appOperations } from '../features/app'
-import { sessionSelectors } from '../features/session'
+import { sessionSelectors, sessionOperations } from '../features/session'
 import { errorOperations } from '../features/error'
+
 export default connect(
   state => ({
     isLoggedIn: sessionSelectors.isLoggedIn(state),
@@ -12,15 +12,16 @@ export default connect(
     apiRootValidationError: sessionSelectors.apiRootValidationError(state),
     storeId: appSelectors.storeID(state),
     allowPriceUpdate: appSelectors.allowPriceUpdateSelector(state),
-    apiRoot: appSelectors.apiRoot(state)
+    apiRoot: appSelectors.apiRoot(state),
+    domain: sessionSelectors.domainSelector(state),
+    requiresDomain: sessionSelectors.requiresDomainSelector(state)
   }),
   dispatch => ({
     onApiRootFormSubmit: data => {
       dispatch(appOperations.setStoreID(data.storeID))
       dispatch(appOperations.setApiRoot(data.apiRoot))
       dispatch(appOperations.setAllowPriceUpdate(data.allowPriceUpdate))
-      //set flag to true to display offline notification message on app load
-      //dispatch(errorOperations.setOfflineFlag())
+      dispatch(sessionOperations.setDomain(data.domain))
     }
   })
 )(Initialize)

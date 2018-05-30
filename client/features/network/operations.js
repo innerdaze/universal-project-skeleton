@@ -44,7 +44,7 @@ export const callApi = ({
         }
 
         if (res.error) {
-          throwError(res.error)
+          throwError(res, res.error)
         }
 
         let error = validateResCode(res)
@@ -73,7 +73,8 @@ const validateResCode = ({ result }) => {
 
       if (Result.ResMessage) {
         if (is(Number, Result.ResMessage.ResCode)) {
-          if (Result.ResMessage.ResCode !== 0) return Result.ResMessage.ResCode
+          if (Result.ResMessage.ResCode !== 0)
+            return Result.ResMessage.ResMessage || Result.ResMessage.ResCode
         }
       }
     }
@@ -97,6 +98,7 @@ const throwError = (data, errorMessage) => {
   error.response = data
   throw error
 }
+
 const checkStatusAndParseJSON = response =>
   response.json().then(data => {
     if (

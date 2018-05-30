@@ -11,12 +11,14 @@ const initialState = {
   lastUpdated: null,
   error: null,
   requiresDomain: true,
-  domain: '@domain.com'
+  domain: ''
 }
+
 const initialStateUser = {
   id: null,
   name: null
 }
+
 export const sessionReducer = handleActions(
   {
     [session.startSession](
@@ -76,26 +78,16 @@ export const sessionReducer = handleActions(
         lastUpdated: Date.now()
       }
     },
-    [session.setDomainFlag](
-      state,
-      {
-        payload: { requiresDomain }
-      }
-    ) {
+    [session.setRequiresDomain](state, { payload: requiresDomain }) {
       return {
         ...state,
-        requiresDomain: requiresDomain
+        requiresDomain
       }
     },
-    [session.setDomainKey](
-      state,
-      {
-        payload: { domain }
-      }
-    ) {
+    [session.setDomain](state, { payload: domain }) {
       return {
         ...state,
-        domain: domain
+        domain
       }
     }
   },

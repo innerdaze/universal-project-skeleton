@@ -35,7 +35,9 @@ exports[`render a ScannedItem 1`] = `
       tag="div"
     >
       1
-       x Units
+       x
+       
+      Units
     </Box>
     <Menu
       closeOnClick={true}
@@ -120,7 +122,9 @@ exports[`render a ScannedItem with data and a render prop 1`] = `
       tag="div"
     >
       1
-       x Units
+       x
+       
+      Units
     </Box>
     <Menu
       closeOnClick={true}

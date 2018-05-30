@@ -14,24 +14,19 @@ import Footer from 'grommet/components/Footer'
 import Button from 'grommet/components/Button'
 
 class Initialize extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      apiRoot: this.props.apiRoot || '',
-      storeID: this.props.storeId || '',
-      allowPriceUpdate: this.props.allowPriceUpdate
-    }
-
-    this.handleApiRootFieldChange = this.handleApiRootFieldChange.bind(this)
-    this.handleStoreIDFieldChange = this.handleStoreIDFieldChange.bind(this)
-    this.handleFormSubmit = this.handleFormSubmit.bind(this)
+  state = {
+    apiRoot: this.props.apiRoot || '',
+    storeID: this.props.storeId || '',
+    allowPriceUpdate: this.props.allowPriceUpdate,
+    domain: this.props.domain || ''
   }
 
+  @autobind
   handleStoreIDFieldChange(e) {
     this.setState({ storeID: e.target.value })
   }
 
+  @autobind
   handleApiRootFieldChange(e) {
     this.setState({ apiRoot: e.target.value })
   }
@@ -41,14 +36,16 @@ class Initialize extends Component {
     this.setState({ allowPriceUpdate: e.target.checked })
   }
 
+  @autobind
+  handleDomainFieldChange(e) {
+    this.setState({ domain: e.target.value })
+  }
+
+  @autobind
   handleFormSubmit(e) {
     e.preventDefault()
     // window.scrollTo(0, 0)
-    this.props.onApiRootFormSubmit({
-      apiRoot: this.state.apiRoot,
-      storeID: this.state.storeID,
-      allowPriceUpdate: this.state.allowPriceUpdate
-    })
+    this.props.onApiRootFormSubmit(this.state)
   }
 
   render() {
@@ -77,6 +74,14 @@ class Initialize extends Component {
               onDOMChange={this.handleStoreIDFieldChange}
             />
           </FormField>
+          <Paragraph>(Optional) Enter DBID.</Paragraph>
+          <FormField>
+            <TextInput
+              name='domain'
+              value={this.state.domain}
+              onDOMChange={this.handleDomainFieldChange}
+            />
+          </FormField>
           <Paragraph>
             <CheckBox
               toggle
@@ -103,14 +108,17 @@ Initialize.propTypes = {
   onApiRootFormSubmit: PropTypes.func.isRequired,
   storeId: PropTypes.string,
   apiRoot: PropTypes.string,
-  allowPriceUpdate: PropTypes.bool
+  allowPriceUpdate: PropTypes.bool,
+  domain: PropTypes.string,
+  requiresDomain: PropTypes.bool.isRequired
 }
 
 Initialize.defaultProps = {
   onApiRootFormSubmit: Function.prototype,
   storeId: '',
   apiRoot: '',
-  allowPriceUpdate: false
+  allowPriceUpdate: false,
+  domain: ''
 }
 
 export default Initialize

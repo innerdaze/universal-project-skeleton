@@ -6,7 +6,9 @@ const identityActions = createIdentityActionMap(
   'RECEIVE_LOGIN',
   'REQUEST_LOGOUT',
   'RECEIVE_LOGOUT',
-  'END_SESSION'
+  'END_SESSION',
+  'SET_DOMAIN',
+  'SET_REQUIRES_DOMAIN'
 )
 
 export default createActions({
@@ -14,8 +16,6 @@ export default createActions({
     START_SESSION: id => ({ id }),
     SUCCEED_LOGIN: user => ({ user }),
     FAIL_LOGIN: error => ({ error }),
-    SET_DOMAIN_FLAG: requiresDomain => ({ requiresDomain }),
-    SET_DOMAIN_KEY:  domain => ({ domain }),
     ...identityActions
   }
 })
