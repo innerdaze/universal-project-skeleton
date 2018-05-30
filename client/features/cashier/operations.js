@@ -25,7 +25,7 @@ export const fetchCashiers = () => {
 
 export const loginCashier = (id, password) => {
   return (dispatch, getState) => {
-    dispatch(cashierAction.loginCashierAuth())  //Name changed because of duplicate function name in operation files edited by KK on 16/03/2018
+    dispatch(cashierAction.loginCashier()) //Name changed because of duplicate function name in operation files edited by KK on 16/03/2018
 
     const error = 'Username or password not found'
 

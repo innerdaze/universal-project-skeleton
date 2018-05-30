@@ -4,18 +4,13 @@
   "description": "",
   "main": "server/_app/index.js",
   "scripts": {
-    "babel-node":
-      "cross-env BABEL_ENV=development cross-env NODE_PATH=server babel-node .",
+    "babel-node": "cross-env BABEL_ENV=development cross-env NODE_PATH=server babel-node .",
     "prebuild": "npm run clean",
     "prebuild:cordova": "npm run clean",
-    "build:dev":
-      "cross-env NODE_ENV=development cross-env BABEL_ENV=development webpack",
-    "build":
-      "cross-env NODE_ENV=production cross-env BABEL_ENV=production webpack -p",
-    "build:cordova:dev":
-      "cross-env NODE_ENV=development cross-env BABEL_ENV=development cross-env CORDOVA=true webpack",
-    "build:cordova":
-      "cross-env NODE_ENV=production cross-env cross-env BABEL_ENV=production CORDOVA=true webpack --progress",
+    "build:dev": "cross-env NODE_ENV=development cross-env BABEL_ENV=development webpack",
+    "build": "cross-env NODE_ENV=production cross-env BABEL_ENV=production webpack -p",
+    "build:cordova:dev": "cross-env NODE_ENV=development cross-env BABEL_ENV=development cross-env CORDOVA=true webpack",
+    "build:cordova": "cross-env NODE_ENV=production cross-env cross-env BABEL_ENV=production CORDOVA=true webpack --progress",
     "build:cordova:dev:win": ".\\scripts\\build-and-install-android-dev.bat",
     "start": "npm run babel-node",
     "clean": "rimraf dist/*",
@@ -24,20 +19,15 @@
     "pretest": "#npm run lint",
     "test": "cross-env BABEL_ENV=test jest",
     "test:watch": "cross-env BABEL_ENV=test jest --watch",
-    "test:coverage":
-      "cross-env BABEL_ENV=test nyc --reporter=lcov jest --coverage",
+    "test:coverage": "cross-env BABEL_ENV=test nyc --reporter=lcov jest --coverage",
     "prestart:server:dev": "npm t",
     "start:server:dev": "npm start",
-    "start:client:dev":
-      "cross-env BABEL_ENV=development cross-env NODE_ENV=development babel-node webpack.dev-server.js",
-    "watch:server":
-      "cross-env NODE_ENV=development nodemon -w server -w package.json -x npm run start:server:dev",
-    "watch:client":
-      "cross-env BABEL_ENV=development cross-env NODE_ENV=development nodemon -w webpack.web.js -w webpack.dev-server.js -x npm run start:client:dev",
+    "start:client:dev": "cross-env BABEL_ENV=development cross-env NODE_ENV=development babel-node webpack.dev-server.js",
+    "watch:server": "cross-env NODE_ENV=development nodemon -w server -w package.json -x npm run start:server:dev",
+    "watch:client": "cross-env BABEL_ENV=development cross-env NODE_ENV=development nodemon -w webpack.web.js -w webpack.dev-server.js -x npm run start:client:dev",
     "webpack-dashboard": "webpack-dashboard -- npm run watch:client",
     "postwatch:client": "npm run tunnel",
-    "cordova:init":
-      "cordova plugin add cordova-plugin-device; cordova plugin add cordova-plugin-whitelist",
+    "cordova:init": "cordova plugin add cordova-plugin-device; cordova plugin add cordova-plugin-whitelist",
     "precordova:link": "rimraf cordova/www/*",
     "cordova:link": "shx cp -R dist/cordova/* cordova/www/",
     "precordova:emulate:ios": "npm run cordova:link",
@@ -46,19 +36,15 @@
     "cordova:emulate:android": "cd cordova && cordova emulate android",
     "tunnel": "lt --port 4000 --subdomain obms",
     "api-mock": "api-mock --port 3333 api-blueprint/spec.md",
-    "watch:cordova:browser:dev":
-      "nodemon -w client -w webpack.cordova.js -w webpack.dev-server.js -x 'cross-env NODE_TARGET=browser npm run build:cordova:dev && npm run cordova:link && cd cordova && cordova run browser'",
+    "watch:cordova:browser:dev": "nodemon -w client -w webpack.cordova.js -w webpack.dev-server.js -x 'cross-env NODE_TARGET=browser npm run build:cordova:dev && npm run cordova:link && cd cordova && cordova run browser'",
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build",
-    "bluekit":
-      "bluekit --baseDir ./client/components --paths . --exclude \"./(Layout|StyledComponent).tsx\"",
+    "bluekit": "bluekit --baseDir ./client/components --paths . --exclude \"./(Layout|StyledComponent).tsx\"",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "prepare-release-notes": "cat ./release-notes/* > ./RELEASE.md",
-    "preview-release-notes":
-      "npm run prepare-release-notes && markdownb ./RELEASE.md",
-    "build-release-notes":
-      "npm run prepare-release-notes && markdown ./RELEASE.md > RELEASE.html",
+    "preview-release-notes": "npm run prepare-release-notes && markdownb ./RELEASE.md",
+    "build-release-notes": "npm run prepare-release-notes && markdown ./RELEASE.md > RELEASE.html",
     "cypress:open": "cypress open"
   },
   "keywords": [],
@@ -97,6 +83,7 @@
     "core-decorators": "^0.18.0",
     "cross-env": "^3.2.4",
     "css-loader": "^0.27.3",
+    "cypress": "^3.0.0",
     "debug": "^2.6.2",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
@@ -142,6 +129,7 @@
     "ramda": "^0.25.0",
     "re-reselect": "^1.0.1",
     "react": "^16.2.0",
+    "react-detect-offline": "^2.0.1",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^3.0.0-beta.7",
     "react-redux": "^5.0.4",
@@ -160,6 +148,7 @@
     "redux-mock-store": "^1.5.1",
     "redux-persist": "^5.5.0",
     "redux-persist-transform-filter": "^0.0.16",
+    "redux-test-utils": "^0.2.2",
     "redux-thunk": "^2.2.0",
     "regenerator-runtime": "^0.11.1",
     "reselect": "^3.0.1",
@@ -177,18 +166,18 @@
     "webpack-dashboard": "^0.3.0",
     "webpack-dev-middleware": "^1.10.2",
     "webpack-hot-middleware": "^2.17.1",
-    "xo": "^0.18.2",
-    "faker": "^4.1.0",
-    "react-detect-offline": "^2.0.1",
-    "redux-mock-store": "^1.5.1",
-    "redux-test-utils": "^0.2.2"
+    "xo": "^0.18.2"
   },
   "jest": {
     "globals": {
       "BABEL_ENV": "test"
     },
-    "setupFiles": ["./client/test/jest-setup.js"],
-    "snapshotSerializers": ["enzyme-to-json/serializer"],
+    "setupFiles": [
+      "./client/test/jest-setup.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
     "moduleNameMapper": {
       "^.+\\.(css|scss)$": "identity-obj-proxy",
       "^~(.*)$": "<rootDir>/client/$1",
@@ -220,8 +209,13 @@
     "babel": "inherit"
   },
   "eslintConfig": {
-    "plugins": ["ramda"],
-    "extends": ["react-app", "plugin:ramda/recommended"]
+    "plugins": [
+      "ramda"
+    ],
+    "extends": [
+      "react-app",
+      "plugin:ramda/recommended"
+    ]
   },
   "xo": {
     "parser": "babel-eslint",
@@ -243,15 +237,22 @@
         "settings": {
           "import/resolver": {
             "node": {
-              "paths": ["server"]
+              "paths": [
+                "server"
+              ]
             }
           }
         }
       },
       {
-        "extends": ["xo", "xo-react"],
+        "extends": [
+          "xo",
+          "xo-react"
+        ],
         "files": "client/**/*.js{,x}",
-        "envs": ["browser"],
+        "envs": [
+          "browser"
+        ],
         "rules": {
           "unicorn/filename-case": 0
         }

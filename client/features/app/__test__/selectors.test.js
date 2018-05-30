@@ -1,6 +1,6 @@
 import { appSelectors } from '../'
 import genricSelector from './genericSelectorsTest'
-import genericSelector from 'kanaiya/generic_test_writer/__test__/generic-selectors-test'
+
 const testSelector = genricSelector.testSelector
 const mockParametersInitialized = {
   app: {
