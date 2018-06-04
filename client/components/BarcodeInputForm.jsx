@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import autobind from 'autobind-decorator'
 import Form from 'grommet/components/Form'
 import Button from 'grommet/components/Button'
 import Box from 'grommet/components/Box'
 import Modes from '../constants/OperationModes'
 import { orderSelectors } from '../features/order'
+
 class BarcodeInputForm extends Component {
   constructor(props) {
     super(props)
@@ -32,12 +34,14 @@ class BarcodeInputForm extends Component {
     }
   }
 
+  @autobind
   handleChange(e) {
     this.setState({
       barcode: e.target.value
     })
   }
 
+  @autobind
   receiveFocus() {
     setTimeout(() => {
       this.inputRef.focus()
@@ -45,6 +49,7 @@ class BarcodeInputForm extends Component {
     }, 100)
   }
 
+  @autobind
   handleSubmit(e) {
     e.preventDefault()
     this.props.onSubmitBarcode(this.state.barcode)
@@ -53,6 +58,7 @@ class BarcodeInputForm extends Component {
     })
   }
 
+  @autobind
   assignInputRef(ref) {
     this.inputRef = ref
   }

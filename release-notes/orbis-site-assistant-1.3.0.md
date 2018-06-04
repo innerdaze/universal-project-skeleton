@@ -8,3 +8,4 @@
 * [7322] - In “Shelf Labels” add the product’s “Selling Price” to the item meta toggle
 * [7320] - In “Ordering” and “Delivery” rename “Units” to “Quantity”
 * [7319] - Hide “In Stock” label from “Stock Take”
+* [7870] - Add option for configuring DBID
