@@ -59,7 +59,7 @@ class Initialize extends Component {
           <Paragraph>
             Enter the API root URL provided by Orbis to get started.
           </Paragraph>
-          <FormField error={this.props.apiRootValidationError || ''}>
+          <FormField>
             <TextInput
               name='apiRoot'
               value={this.state.apiRoot}

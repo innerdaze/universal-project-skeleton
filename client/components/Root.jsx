@@ -10,10 +10,12 @@ import AppLayout from '../components/AppLayout'
 import OrdersLayoutContainer from '../containers/OrdersLayoutContainer'
 import InitializeContainer from '../containers/InitializeContainer'
 import BlockingProcessDisplay from '../components/BlockingProcessDisplay'
+import GenericErrorBoundary from './GenericErrorBoundary'
 import BackgroundSyncProgressContainer from '../containers/BackgroundSyncProgressContainer'
 import { Offline, Online } from 'react-detect-offline'
 import { errorOperations, errorSelectors } from '../features/error'
 import OfflineNotificationContainer from '../containers/OfflineNotificationContainer'
+
 const Root = ({
   initialized,
   authed,
@@ -23,68 +25,79 @@ const Root = ({
 }) => (
   <ConnectedRouter history={history}>
     <AppLayout>
-      {error && (
-        <Notification
-          closer
-          message={error}
-          status='critical'
-          onClose={handleNotificationClose}
-        />
-      )}
-      {
-        <OfflineNotificationContainer
-          background='#FFD602'
-          color='black'
-          text='You are offline. Sync unavailable'
-          fontSize='15px'
-          height='25px'
-          textAlign='center'
-        />
-      }
-      {isSyncing && (
-        <BlockingProcessDisplay
-          component={<BackgroundSyncProgressContainer />}
-        />
-      )}
-      <Switch>
-        <Route
-          path='/login'
-          render={props =>
-            initialized === true ? (
-              authed === false ? (
-                <LoginContainer />
+      <GenericErrorBoundary
+        renderError={() => (
+          <Notification
+            closer
+            message={error}
+            status='critical'
+            onClose={handleNotificationClose}
+          />
+        )}
+      >
+        {error && (
+          <Notification
+            closer
+            message={error}
+            status='critical'
+            onClose={handleNotificationClose}
+          />
+        )}
+        {
+          <OfflineNotificationContainer
+            background='#FFD602'
+            color='black'
+            text='You are offline. Sync unavailable'
+            fontSize='15px'
+            height='25px'
+            textAlign='center'
+          />
+        }
+        {isSyncing && (
+          <BlockingProcessDisplay
+            component={<BackgroundSyncProgressContainer />}
+          />
+        )}
+        <Switch>
+          <Route
+            path='/login'
+            render={props =>
+              initialized === true ? (
+                authed === false ? (
+                  <LoginContainer />
+                ) : (
+                  <Redirect to={props.from || '/'} />
+                )
               ) : (
-                <Redirect to={props.from || '/'} />
+                <Redirect
+                  to={{
+                    pathname: '/initialize',
+                    state: {
+                      from: props.from
+                    }
+                  }}
+                />
               )
-            ) : (
-              <Redirect
-                to={{
-                  pathname: '/initialize',
-                  state: {
-                    from: props.from
-                  }
-                }}
-              />
-            )
-          }
-        />
-        <Route
-          path='/initialize'
-          render={props =>
-            initialized === false ? (
-              <InitializeContainer />
-            ) : (
-              <Redirect to='/login' />
-            )
-          }
-        />
-        <AuthenticatedRoute
-          path='/orders'
-          component={OrdersLayoutContainer}
-          authed={authed}
-        />
-        <Redirect from='/' to='/orders' />
-      </Switch>
+            }
+          />
+          <Route
+            path='/initialize'
+            render={props =>
+              initialized === false ? (
+                <InitializeContainer />
+              ) : (
+                <Redirect to='/login' />
+              )
+            }
+          />
+          <AuthenticatedRoute
+            path='/orders'
+            component={OrdersLayoutContainer}
+            authed={authed}
+          />
+          <Redirect from='/' to='/orders' />
+        </Switch>
+      </GenericErrorBoundary>
     </AppLayout>
   </ConnectedRouter>
 )

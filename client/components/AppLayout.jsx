@@ -25,16 +25,12 @@ class AppLayout extends Component {
   }
 
   render() {
-    return (
-      <App centered>
-        { this.props.children }
-      </App>
-    )
+    return <App centered>{this.props.children}</App>
   }
 }
 
 AppLayout.propTypes = {
-  children: PropTypes.array.isRequired
+  children: PropTypes.node.isRequired
 }
 
 export default AppLayout

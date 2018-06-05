@@ -25,21 +25,24 @@ export const login = (userID, password) => (dispatch, getState) => {
       params: {
         UserID: userID,
         Password: password
-      },
-      success: json => {
-        dispatch(sessionAction.receiveLogin())
-        dispatch(sessionAction.startSession(json.result.Result.SessionID))
-        dispatch(sessionAction.succeedLogin(json.result.Result.UserData))
-      },
-      error: error => {
-        const message = error
-          ? error.message
-          : 'Could not login at this time. Please try again later or contact support'
-        dispatch(sessionAction.failLogin(message))
-        dispatch(errorOperations.displayError(message))
       }
     })
   )
+    .then(json => {
+      dispatch(sessionAction.receiveLogin())
+      dispatch(sessionAction.startSession(json.result.Result.SessionID))
+      dispatch(sessionAction.succeedLogin(json.result.Result.UserData))
+    })
+    .catch(
+      (
+        error = Error(
+          'Could not login at this time. Please try again later or contact support'
+        )
+      ) => {
+        dispatch(sessionAction.failLogin(error.message))
+        throw error
+      }
+    )
 }
 
 export const logout = () => (dispatch, getState) => {
@@ -49,14 +52,13 @@ export const logout = () => (dispatch, getState) => {
     networkOperations.callApi({
       service: 'SystemLoginService.Logout',
       params: {
-        SessionID: getState().session.session.id
-      },
-      success: () => {
-        dispatch(sessionAction.receiveLogout())
-        dispatch(sessionAction.endSession())
+        SessionID: sessionSelectors.id(getState())
       }
     })
-  )
+  ).then(() => {
+    dispatch(sessionAction.receiveLogout())
+    dispatch(sessionAction.endSession())
+  })
 }
 
 const { setDomain } = actions.session

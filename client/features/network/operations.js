@@ -14,8 +14,8 @@ export const callApi = ({
   headers = {},
   params = {},
   method = 'post',
-  success = json => json,
-  failure = error => error,
+  success = message => Promise.resolve(message),
+  failure = error => Promise.reject(error),
   skipSessionCheck = false
 }) => (dispatch, getState) => {
   if (!isOnline()) {
@@ -55,10 +55,10 @@ export const callApi = ({
         return res
       })
       .then(success)
-      .catch(error => {
-        dispatch(errorOperations.displayError(error.message))
-        failure(error)
-      })
+      .catch(failure)
+    // dispatch(errorOperations.displayError(error.message))
+    // failure(error)
+    // })
   })()
 }
 
