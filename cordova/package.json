@@ -1,28 +1,12 @@
 {
-  "name": "uk.co.orbistech.mstock",
-  "version": "1.0.0",
-  "displayName": "Orbis Site Assistant",
-  "cordova": {
-    "platforms": [
-      "windows"
-    ],
-    "plugins": {
-      "cordova-plugin-console": {},
-      "cordova-plugin-device": {},
-      "cordova-plugin-whitelist": {},
-      "cordova-fabric-plugin": {
-        "FABRIC_API_KEY": "dd87f6353ee085f2e98da9832d5b331e4b4b78bf",
-        "FABRIC_API_SECRET": "a2e15103d238eb04d8cbbdd9715f94a774e90bf6739ee816e988fd950bbff6a7"
-      },
-      "cordova-plugin-network-information": {}
-    }
-  },
-  "dependencies": {
-    "cordova-android": "^6.2.3",
-    "cordova-fabric-plugin": "^1.1.9",
-    "cordova-plugin-device": "~1.1.6",
-    "cordova-plugin-network-information": "^2.0.1",
-    "cordova-plugin-whitelist": "1",
-    "cordova-windows": "~5.0.0"
-  }
+    "name": "org.apache.cordova.myapp",
+    "displayName": "cordova",
+    "version": "1.0.0",
+    "description": "A sample Apache Cordova application that responds to the deviceready event.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Apache Cordova Team",
+    "license": "Apache-2.0"
 }

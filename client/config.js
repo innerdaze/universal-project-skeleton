@@ -1,15 +1,7 @@
 // Set a boolean for Dev mode
 export const isDevelopment = process.env.NODE_ENV === 'development'
 
-// Everything for remote calls should go in here
-export const api = {
-  protocol: isDevelopment ? 'http' : 'http',
-  host: isDevelopment ? 'http://212.188.254.94/' : '192.168.16.33',
-  port: isDevelopment ? 7417 : 8099
-}
-
-export const apiURL = `${api.protocol}://${api.host}:${api.port}`
-export const appTitle = 'Orbis Site Assistant'
-export const appShortTitle = 'Site Assistant'
+export const appTitle = 'REPLACE_WITH_APP_TITLE'
+export const appShortTitle = 'REPLACE_WITH_APP_SHORT_TITLE'
 
 export const lowestLogLevel = isDevelopment ? 'debug' : 'error'

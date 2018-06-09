@@ -13,71 +13,7 @@ import * as reducers from './features'
 // Persist Configs
 const rootPersistConfig = storage => ({
   storage,
-  key: 'root',
-  whitelist: ['app', 'session', 'order', 'product', 'cashier', 'barcode']
-})
-
-const appPersistConfig = storage => ({
-  storage,
-  key: 'app',
-  whitelist: [
-    'apiRoot',
-    'isInitialized',
-    'storeID',
-    'allowPriceUpdate',
-    'apiRootValid'
-  ]
-})
-
-const sessionPersistConfig = storage => ({
-  storage,
-  key: 'session',
-  whitelist: ['id', 'alive', 'lastUpdated']
-})
-
-const orderPersistConfig = storage => ({
-  storage,
-  key: 'order',
-  whitelist: ['orders', 'orderEntities'],
-  transforms: [
-    createFilter('orders', ['unprocessedItems', 'processedItems', 'mode'])
-  ]
-})
-
-const productPersistConfig = storage => ({
-  storage,
-  key: 'product',
-  whitelist: ['products', 'productIDsByProductName', 'productEntities'],
-  transforms: [createFilter('products', ['items'])]
-})
-
-const cashierPersistConfig = storage => ({
-  storage,
-  key: 'cashier',
-  whitelist: ['cashiers', 'cashierEntities'],
-  transforms: [
-    createFilter('cashiers', ['items', 'idByUsername', 'activeCashier'])
-  ]
-})
-
-const barcodePersistConfig = storage => ({
-  storage,
-  key: 'barcode',
-  whitelist: ['barcodes', 'barcodeEntities', 'barcodeIDsByProductID'],
-  transforms: [createFilter('barcodes', ['items'])]
-})
-
-const wastagePersistConfig = storage => ({
-  storage,
-  key: 'wastage',
-  whitelist: ['wastageEntities', 'wastageTypeToOrderMap', 'wastageTypes'],
-  transforms: [createFilter('barcodes', ['items'])]
-})
-
-const priceCheckPersistConfig = storage => ({
-  storage,
-  key: 'priceCheck',
-  whitelist: ['byId']
+  key: 'root'
 })
 
 export default async function configureStore(initialState) {
@@ -105,35 +41,7 @@ export default async function configureStore(initialState) {
 
   // TODO - Make a withPersistence HOR
 
-  const reducer = combineReducers({
-    ...reducers,
-    app: persistReducer(appPersistConfig(localForage), reducers.app),
-    session: persistReducer(
-      sessionPersistConfig(localForage),
-      reducers.session
-    ),
-    order: persistReducer(orderPersistConfig(localForage), reducers.order),
-    product: persistReducer(
-      productPersistConfig(localForage),
-      reducers.product
-    ),
-    cashier: persistReducer(
-      cashierPersistConfig(localForage),
-      reducers.cashier
-    ),
-    barcode: persistReducer(
-      barcodePersistConfig(localForage),
-      reducers.barcode
-    ),
-    wastage: persistReducer(
-      wastagePersistConfig(localForage),
-      reducers.wastage
-    ),
-    priceCheck: persistReducer(
-      priceCheckPersistConfig(localForage),
-      reducers.priceCheck
-    )
-  })
+  const reducer = combineReducers(reducers)
 
   const store = createStore(
     persistReducer(

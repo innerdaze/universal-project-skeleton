@@ -3,11 +3,10 @@ import { compose, map, applySpec, always } from 'ramda'
 
 // TODO: Write MockModel Class to code gen the generate methods
 
-// Wastage
-export const appModel = {
-  apiRoot: faker.internet.url,
-  storeID: always(0)
-}
+export const appModel = {}
 
-export const generateappModel = applySpec(appModel)
-export const generateappModelArray = compose(map(generateappModel), Array)
+export const generateAppModel = applySpec(appModel)
+export const generateAppModelArray = compose(
+  map(generateAppModel),
+  Array
+)

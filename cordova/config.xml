@@ -1,17 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="uk.co.orbistech.mstock" version="1.3.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Orbis Site Assistant</name>
-    <preference name="android-minSdkVersion" value="16" />
-    <preference name="android-targetSdkVersion" value="22" />
-    <preference name="windows-target-version" value="10.0" />
-    <preference name="orientation" value="portrait" />
+<widget id="org.apache.cordova.myApp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>cordova</name>
     <description>
-        A simple app for taking stock
+        A sample Apache Cordova application that responds to the deviceready event.
     </description>
-    <author email="support@orbistech.co.uk" href="https://orbistech.co.uk">
-        Orbis Tech Ltd
+    <author email="dev@cordova.apache.org" href="http://cordova.io">
+        Apache Cordova Team
     </author>
     <content src="index.html" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -21,25 +18,9 @@
     <allow-intent href="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
-        <icon density="ldpi" src="res/android/mipmap-ldpi/ic_launcher.png" />
-        <icon density="mdpi" src="res/android/mipmap-mdpi/ic_launcher.png" />
-        <icon density="hdpi" src="res/android/mipmap-hdpi/ic_launcher.png" />
-        <icon density="xhdpi" src="res/android/mipmap-xhdpi/ic_launcher.png" />
-        <icon density="xxhdpi" src="res/android/mipmap-xxhdpi/ic_launcher.png" />
-        <icon density="xxxhdpi" src="res/android/mipmap-xxxhdpi/ic_launcher.png" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
-    <platform name="winphone" />
-    <engine name="windows" spec="~5.0.0" />
-    <plugin name="cordova-plugin-console" />
-    <plugin name="cordova-plugin-device" spec="~1.1.6" />
-    <plugin name="cordova-plugin-whitelist" spec="1" />
-    <plugin name="cordova-fabric-plugin" spec="^1.1.9">
-        <variable name="FABRIC_API_KEY" value="dd87f6353ee085f2e98da9832d5b331e4b4b78bf" />
-        <variable name="FABRIC_API_SECRET" value="a2e15103d238eb04d8cbbdd9715f94a774e90bf6739ee816e988fd950bbff6a7" />
-    </plugin>
-    <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
 </widget>

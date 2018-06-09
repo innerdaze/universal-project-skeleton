@@ -1,66 +1,19 @@
 import { appSelectors } from '../'
-import genricSelector from './genericSelectorsTest'
+import genericSelectorTest from './genericSelectorTest'
 
-const testSelector = genricSelector.testSelector
-const mockParametersInitialized = {
-  app: {
-    isInitialized: true
-  }
-}
-const mockParametersAllowPriceUpdate = {
-  app: {
-    allowPriceUpdate: true
-  }
-}
-const mockParametersApiRoot = {
-  app: {
-    apiRoot: 'http://'
-  }
-}
-const mockParametersStoreID = {
-  app: {
-    storeID: '0'
-  }
-}
-const mockParametersApiRootValid = {
-  app: {
-    apiRootValid: true
-  }
-}
+const { testSelector } = genericSelectorTest
 
 describe('app Selectors', () => {
-  testSelector({
-    selector: appSelectors.isInitialized,
-    state: mockParametersInitialized,
-    key: 'isInitialized',
-    xpath: 'app'
-  })
+  const mockParametersReady = {
+    app: {
+      isReady: true
+    }
+  }
 
   testSelector({
-    selector: appSelectors.apiRoot,
-    state: mockParametersApiRoot,
-    key: 'apiRoot',
-    xpath: 'app'
-  })
-
-  testSelector({
-    selector: appSelectors.storeID,
-    state: mockParametersStoreID,
-    key: 'storeID',
-    xpath: 'app'
-  })
-
-  testSelector({
-    selector: appSelectors.apiRootValid,
-    state: mockParametersApiRootValid,
-    key: 'apiRootValid',
-    xpath: 'app'
-  })
-
-  testSelector({
-    selector: appSelectors.allowPriceUpdateSelector,
-    state: mockParametersAllowPriceUpdate,
-    key: 'allowPriceUpdate',
+    selector: appSelectors.isReady,
+    state: mockParametersReady,
+    key: 'isReady',
     xpath: 'app'
   })
 })
