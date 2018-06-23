@@ -3,7 +3,6 @@ import bodyParser from 'body-parser'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
-import WebpackDashboardPlugin from 'webpack-dashboard/plugin'
 import webpackConfig from './webpack.config'
 
 process.env.NODE_ENV = 'development'
@@ -14,8 +13,6 @@ const PORT = process.env.PORT || 4000
 const server = express()
 
 const compiler = webpack(webpackConfig)
-
-compiler.apply(new WebpackDashboardPlugin())
 
 server.use(
   webpackDevMiddleware(compiler, {

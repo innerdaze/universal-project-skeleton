@@ -62,5 +62,5 @@ export default async function configureStore(initialState) {
     })
   }
 
-  return { persister: persistStore(store), store }
+  return { persistor: persistStore(store), store }
 }

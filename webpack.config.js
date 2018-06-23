@@ -1,19 +1,17 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   devtool:
-    process.env.NODE_ENV === 'production'
-      ? 'source-map'
-      : 'cheap-module-eval-source-map',
-  entry: [
-    'babel-polyfill',
-    'react-hot-loader/patch',
-    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-    'webpack/hot/only-dev-server',
-    path.join(__dirname, 'client', 'index.jsx')
-  ],
+    process.env.NODE_ENV === 'production' ? 'source-map' : 'eval-source-map',
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    hot: true
+  },
+  entry: ['babel-polyfill', path.join(__dirname, 'client', 'index.jsx')],
   output: {
     filename: '[name].bundle.js',
     chunkFilename: '[name].bundle.js',
@@ -22,12 +20,12 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '~': path.resolve(__dirname, 'client'),
-      '~features': path.resolve(__dirname, 'client', 'features'),
-      '~components': path.resolve(__dirname, 'client', 'components'),
-      css: path.resolve(__dirname, 'client', 'assets', 'css')
+      '~': path.resolve('./client'),
+      '~features': path.resolve('./client/features'),
+      '~components': path.resolve('./client/components'),
+      '~tools': path.resolve('./client/helpers')
     },
-    extensions: ['.js', '.jsx', '.json', '.css', '.scss']
+    extensions: ['.js', '.jsx', '.json', '.css', '.scss', '.less']
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -46,8 +44,9 @@ module.exports = {
       ),
       filename: 'index.html'
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: process.env.NODE_ENV === 'production'
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
     })
   ],
   module: {
@@ -55,29 +54,36 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         include: /client/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.html$/,
         use: [
-          'react-hot-loader/webpack',
           {
-            loader: 'babel-loader',
-            query: {
-              presets: [
-                ['env', { loose: true, modules: false }],
-                'react',
-                'stage-0'
-              ],
-              plugins: [
-                'syntax-dynamic-import',
-                'transform-decorators-legacy',
-                'transform-class-properties'
-              ]
+            loader: 'html-loader',
+            options: { minimize: true }
+          }
+        ]
+      },
+      {
+        test: /\.css$/,
+        include: /node_modules/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: true,
+              modules: false
             }
           }
         ]
       },
       {
         test: /\.css$/,
+        exclude: /node_modules/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -90,7 +96,7 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'sass-loader',
@@ -98,10 +104,16 @@ module.exports = {
               includePaths: [
                 './node_modules'
                 // './node_modules/inuitcss'
+                // - UNCOMMENT the line below if using grommet
+                //  './node_modules/grommet/scss'
               ]
             }
           }
         ]
+      },
+      {
+        test: /\.less$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
