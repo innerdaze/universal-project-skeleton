@@ -3,7 +3,6 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import { createLogger } from 'redux-logger'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { persistStore, persistReducer } from 'redux-persist'
-import { createFilter } from 'redux-persist-transform-filter'
 import localForage from 'localforage'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 import cordovaSQLiteDriver from 'localforage-cordovasqlitedriver'
@@ -52,8 +51,6 @@ export default async function configureStore(initialState) {
     storeEnhancers
   )
 
-  const persistor = persistStore(store)
-
   if (module.hot) {
     module.hot.accept('./features/index', () => {
       store.replaceReducer(
@@ -65,5 +62,5 @@ export default async function configureStore(initialState) {
     })
   }
 
-  return { persistor, store }
+  return { persister: persistStore(store), store }
 }

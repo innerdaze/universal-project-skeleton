@@ -9,10 +9,7 @@ describe('App Reducer', () => {
     const appModelFixture = generateAppModel()
     const { appReady } = operations
 
-    const { apiRoot } = reducer(
-      initialState,
-      appSetApiRoot(appModelFixture.isReady)
-    )
+    const { apiRoot } = reducer(initialState, { type: 'APP/READY' })
 
     expect(apiRoot).toEqual(appModelFixture.isReady)
   })
